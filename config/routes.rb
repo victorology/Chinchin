@@ -1,6 +1,8 @@
 Chinchin2::Application.routes.draw do
   root to: 'static_pages#home'
 
+  match 'users', to: 'static_pages#users'
+  match 'user/:id', to: 'static_pages#profile'
   match 'fb4pp01', to: 'static_pages#fb4pp01'
 
   match 'auth/:provider/callback', to: 'sessions#create'
