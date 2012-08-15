@@ -1,6 +1,8 @@
 Chinchin2::Application.routes.draw do
   root to: 'static_pages#home'
 
+  match 'fb4pp01', to: 'static_pages#fb4pp01'
+
   match 'auth/:provider/callback', to: 'sessions#create'
   match 'auth/failure', to: redirect('/')
   match 'signout', to: 'sessions#destroy', as: 'signout'
