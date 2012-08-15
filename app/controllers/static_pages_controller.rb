@@ -2,10 +2,12 @@ class StaticPagesController < ApplicationController
   def home
   end
 
+  # This controller is for the user index
   def users
   	@user = User.all
   end
 
+  # This controller is for the user profile
   def profile
   	@user = User.find(params[:id])
   end
