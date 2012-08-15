@@ -1,3 +1,29 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                  :integer          not null, primary key
+#  provider            :string(255)
+#  uid                 :string(255)
+#  name                :string(255)
+#  email               :string(255)
+#  first_name          :string(255)
+#  last_name           :string(255)
+#  birthday            :string(255)
+#  location            :string(255)
+#  hometown            :string(255)
+#  employer            :string(255)
+#  position            :string(255)
+#  gender              :string(255)
+#  relationship_status :string(255)
+#  school              :string(255)
+#  locale              :string(255)
+#  oauth_token         :string(255)
+#  oauth_expires_at    :datetime
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#
+
 class User < ActiveRecord::Base
   attr_accessible :birthday, :email, :employer, :first_name, :gender, :hometown, :last_name, :locale, :location, :name, :oauth_expires_at, :oauth_token, :position, :provider, :relationship_status, :school, :uid
 
