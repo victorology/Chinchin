@@ -40,6 +40,7 @@ class User < ActiveRecord::Base
 	    user.hometown = auth.extra.raw_info.hometown.name
 	    # user.employer = auth.extra.raw_info.work.employer.name
 	    # user.position = auth.extra.raw_info.work.position
+	    # Added this from old code. This takes the previous entry.
 	    if auth["extra"]["raw_info"]["work"]
 				user.employer = auth["extra"]["raw_info"]["work"][0]["employer"]["name"]
 				user.position = auth["extra"]["raw_info"]["work"][0]["position"]["name"]
@@ -47,6 +48,7 @@ class User < ActiveRecord::Base
 	    user.gender = auth.extra.raw_info.gender
 	    user.relationship_status = auth.extra.raw_info.relationship_status
 	    #	user.school = auth.extra.raw_info.education.school.name
+	    # Added this from old code. Takes previous entry but should only take College.
 			if auth["extra"]["raw_info"]["education"]
 				user.school = auth["extra"]["raw_info"]["education"][0]["school"]["name"]
 			end
