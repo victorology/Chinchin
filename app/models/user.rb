@@ -40,9 +40,16 @@ class User < ActiveRecord::Base
 	    user.hometown = auth.extra.raw_info.hometown.name
 	    # user.employer = auth.extra.raw_info.work.employer.name
 	    # user.position = auth.extra.raw_info.work.position
+	    if auth["extra"]["raw_info"]["work"]
+				user.employer = auth["extra"]["raw_info"]["work"][0]["employer"]["name"]
+				user.position = auth["extra"]["raw_info"]["work"][0]["position"]["name"]
+			end
 	    user.gender = auth.extra.raw_info.gender
 	    user.relationship_status = auth.extra.raw_info.relationship_status
-	    # user.school = auth.extra.raw_info.education.school.name
+	    #	user.school = auth.extra.raw_info.education.school.name
+			if auth["extra"]["raw_info"]["education"]
+				user.school = auth["extra"]["raw_info"]["education"][0]["school"]["name"]
+			end
 	    user.locale = auth.extra.raw_info.locale
 	    user.oauth_token = auth.credentials.token
 	    user.oauth_expires_at = Time.at(auth.credentials.expires_at)
