@@ -50,4 +50,12 @@ class User < ActiveRecord::Base
 	  end
 	end
 
+	def facebook
+		@fb_user ||= FbGraph::User.me(oauth_token)
+	end
+
+	def friends
+		@friends ||= facebook.friends
+	end
+
 end

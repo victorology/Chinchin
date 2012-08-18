@@ -4,7 +4,7 @@
 </div>
 <% if @user.gender == "male" %>
 	<h2>
-		<strong><%= @user.name %></strong> has XX friends he can introduce.
+		<strong><%= @user.name %></strong> has <%= @user.friends.length %> friends he can introduce.
 		<%= @user.first_name %> is born on <%= @user.birthday %>.
 		<% if !@user.location.nil? %>
 			He lives in <%= @user.location %>.
@@ -24,7 +24,7 @@
 	</h2>
 <% else %>
 	<h2>
-		<strong><%= @user.name %></strong> has XX friends she can introduce.
+		<strong><%= @user.name %></strong> has <%= @user.friends.length %> friends she can introduce.
 		<%= @user.first_name %> is born on <%= @user.birthday %>.
 		<% if !@user.location.nil? %>
 			She lives in <%= @user.location %>.
@@ -45,4 +45,14 @@
 <% end %>
 <div class="divider-thin-XL"></div>
 
+<% @user.friends.each do |friend| %>
+	<div class="user-index-box">
+		<div class="user-photo">
+			<img align="absmiddle" alt="Picture?type=large" src="<%=friend.picture("large")%>" style="min-width: 120px; min-height: 120px;" width="120">
+		</div> <!-- .user-photo -->
+		<div class="user-index-info">
+			<h3><%= friend.name %></h3>
+	  	</div> <!-- .user-index-info -->
+	</div> <!-- .user-index-box -->
+<% end %>
 <br />
