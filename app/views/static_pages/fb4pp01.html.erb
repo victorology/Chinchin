@@ -1,7 +1,45 @@
-<h2>This is the code for the Chinchin Facebook canvas app.</h2>
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= full_title(yield(:title)) %></title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  <%= render 'layouts/shim' %>
+
+  <script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30640878-1']);
+    _gaq.push(['_setDomainName', 'chinchinapp.com']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+    // Added to track client side errors in GA
+    window.onerror = function(message, file, line) { 
+       var sFormattedMessage = '[' + file + ' (' + line + ')] ' + message; 
+       _gaq.push(['_trackEvent', 'Exceptions', 'Application', sFormattedMessage, null, true]);
+    }
+
+  </script>
+</head>
+<body>
 
 <% if user_likes_page? %>
 	<p><%= link_to "Find out more!", "/auth/facebook", class: "btn-cta" %></p>
 <% else %>
-	<p>Hey! Like Chinchin on Facebook!</p>
+
+	<div id="fb4pp01bg">
+		<div id="fb-like-gate">
+		</div> <!-- #fb-like-gate -->
+	</div> <!-- #fb4pp01bg -->
+	
 <% end %>
+
+</body>
+</html>
