@@ -31,15 +31,29 @@
 <body>
 
 <% if user_likes_page? %>
+
 	<p><%= link_to "Find out more!", "/auth/facebook", class: "btn-cta" %></p>
+
+	<div class="fb-comments" data-href="https://www.facebook.com/chinchinapp/app_350879474993793" data-num-posts="10" data-width="810"></div>
+	
 <% else %>
 
 	<div id="fb4pp01bg">
 		<div id="fb-like-gate">
 		</div> <!-- #fb-like-gate -->
 	</div> <!-- #fb4pp01bg -->
-	
+
+	<div class="fb-comments" data-href="https://www.facebook.com/chinchinapp/app_350879474993793" data-num-posts="10" data-width="810"></div>
+
 <% end %>
 
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=234732379910412";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 </body>
 </html>
