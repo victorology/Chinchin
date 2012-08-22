@@ -1,6 +1,6 @@
 <h2>This is the code for the Chinchin Facebook canvas app.</h2>
 
-<% if @likes_page = true %>
+<% if user_likes_page? %>
 	<p><%= link_to "Find out more!", "/auth/facebook", class: "btn-cta" %></p>
 <% else %>
 	<p>Hey! Like Chinchin on Facebook!</p>

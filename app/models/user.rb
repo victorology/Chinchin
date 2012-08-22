@@ -67,9 +67,4 @@ class User < ActiveRecord::Base
 		@friends ||= facebook.friends
 	end
 
-	def likes_page
-    page = FbGraph::Page.new(173946219392425) # or a Page retrieved using FbGraph::Page.search('fb_graph') as well
-    @likes_page = facebook.like?(page) # true if User Liked, false otherwise
-  end
-
 end
