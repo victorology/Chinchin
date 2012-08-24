@@ -32,10 +32,14 @@
 
 <% if user_likes_page? %>
 
-	<p><%= link_to "Find out more!", "/auth/facebook", class: "btn-cta" %></p>
+	<div id="fb4pp01bg">
+		<div id="fb-start-app">
+			<%= link_to "Find out more!", "/auth/facebook" %>
+		</div> <!-- #fb-start-app -->
+	</div> <!-- #fb4pp01bg -->
 
 	<div class="fb-comments" data-href="https://www.facebook.com/chinchinapp/app_350879474993793" data-num-posts="10" data-width="810"></div>
-	
+
 <% else %>
 
 	<div id="fb4pp01bg">
