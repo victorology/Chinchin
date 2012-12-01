@@ -36,8 +36,8 @@ class User < ActiveRecord::Base
 	    user.first_name = auth.info.first_name
 	    user.last_name = auth.info.last_name
 	    user.birthday = auth.extra.raw_info.birthday
-	    user.location = auth.extra.raw_info.location.name
-	    user.hometown = auth.extra.raw_info.hometown.name
+	    user.location = auth.extra.raw_info.location
+	    user.hometown = auth.extra.raw_info.hometown
 	    # user.employer = auth.extra.raw_info.work.employer.name
 	    # user.position = auth.extra.raw_info.work.position
 	    # Added this from old code. This takes the previous entry.
