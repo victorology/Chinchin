@@ -38,20 +38,26 @@ class User < ActiveRecord::Base
 	    user.birthday = auth.extra.raw_info.birthday
 	    user.location = auth.extra.raw_info.location.name unless auth.extra.raw_info.location.nil?
 	    user.hometown = auth.extra.raw_info.hometown.name unless auth.extra.raw_info.hometown.nil?
-	    # user.employer = auth.extra.raw_info.work.employer.name
-	    # user.position = auth.extra.raw_info.work.position
-	    # Added this from old code. This takes the previous entry.
-	    if auth["extra"]["raw_info"]["work"]
-				user.employer = auth["extra"]["raw_info"]["work"][0]["employer"]["name"]
-				user.position = auth["extra"]["raw_info"]["work"][0]["position"]["name"]
-			end
+	    # Takes the most recent employer and position.
+	    unless auth.extra.raw_info.work.nil?
+	    	user.employer = auth.extra.raw_info.work.first.employer.name
+	    	user.position = auth.extra.raw_info.work.first.position.name
+	    end
+	    # The code below works.
+	    # if auth["extra"]["raw_info"]["work"]
+			# 	user.employer = auth["extra"]["raw_info"]["work"][0]["employer"]["name"]
+			# 	user.position = auth["extra"]["raw_info"]["work"][0]["position"]["name"]
+			# end
 	    user.gender = auth.extra.raw_info.gender
 	    user.relationship_status = auth.extra.raw_info.relationship_status
-	    #	user.school = auth.extra.raw_info.education.school.name
-	    # Added this from old code. Takes previous entry but should only take College.
-			if auth["extra"]["raw_info"]["education"]
-				user.school = auth["extra"]["raw_info"]["education"][0]["school"]["name"]
-			end
+	    # Takes the most recent entry but should take College if it exists.
+	    unless auth.extra.raw_info.education.nil?
+	    	user.school = auth.extra.raw_info.education.first.school.name
+	    end
+	    # The code below works. Takes most recent entry but should only take College.
+			# if auth["extra"]["raw_info"]["education"]
+			# 	user.school = auth["extra"]["raw_info"]["education"][0]["school"]["name"]
+			# end
 	    user.locale = auth.extra.raw_info.locale
 	    user.oauth_token = auth.credentials.token
 	    user.oauth_expires_at = Time.at(auth.credentials.expires_at)
