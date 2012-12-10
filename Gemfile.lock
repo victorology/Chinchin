@@ -36,6 +36,7 @@ GEM
     better_errors (0.0.8)
       coderay
       erubis
+    binding_of_caller (0.6.8)
     bootstrap-sass (2.0.0)
     builder (3.0.0)
     capybara (1.1.2)
@@ -184,6 +185,7 @@ PLATFORMS
 DEPENDENCIES
   annotate (= 2.5.0)
   better_errors
+  binding_of_caller
   bootstrap-sass (= 2.0.0)
   capybara (= 1.1.2)
   coffee-rails (~> 3.2.2)
