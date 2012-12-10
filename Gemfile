@@ -14,7 +14,10 @@ group :development, :test do
 	gem 'rspec-rails', '2.10.0'
 end
 
-gem 'annotate', '2.5.0', group: :development
+group :development do
+	gem 'annotate', '2.5.0'
+	gem 'better_errors'
+end
 
 # Gems used only for assets and not required
 # in production environments by default.
