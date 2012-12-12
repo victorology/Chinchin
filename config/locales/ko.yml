@@ -16,5 +16,5 @@ ko:
     home:
       headline: "반가워요! 친친 통해서 소개팅을 받으세요!"
       call_to_action: "If you would like to learn how Chinchin can help hook you up, click the 'Find out more' button!"
-      log_in_message: "Find out more!"
+      log_in_message: "소개팅 받자!"
       signed_up_html: "Thank you for signing up, <strong>%{username}</strong>! We will make sure you are the first to know when Chinchin launches! :D"

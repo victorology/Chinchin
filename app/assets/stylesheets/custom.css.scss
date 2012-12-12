@@ -335,20 +335,20 @@ p {
 
 a.btn-cta {
   width: 180px;
-  height: 48px;
-  background: url(main-content-btn.png) 0 0;
+  height: 68px;
+  background-color: $ChinchinRed;
   display: block;
   color: $white;
-  font-size: 1.5em;
+  font-size: 1.8em;
   font-weight: bold;
   text-align: center;
-  line-height: 44px;
+  line-height: 68px;
   &:hover {
-    background-position: 0 -48px;
+    background-color: #B9113B;
     text-decoration: none;
   }
   &:active {
-    background-position: 0 -96px;
+    background-color: #FF1751;
   }
 }
 

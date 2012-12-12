@@ -16,5 +16,5 @@ en:
     home:
       headline: "We are a social club where you can meet people through your mutual friends!"
       call_to_action: "If you would like to learn how Chinchin can help hook you up, click the 'Find out more' button!"
-      log_in_message: "Find out more!"
+      log_in_message: "Get Started!"
       signed_up_html: "Thank you for signing up, <strong>%{username}</strong>! We will make sure you are the first to know when Chinchin launches! :D"
