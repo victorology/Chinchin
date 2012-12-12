@@ -6,6 +6,10 @@
 
 	<% if current_user %>
 	  <p><%= t '.signed_up_html', :username => current_user.name %> <%= link_to "Sign out", signout_path, id: "sign_out" %></p>
+	  <!-- Mixpanel registered user tracking code -->
+	  <script type="text/javascript">
+		  mixpanel.track("Home Page Registered")
+		</script>
 	<% else %>
 	  <div id="main-content-text">
 			<p><%= t '.call_to_action' %></p>
@@ -13,6 +17,12 @@
 		<div id="main-content-btn">
 				<%= link_to t('.log_in_message'), "/auth/facebook", class: "btn-cta" %>
 		</div> <!-- #main-content-btn -->
+		<!-- Mixpanel CTA click tracking code -->
+		<script type="text/javascript">
+			$(".btn-cta").click(function() {
+			  mixpanel.track("CTA Click"); 
+			});
+		</script>
 	<% end %>
 
 	<ul class="social-share">
@@ -22,3 +32,8 @@
 	</ul>
 
 </div> <!-- #main-content -->
+
+<!-- Mixpanel home page tracking code -->
+<script type="text/javascript">
+  mixpanel.track("Home Page")
+</script>
