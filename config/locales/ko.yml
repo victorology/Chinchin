@@ -1,20 +1,20 @@
 # Sample localization file for English. Add more files in this directory for other locales.
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
-en:
+ko:
   layouts:
     footer:
-      in_touch: "Thanks for looking. We'd love to stay in touch!"
-      blog: "Check out our blog"
-      social_networks: "Find us on social networks"
-      facebook: "Facebook"
-      twitter: "Twitter"
-      contact: "General inquiries, contact"
-      jobs: "Careers, send portfolio to"
+      in_touch: "찾아줘셔서 고마워요. 자주 뵈요. ^_^"
+      blog: "블로그 구경 해주세요."
+      social_networks: "SNS에 친구 해요."
+      facebook: "페이스북"
+      twitter: "트위터"
+      contact: "문의 있으면 언제나 연락주세요."
+      jobs: "이력서 보내서 같이 일 해요."
       copyright: "© 2012. Chinchin. All rights reserved."
   static_pages:
     home:
-      headline: "We are a social club where you can meet people through your mutual friends!"
+      headline: "반가워요! 친친 통해서 소개팅을 받으세요!"
       call_to_action: "If you would like to learn how Chinchin can help hook you up, click the 'Find out more' button!"
       log_in_message: "Find out more!"
       signed_up_html: "Thank you for signing up, <strong>%{username}</strong>! We will make sure you are the first to know when Chinchin launches! :D"

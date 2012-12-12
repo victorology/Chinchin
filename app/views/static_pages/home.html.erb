@@ -1,17 +1,17 @@
-<h2>We aim to transform the most important industry in the world... introducing men and women so the human race continues to dominate the face of the earth for years to come.</h2>
+<h2><%= t '.headline' %></h2>
 
 <%= image_tag "main-model.jpg" %>
 
 <div id="main-content">
 
 	<% if current_user %>
-	  <p>Thank you for signing up, <strong><%= current_user.name %></strong>! We will make sure you are the first to know when Chinchin launches! :D <%= link_to "Sign out", signout_path, id: "sign_out" %></p>
+	  <p><%= t '.signed_up_html', :username => current_user.name %> <%= link_to "Sign out", signout_path, id: "sign_out" %></p>
 	<% else %>
 	  <div id="main-content-text">
-			<p>If you would like to learn how Chinchin can help hook you up, click the "Find out more" button!</p>
+			<p><%= t '.call_to_action' %></p>
 		</div> <!-- #main-content-text -->
 		<div id="main-content-btn">
-				<%= link_to "Find out more!", "/auth/facebook", class: "btn-cta" %>
+				<%= link_to t('.log_in_message'), "/auth/facebook", class: "btn-cta" %>
 		</div> <!-- #main-content-btn -->
 	<% end %>
 
