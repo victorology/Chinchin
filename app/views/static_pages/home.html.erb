@@ -19,9 +19,7 @@
 		</div> <!-- #main-content-btn -->
 		<!-- Mixpanel CTA click tracking code -->
 		<script type="text/javascript">
-			$(".btn-cta").click(function() {
-			  mixpanel.track("CTA Click"); 
-			});
+			mixpanel.track_links('a.btn-cta', 'CTA Click');
 		</script>
 	<% end %>
 
