@@ -1,6 +1,3 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
 ko:
   layouts:
     footer:
@@ -18,3 +15,25 @@ ko:
       call_to_action: "If you would like to learn how Chinchin can help hook you up, click the 'Find out more' button!"
       log_in_message: "소개팅 받자!"
       signed_up_html: "Thank you for signing up, <strong>%{username}</strong>! We will make sure you are the first to know when Chinchin launches! :D"
+    users:
+      birthday: "Born on %{birthday}"
+      location: "Lives in %{location}"
+      position_employer: "%{position} at %{employer}"
+      employer: "Works at %{employer}"
+    profile:
+      male_friends_html: "<strong>%{username}</strong> has %{friends} friends he can introduce."
+      male_birthday: "%{firstname} is born on %{birthday}."
+      male_location: "He lives in %{location}."
+      male_relationship_status: "His relationship status is currently '%{relationshipstatus}.'"
+      male_position_employer: "He works as %{position} at %{employer}."
+      male_employer: "He works at %{employer}."
+      male_school: "He also studied at %{school}."
+      male_introduce: "Want to meet any of his friends?"
+      female_friends_html: "<strong>%{username}</strong> has %{friends} friends she can introduce."
+      female_birthday: "%{firstname} is born on %{birthday}."
+      female_location: "She lives in %{location}."
+      female_relationship_status: "Her relationship status is currently '%{relationshipstatus}.'"
+      female_position_employer: "She works as %{position} at %{employer}."
+      female_employer: "She works at %{employer}."
+      female_school: "She also studied at %{school}."
+      female_introduce: "Want to meet any of her friends?"

@@ -9,14 +9,14 @@
 		</div> <!-- .user-photo -->
 		<div class="user-index-info">
 			<h3><%= link_to user.name, user %></h3>
-      <p>Born on <%= user.birthday %>
+      <p><%= t '.birthday', :birthday => user.birthday %>
       <% if !user.location.nil? %>
-	      <br />Lives in <%= user.location %>
+	      <br /><%= t '.location', :location => user.location %>
 	    <% end %>
 	    <% if !user.position.nil? && !user.employer.nil? %>
-				<br /><%= user.position %> at <%= user.employer %>
+				<br /><%= t '.position_employer', :position => user.position, :employer => user.employer %>
 			<% elsif !user.employer.nil? %>
-				<br />Works at <%= user.employer %>
+				<br /><%= t '.employer', :employer => user.employer %>
 			<% end %>
 	    </p>
 	  </div> <!-- .user-index-info -->
