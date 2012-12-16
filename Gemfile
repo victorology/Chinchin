@@ -6,7 +6,8 @@ gem 'omniauth-facebook'
 gem 'fb_graph'
 gem 'newrelic_rpm'
 gem 'activeadmin'
-gem 'formtastic', '~> 2.1.1'
+gem 'formtastic', '~> 2.1.1' # Added for ActiveAdmin
+gem "meta_search", '>= 1.1.0.pre' # Added for ActiveAdmin
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

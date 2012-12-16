@@ -235,6 +235,7 @@ DEPENDENCIES
   fb_graph
   formtastic (~> 2.1.1)
   jquery-rails (= 2.0.2)
+  meta_search (>= 1.1.0.pre)
   newrelic_rpm
   omniauth-facebook
   pg (= 0.12.2)
