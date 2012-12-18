@@ -8,7 +8,13 @@
 	  <p><%= t '.signed_up_html', :username => current_user.name %> <%= link_to "Sign out", signout_path, id: "sign_out" %></p>
 	  <!-- start Mixpanel Registered User -->
 	  <script type="text/javascript">
-		  mixpanel.track("Home Page Registered")
+		  mixpanel.track("Home Page Registered");
+		  mixpanel.identify(<%= current_user.id %>);
+		  mixpanel.people.set({
+		  	"name": "<%= current_user.name %>",
+		  	"referrer": document.referrer
+		  });
+		  mixpanel.people.increment("visits");
 		</script>
 		<!-- end Mixpanel Home Page Registered User -->
 	<% else %>
@@ -23,6 +29,11 @@
 			mixpanel.track_links('a.btn-cta', 'CTA Click');
 		</script>
 		<!-- end Mixpanel CTA Click -->
+		<!-- start Mixpanel Home Page Guest -->
+		<script type="text/javascript">
+		  mixpanel.track("Home Page")
+		</script>
+		<!-- end Mixpanel Home Page Guest -->
 	<% end %>
 
 	<ul class="social-share">
@@ -32,9 +43,3 @@
 	</ul>
 
 </div> <!-- #main-content -->
-
-<!-- start Mixpanel Home Page Guest -->
-<script type="text/javascript">
-  mixpanel.track("Home Page")
-</script>
-<!-- end Mixpanel Home Page Guest -->
