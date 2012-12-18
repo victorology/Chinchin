@@ -11,7 +11,9 @@
 		  mixpanel.track("Home Page Registered");
 		  mixpanel.identify(<%= current_user.id %>);
 		  mixpanel.people.set({
-		  	"name": "<%= current_user.name %>",
+		  	"$name": "<%= current_user.name %>",
+		  	"$email": "<%= current_user.email %>",
+		  	"$last_login": new Date(),
 		  	"referrer": document.referrer
 		  });
 		  mixpanel.people.increment("visits");
