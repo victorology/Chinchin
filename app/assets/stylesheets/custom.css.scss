@@ -16,7 +16,6 @@ $marginTiny: 5px;
 
 @mixin main-model {
   margin: 0 0 $marginMid 0;
-  position: relative;
 
   padding-top: 56.25%; /* 540px/960px = 0.5625 */
   background-image: url(main-model-gr.jpg);
@@ -65,29 +64,16 @@ $marginTiny: 5px;
     font-size: 5em;
   }
 
-  h2 {
-    font-size: 1.6em;
-    color: $white;
-  }
-
   figure.main-model {
     @include main-model;
   }
 
   #main-container {
-    padding: 20px;
-    position: absolute;
-    background: $grayDark;
+    float: left;
+    margin: $marginSmall 0;
     p {
       font-size: 1.2em;
-      color: $white;
     }
-  }
-
-  #main-content-btn {
-    float: left;
-    margin-bottom: $marginMid;
-    width: 100%;
   }
 
   .user-index-box {
@@ -120,28 +106,23 @@ $marginTiny: 5px;
     font-size: 5em;
   }
 
-  h2 {
-    font-size: 1.6em;
-    color: $white;
-  }
-
   figure.main-model {
     @include main-model;
   }
 
   #main-container {
-    padding: 20px;
-    position: absolute;
-    background: $grayDark;
+    float: left;
+    margin: $marginSmall 0;
     p {
       font-size: 1.2em;
-      color: $white;
     }
   }
 
-  #main-content-btn {
+  #main-content {
     float: left;
-    width: 100%;
+    margin: 0;
+    position: relative;
+    clear: both;
   }
 
   .user-index-box {
@@ -180,6 +161,7 @@ $marginTiny: 5px;
 
   figure.main-model {
     @include main-model;
+    position: relative;
   }
 
   #main-container {
@@ -224,6 +206,7 @@ $marginTiny: 5px;
 
   figure.main-model {
     @include main-model;
+    position: relative;
   }
 
   #main-container {
