@@ -14,19 +14,29 @@ $marginMid: 20px;
 $marginSmall: 10px;
 $marginTiny: 5px;
 
-@mixin main-content {
-  margin: -200px 0 58px 0;
-  padding: 30px;
-  width: 80%;
-  height: 98px;
-  background: $grayDark;
-  opacity: 0.8;
-  -moz-opacity: 0.8;
-  filter:alpha(opacity=8);
+@mixin main-model {
+  margin: 0 0 $marginMid 0;
+
+  padding-top: 56.25%; /* 540px/960px = 0.5625 */
+  background-image: url(main-model-gr.jpg);
+  background-size: cover;
+  -moz-background-size: cover; /* Firefox 3.6 */
+  background-position: center; /* Internet Explorer 7/8 */
+}
+
+@mixin main-container {
+  margin: -56.25% 0 0 61.77%;
+  width: 38.23%;
+  height: 100%;
+  position: absolute;
+  bottom: 0;
   p {
-    font-size: 1.3em;
     line-height: 1.5;
     color: $white;
+  }
+  h2 {
+    color: $white;
+    letter-spacing: 0;
   }
 }
 
@@ -54,30 +64,16 @@ $marginTiny: 5px;
     font-size: 5em;
   }
 
-  h2 {
-    font-size: 1.6em;
+  figure.main-model {
+    @include main-model;
   }
 
-  #main-content {
-    margin-top: -5px;
-    padding: 20px 20px 50px 20px;
-    background: $grayDark;
+  #main-container {
+    float: left;
+    margin: $marginSmall 0;
     p {
       font-size: 1.2em;
-      color: $white;
     }
-  }
-
-  #main-content-btn {
-    float: left;
-    margin-bottom: $marginMid;
-    width: 100%;
-  }
-
-  div.fb-like {
-    float: left;
-    width: 130px;
-    overflow: hidden !important;
   }
 
   .user-index-box {
@@ -110,30 +106,23 @@ $marginTiny: 5px;
     font-size: 5em;
   }
 
-  h2 {
-    font-size: 1.6em;
+  figure.main-model {
+    @include main-model;
   }
 
-  #main-content {
-    margin-top: -5px;
-    padding: 20px 20px 50px 20px;
-    background: $grayDark;
+  #main-container {
+    float: left;
+    margin: $marginSmall 0;
     p {
       font-size: 1.2em;
-      color: $white;
     }
   }
 
-  #main-content-btn {
+  #main-content {
     float: left;
-    margin-bottom: $marginMid;
-    width: 100%;
-  }
-
-  div.fb-like {
-    float: left;
-    width: 130px;
-    overflow: hidden !important;
+    margin: 0;
+    position: relative;
+    clear: both;
   }
 
   .user-index-box {
@@ -166,17 +155,26 @@ $marginTiny: 5px;
     font-size: 8em;
   }
 
-  #main-content {
-    @include main-content;
+  h2 {
+    font-size: 1.6em;
   }
 
-  #main-content-text {
-    width: 68%;
+  figure.main-model {
+    @include main-model;
+    position: relative;
+  }
+
+  #main-container {
+    @include main-container;
+  }
+
+  #main-content {
+    padding: 8%;
   }
 
   #main-content-btn {
-    float: right;
-    width: 180px;
+    float: left;
+    width: 100%;
   }
 
   .user-index-box {
@@ -206,17 +204,22 @@ $marginTiny: 5px;
     font-size: 8em;
   }
 
-  #main-content {
-    @include main-content;
+  figure.main-model {
+    @include main-model;
+    position: relative;
   }
 
-  #main-content-text {
-    width: 75%;
+  #main-container {
+    @include main-container;
+  }
+
+  #main-content {
+    padding: 8%;
   }
 
   #main-content-btn {
-    float: right;
-    width: 180px;
+    float: left;
+    width: 100%;
   }
 
   .user-index-box {
@@ -328,12 +331,9 @@ p {
 
 /* home */
 
-#main-content-text {
-  float: left;
-  margin-bottom: $marginSmall;
-}
-
 a.btn-cta {
+  float: left;
+  margin: $marginSmall 0;
   width: 180px;
   height: 68px;
   background-color: $ChinchinRed;
@@ -353,18 +353,15 @@ a.btn-cta {
 }
 
 .social-share {
-  margin: 15px 0 0 0;
+  float: left;
+  margin: $marginSmall 0 0 0;
   padding: 0;
   list-style-type: none;
   clear: both;
-  ul {
+  li {
     float: left;
+    margin: 0 $marginSmall 0 0;
   }
-}
-
-.social-twitter {
-  float: left;
-  margin: 2px -20px 0 0;
 }
 
 /* user index + user page */
@@ -384,7 +381,7 @@ a.btn-cta {
 
 .user-index-info {
   float: left;
-  margin-left: 10px;
+  margin-left: $marginSmall;
 }
 
 /* footer */
