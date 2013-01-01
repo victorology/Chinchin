@@ -11,10 +11,11 @@ en:
       copyright: "© 2012. Chinchin. All rights reserved."
   static_pages:
     home:
-      headline: "We are a social club where you can meet people through your mutual friends!"
-      call_to_action: "If you would like to learn how Chinchin can help hook you up, click the 'Find out more' button!"
+      headline_html: "<strong>Chinchin</strong> is a social club where you can meet new people through your mutual friends."
+      call_to_action: "We are currently accepting signups for a private preview of our service. If you would like to be one of the first to be invited, click 'Get Started!'"
       log_in_message: "Get Started!"
-      signed_up_html: "Thank you for signing up, <strong>%{username}</strong>! We will make sure you are the first to know when Chinchin launches! :D"
+      thanks_html: "Thank you for signing up for early access to Chinchin, <strong>%{username}</strong>!"
+      let_you_know: "When we start the private preview of our service, we will make sure you are one of the first to know! In the meantime, please help spread the word by pressing Like on Facebook or sending a Tweet!"
     users:
       birthday: "Born on %{birthday}"
       location: "Lives in %{location}"

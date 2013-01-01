@@ -11,10 +11,11 @@ ko:
       copyright: "© 2012. Chinchin. All rights reserved."
   static_pages:
     home:
-      headline: "반가워요! 친친 통해서 소개팅을 받으세요!"
+      headline_html: "반가워요! 친친 통해서 소개팅을 받으세요!"
       call_to_action: "If you would like to learn how Chinchin can help hook you up, click the 'Find out more' button!"
       log_in_message: "소개팅 받자!"
-      signed_up_html: "Thank you for signing up, <strong>%{username}</strong>! We will make sure you are the first to know when Chinchin launches! :D"
+      thanks_html: "Thank you for signing up, <strong>%{username}</strong>! We will make sure you are the first to know when Chinchin launches! :D"
+      let_you_know: "When we start the private preview of our service, we will make sure you are one of the first to know! In the meantime, please help spread the word by pressing Like on Facebook or sending a Tweet!"
     users:
       birthday: "Born on %{birthday}"
       location: "Lives in %{location}"

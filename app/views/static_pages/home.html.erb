@@ -1,47 +1,49 @@
-<h2><%= t '.headline' %></h2>
+<figure class="main-model">
 
-<%= image_tag "main-model.jpg" %>
+<div id="main-container">
+	<div id="main-content">
 
-<div id="main-content">
-
-	<% if current_user %>
-	  <p><%= t '.signed_up_html', :username => current_user.name %> <%= link_to "Sign out", signout_path, id: "sign_out" %></p>
-	  <!-- start Mixpanel Registered User -->
-	  <script type="text/javascript">
-		  mixpanel.track("Home Page Registered");
-		  mixpanel.identify(<%= current_user.id %>);
-		  mixpanel.people.set({
-		  	"$name": "<%= current_user.name %>",
-		  	"$email": "<%= current_user.email %>",
-		  	"$last_login": new Date(),
-		  	"referrer": document.referrer
-		  });
-		  mixpanel.people.increment("visits");
-		</script>
-		<!-- end Mixpanel Home Page Registered User -->
-	<% else %>
-	  <div id="main-content-text">
+		<% if current_user %>
+			<h2><%= t '.thanks_html', :username => current_user.name %></h2>
+		  <p><%= t '.let_you_know' %> <%= link_to "Sign out", signout_path, id: "sign_out" %></p>
+		  <!-- start Mixpanel Registered User -->
+		  <script type="text/javascript">
+			  mixpanel.track("Home Page Registered");
+			  mixpanel.identify(<%= current_user.id %>);
+			  mixpanel.people.set({
+			  	"$name": "<%= current_user.name %>",
+			  	"$email": "<%= current_user.email %>",
+			  	"$last_login": new Date(),
+			  	"referrer": document.referrer
+			  });
+			  mixpanel.people.increment("visits");
+			</script>
+			<!-- end Mixpanel Home Page Registered User -->
+		<% else %>
+	  	<h2><%= t '.headline_html' %></h2>
 			<p><%= t '.call_to_action' %></p>
-		</div> <!-- #main-content-text -->
-		<div id="main-content-btn">
+			<div id="main-content-btn">
 				<%= link_to t('.log_in_message'), "/auth/facebook", class: "btn-cta" %>
-		</div> <!-- #main-content-btn -->
-		<!-- start Mixpanel CTA Click -->
-		<script type="text/javascript">
-			mixpanel.track_links('a.btn-cta', 'CTA Click');
-		</script>
-		<!-- end Mixpanel CTA Click -->
-		<!-- start Mixpanel Home Page Guest -->
-		<script type="text/javascript">
-		  mixpanel.track("Home Page")
-		</script>
-		<!-- end Mixpanel Home Page Guest -->
-	<% end %>
+			</div> <!-- #main-content-btn -->
+			<!-- start Mixpanel CTA Click -->
+			<script type="text/javascript">
+				mixpanel.track_links('a.btn-cta', 'CTA Click');
+			</script>
+			<!-- end Mixpanel CTA Click -->
+			<!-- start Mixpanel Home Page Guest -->
+			<script type="text/javascript">
+			  mixpanel.track("Home Page")
+			</script>
+			<!-- end Mixpanel Home Page Guest -->
+		<% end %>
 
-	<ul class="social-share">
-	<li class="social-twitter"><a href="https://twitter.com/share" class="twitter-share-button" data-url="http://chinchinapp.com" data-text="Chinchin is an online dating service which introduces people to friends of friends. :D http://chinchinapp.com" data-via="Chinchinapp">Tweet</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></li>
-	<li><div class="fb-like" data-href="https://www.facebook.com/chinchinapp" data-send="false" data-width="450" data-show-faces="false" data-font="lucida grande" data-colorscheme="dark"></div></li>
-	</ul>
+		<ul class="social-share">
+			<li><div class="fb-like" data-href="http://facebook.com/chinchinapp" data-send="false" data-layout="button_count" data-width="90" data-show-faces="true" data-font="lucida grande" data-colorscheme="dark"></div></li>
+			<li><a href="https://twitter.com/share" class="twitter-share-button" data-url="http://chinchinapp.com" data-text="Chinchin is an online dating service which introduces people to friends of friends. :D http://chinchinapp.com" data-via="Chinchinapp">Tweet</a>
+		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></li>
+		</ul>
 
-</div> <!-- #main-content -->
+	</div> <!-- #main-content -->
+</div> <!-- #main-container -->
+
+</figure>
