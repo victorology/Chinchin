@@ -73,4 +73,28 @@ class User < ActiveRecord::Base
 		@friends ||= facebook.friends
 	end
 
+  def friends_in_chinchin
+    users = User.all
+    friends = self.friends
+    chinchin = []
+
+    friends.each do |friend|
+      users.each do |user|
+        if friend.raw_attributes["id"] == user.uid
+          chinchin.push(user)
+        end
+      end
+    end
+
+    return chinchin
+  end
+
+  def chinchin
+    chinchin = []
+    self.friends_in_chinchin.each do |friend|
+      chinchin.push(friend.friends)
+    end
+
+    chinchin.flatten
+  end
 end

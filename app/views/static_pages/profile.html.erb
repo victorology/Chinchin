@@ -3,9 +3,12 @@
 <div style="float: left; margin-right: 20px; margin-top: 5px; margin-bottom: 25px; width: 120px; height: 120px; overflow: hidden; display: inline-block;">
   <img src="http://graph.facebook.com/<%= @user.uid %>/picture?type=large" align="absmiddle" width=120 style="min-width: 120px; min-height: 120px;" />
 </div>
+<div class="sign_out">
+  <%= link_to "Sign out", signout_path, id: "sign_out" %>
+</div>
 <% if @user.gender == "male" %>
 	<h2>
-		<%= t '.male_friends_html', :username => @user.name, :friends => @user.friends.length %>
+		<%= t '.male_friends_html', :username => @user.name, :friends => @user.chinchin.length %>
 		<%= t '.male_birthday', :firstname => @user.first_name, :birthday => @user.birthday %>
 		<% if !@user.location.nil? %>
 			<%= t '.male_location', :location => @user.location %>
@@ -25,7 +28,7 @@
 	</h2>
 <% else %>
 	<h2>
-		<%= t '.female_friends_html', :username => @user.name, :friends => @user.friends.length %>
+		<%= t '.female_friends_html', :username => @user.name, :friends => @user.chinchin.length %>
 		<%= t '.female_birthday', :firstname => @user.first_name, :birthday => @user.birthday %>
 		<% if !@user.location.nil? %>
 			<%= t '.female_location', :location => @user.location %>
@@ -46,7 +49,7 @@
 <% end %>
 <div class="divider-thin-XL"></div>
 
-<% @user.friends.each do |friend| %>
+<% @user.chinchin.each do |friend| %>
 	<div class="user-index-box">
 		<div class="user-photo">
 			<%= image_tag ( friend.picture('large') ), :align => "absmiddle", :width => "120", :style => "min-width: 120px; min-height: 120px;" %>

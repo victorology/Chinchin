@@ -1,5 +1,8 @@
 class StaticPagesController < ApplicationController
   def home
+    if current_user
+      redirect_to "/user/#{current_user.id}"
+    end
   end
 
   # This controller is for the user index

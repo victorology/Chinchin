@@ -19,6 +19,9 @@
 			<% elsif !user.employer.nil? %>
 				<br /><%= t '.employer', :employer => user.employer %>
 			<% end %>
+        <% user.friends_in_chinchin.each do |friend| %>
+          <br /><%= friend.name %>
+        <% end %>
 	    </p>
 	  </div> <!-- .user-index-info -->
 	</div> <!-- .user-index-box -->
