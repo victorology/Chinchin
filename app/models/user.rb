@@ -95,8 +95,8 @@ class User < ActiveRecord::Base
       chinchins.push(friend.friends)
     end
 
-    chinchins.flatten
-    chinchins = chinchins[0].shuffle
+    chinchins.flatten!
+    chinchins.shuffle!
     #chinchins.shuffle
 
     real_chinchins = []

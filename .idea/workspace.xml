@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="768d819e-f9a2-4ce1-aada-67737081baf5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/user.rb" afterPath="$PROJECT_DIR$/app/models/user.rb" />
     </list>
     <ignored path="chinchin.iws" />
@@ -71,7 +70,7 @@
       <file leaf-file-name="user.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/models/user.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="103" column="13" selection-start="3498" selection-end="3498" vertical-scroll-proportion="0.41418764">
+            <state line="98" column="22" selection-start="3398" selection-end="3398" vertical-scroll-proportion="0.23112129">
               <folding />
             </state>
           </provider>
@@ -675,7 +674,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/models/user.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="103" column="13" selection-start="3498" selection-end="3498" vertical-scroll-proportion="0.41418764">
+        <state line="98" column="22" selection-start="3398" selection-end="3398" vertical-scroll-proportion="0.23112129">
           <folding />
         </state>
       </provider>
