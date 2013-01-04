@@ -90,11 +90,28 @@ class User < ActiveRecord::Base
   end
 
   def chinchin
-    chinchin = []
+    chinchins = []
     self.friends_in_chinchin.each do |friend|
-      chinchin.push(friend.friends)
+      chinchins.push(friend.friends)
     end
 
-    chinchin.flatten
+    chinchins.flatten
+    chinchins = chinchins[0].shuffle
+    #chinchins.shuffle
+
+    real_chinchins = []
+    puts(chinchins.size)
+    chinchins.each do |chinchin|
+      c = FbGraph::User.fetch(chinchin.raw_attributes["id"])
+      if c.raw_attributes["gender"] != self.gender
+        real_chinchins.push(c)
+      end
+
+      if real_chinchins.size >= 12
+        break
+      end
+    end
+
+    return real_chinchins
   end
 end
