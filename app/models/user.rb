@@ -39,15 +39,12 @@ class User < ActiveRecord::Base
 	    user.location = auth.extra.raw_info.location.name unless auth.extra.raw_info.location.nil?
 	    user.hometown = auth.extra.raw_info.hometown.name unless auth.extra.raw_info.hometown.nil?
 	    # Takes the most recent employer and position.
-	    unless auth.extra.raw_info.work.nil?
+	    unless auth.extra.raw_info.work.first.employer.name.nil?
 	    	user.employer = auth.extra.raw_info.work.first.employer.name
+	    end
+	    unless auth.extra.raw_info.work.first.position.nil?
 	    	user.position = auth.extra.raw_info.work.first.position.name
 	    end
-	    # The code below works.
-	    # if auth["extra"]["raw_info"]["work"]
-			# 	user.employer = auth["extra"]["raw_info"]["work"][0]["employer"]["name"]
-			# 	user.position = auth["extra"]["raw_info"]["work"][0]["position"]["name"]
-			# end
 	    user.gender = auth.extra.raw_info.gender
 	    user.relationship_status = auth.extra.raw_info.relationship_status
 	    # Takes the most recent entry but should take College if it exists.
