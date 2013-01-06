@@ -103,12 +103,13 @@ class User < ActiveRecord::Base
     real_chinchins = []
     puts(chinchins.size)
     chinchins.each do |chinchin|
-      c = FbGraph::User.fetch(chinchin.raw_attributes["id"])
+      #c = FbGraph::User.fetch(chinchin.raw_attributes["id"], :access_token => oauth_token)
+      c = chinchin.fetch
       if c.raw_attributes["gender"] != self.gender
         real_chinchins.push(c)
       end
 
-      if real_chinchins.size >= 12
+      if real_chinchins.size >= 3
         break
       end
     end

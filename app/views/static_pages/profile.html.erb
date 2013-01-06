@@ -14,7 +14,16 @@
 			<%= image_tag ( friend.picture('large') ), :align => "absmiddle", :width => "120", :style => "min-width: 120px; min-height: 120px;" %>
 		</div> <!-- .user-photo -->
 		<div class="user-index-info">
-			<h3><%= friend.name %></h3>
+		    <h3><%= friend.name %></h3>
+                    <% if friend.raw_attributes['birthday'] %>
+                    <div class="birthday"><%= friend.raw_attributes['birthday'] %></div>
+                    <% end %>
+                    <% if friend.raw_attributes['location'] %>
+                    <div class="location"><%= friend.raw_attributes['location']['name'] %></div>
+                    <% end %>
+                    <% if friend.raw_attributes['education'] %>
+                    <div class="education"><%= friend.raw_attributes['education'].last['school']['name'] %></div>
+                    <% end %>
 	  	</div> <!-- .user-index-info -->
 	</div> <!-- .user-index-box -->
 <% end %>
