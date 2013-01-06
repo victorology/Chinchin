@@ -51,10 +51,6 @@ class User < ActiveRecord::Base
 	    unless auth.extra.raw_info.education.nil?
 	    	user.school = auth.extra.raw_info.education.first.school.name
 	    end
-	    # The code below works. Takes most recent entry but should only take College.
-			# if auth["extra"]["raw_info"]["education"]
-			# 	user.school = auth["extra"]["raw_info"]["education"][0]["school"]["name"]
-			# end
 	    user.locale = auth.extra.raw_info.locale
 	    user.oauth_token = auth.credentials.token
 	    user.oauth_expires_at = Time.at(auth.credentials.expires_at)
