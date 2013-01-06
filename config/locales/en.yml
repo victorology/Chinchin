@@ -17,7 +17,7 @@ en:
       thanks_html: "Thank you for signing up for early access to Chinchin, <strong>%{username}</strong>!"
       let_you_know: "When we start the private preview of our service, we will make sure you are one of the first to know! In the meantime, please help spread the word by pressing Like on Facebook or sending a Tweet!"
     users:
-      birthday: "Born on %{birthday}"
+      age: "%{age} years old"
       location: "Lives in %{location}"
       position_employer: "%{position} at %{employer}"
       employer: "Works at %{employer}"

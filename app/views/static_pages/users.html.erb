@@ -10,7 +10,7 @@
 		</div> <!-- .user-photo -->
 		<div class="user-index-info">
 			<h3><%= link_to user.name, user %></h3>
-      <p><%= t '.birthday', :birthday => user.birthday %>
+      <p><%= t '.age', :age => user.age %>
       <% if !user.location.nil? %>
 	      <br /><%= t '.location', :location => user.location %>
 	    <% end %>
