@@ -109,7 +109,7 @@ class User < ActiveRecord::Base
         real_chinchins.push(c)
       end
 
-      if real_chinchins.size >= 3
+      if real_chinchins.size >= 12
         break
       end
     end
