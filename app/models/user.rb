@@ -39,10 +39,10 @@ class User < ActiveRecord::Base
 	    user.location = auth.extra.raw_info.location.name unless auth.extra.raw_info.location.nil?
 	    user.hometown = auth.extra.raw_info.hometown.name unless auth.extra.raw_info.hometown.nil?
 	    # Takes the most recent employer and position.
-	    unless auth.extra.raw_info.work.first.employer.name.nil?
+	    unless auth.extra.raw_info.work.employer.name.nil?
 	    	user.employer = auth.extra.raw_info.work.first.employer.name
 	    end
-	    unless auth.extra.raw_info.work.first.position.nil?
+	    unless auth.extra.raw_info.work.position.nil?
 	    	user.position = auth.extra.raw_info.work.first.position.name
 	    end
 	    user.gender = auth.extra.raw_info.gender
