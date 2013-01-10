@@ -15,8 +15,8 @@
 		</div> <!-- .user-photo -->
 		<div class="user-index-info">
 		    <h3><%= friend.name %></h3>
-                    <% if friend.raw_attributes['birthday'] %>
-                    <div class="birthday"><%= friend.raw_attributes['birthday'] %></div>
+                    <% if age(friend.raw_attributes['birthday']) %>
+                    <div class="birthday"><%= age(friend.raw_attributes['birthday']) %> years old</div>
                     <% end %>
                     <% if friend.raw_attributes['location'] %>
                     <div class="location"><%= friend.raw_attributes['location']['name'] %></div>
