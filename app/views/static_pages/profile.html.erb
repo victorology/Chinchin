@@ -15,14 +15,17 @@
 		</div> <!-- .user-photo -->
 		<div class="user-index-info">
 		    <h3><%= friend.name %></h3>
-                    <% if age(friend.raw_attributes['birthday']) %>
-                    <div class="birthday"><%= age(friend.raw_attributes['birthday']) %> years old</div>
+                    <% if age(friend.birthday) %>
+                    <div class="birthday"><%= age(friend.birthday) %> years old</div>
                     <% end %>
-                    <% if friend.raw_attributes['location'] %>
-                    <div class="location"><%= friend.raw_attributes['location']['name'] %></div>
+                    <% if friend.location %>
+                    <div class="location"><%= friend.location %></div>
                     <% end %>
-                    <% if friend.raw_attributes['education'] %>
-                    <div class="education"><%= friend.raw_attributes['education'].last['school']['name'] %></div>
+                    <% if friend.school %>
+                    <div class="school"><%= friend.school %></div>
+                    <% end %>
+                    <% Friendship.find_all_by_chinchin_id(friend.id).each do |friendship| %>
+                        <%= friendship.user.name %>
                     <% end %>
 	  	</div> <!-- .user-index-info -->
 	</div> <!-- .user-index-box -->

@@ -57,6 +57,7 @@ class User < ActiveRecord::Base
 	    user.oauth_token = auth.credentials.token
 	    user.oauth_expires_at = Time.at(auth.credentials.expires_at)
 	    user.save!
+      user.delay.add_friends_to_chinchin
 	  end
 	end
 
@@ -85,30 +86,27 @@ class User < ActiveRecord::Base
   end
 
   def chinchin
-    chinchins = []
+    friendships = []
     self.friends_in_chinchin.each do |friend|
-      chinchins.push(friend.friends)
+      friendships.push(Friendship.find_all_by_user_id(friend.id))
     end
 
-    chinchins.flatten!
-    chinchins.shuffle!
-    #chinchins.shuffle
+    friendships.flatten!
+    friendships.shuffle!
 
-    real_chinchins = []
-    puts(chinchins.size)
-    chinchins.each do |chinchin|
-      #c = FbGraph::User.fetch(chinchin.raw_attributes["id"], :access_token => oauth_token)
-      c = chinchin.fetch
-      if c.raw_attributes["gender"] != self.gender
-        real_chinchins.push(c)
+    chinchins = []
+    friendships.each do |friendship|
+      chinchin = friendship.chinchin
+      if chinchin.gender != self.gender
+        chinchins.push(chinchin)
       end
 
-      if real_chinchins.size >= 3
+      if chinchins.size >= 3
         break
       end
     end
 
-    return real_chinchins
+    return chinchins
   end
 
   def add_friends_to_chinchin
