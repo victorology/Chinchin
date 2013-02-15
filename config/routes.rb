@@ -7,6 +7,7 @@ Chinchin2::Application.routes.draw do
 
   match 'users', to: 'static_pages#users'
   match 'user/:id', to: 'static_pages#profile', :as => :user
+  match 'make_chinchin/:id', to: 'static_pages#make_chinchin'
 
   match 'fb4pp01', to: 'static_pages#fb4pp01'
 

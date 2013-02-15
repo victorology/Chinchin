@@ -20,4 +20,11 @@ class StaticPagesController < ApplicationController
   	# This code is added so the template does not use application.html.erb
   	render :layout => false
   end
+
+  def make_chinchin
+    @user = User.find(params[:id])
+    @user.delay.add_friends_to_chinchin
+
+    render :text => 'making...'
+  end
 end
