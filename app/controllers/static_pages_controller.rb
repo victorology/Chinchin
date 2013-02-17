@@ -1,4 +1,7 @@
 class StaticPagesController < ApplicationController
+  # Render mobile or desktop depending on User-Agent for these actions.
+  before_filter :check_for_mobile, :only => [:profile]
+
   def home
     if current_user
       redirect_to "/user/#{current_user.id}"
@@ -27,4 +30,5 @@ class StaticPagesController < ApplicationController
 
     render :text => 'making...'
   end
+
 end

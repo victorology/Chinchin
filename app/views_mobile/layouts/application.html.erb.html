@@ -47,11 +47,7 @@ mixpanel.init("53ba1bb796ef510bf1c77ccb3facd3c4");</script>
 </head>
 <body>
 
-<%= render 'layouts/header' if !mobile_device? %>
-
 <%= yield %>
-
-<%= render 'layouts/footer' if !mobile_device? %>
 
 <%= debug(params) if Rails.env.development? %>
 
