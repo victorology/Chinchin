@@ -1,6 +1,6 @@
 class StaticPagesController < ApplicationController
   # Render mobile or desktop depending on User-Agent for these actions.
-  before_filter :check_for_mobile, :only => [:profile]
+  before_filter :check_for_mobile, :only => :profile
 
   def home
     if current_user
