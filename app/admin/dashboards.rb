@@ -1,7 +1,7 @@
 ActiveAdmin::Dashboards.build do
 
   section "Users" do
-    table_for User.order("created_at desc").limit(5) do
+    table_for User.order("created_at desc").limit(10) do
       column :name do |user|
         link_to user.name, admin_user_path(user)
       end
