@@ -101,7 +101,7 @@ class User < ActiveRecord::Base
         chinchins.push(chinchin)
       end
 
-      if chinchins.size >= 3
+      if chinchins.size >= 6
         break
       end
     end
