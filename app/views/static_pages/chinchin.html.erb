@@ -14,7 +14,7 @@
 			<%= image_tag ( friend.picture('large') ), :align => "absmiddle", :width => "120", :style => "min-width: 120px; min-height: 120px;" %>
 		</div> <!-- .user-photo -->
 		<div class="user-index-info">
-		    <h3><%= link_to friend.name, friend %></h3>
+		    <h3><%= friend.name %></h3>
                     <% if age(friend.birthday) %>
                     <div class="birthday"><%= age(friend.birthday) %> years old</div>
                     <% end %>

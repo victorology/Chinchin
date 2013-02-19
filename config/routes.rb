@@ -6,6 +6,7 @@ Chinchin2::Application.routes.draw do
   root to: 'static_pages#home'
 
   match 'users', to: 'static_pages#users'
+  match 'user/:id/chinchin', to: 'static_pages#chinchin', :as => :user
   match 'user/:id', to: 'static_pages#profile', :as => :user
   match 'make_chinchin/:id', to: 'static_pages#make_chinchin'
 

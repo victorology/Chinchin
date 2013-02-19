@@ -13,9 +13,14 @@ class StaticPagesController < ApplicationController
   	@user = User.all
   end
 
-  # This controller is for the user profile
-  def profile
+  # This controller is for the user Chinchin list
+  def chinchin
   	@user = User.find(params[:id])
+  end
+
+  # This controller is for a detailed user profile
+  def profile
+    @user = User.find(params[:id])
   end
 
   # This controller is for a Facebook canvas app
