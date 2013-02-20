@@ -149,4 +149,20 @@ class User < ActiveRecord::Base
       end
     end
   end
+
+  def like(chinchin)
+    like = Like.new
+    like.user = self
+    like.chinchin = chinchin
+    like.save!
+  end
+
+  def liked(chinchin)
+    like = Like.find_by_user_id_and_chinchin_id(self.id, chinchin.id)
+    if like.nil?
+      false
+    else
+      true
+    end
+  end
 end

@@ -29,6 +29,17 @@ class StaticPagesController < ApplicationController
   	render :layout => false
   end
 
+  def like
+    user = User.find(params[:userId])
+    chinchin = Chinchin.find(params[:chinchinId])
+    @chinchinId = params[:chinchinId]
+    user.like(chinchin)
+
+    respond_to do | format |
+      format.js {render :layout => false}
+    end
+  end
+
   def make_chinchin
     @user = User.find(params[:id])
     @user.delay.add_friends_to_chinchin

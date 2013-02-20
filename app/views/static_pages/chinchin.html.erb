@@ -27,6 +27,13 @@
                     <% Friendship.find_all_by_chinchin_id(friend.id).each do |friendship| %>
                         <%= friendship.user.name %>
                     <% end %>
+                    <div id="like_<%=friend.id%>">
+                      <% if @user.liked(friend) %>
+                        You liked
+                      <% else %>
+                        <%= link_to "Like", {:action => "like", :userId => @user.id, :chinchinId => friend.id}, :remote => true %>
+                      <% end %>
+                    </div>
 	  	</div> <!-- .user-index-info -->
 	</div> <!-- .user-index-box -->
 <% end %>
