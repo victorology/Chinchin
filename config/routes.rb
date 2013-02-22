@@ -5,10 +5,10 @@ Chinchin2::Application.routes.draw do
 
   root to: 'static_pages#home'
 
-  match 'users', to: 'static_pages#users'
-  match 'user/:id/chinchin', to: 'static_pages#chinchin', :as => :user
-  match 'user/:id', to: 'static_pages#profile', :as => :user
-  match 'user/:userId/like/:chinchinId', to:'static_pages#like'
+  match 'users', to: 'users#users'
+  match 'user/:id/chinchin', to: 'users#chinchin', :as => :user
+  match 'user/:id', to: 'users#profile', :as => :user
+  match 'user/:userId/like/:chinchinId', to:'users#like'
   match 'make_chinchin/:id', to: 'static_pages#make_chinchin'
 
   match 'fb4pp01', to: 'static_pages#fb4pp01'
@@ -17,6 +17,7 @@ Chinchin2::Application.routes.draw do
   match 'auth/failure', to: redirect('/')
   match 'signout', to: 'sessions#destroy', as: 'signout'
 
+  resources :chinchins
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
