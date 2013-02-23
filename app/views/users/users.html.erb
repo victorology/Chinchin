@@ -1,6 +1,6 @@
 <%= provide(:title, 'All users') %>
 <div class="divider-thin"></div>
-<h2>Chinchin currently has <%= User.count %> users.</h2>
+<h2><%= t '.headline', :users => User.count %></h2>
 <div class="divider-thin-XL"></div>
 
 <% @user.each do |user| %>

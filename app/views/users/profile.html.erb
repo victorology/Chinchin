@@ -13,17 +13,3 @@
 <div class="divider-thin-XL"></div>
 
 <p>This is the user profile page.</p>
-
-<!-- start Mixpanel Registered User -->
-<script type="text/javascript">
-  mixpanel.track("Home Page Registered");
-  mixpanel.identify(<%= current_user.id %>);
-  mixpanel.people.set({
-  	"$name": "<%= current_user.name %>",
-  	"$email": "<%= current_user.email %>",
-  	"$last_login": new Date(),
-  	"referrer": document.referrer
-  });
-  mixpanel.people.increment("visits");
-</script>
-<!-- end Mixpanel Home Page Registered User -->
