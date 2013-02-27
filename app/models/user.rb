@@ -66,7 +66,11 @@ class User < ActiveRecord::Base
 	end
 
 	def friends
-		@friends ||= facebook.friends
+    begin
+		  @friends ||= facebook.friends
+    rescue
+      []
+    end
 	end
 
   def friends_in_chinchin
