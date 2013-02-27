@@ -109,43 +109,49 @@ class User < ActiveRecord::Base
     return chinchins
   end
 
+  def add_friend_to_chinchin(friend)
+    fetched_c = friend.fetch
+    ra = fetched_c.raw_attributes
+    ra['location'] = ra['location']['name'] unless ra['location'].nil?
+    ra['hometown'] = ra['hometown']['name'] unless ra['hometown'].nil?
+    ra['employer'] = ra['employer'].first['name'] unless ra['employer'].nil?
+    ra['position'] = ra['position'].first['name'] unless ra['position'].nil?
+    ra['school'] = ra['school'].last['name'] unless ra['school'].nil?
+
+    c = Chinchin.new(
+        :uid => ra['id'],
+        :name => ra['name'],
+        :email => ra['email'],
+        :first_name => ra['first_name'],
+        :last_name => ra['last_name'],
+        :birthday => ra['birthday'],
+        :location => ra['location'],
+        :hometown => ra['hometown'],
+        :employer => ra['employer'],
+        :position => ra['position'],
+        :gender => ra['gender'],
+        :relationship_status => ra['relationship_status'],
+        :school => ra['school'],
+        :locale => ra['locale']
+    )
+    c.save!
+
+    return c
+  end
+
   def add_friends_to_chinchin
     friends = self.friends
     friends.each do |friend|
       c = Chinchin.find_by_uid(friend.raw_attributes['id'])
       if c.nil?
-        fetched_c = friend.fetch
-        ra = fetched_c.raw_attributes
-        ra['location'] = ra['location']['name'] unless ra['location'].nil?
-        ra['hometown'] = ra['hometown']['name'] unless ra['hometown'].nil?
-        ra['employer'] = ra['employer'].first['name'] unless ra['employer'].nil?
-        ra['position'] = ra['position'].first['name'] unless ra['position'].nil?
-        ra['school'] = ra['school'].last['name'] unless ra['school'].nil?
+        self.add_friend_to_chinchin(friend)
+      end
 
-        c = Chinchin.new(
-            :uid => ra['id'],
-            :name => ra['name'],
-            :email => ra['email'],
-            :first_name => ra['first_name'],
-            :last_name => ra['last_name'],
-            :birthday => ra['birthday'],
-            :location => ra['location'],
-            :hometown => ra['hometown'],
-            :employer => ra['employer'],
-            :position => ra['position'],
-            :gender => ra['gender'],
-            :relationship_status => ra['relationship_status'],
-            :school => ra['school'],
-            :locale => ra['locale']
-        )
-        c.save!
-
-        if Friendship.find_by_user_id_and_chinchin_id(self.id, c.id).nil?
-          friendship = Friendship.new
-          friendship.user = self
-          friendship.chinchin = c
-          friendship.save!
-        end
+      if Friendship.find_by_user_id_and_chinchin_id(self.id, c.id).nil?
+        friendship = Friendship.new
+        friendship.user = self
+        friendship.chinchin = c
+        friendship.save!
       end
     end
   end

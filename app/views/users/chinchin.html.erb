@@ -24,7 +24,7 @@
                     <% if friend.school %>
                     <div class="school"><%= friend.school %></div>
                     <% end %>
-                    <% Friendship.find_all_by_chinchin_id(friend.id).each do |friendship| %>
+                    <% friend.friendships.each do |friendship| %>
                         <%= friendship.user.name %>
                     <% end %>
                     <div id="like_<%=friend.id%>">
