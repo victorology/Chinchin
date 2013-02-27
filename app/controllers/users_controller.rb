@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
-# This controller is for the user index
+  # Render mobile or desktop depending on User-Agent for these actions.
+  before_filter :check_for_mobile, :only => [:profile, :chinchin]
+
+  # This controller is for the user index
   def users
   	@user = User.all
   end

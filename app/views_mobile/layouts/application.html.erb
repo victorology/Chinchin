@@ -2,7 +2,7 @@
 <html>
 <head>
   <title><%= full_title(yield(:title)) %></title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= stylesheet_link_tag    "mobile", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
   <%= render 'layouts/shim' %>
@@ -47,7 +47,11 @@ mixpanel.init("53ba1bb796ef510bf1c77ccb3facd3c4");</script>
 </head>
 <body>
 
+<div class="container-fluid">
+
 <%= yield %>
+
+</div> <!-- .container-fluid -->
 
 <%= debug(params) if Rails.env.development? %>
 

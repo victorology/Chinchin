@@ -1,0 +1,10 @@
+<% provide(:title, @user.name) %>
+<div class="user-photo-large">
+  <img src="http://graph.facebook.com/<%= @user.uid %>/picture?type=large" align="absmiddle" width=300 style="min-width: 300px; min-height: 300px;" />
+</div> <!-- .user-photo-large -->
+
+<h2><strong><%= @user.name %></strong></h2>
+<p><%= age(@user.birthday) %> years old<br />
+  Lives in <%= @user.location %><br />
+  Studied at <%= @user.school %><br />
+  Works at <%= @user.employer %></p>
