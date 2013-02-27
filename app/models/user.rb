@@ -175,4 +175,22 @@ class User < ActiveRecord::Base
       true
     end
   end
+
+  def make_friendship
+    friends = self.friends
+    friends.each do |friend|
+      chinchin = Chinchin.find_by_uid(friend.identifier)
+      if chinchin.nil?
+        chinchin = self.add_friend_to_chinchin(friend)
+      end
+
+      friendship = Friendship.find_by_user_id_and_chinchin_id(user.id, chinchin.id)
+      if friendship.nil?
+        friendship = Friendship.new
+        friendship.user = user
+        friendship.chinchin = chinchin
+        friendship.save!
+      end
+    end
+  end
 end
