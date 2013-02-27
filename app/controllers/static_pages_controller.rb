@@ -21,4 +21,31 @@ class StaticPagesController < ApplicationController
     render :text => 'making...'
   end
 
+  def make_friendship
+    users = User.all
+    nil_count = 0
+    new_count = 0
+    users.each do |user|
+      friends = user.friends
+      friends.each do |friend|
+        chinchin = Chinchin.find_by_uid(friend.identifier)
+        if chinchin.nil?
+          nil_count += 1
+          chinchin = user.add_friend_to_chinchin(friend)
+        end
+
+        friendship = Friendship.find_by_user_id_and_chinchin_id(user.id, chinchin.id)
+        if friendship.nil?
+          new_count += 1
+          friendship = Friendship.new
+          friendship.user = user
+          friendship.chinchin = chinchin
+          friendship.save!
+        end
+      end
+    end
+
+    render :text => "nil_count: #{nil_count} - new_count #{new_count}"
+  end
+
 end
