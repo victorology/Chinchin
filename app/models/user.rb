@@ -184,10 +184,10 @@ class User < ActiveRecord::Base
         chinchin = self.add_friend_to_chinchin(friend)
       end
 
-      friendship = Friendship.find_by_user_id_and_chinchin_id(user.id, chinchin.id)
+      friendship = Friendship.find_by_user_id_and_chinchin_id(self.id, chinchin.id)
       if friendship.nil?
         friendship = Friendship.new
-        friendship.user = user
+        friendship.user = self
         friendship.chinchin = chinchin
         friendship.save!
       end
