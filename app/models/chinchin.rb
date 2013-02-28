@@ -57,4 +57,10 @@ class Chinchin < ActiveRecord::Base
 
     return nil
   end
+
+  def likes
+    friend = self.friendships.first.user
+    fb_user = FbGraph::User.new(self.uid, :access_token => friend.oauth_token)
+    fb_user.likes
+  end
 end

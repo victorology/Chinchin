@@ -20,9 +20,17 @@
 </p>
 
 <p>
-  <% if @chinchin.photos %>
-    <% @chinchin.photos.each do |photo| %>
+  <% if @photos %>
+    <% @photos.each do |photo| %>
       <%= image_tag photo.source, :size => "200x150" %>
     <% end %>
   <% end  %>
+</p>
+
+<p>
+  <% if @likes %>
+    <% @likes.each do |like| %>
+        <%= like %>
+    <% end %>
+  <% end %>
 </p>

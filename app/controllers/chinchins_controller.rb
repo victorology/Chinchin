@@ -4,5 +4,7 @@ class ChinchinsController < ApplicationController
 
 	def show
 		@chinchin = Chinchin.find(params[:id])
+    @photos = @chinchin.photos
+    @likes = @chinchin.likes
 	end
 end
