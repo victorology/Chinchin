@@ -20,6 +20,7 @@ Chinchin2::Application.routes.draw do
   match 'signout', to: 'sessions#destroy', as: 'signout'
 
   resources :chinchins
+  match 'chinchins/:id/profile_photos', to:'chinchins#profile_photos'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

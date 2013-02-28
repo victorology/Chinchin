@@ -6,5 +6,14 @@ class ChinchinsController < ApplicationController
 		@chinchin = Chinchin.find(params[:id])
     @photos = @chinchin.photos
     @likes = @chinchin.likes
-	end
+  end
+
+  def profile_photos
+    @chinchin = Chinchin.find(params[:id])
+    @photos = @chinchin.photos
+
+    respond_to do | format |
+      format.js {render :layout => false}
+    end
+  end
 end

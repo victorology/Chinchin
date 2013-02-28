@@ -19,15 +19,13 @@
   <% end %>
 </p>
 
-<p>
+<p id="photos">
   <% if @photos %>
-    <% @photos.each do |photo| %>
-      <%= image_tag photo.source, :size => "200x150" %>
-    <% end %>
+    <%= link_to "#{@photos.count}개의 프로필 사진이 더 있습니다. 보시겠습니까?", {:action => "profile_photos", :id => @chinchin.id}, :remote => true %>
   <% end  %>
 </p>
 
-<p>
+<p id="likes">
   <% if @likes %>
     <% @likes.each do |like| %>
         <%= like %>
