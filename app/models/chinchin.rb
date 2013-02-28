@@ -44,4 +44,17 @@ class Chinchin < ActiveRecord::Base
   def friendships
     friendships = Friendship.find_all_by_chinchin_id(self.id)
   end
+
+  def photos
+    friend = self.friendships.first.user
+    fb_user = FbGraph::User.new(self.uid, :access_token => friend.oauth_token)
+    albums = fb_user.albums
+    albums.each do |album|
+      if album.name == 'Profile Pictures' and album.photos.count > 0
+        return album.photos
+      end
+    end
+
+    return nil
+  end
 end

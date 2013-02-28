@@ -18,3 +18,11 @@
   	<div class="school"><%= @chinchin.school %></div>
   <% end %>
 </p>
+
+<p>
+  <% if @chinchin.photos %>
+    <% @chinchin.photos.each do |photo| %>
+      <%= image_tag photo.source, :size => "200x150" %>
+    <% end %>
+  <% end  %>
+</p>
