@@ -29,9 +29,6 @@
                     <% end %>
                     <div id="like_<%=friend.id%>">
                       <% if @user.liked(friend) %>
-                        <script type="text/javascript">
-                          mixpanel.track("Like");
-                        </script>
                         You liked
                       <% else %>
                         <%= link_to "Like", {:action => "like", :userId => @user.id, :chinchinId => friend.id}, :remote => true %>
