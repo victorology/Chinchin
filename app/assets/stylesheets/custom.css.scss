@@ -364,13 +364,13 @@ a.btn-cta {
 
 .social-share {
   float: left;
-  margin: $marginSmall 0 0 0;
+  margin: 0;
   padding: 0;
   list-style-type: none;
   clear: both;
   li {
     float: left;
-    margin: 0 $marginSmall 0 0;
+    margin: $marginSmall $marginSmall 0 0;
   }
 }
 
