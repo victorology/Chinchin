@@ -248,6 +248,15 @@ a.btn-cta {
   display: inline-block;
 }
 
+.user-photo-more {
+  float: left;
+  margin: 0 $marginTiny $marginTiny 0;
+  width: 145px;
+  height: 145px;
+  overflow: hidden;
+  display: inline-block;
+}
+
 .user-index-info {
   float: left;
   margin-left: $marginSmall;
