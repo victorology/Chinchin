@@ -27,4 +27,9 @@ class UsersController < ApplicationController
       format.js {render :layout => false}
     end
   end
+
+  def likes
+    user = User.find(params[:userId])
+    @likes = Like.find_all_by_user_id(user.id)
+  end
 end

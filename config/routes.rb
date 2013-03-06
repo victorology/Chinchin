@@ -6,9 +6,10 @@ Chinchin2::Application.routes.draw do
   root to: 'static_pages#home'
 
   match 'users', to: 'users#users'
-  match 'user/:id/chinchin', to: 'users#chinchin', :as => :user
-  match 'user/:id', to: 'users#profile', :as => :user
-  match 'user/:userId/like/:chinchinId', to:'users#like'
+  match 'user/:id/chinchin', to: 'users#chinchin'
+  match 'user/:id', to: 'users#profile'
+  match 'user/:userId/like/:chinchinId', to: 'users#like'
+  match 'user/:userId/like/', to: 'users#likes'
 
   match 'make_chinchin/:id', to: 'static_pages#make_chinchin'
   match 'make_friendship', to: 'static_pages#make_friendship'
