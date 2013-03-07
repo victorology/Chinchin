@@ -13,8 +13,8 @@ Chinchin2::Application.routes.draw do
     resources :chinchins
     resources :likes
   end
+  resources :chinchins, :only => [:show]
 
-  match 'chinchins/:id', to: 'chinchins#show'
   match 'chinchins/:id/profile_photos', to: 'chinchins#profile_photos'
 
   #match 'users', to: 'users#users'
