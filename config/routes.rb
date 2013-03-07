@@ -5,23 +5,29 @@ Chinchin2::Application.routes.draw do
 
   root to: 'static_pages#home'
 
-  match 'users', to: 'users#users'
-  match 'user/:id/chinchin', to: 'users#chinchin'
-  match 'user/:id', to: 'users#profile'
-  match 'user/:userId/like/:chinchinId', to: 'users#like'
-  match 'user/:userId/like/', to: 'users#likes'
+  match 'auth/:provider/callback', to: 'sessions#create'
+  match 'auth/failure', to: redirect('/')
+  match 'signout', to: 'sessions#destroy', as: 'signout'
+
+  resources :users do
+    resources :chinchins
+    resources :likes
+  end
+
+  match 'chinchins/:id', to: 'chinchins#show'
+  match 'chinchins/:id/profile_photos', to: 'chinchins#profile_photos'
+
+  #match 'users', to: 'users#users'
+  #match 'user/:id/chinchin', to: 'users#chinchin'
+  #match 'user/:id', to: 'users#profile'
+  #match 'user/:userId/like/:chinchinId', to: 'users#like'
+  #match 'user/:userId/like/', to: 'users#likes'
 
   match 'make_chinchin/:id', to: 'static_pages#make_chinchin'
   match 'make_friendship', to: 'static_pages#make_friendship'
 
   match 'fb4pp01', to: 'static_pages#fb4pp01'
 
-  match 'auth/:provider/callback', to: 'sessions#create'
-  match 'auth/failure', to: redirect('/')
-  match 'signout', to: 'sessions#destroy', as: 'signout'
-
-  resources :chinchins
-  match 'chinchins/:id/profile_photos', to:'chinchins#profile_photos'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

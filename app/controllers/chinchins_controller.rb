@@ -1,11 +1,15 @@
 class ChinchinsController < ApplicationController
 	# Render mobile or desktop depending on User-Agent for these actions.
-  before_filter :check_for_mobile, :only => :show
+  before_filter :check_for_mobile, :only => [:index, :show]
+
+  def index
+    @user = current_user
+  end
 
 	def show
 		@chinchin = Chinchin.find(params[:id])
     @photos = @chinchin.photos
-    @likes = @chinchin.likes
+    #@likes = @chinchin.likes
   end
 
   def profile_photos

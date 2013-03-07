@@ -1,35 +1,18 @@
 class UsersController < ApplicationController
   # Render mobile or desktop depending on User-Agent for these actions.
-  before_filter :check_for_mobile, :only => [:profile, :chinchin]
+  before_filter :check_for_mobile, :only => [:show]
 
   # This controller is for the user index
-  def users
-  	@user = User.all
-  end
-
-  # This controller is for the user Chinchin list
-  def chinchin
-  	@user = User.find(params[:id])
+  def index
+  	@users = User.all
   end
 
   # This controller is for a detailed user profile
-  def profile
-    @user = User.find(params[:id])
-  end
-
-  def like
-    user = User.find(params[:userId])
-    chinchin = Chinchin.find(params[:chinchinId])
-    @chinchinId = params[:chinchinId]
-    user.like(chinchin)
-
-    respond_to do | format |
-      format.js {render :layout => false}
+  def show
+    userId = session[:user_id]
+    if userId.to_s != params[:id]
+      render :text => "Invalid access"
     end
-  end
-
-  def likes
-    user = User.find(params[:userId])
-    @likes = Like.find_all_by_user_id(user.id)
+    @user = User.find(params[:id])
   end
 end
