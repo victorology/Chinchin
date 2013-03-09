@@ -89,6 +89,37 @@ class User < ActiveRecord::Base
     return chinchin
   end
 
+  def chinchins_in_leaderboard
+    friendships = Friendship.find_all_by_user_id(self.id)
+    leaders = []
+
+    friendships.each do |friendship|
+      c = friendship.chinchin
+      leaders.push({:chinchin => c, :score => c.score})
+    end
+
+    leaders.sort_by { |leader| leader[:score] }
+
+    return leaders.slice 0, 10
+  end
+
+  def people_in_leaderboard
+    likes = Like.all
+    leaders = Hash.new(0)
+
+    likes.each do |like|
+      c = like.chinchin
+      leaders[c.uid] = leaders[c.uid] + 10
+    end
+
+    results = []
+    leaders.keys.each do |uid|
+      results.push({:chinchin => Chinchin.find_by_uid(uid), :score => leaders[uid]})
+    end
+
+    return results
+  end
+
   def chinchin
     friendships = []
     self.friends_in_chinchin.each do |friend|

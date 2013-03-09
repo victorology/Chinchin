@@ -25,6 +25,7 @@
 
 class Chinchin < ActiveRecord::Base
   has_many :friendships
+  has_many :likes
   attr_accessible :birthday, :email, :employer, :first_name, :gender, :hometown, :last_name, :locale, :location, :name, :oauth_expires_at, :oauth_token, :position, :provider, :relationship_status, :school, :uid
   # attr_accessible :title, :body
 
@@ -58,9 +59,13 @@ class Chinchin < ActiveRecord::Base
     return nil
   end
 
-  def likes
+  def facebook_likes
     friend = self.friendships.first.user
     fb_user = FbGraph::User.new(self.uid, :access_token => friend.oauth_token)
     fb_user.likes
+  end
+
+  def score
+    self.likes.count * 10
   end
 end

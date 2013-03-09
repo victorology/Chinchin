@@ -14,6 +14,7 @@ Chinchin2::Application.routes.draw do
     resources :likes
   end
   resources :chinchins, :only => [:show]
+  resources :leaderboards, :only => [:index]
 
   match 'chinchins/:id/profile_photos', to: 'chinchins#profile_photos'
 
