@@ -4,19 +4,20 @@
   <img src="http://graph.facebook.com/<%= @chinchin.uid %>/picture?type=large" align="absmiddle" width=300 style="min-width: 300px; min-height: 300px;" />
 </div> <!-- .user-photo-large -->
 
-<h2><strong><%= @chinchin.name %></strong></h2>
-<p><% if age(@chinchin.birthday) %>
-	<%= age(@chinchin.birthday) %> years old<br />
-<% end %>
-<% if @chinchin.location %>
-  Lives in <%= @chinchin.location %><br />
-<% end %>
-<% if @chinchin.school %>
-  Studied at <%= @chinchin.school %><br />
-<% end %>
-<% if @chinchin.employer %>
-  Works at <%= @chinchin.employer %>
-<% end %>
+<h2><strong><%= @chinchin.first_name %></strong><br />
+  <% if age(@chinchin.birthday) %>
+    <div class="user-age"><%= t '.age', :age => age(@chinchin.birthday) %></div>
+  <% end %>
+  <% if @chinchin.location %>
+    <div class="user-location"><%= t '.location', :location => @chinchin.location %></div>
+  <% end %>
+  <% if @chinchin.employer %>
+    <div class="user-employer"><%= t '.employer', :employer => @chinchin.employer %></div>
+  <% end %>
+  <% if @chinchin.school %>
+    <div class="user-school"><%= t '.school', :school => @chinchin.school %></div>
+  <% end %>
+</h2>
 
 <p id="photos">
   <% if @photos %>
