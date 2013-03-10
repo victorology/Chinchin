@@ -1,22 +1,37 @@
+<% provide(:title, "Chinchins You Like") %>
+<div class="divider-thin"></div>
+<div style="float: left; margin-right: 20px; margin-top: 5px; margin-bottom: 25px; width: 120px; height: 120px; overflow: hidden; display: inline-block;">
+  <img src="http://graph.facebook.com/<%= @user.uid %>/picture?type=large" align="absmiddle" width=120 style="min-width: 120px; min-height: 120px;" />
+</div>
+
+<h2>Hi <strong><%= @user.name %></strong>!<br />These are Chinchins you Like.</h2>
+
+<div class="divider-thin-XL"></div>
+
 <% @likes.each do |like| %>
-    <div class="user-index-box">
-      <div class="user-photo">
-        <%= image_tag ( like.chinchin.picture('large') ), :align => "absmiddle", :width => "120", :style => "min-width: 120px; min-height: 120px;" %>
-      </div> <!-- .user-photo -->
-      <div class="user-index-info">
-        <h3><%= link_to like.chinchin.name, chinchin_path(like.chinchin) %></h3>
+  <div class="user-index-box">
+    <div class="user-photo">
+      <%= image_tag ( like.chinchin.picture('large') ), :align => "absmiddle", :width => "120", :style => "min-width: 120px; min-height: 120px;" %>
+    </div> <!-- .user-photo -->
+    <div class="user-index-info">
+      <h3><%= link_to like.chinchin.name, chinchin_path(like.chinchin) %></h3>
+      <p>
         <% if age(like.chinchin.birthday) %>
-            <div class="birthday"><%= age(like.chinchin.birthday) %> years old</div>
+          <%= t '.age', :age => age(like.chinchin.birthday) %><br />
         <% end %>
         <% if like.chinchin.location %>
-            <div class="location"><%= like.chinchin.location %></div>
+          <%= t '.location', :location => like.chinchin.location %><br />
+        <% end %>
+        <% if like.chinchin.employer %>
+          <%= t '.employer', :employer => like.chinchin.employer %><br />
         <% end %>
         <% if like.chinchin.school %>
-            <div class="school"><%= like.chinchin.school %></div>
+          <%= t '.school', :school => like.chinchin.school %><br />
         <% end %>
-        <% like.chinchin.friendships.each do |friendship| %>
-            <%= friendship.user.name %>
-        <% end %>
-      </div> <!-- .user-index-info -->
-    </div> <!-- .user-index-box -->
+      </p>
+      <% like.chinchin.friendships.each do |friendship| %>
+          <%= friendship.user.name %>
+      <% end %>
+    </div> <!-- .user-index-info -->
+  </div> <!-- .user-index-box -->
 <% end %>

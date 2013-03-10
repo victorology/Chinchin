@@ -10,15 +10,17 @@
 		</div> <!-- .user-photo -->
 		<div class="user-index-info">
 			<h3><%= link_to user.name, user %></h3>
-      <p><%= t '.age', :age => age(user.birthday) %>
-      <% if !user.location.nil? %>
-	      <br /><%= t '.location', :location => user.location %>
-	    <% end %>
-	    <% if !user.position.nil? && !user.employer.nil? %>
-				<br /><%= t '.position_employer', :position => user.position, :employer => user.employer %>
-			<% elsif !user.employer.nil? %>
-				<br /><%= t '.employer', :employer => user.employer %>
-			<% end %>
+      <p>
+      	<%= t '.age', :age => age(user.birthday) %><br />
+	      <% if !user.location.nil? %>
+		      <%= t '.location', :location => user.location %><br />
+		    <% end %>
+				<% if !user.employer.nil? %>
+					<%= t '.employer', :employer => user.employer %><br />
+				<% end %>
+				<% if !user.school.nil? %>
+					<%= t '.school', :school => user.school %><br />
+				<% end %>
 	    </p>
 	  </div> <!-- .user-index-info -->
 	</div> <!-- .user-index-box -->
