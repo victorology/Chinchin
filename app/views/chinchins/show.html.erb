@@ -4,19 +4,20 @@
   <img src="http://graph.facebook.com/<%= @chinchin.uid %>/picture?type=large" align="absmiddle" width=120 style="min-width: 120px; min-height: 120px;" />
 </div>
 
-<h2>Hi <strong><%= @chinchin.first_name %></strong>!<br />
+<h2><strong><%= @chinchin.first_name %></strong><br />
   <% if age(@chinchin.birthday) %>
-    <%= age(@chinchin.birthday) %> years old
+    <%= t '.age', :age => age(@chinchin.birthday) %><br />
   <% end %>
   <% if @chinchin.location %>
-    <%= @chinchin.location %>
-  <% end %>
-  <% if @chinchin.school %>
-    <%= @chinchin.school %>
+    <%= t '.location', :location => @chinchin.location %><br />
   <% end %>
   <% if @chinchin.employer %>
-    <%= @chinchin.employer %>
-  <% end %></h2>
+    <%= t '.employer', :employer => @chinchin.employer %><br />
+  <% end %>
+  <% if @chinchin.school %>
+    <%= t '.school', :school => @chinchin.school %><br />
+  <% end %>
+</h2>
 
 <div class="divider-thin-XL"></div>
 

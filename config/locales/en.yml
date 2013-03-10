@@ -17,9 +17,31 @@ en:
       thanks_html: "Thank you for signing up for early access to Chinchin, <strong>%{username}</strong>!"
       let_you_know: "When we start the private preview of our service, we will make sure you are one of the first to know! In the meantime, please help spread the word by pressing Like on Facebook or sending a Tweet!"
   users:
-    users:
+    index:
       headline: "Chinchin currently has %{users} users."
       age: "%{age} years old"
       location: "Lives in %{location}"
-      position_employer: "%{position} at %{employer}"
       employer: "Works at %{employer}"
+      school: "Studied at %{school}"
+    show:
+      age: "%{age} years old"
+      location: "Lives in %{location}"
+      employer: "Works at %{employer}"
+      school: "Studied at %{school}"
+  chinchins:
+    index:
+      age: "%{age} years old"
+      location: "Lives in %{location}"
+      employer: "Works at %{employer}"
+      school: "Studied at %{school}"
+    show:
+      age: "%{age} years old"
+      location: "Lives in %{location}"
+      employer: "Works at %{employer}"
+      school: "Studied at %{school}"
+  likes:
+    index:
+      age: "%{age} years old"
+      location: "Lives in %{location}"
+      employer: "Works at %{employer}"
+      school: "Studied at %{school}"
