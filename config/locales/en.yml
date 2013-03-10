@@ -20,9 +20,9 @@ en:
     index:
       headline: "Chinchin currently has %{users} users."
       age: "%{age} years old"
-      location: "Lives in %{location}"
-      employer: "Works at %{employer}"
-      school: "Studied at %{school}"
+      location: "%{location}"
+      employer: "%{employer}"
+      school: "%{school}"
     show:
       age: "%{age} years old"
       location: "Lives in %{location}"
@@ -30,10 +30,12 @@ en:
       school: "Studied at %{school}"
   chinchins:
     index:
+      headline_html: "Hi <strong>%{name}</strong>!<br />You are viewing %{chinchin_count} Chinchins (friends of your friends). Hopefully, you see somebody you like but if not, you can %{href}."
+      headline_href: "check out a new set of Chinchins"
       age: "%{age} years old"
-      location: "Lives in %{location}"
-      employer: "Works at %{employer}"
-      school: "Studied at %{school}"
+      location: "%{location}"
+      employer: "%{employer}"
+      school: "%{school}"
     show:
       age: "%{age} years old"
       location: "Lives in %{location}"
@@ -41,7 +43,8 @@ en:
       school: "Studied at %{school}"
   likes:
     index:
+      headline_html: "Hi <strong>%{name}</strong>!<br />These are Chinchins you Like."
       age: "%{age} years old"
-      location: "Lives in %{location}"
-      employer: "Works at %{employer}"
-      school: "Studied at %{school}"
+      location: "%{location}"
+      employer: "%{employer}"
+      school: "%{school}"

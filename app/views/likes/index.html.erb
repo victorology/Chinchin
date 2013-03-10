@@ -4,7 +4,7 @@
   <img src="http://graph.facebook.com/<%= @user.uid %>/picture?type=large" align="absmiddle" width=120 style="min-width: 120px; min-height: 120px;" />
 </div>
 
-<h2>Hi <strong><%= @user.name %></strong>!<br />These are Chinchins you Like.</h2>
+<h2><%= t '.headline_html', :name => @user.name %></h2>
 
 <div class="divider-thin-XL"></div>
 
@@ -14,21 +14,19 @@
       <%= image_tag ( like.chinchin.picture('large') ), :align => "absmiddle", :width => "120", :style => "min-width: 120px; min-height: 120px;" %>
     </div> <!-- .user-photo -->
     <div class="user-index-info">
-      <h3><%= link_to like.chinchin.name, chinchin_path(like.chinchin) %></h3>
-      <p>
-        <% if age(like.chinchin.birthday) %>
-          <%= t '.age', :age => age(like.chinchin.birthday) %><br />
-        <% end %>
-        <% if like.chinchin.location %>
-          <%= t '.location', :location => like.chinchin.location %><br />
-        <% end %>
-        <% if like.chinchin.employer %>
-          <%= t '.employer', :employer => like.chinchin.employer %><br />
-        <% end %>
-        <% if like.chinchin.school %>
-          <%= t '.school', :school => like.chinchin.school %><br />
-        <% end %>
-      </p>
+      <h3><%= link_to like.chinchin.first_name, chinchin_path(like.chinchin) %></h3>
+      <% if age(like.chinchin.birthday) %>
+        <div class="user-age"><%= t '.age', :age => age(like.chinchin.birthday) %></div>
+      <% end %>
+      <% if like.chinchin.location %>
+        <div class="user-location"><%= t '.location', :location => like.chinchin.location %></div>
+      <% end %>
+      <% if like.chinchin.employer %>
+        <div class="user-employer"><%= t '.employer', :employer => like.chinchin.employer %></div>
+      <% end %>
+      <% if like.chinchin.school %>
+        <div class="user-school"><%= t '.school', :school => like.chinchin.school %></div>
+      <% end %>
       <% like.chinchin.friendships.each do |friendship| %>
           <%= friendship.user.name %>
       <% end %>

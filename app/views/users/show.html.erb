@@ -6,15 +6,15 @@
 </div>
 
 <h2><strong><%= @user.first_name %></strong><br />
-  <%= t '.age', :age => age(@user.birthday) %><br />
+  <div class="user-age"><%= t '.age', :age => age(@user.birthday) %></div>
   <% if @user.location %>
-  	<%= t '.location', :location => @user.location %><br />
+  	<div class="user-location"><%= t '.location', :location => @user.location %></div>
   <% end %>
   <% if @user.employer %>
-  	<%= t '.employer', :employer => @user.employer %><br />
+  	<div class="user-employer"><%= t '.employer', :employer => @user.employer %></div>
   <% end %>
   <% if @user.school %>
-  	<%= t '.school', :school => @user.school %>
+  	<div class="user-school"><%= t '.school', :school => @user.school %></div>
   <% end %>
 </h2>
 
