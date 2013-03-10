@@ -6,16 +6,16 @@
 
 <h2><strong><%= @chinchin.first_name %></strong><br />
   <% if age(@chinchin.birthday) %>
-    <%= t '.age', :age => age(@chinchin.birthday) %><br />
+    <div class="user-age"><%= t '.age', :age => age(@chinchin.birthday) %></div>
   <% end %>
   <% if @chinchin.location %>
-    <%= t '.location', :location => @chinchin.location %><br />
+    <div class="user-location"><%= t '.location', :location => @chinchin.location %></div>
   <% end %>
   <% if @chinchin.employer %>
-    <%= t '.employer', :employer => @chinchin.employer %><br />
+    <div class="user-employer"><%= t '.employer', :employer => @chinchin.employer %></div>
   <% end %>
   <% if @chinchin.school %>
-    <%= t '.school', :school => @chinchin.school %><br />
+    <div class="user-school"><%= t '.school', :school => @chinchin.school %></div>
   <% end %>
 </h2>
 
@@ -23,7 +23,7 @@
 
 <p id="photos">
   <% if @photos %>
-    <%= link_to "#{@photos.count}개의 프로필 사진이 더 있습니다. 보시겠습니까?", {:action => "profile_photos", :id => @chinchin.id}, :remote => true %>
+    <%= link_to "Check out #{@photos.count} more photos.", {:action => "profile_photos", :id => @chinchin.id}, :remote => true %>
   <% end  %>
 </p>
 
