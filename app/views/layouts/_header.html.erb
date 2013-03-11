@@ -3,4 +3,14 @@
 <header>
   <div id="divider-header"></div>
   <%= link_to "Chinchin", root_path, id: "logo" %>
+  <% if current_user %>
+	  <div id="navigation">
+	    <ul>
+	      <li><%= link_to "Browse Chinchins", "/users/#{current_user.id}/chinchins" %></li>
+	      <li><%= link_to "My Likes", "/users/#{current_user.id}/likes" %></li>
+	      <li><%= link_to "Profile", "/users/#{current_user.id}" %></li>
+	      <li><%= link_to "Sign Out", "/signout" %></li>
+	    </ul>
+	  </div> <!-- #navigation -->
+	<% end %>
 </header>

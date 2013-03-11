@@ -64,6 +64,10 @@ $marginTiny: 5px;
     font-size: 5em;
   }
 
+  #navigation {
+    display: none;
+  }
+
   figure.main-model {
     @include main-model;
   }
@@ -111,6 +115,10 @@ $marginTiny: 5px;
 
   #logo {
     font-size: 5em;
+  }
+
+  #navigation {
+    display: none;
   }
 
   figure.main-model {
@@ -163,7 +171,23 @@ $marginTiny: 5px;
   }
 
   #logo {
-    font-size: 8em;
+    font-size: 7em;
+  }
+
+  #navigation {
+    float: right;
+    margin-top: 6em;
+  }
+
+  #navigation ul li {
+    float: left;
+    margin-left: $marginMid;
+    list-style: none;
+  }
+
+  #navigation ul li a {
+    font-size: 1.1em;
+    color: $grayDark;
   }
 
   figure.main-model {
@@ -212,6 +236,22 @@ $marginTiny: 5px;
 
   #logo {
     font-size: 8em;
+  }
+
+  #navigation {
+    float: right;
+    margin-top: 7em;
+  }
+
+  #navigation ul li {
+    float: left;
+    margin-left: $marginMid;
+    list-style: none;
+  }
+
+  #navigation ul li a {
+    font-size: 1.3em;
+    color: $grayDark;
   }
 
   figure.main-model {
