@@ -55,7 +55,7 @@ class User < ActiveRecord::Base
 	    end
 	    user.locale = auth.extra.raw_info.locale
 	    user.oauth_token = auth.credentials.token
-	    user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+	    user.oauth_expires_at = Time.at(auth.credentials.expires_at) unless auth.credentials.expires_at.nil?
 	    user.save!
       user.delay.add_friends_to_chinchin
 	  end
