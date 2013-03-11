@@ -30,7 +30,7 @@ en:
       school: "Studied at %{school}"
   chinchins:
     index:
-      headline_html: "Hi <strong>%{name}</strong>!<br />You are viewing %{chinchin_count} Chinchins (friends of your friends). Hopefully, you see somebody you like but if not, you can %{href}."
+      headline_html: "Hi <strong>%{name}</strong>! You are viewing %{chinchin_count} Chinchins (friends of your friends). Hopefully, you see somebody you like but if not, you can %{href}."
       headline_href: "check out a new set of Chinchins"
       age: "%{age} years old"
       location: "%{location}"
@@ -43,7 +43,7 @@ en:
       school: "Studied at %{school}"
   likes:
     index:
-      headline_html: "Hi <strong>%{name}</strong>!<br />These are Chinchins you Like."
+      headline_html: "Hi <strong>%{name}</strong>! These are Chinchins you Like."
       age: "%{age} years old"
       location: "%{location}"
       employer: "%{employer}"

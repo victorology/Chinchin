@@ -1,8 +1,5 @@
 <% provide(:title, @user.name) %>
 <div class="divider-thin"></div>
-<div style="float: left; margin-right: 20px; margin-top: 5px; margin-bottom: 25px; width: 120px; height: 120px; overflow: hidden; display: inline-block;">
-  <img src="http://graph.facebook.com/<%= @user.uid %>/picture?type=large" align="absmiddle" width=120 style="min-width: 120px; min-height: 120px;" />
-</div>
 
 <h2><%= t '.headline_html', :name => @user.name, :chinchin_count => @user.chinchin.length, :href => link_to(t('.headline_href'), "/users/#{current_user.id}/chinchins") %></h2>
 
