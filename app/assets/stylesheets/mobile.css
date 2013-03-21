@@ -1,0 +1,26 @@
+.ui-header .ui-btn {
+    background: none;
+    border: none;
+    top: 9px;
+}
+
+.ui-header .ui-btn-inner {
+    border: none;
+}
+
+.ui-li-has-thumb .ui-btn-inner a.ui-link-inherit {
+    min-height: 27px;
+}
+
+.ui-li-thumb {
+    left: 0px;
+    top: -1px;
+}
+
+.ui-li-has-thumb .ui-btn-inner a.ui-link-inherit, .ui-li-static.ui-li-has-thumb {
+    padding-left: 60px;
+}
+
+.ui-panel-display-reveal {
+
+}
