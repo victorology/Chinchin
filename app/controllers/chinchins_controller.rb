@@ -4,11 +4,20 @@ class ChinchinsController < ApplicationController
 
   def index
     @user = current_user
+    respond_to do | format |
+      format.js {render :layout => false}
+      format.html
+    end
   end
 
 	def show
 		@chinchin = Chinchin.find(params[:id])
     @photos = @chinchin.photos
+
+    respond_to do | format |
+      format.js {render :layout => false}
+      format.html
+    end
     #@likes = @chinchin.likes
   end
 

@@ -1,100 +1,45 @@
-<% provide(:title, @user.name) %>
-
-<div data-role="page" id="chinchin">
-  <div data-role="header" data-theme="c">
-    <a href="#menupanel" data-icon="bars" data-iconpos="notext" data-shadow="false" data-iconshadow="false">Menu</a>
-    <h1>Chinchin</h1>
+<div class="sidetap">
+  <div class="stp-nav">
+    <div>
+      <nav>
+        <a href="#" class="selected">Browse</a>
+        <a href="#">Viewed You</a>
+        <a href="#">Your Likes</a>
+        <a href="#">Messages</a>
+      </nav>
+    </div>
   </div>
-  <%= render :partial => 'layouts/menupanel' %>
-  <div data-role="content">
-<% @user.chinchin.each do |friend| %>
-	<div class="user-index-box">
-		<div class="user-photo">
-			<%= image_tag ( friend.picture('large') ), :align => "absmiddle", :width => "120", :style => "min-width: 120px; min-height: 120px;" %>
-		</div> <!-- .user-photo -->
-		<div class="user-index-info">
-      <h3><%= link_to friend.first_name, chinchin_path(friend) %></h3>
-      <% if age(friend.birthday) %>
-        <div class="user-age"><%= t '.age', :age => age(friend.birthday) %></div>
-      <% end %>
-      <% if friend.location %>
-        <div class="user-location"><%= t '.location', :location => friend.location %></div>
-      <% end %>
-      <% if friend.employer %>
-        <div class="user-employer"><%= t '.employer', :employer => friend.employer %></div>
-      <% end %>
-      <% if friend.school %>
-        <div class="user-school"><%= t '.school', :school => friend.school %></div>
-      <% end %>
-      <% friend.friendships.each do |friendship| %>
-        <%= friendship.user.name %>
-      <% end %>
-      <div id="like_<%=friend.id%>">
-        <% if @user.liked(friend) %>
-          Liked
-        <% else %>
-          <%= button_to "Like", user_likes_path(:chinchin_id => friend.id), :method => :post, :remote => true %>
-        <% end %>
+
+  <div class="stp-content" id="content">
+    <header class="stp-fake-header">&nbsp;</header>
+    <div class="stp-overlay nav-toggle">&nbsp;</div>
+
+    <!-- Content Divs Look Like This -->
+    <div class="stp-content-panel" id="browse">
+      <header>
+        <a href="javascript:void(0)" class="header-button icon menu"><span>Menu</span></a>
+        <h1>Chinchin</h1>
+      </header>
+      <div class="stp-content-frame">
+        <div class="stp-content-body">
+          <div class="container">
+          </div>
+        </div>
       </div>
-    </div> <!-- .user-index-info -->
-	</div> <!-- .user-index-box -->
-<% end %>
+    </div>
+    <!-- End content Div -->
+
+    <div class="stp-content-panel" id="chinchin">
+      <header>
+        <a href="javascript:void(0)" class="header-button icon back"><span>Menu</span></a>
+        <h1></h1>
+      </header>
+      <div class="stp-content-frame">
+        <div class="stp-content-body">
+          <div class="container">
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
-<div data-role="page" id="viewed">
-  <div data-role="header">
-    <a href="#menupanel" data-icon="bars" data-iconpos="notext" data-shadow="false" data-iconshadow="false">Menu</a>
-    <h1>Viewed You</h1>
-  </div>
-  <%= render :partial => 'layouts/menupanel' %>
-  <div data-role="content">
-
-  </div>
-</div>
-<div data-role="page" id="likes">
-  <div data-role="header">
-    <a href="#menupanel" data-icon="bars" data-iconpos="notext" data-shadow="false" data-iconshadow="false">Menu</a>
-    <h1>Your Like</h1>
-  </div>
-  <%= render :partial => 'layouts/menupanel' %>
-  <div data-role="content">
-
-  </div>
-</div>
-<div data-role="page" id="me">
-  <div data-role="header">
-    <a href="#menupanel" data-icon="bars" data-iconpos="notext" data-shadow="false" data-iconshadow="false">Menu</a>
-    <h1><%= current_user.name %></h1>
-  </div>
-  <%= render :partial => 'layouts/menupanel' %>
-  <div data-role="content">
-
-  </div>
-</div>
-<div data-role="page" id="messages">
-  <div data-role="header">
-    <a href="#menupanel" data-icon="bars" data-iconpos="notext" data-shadow="false" data-iconshadow="false">Menu</a>
-    <h1>Messages</h1>
-  </div>
-  <%= render :partial => 'layouts/menupanel' %>
-  <div data-role="content">
-
-  </div>
-</div>
-
-<script type="text/javascript">
-  $("#menupanel").panel("open");
-</script>
-<!-- start Mixpanel Registered User -->
-<script type="text/javascript">
-  mixpanel.track("Home Page Registered");
-  mixpanel.identify(<%= current_user.id %>);
-  mixpanel.people.set({
-    "$name": "<%= current_user.name %>",
-    "$email": "<%= current_user.email %>",
-    "$last_login": new Date(),
-    "referrer": document.referrer
-  });
-  mixpanel.people.increment("visits");
-</script>
-<!-- end Mixpanel Home Page Registered User -->

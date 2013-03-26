@@ -8,3 +8,28 @@ $( document ).on( "pageinit", "body", function() {
         }
     });
 });
+
+var st = sidetap();
+$("header .menu").on("click",st.toggle_nav);
+
+var browse, chinchin, show_contents;
+browse = $('#browse');
+chinchin = $('#chinchin');
+
+show_chinchin = function(chinchin_id) {
+    st.show_section(chinchin, {
+        animation: 'infromright'
+    });
+    $.get('/chinchins/'+chinchin_id+'.js');
+}
+
+show_chinchins = function(section, title, url) {
+    section.find('h1').text = (title);
+    $.get(url, function() {
+        section.find('.container').find('a').click(function() {
+            show_chinchin($(this).parent().parent().parent().attr('id'));
+        });
+    });
+}
+
+show_chinchins(browse, "Chinchin", "/chinchins.js");

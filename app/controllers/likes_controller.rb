@@ -9,10 +9,9 @@ class LikesController < ApplicationController
   end
 
   def create
-    user = User.find(session[:user_id])
     chinchin = Chinchin.find(params[:chinchin_id])
     @chinchinId = params[:chinchin_id]
-    user.like(chinchin)
+    current_user.like(chinchin)
 
     respond_to do | format |
       format.js {render :layout => false}

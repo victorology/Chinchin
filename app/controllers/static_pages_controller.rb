@@ -1,7 +1,11 @@
 class StaticPagesController < ApplicationController
   def home
     if current_user
-      redirect_to "/users/#{current_user.id}/chinchins"
+      if mobile_device?
+        redirect_to "/m"
+      else
+        redirect_to "/chinchins"
+      end
     end
   end
 
