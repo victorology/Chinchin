@@ -41,9 +41,20 @@
 <% end %>
   </div>
 </div>
+<div data-role="page" id="viewed">
+  <div data-role="header">
+    <a href="#menupanel" data-icon="bars" data-iconpos="notext" data-shadow="false" data-iconshadow="false">Menu</a>
+    <h1>Viewed You</h1>
+  </div>
+  <%= render :partial => 'layouts/menupanel' %>
+  <div data-role="content">
+
+  </div>
+</div>
 <div data-role="page" id="likes">
   <div data-role="header">
-
+    <a href="#menupanel" data-icon="bars" data-iconpos="notext" data-shadow="false" data-iconshadow="false">Menu</a>
+    <h1>Your Like</h1>
   </div>
   <%= render :partial => 'layouts/menupanel' %>
   <div data-role="content">
@@ -52,7 +63,18 @@
 </div>
 <div data-role="page" id="me">
   <div data-role="header">
+    <a href="#menupanel" data-icon="bars" data-iconpos="notext" data-shadow="false" data-iconshadow="false">Menu</a>
     <h1><%= current_user.name %></h1>
+  </div>
+  <%= render :partial => 'layouts/menupanel' %>
+  <div data-role="content">
+
+  </div>
+</div>
+<div data-role="page" id="messages">
+  <div data-role="header">
+    <a href="#menupanel" data-icon="bars" data-iconpos="notext" data-shadow="false" data-iconshadow="false">Menu</a>
+    <h1>Messages</h1>
   </div>
   <%= render :partial => 'layouts/menupanel' %>
   <div data-role="content">

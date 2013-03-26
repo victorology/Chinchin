@@ -14,13 +14,13 @@ class ApplicationController < ActionController::Base
   end
 
   def mobile_device?
-    session[:mobile_override] == "1"
-    # if session[:mobile_override]
-    #   session[:mobile_override] == "1"
-    # else
-    #   # Treats iPad as non-mobile.
-    #   (request.user_agent =~ /Mobile|webOS) && (request.user_agent !~ /iPad/)
-    # end
+    #session[:mobile_override] == "1"
+    if session[:mobile_override]
+       session[:mobile_override] == "1"
+    else
+       # Treats iPad as non-mobile.
+       (request.user_agent =~ /Mobile|webOS/) && (request.user_agent !~ /iPad/)
+    end
   end
   helper_method :mobile_device?
 
