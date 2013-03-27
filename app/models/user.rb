@@ -227,4 +227,21 @@ class User < ActiveRecord::Base
       end
     end
   end
+
+  def endpoint
+    ['https://graph.facebook.com', "#{self.uid}"].join('/')
+  end
+
+  def picture(options_or_size = {})
+    options = if options_or_size.is_a?(String) || options_or_size.is_a?(Symbol)
+                {:type => options_or_size}
+              else
+                options_or_size
+              end
+    _endpoint_ = ["#{self.endpoint}/picture", options.to_query].delete_if(&:blank?).join('?')
+  end
+
+  def friendships(current_user)
+    current_user.friends_in_chinchin & self.friends_in_chinchin
+  end
 end
