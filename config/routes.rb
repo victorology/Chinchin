@@ -11,7 +11,7 @@ Chinchin2::Application.routes.draw do
 
   match 'm', to: 'chinchins#index'
   match 'chinchins', to: 'chinchins#index'
-  resources :likes, :only => [:index]
+  resources :likes
   resources :views, :only => [:index]
 
   resources :users do
