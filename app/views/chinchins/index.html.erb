@@ -31,7 +31,7 @@
         <% if @user.liked(friend) %>
           Liked
         <% else %>
-          <%= button_to "Like", user_likes_path(:chinchin_id => friend.id), :method => :post, :remote => true %>
+          <%= button_to "Like", likes_path(:chinchin_id => friend.id), :method => :post, :remote => true %>
         <% end %>
       </div>
 	  </div> <!-- .user-index-info -->
