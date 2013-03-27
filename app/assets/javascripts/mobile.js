@@ -26,11 +26,13 @@ show_chinchin = function(chinchin_id, chinchin_name) {
     st.show_section(chinchin, {
         animation: 'infromright'
     });
+    $('#chinchin').find('.container').html('<div class="loader"><img src="/assets/ajax-loader.gif" /></div>');
     $.get('/chinchins/'+chinchin_id+'.js');
 }
 
 show_chinchins = function(section, title, url) {
     section.find('h1').text(title);
+    section.find('.container').html('<div class="loader"><img src="/assets/ajax-loader.gif" /></div>');
     $.get(url, function() {
         section.find('.container').find('a').click(function() {
             show_chinchin($(this).parent().parent().parent().attr('id'), $(this).text());
