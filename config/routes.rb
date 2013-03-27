@@ -13,6 +13,7 @@ Chinchin2::Application.routes.draw do
   resources :likes
 
   resources :users do
+    resources :likes
     resources :chinchins
   end
   resources :chinchins, :only => [:show]
