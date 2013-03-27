@@ -4,8 +4,12 @@ class LikesController < ApplicationController
 
   def index
     @user = current_user # Added by Victor don't know if this is right
-    user = User.find(params[:user_id])
-    @likes = Like.find_all_by_user_id(user.id)
+    @likes = Like.find_all_by_user_id(@user.id)
+
+    respond_to do | format |
+      format.html
+      format.js {render :layout => false}
+    end
   end
 
   def create
