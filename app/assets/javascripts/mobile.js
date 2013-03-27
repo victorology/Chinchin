@@ -9,6 +9,11 @@ $( document ).on( "pageinit", "body", function() {
     });
 });
 
+$(document).ajaxSend(function(e, xhr, options) {
+    var token = $("meta[name='csrf-token']").attr("content");
+    xhr.setRequestHeader("X-CSRF-Token", token);
+});
+
 var st = sidetap();
 var browse, chinchin, show_contents;
 browse = $('#browse');
@@ -27,7 +32,9 @@ show_chinchin = function(chinchin_id, chinchin_name) {
         animation: 'infromright'
     });
     $('#chinchin').find('.container').html('<div class="loader"><img src="/assets/ajax-loader.gif" /></div>');
-    $.get('/chinchins/'+chinchin_id+'.js');
+    $.get('/chinchins/'+chinchin_id+'.js', function() {
+        $.post('/views.js', {viewee_id:chinchin_id});
+    });
 }
 
 show_chinchins = function(section, title, url) {

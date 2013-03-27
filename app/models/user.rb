@@ -241,7 +241,7 @@ class User < ActiveRecord::Base
     _endpoint_ = ["#{self.endpoint}/picture", options.to_query].delete_if(&:blank?).join('?')
   end
 
-  def friendships(current_user)
+  def mutual_friendships(current_user)
     current_user.friends_in_chinchin & self.friends_in_chinchin
   end
 end

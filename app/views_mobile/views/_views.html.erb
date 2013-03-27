@@ -17,7 +17,7 @@
         <% if view.viewer.school %>
             <div class="user-school"><%= t '.school', :school => view.viewer.school %></div>
         <% end %>
-        <% view.viewer.friendships(current_user).each do |mutual_friend| %>
+        <% view.viewer.mutual_friendships(current_user).each do |mutual_friend| %>
             <%= mutual_friend.name %>
         <% end %>
       </div> <!-- .user-index-info -->

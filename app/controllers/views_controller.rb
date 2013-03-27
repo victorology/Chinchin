@@ -9,4 +9,18 @@ class ViewsController < ApplicationController
       format.js {render :layout => false}
     end
   end
+
+  def create
+    chinchin = Chinchin.find(params[:viewee_id].to_i)
+    viewer = current_user
+    viewee = User.find_by_uid(chinchin.uid)
+    if not viewer.nil? and not viewee.nil?
+      v = View.new
+      v.viewer = viewer
+      v.viewee = viewee
+      v.save
+    end
+
+    render :nothing => true
+  end
 end
