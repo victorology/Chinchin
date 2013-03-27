@@ -10,13 +10,19 @@ $( document ).on( "pageinit", "body", function() {
 });
 
 var st = sidetap();
-$("header .menu").on("click",st.toggle_nav);
-
 var browse, chinchin, show_contents;
 browse = $('#browse');
 chinchin = $('#chinchin');
 
-show_chinchin = function(chinchin_id) {
+$("header .menu").on("click",st.toggle_nav);
+$('#chinchin a.back').click(function() {
+    return st.show_section(browse, {
+        animation: 'infromleft'
+    });
+});
+
+show_chinchin = function(chinchin_id, chinchin_name) {
+    chinchin.find('h1').text(chinchin_name);
     st.show_section(chinchin, {
         animation: 'infromright'
     });
@@ -24,12 +30,27 @@ show_chinchin = function(chinchin_id) {
 }
 
 show_chinchins = function(section, title, url) {
-    section.find('h1').text = (title);
+    section.find('h1').text(title);
     $.get(url, function() {
         section.find('.container').find('a').click(function() {
-            show_chinchin($(this).parent().parent().parent().attr('id'));
+            show_chinchin($(this).parent().parent().parent().attr('id'), $(this).text());
         });
     });
 }
 
 show_chinchins(browse, "Chinchin", "/chinchins.js");
+
+st.stp_nav.find('nav a').click(function() {
+    $(this).addClass('selected').siblings().removeClass('selected');
+    st.toggle_nav();
+    var link_text = $(this).text();
+    var title, url;
+    if (link_text == 'Your Likes') {
+        title = "Your Likes";
+        url = "/likes.js";
+    } else if (link_text == 'Browse') {
+        title = "Chinchin";
+        url = "/chinchins.js";
+    }
+    show_chinchins(browse, title, url);
+});

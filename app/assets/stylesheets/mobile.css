@@ -293,6 +293,18 @@ header .header-button.info span {
     -o-background-size: 8px 17px;
     background-size: 8px 17px;
 }
+
+header .header-button.like span {
+    background: transparent url('/assets/like.png') no-repeat;
+    height: 16px;
+    margin: 5px 5px 0;
+    width: 20px;
+    -webkit-background-size: 20px 16px;
+    -moz-background-size: 20px 16px;
+    -o-background-size: 20px 16px;
+    background-size: 20px 16px;
+}
+
 .stp-content {
     background: #171a21;
     -webkit-box-sizing: border-box;
