@@ -42,7 +42,7 @@ show_chinchins = function(section, title, url) {
     section.find('.container').html('<div class="loader"><img src="/assets/ajax-loader.gif" /></div>');
     $.get(url, function() {
         section.find('.container').find('a').click(function() {
-            show_chinchin($(this).parent().parent().parent().attr('id'), $(this).text());
+            show_chinchin($(this).find('.user-index-box').attr('id'), $(this).find('h3').text());
         });
     });
 }

@@ -127,11 +127,11 @@ table {
 */
 body {
     background: #171a21;
-    color: #fff;
+    color: #282828;
     font-family: 'Helvetica Neue', 'Helvetica-Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;
     font-size: 1em;
     font-weight: normal;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+    /*text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);*/
     word-wrap: break-word;
     -webkit-text-size-adjust: none;
 }
@@ -142,7 +142,8 @@ h1 {
     line-height: 42px;
 }
 a {
-    color: #9e6ab7;
+    color: #282828;
+    text-decoration: none;
 }
 .button {
     background: #743f8d;
@@ -315,7 +316,7 @@ header .header-button.like span {
     box-sizing: border-box;
 }
 .stp-content-panel {
-    background: #fff;
+    background: #eee;
 }
 .container {
     padding: 54px 10px 10px;
@@ -323,3 +324,34 @@ header .header-button.like span {
 
 div.loader { height: 100px; line-height: 100px;text-align:center; }
 div.loader img { vertical-align:middle;}
+
+div.user-index-box {
+    background: #fff;
+    margin-bottom: 10px;
+    display: block;
+    height: 150px;
+}
+
+div.clear {
+    clear: left;
+}
+
+div.user-photo {
+    width: 150px; height: 150px; overflow:hidden;
+    display: block;
+    float: left;
+}
+
+div.user-photo img {
+    width: 150px; height: 200px; margin: -20px 0 0 0;
+    display: block;
+}
+
+div.user-index-info {
+    float: left;
+    padding: 10px;
+}
+
+div.user-index-info h3 {
+    font-size: 1.5em;
+}

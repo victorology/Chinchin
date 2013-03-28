@@ -1,10 +1,11 @@
 <% chinchins.each do |friend| %>
+  <a href="#">
     <div class="user-index-box" id="<%=friend.id%>">
       <div class="user-photo">
         <%= image_tag ( friend.picture('large') ), :align => "absmiddle", :width => "120", :style => "min-width: 120px; min-height: 120px;" %>
       </div> <!-- .user-photo -->
       <div class="user-index-info">
-        <h3><%= link_to friend.first_name, "#" %></h3>
+        <h3><%= friend.first_name %></h3>
         <% if age(friend.birthday) %>
             <div class="user-age"><%= t '.age', :age => age(friend.birthday) %></div>
         <% end %>
@@ -29,4 +30,6 @@
         </div>
       </div> <!-- .user-index-info -->
     </div> <!-- .user-index-box -->
+  </a>
+  <div class="clear" />
 <% end %>
