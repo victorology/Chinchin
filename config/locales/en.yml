@@ -56,3 +56,9 @@ en:
       location: "%{location}"
       employer: "%{employer}"
       school: "%{school}"
+    likes:
+      headline_html: "Hi <strong>%{name}</strong>! These are Chinchins you Like."
+      age: "%{age} years old"
+      location: "%{location}"
+      employer: "%{employer}"
+      school: "%{school}"
