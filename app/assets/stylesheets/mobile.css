@@ -332,10 +332,6 @@ div.user-index-box {
     height: 150px;
 }
 
-div.clear {
-    clear: left;
-}
-
 div.user-photo {
     width: 150px; height: 150px; overflow:hidden;
     display: block;
@@ -349,9 +345,42 @@ div.user-photo img {
 
 div.user-index-info {
     float: left;
-    padding: 10px;
 }
 
-div.user-index-info h3 {
+div.user-index-basic-info {
+    float: left;
+    padding: 10px;
+    height: 100px;
+}
+
+div.user-index-basic-info h3 {
     font-size: 1.5em;
+}
+
+div.right-arrow {
+    background: transparent url('/assets/arrow-right-gray.png') no-repeat left center;
+    float: right;
+    /*content: ' ';*/
+    /*display: block;*/
+    height: 41px;
+    position: relative;
+    /*-webkit-transform: translatez(0);*/
+    /*-moz-transform: translatez(0);*/
+    /*-o-transform: translatez(0);*/
+    /*transform: translatez(0);*/
+    /*float: right;*/
+    top: 30px;
+    right: 0px;
+    width: 19px;
+    -webkit-background-size: 19px 14px;
+    -moz-background-size: 19px 14px;
+    -o-background-size: 19px 14px;
+    background-size: 19px 14px;
+}
+
+div.user-index-additional-info {
+    border-top: 1px solid #eee;
+    clear: both;
+    height: 20px;
+    padding: 5px 0 5px 10px;
 }
