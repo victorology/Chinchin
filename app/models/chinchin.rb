@@ -24,6 +24,7 @@
 #
 
 class Chinchin < ActiveRecord::Base
+  belongs_to :user
   has_many :friendships
   has_many :likes
   attr_accessible :birthday, :email, :employer, :first_name, :gender, :hometown, :last_name, :locale, :location, :name, :oauth_expires_at, :oauth_token, :position, :provider, :relationship_status, :school, :uid
@@ -40,10 +41,6 @@ class Chinchin < ActiveRecord::Base
                 options_or_size
               end
     _endpoint_ = ["#{self.endpoint}/picture", options.to_query].delete_if(&:blank?).join('?')
-  end
-
-  def friendships
-    friendships = Friendship.find_all_by_chinchin_id(self.id)
   end
 
   def photos

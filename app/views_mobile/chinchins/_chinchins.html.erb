@@ -19,9 +19,6 @@
             <% if friend.school %>
                 <div class="user-school"><%= t '.school', :school => friend.school %></div>
             <% end %>
-            <% friend.friendships.each do |friendship| %>
-                <%= friendship.user.name %>
-            <% end %>
             <div id="like_<%=friend.id%>">
               <% if @user.liked(friend) %>
                   Liked
@@ -32,7 +29,7 @@
         </div> <!-- .user-index-basic-info -->
         <div class="right-arrow"></div>
         <div class="user-index-additional-info">
-          <span class="picture-count">25</span> <span class="mutual-friend-count">8</span>
+          <span class="picture-count"><%= 25 %></span> <span class="mutual-friend-count"><%= friend.friendships.count %></span>
         </div>
       </div> <!-- .user-index-info -->
     </div> <!-- .user-index-box -->

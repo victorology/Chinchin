@@ -30,4 +30,12 @@ class StaticPagesController < ApplicationController
 
     render :text => "making..."
   end
+
+  def connect_users_with_chinchins
+    User.all.each do |user|
+      user.delay.connect_with_chinchin
+    end
+
+    render :text => "connecting..."
+  end
 end

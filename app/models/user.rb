@@ -26,6 +26,8 @@
 
 class User < ActiveRecord::Base
   attr_accessible :birthday, :email, :employer, :first_name, :gender, :hometown, :last_name, :locale, :location, :name, :oauth_expires_at, :oauth_token, :position, :provider, :relationship_status, :school, :uid
+  has_many :friendships
+  has_many :chinchins, :through => :friendships
   has_many :likes
   has_many :viewers, :class_name => 'View', :foreign_key => 'viewee_id'
   has_many :viewees, :class_name => 'View', :foreign_key => 'viewer_id'
@@ -77,6 +79,10 @@ class User < ActiveRecord::Base
 	end
 
   def friends_in_chinchin
+    self.chinchins.joins("INNER JOIN users u on chinchins.uid = u.uid")
+  end
+
+  def friends_in_chinchin2
     users = User.all
     friends = self.friends
     chinchin = []
@@ -125,7 +131,8 @@ class User < ActiveRecord::Base
 
   def chinchin
     friendships = []
-    self.friends_in_chinchin.each do |friend|
+    self.friends_in_chinchin.each do |chinchin|
+      friend = chinchin.user
       friendships.push(Friendship.find_all_by_user_id(friend.id))
     end
 
@@ -172,6 +179,10 @@ class User < ActiveRecord::Base
         :school => ra['school'],
         :locale => ra['locale']
     )
+    u = User.find_by_uid(c.uid)
+    if not u.nil?
+      c.user = u
+    end
     c.save!
 
     return c
@@ -242,6 +253,14 @@ class User < ActiveRecord::Base
   end
 
   def mutual_friendships(current_user)
-    current_user.friends_in_chinchin & self.friends_in_chinchin
+    @mutual_friendships ||= current_user.friends_in_chinchin & self.friends_in_chinchin
+  end
+
+  def connect_with_chinchin
+    c = Chinchin.find_by_uid(self.uid)
+    if not c.nil?
+      c.user = u
+      c.save
+    end
   end
 end

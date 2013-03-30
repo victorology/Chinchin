@@ -31,6 +31,7 @@ Chinchin2::Application.routes.draw do
 
   match 'make_chinchin/:id', to: 'static_pages#make_chinchin'
   match 'make_friendship', to: 'static_pages#make_friendship'
+  match 'connect_chinchins_with_users', to: 'static_pages#connect_chinchins_with_users'
 
   match 'fb4pp01', to: 'static_pages#fb4pp01'
 
