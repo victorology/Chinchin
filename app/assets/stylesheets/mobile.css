@@ -301,7 +301,7 @@ div.user-index-box {
     background: rgb(255,255,255);
     margin-bottom: 10px;
     display: block;
-    height: 150px;
+    height: 120px;
 }
 
 div.clear {
@@ -309,19 +309,19 @@ div.clear {
 }
 
 div.user-photo {
-    width: 150px; height: 150px; overflow:hidden;
+    width: 120px; height: 120px; overflow:hidden;
     display: block;
     float: left;
 }
 
 div.user-photo img {
-    width: 150px; height: 200px; margin: -20px 0 0 0;
+    width: 120px; height: 200px; margin: -20px 0 0 0;
     display: block;
 }
 
 div.user-index-info {
     float: left;
-    padding: 10px;
+    padding: 5px 10px;
 }
 
 div.user-index-info h3 {
