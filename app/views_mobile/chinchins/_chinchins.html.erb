@@ -19,13 +19,6 @@
             <% if friend.school %>
                 <div class="user-school"><%= t '.school', :school => friend.school %></div>
             <% end %>
-            <div id="like_<%=friend.id%>">
-              <% if @user.liked(friend) %>
-                  Liked
-              <% else %>
-                  <%= button_to "Like", likes_path(:chinchin_id => friend.id), :method => :post, :remote => true %>
-              <% end %>
-            </div>
         </div> <!-- .user-index-basic-info -->
         <div class="right-arrow"></div>
         <div class="user-index-additional-info">
