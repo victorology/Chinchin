@@ -2,13 +2,15 @@ html,
 body {
   padding: 0;
   margin: 0;
-  background: #E8E8E8;
+  background: rgb(235,235,235);
 }
+
 .sidetap {
   position: relative;
   width: 100%;
   overflow: hidden;
 }
+
 .stp-nav {
   background: black;
   color: white;
@@ -19,6 +21,7 @@ body {
   width: 272px;
   z-index: 5;
 }
+
 .stp-content {
   background: white;
   margin-left: 0;
@@ -26,6 +29,7 @@ body {
   z-index: 10;
   position: relative;
 }
+
 .stp-overlay {
   background: blue;
   display: none;
@@ -36,45 +40,52 @@ body {
   top: 0;
   width: 100%;
 }
+
 .stp-content-body > * > *:first-child {
   margin-top: 0;
 }
+
 .stp-content-body > * > *:last-child {
   margin-bottom: 0;
 }
+
 .sidetap.nav-showing .stp-content {
   overflow: hidden;
   position: absolute;
   top: 0;
   left: 0;
-  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.9);
-  -webkit-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.9);
-  -moz-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.9);
 }
+
 .sidetap.nav-showing .stp-overlay {
   display: block;
   z-index: 100;
 }
+
 .stp-content-panel,
 .stp-nav-panel {
   position: relative;
   height: 100%;
 }
+
 .stp-content-panel {
   background: white;
 }
+
 .stp-content-panel.hidden {
   display: none;
 }
+
 .stp-fake-header {
   position: absolute;
   top: 0;
   left: 0;
   z-index: 0;
 }
+
 .ios .sidetap {
   overflow-x: hidden;
 }
+
 .ios .stp-content-panel,
 .ios .stp-nav-panel {
   height: 100%;
@@ -83,16 +94,19 @@ body {
   top: 0;
   width: 100%;
 }
+
 .ios .stp-content-panel.hidden {
   display: block;
   left: -9999px;
 }
+
 .ios .stp-content-frame {
   height: 100%;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   position: relative;
 }
+
 .ios .stp-content-body {
   -webkit-transform: translatez(0);
   position: absolute;
@@ -104,12 +118,15 @@ body {
   -webkit-overflow-scrolling: touch;
   width: 100%;
 }
+
 .ios .nav-showing .stp-content .stp-content-body {
   overflow: hidden;
 }
+
 /*
   Show Navigation Animation
 */
+
 .showing-nav {
   -webkit-transform: translatex(272px);
   -moz-transform: translatex(272px);
@@ -122,6 +139,7 @@ body {
   -moz-animation-duration: 175ms;
   animation-duration: 175ms;
 }
+
 @-webkit-keyframes slidefornav {
   from {
     -webkit-transform: translatex(0);
@@ -130,6 +148,7 @@ body {
     -webkit-transform: translatex(272px);
   }
 }
+
 @-moz-keyframes slidefornav {
   from {
     -moz-transform: translatex(0);
@@ -138,9 +157,11 @@ body {
     -moz-transform: translatex(272px);
   }
 }
+
 /*
   Hide Navigation Animation
 */
+
 .hide-nav {
   -webkit-transform: translatex(0);
   -moz-transform: translatex(0);
@@ -153,6 +174,7 @@ body {
   -moz-animation-duration: 175ms;
   animation-duration: 175ms;
 }
+
 @-webkit-keyframes slideovernav {
   from {
     -webkit-transform: translatex(272px);
@@ -161,6 +183,7 @@ body {
     -webkit-transform: translatex(0);
   }
 }
+
 @-moz-keyframes slideovernav {
   from {
     -moz-transform: translatex(272px);
@@ -169,7 +192,9 @@ body {
     -moz-transform: translatex(0);
   }
 }
+
 /* Slide up or Down animation */
+
 .up-from-bottom {
   -webkit-transform: translatey(0);
   -moz-transform: translatey(0);
@@ -181,6 +206,7 @@ body {
   -moz-animation-duration: 250ms;
   z-index: 5;
 }
+
 .down-to-bottom {
   -webkit-transform: translatey(100%);
   -moz-transform: translatey(100%);
@@ -192,6 +218,7 @@ body {
   -moz-animation-duration: 250ms;
   z-index: 5;
 }
+
 @-webkit-keyframes upfrombottom {
   from {
     -webkit-transform: translatey(100%);
@@ -200,6 +227,7 @@ body {
     -webkit-transform: translatey(0);
   }
 }
+
 @-webkit-keyframes downtobottom {
   from {
     -webkit-transform: translatey(0);
@@ -208,25 +236,31 @@ body {
     -webkit-transform: translatey(100%);
   }
 }
+
 /*
   Sliding animations
 */
+
 .slide-out-to-left {
   -webkit-transform: translatex(-100%);
   -webkit-animation-name: slideouttoleft;
 }
+
 .slide-in-from-right {
   -webkit-transform: translatex(0);
   -webkit-animation-name: slideinfromright;
 }
+
 .slide-out-to-right {
   -webkit-transform: translatex(100%);
   -webkit-animation-name: slideouttoright;
 }
+
 .slide-in-from-left {
   -webkit-transform: translatex(0);
   -webkit-animation-name: slideinfromleft;
 }
+
 .slide-in-from-left,
 .slide-out-to-right,
 .slide-in-from-right,
@@ -234,6 +268,7 @@ body {
   -webkit-animation-timing-function: ease-out;
   -webkit-animation-duration: 200ms;
 }
+
 @-webkit-keyframes slideinfromright {
   from {
     -webkit-transform: translatex(100%);
@@ -242,6 +277,7 @@ body {
     -webkit-transform: translatex(0);
   }
 }
+
 @-webkit-keyframes slideinfromleft {
   from {
     -webkit-transform: translatex(-100%);
@@ -250,6 +286,7 @@ body {
     -webkit-transform: translatex(0);
   }
 }
+
 @-webkit-keyframes slideouttoleft {
   from {
     -webkit-transform: translatex(0);
@@ -258,6 +295,7 @@ body {
     -webkit-transform: translatex(-100%);
   }
 }
+
 @-webkit-keyframes slideouttoright {
   from {
     -webkit-transform: translatex(0);
