@@ -172,7 +172,6 @@ nav > a {
     line-height: 68px;
     margin: 0;
     padding: 0 0 0 22px;
-    position: relative;
     text-decoration: none;
 }
 
@@ -199,6 +198,38 @@ nav > a.selected {
 
 nav > a.selected:after {
     opacity: 1;
+}
+
+.stp-browse {
+    float: left;
+    margin: 17px;
+    width: 34px;
+    height: 34px;
+    background: url(index/icon-browse.png);
+}
+
+.stp-viewed {
+    float: left;
+    margin: 17px;
+    width: 34px;
+    height: 34px;
+    background: url(index/icon-views.png);
+}
+
+.stp-likes {
+    float: left;
+    margin: 17px;
+    width: 34px;
+    height: 34px;
+    background: url(index/icon-likes.png);
+}
+
+.stp-messages {
+    float: left;
+    margin: 17px;
+    width: 34px;
+    height: 34px;
+    background: url(index/icon-messages.png);
 }
 
 header {
