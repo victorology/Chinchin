@@ -221,7 +221,7 @@ header .header-button {
     color: white;
     width: 48px;
     height: 28px;
-    left: 6px;
+    left: 7px;
     position: absolute;
     -webkit-transform: translatez(0);
     -moz-transform: translatez(0);
@@ -236,7 +236,7 @@ header .header-button {
 
 header .header-button.right {
     left: auto;
-    right: 6px;
+    right: 7px;
 }
 
 header .header-button.icon span {
