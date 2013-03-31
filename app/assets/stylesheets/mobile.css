@@ -83,11 +83,11 @@ time,
 mark,
 audio,
 video {
-    border: 0;
-    font-size: 100%;
-    font-family: inherit;
-    margin: 0;
-    padding: 0;
+  border: 0;
+  font-size: 100%;
+  font-family: inherit;
+  margin: 0;
+  padding: 0;
 }
 article,
 aside,
@@ -100,247 +100,285 @@ hgroup,
 menu,
 nav,
 section {
-    display: block;
+  display: block;
 }
 ol,
 ul {
-    list-style: none;
+  list-style: none;
 }
 blockquote,
 q {
-    quotes: none;
+  quotes: none;
 }
 blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-    content: "";
-    content: none;
+  content: "";
+  content: none;
 }
 table {
-    border-collapse: collapse;
-    border-spacing: 0;
-}
-/*
-  Sidetap Default Theme
-  Demo app: Stonehenge
-*/
-body {
-    background: #171a21;
-    color: #282828;
-    font-family: 'Helvetica Neue', 'Helvetica-Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;
-    font-size: 1em;
-    font-weight: normal;
-    /*text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);*/
-    word-wrap: break-word;
-    -webkit-text-size-adjust: none;
-}
-h1 {
-    color: white;
-    font-size: 20px;
-    font-weight: bold;
-    line-height: 42px;
-}
-a {
-    color: #282828;
-    text-decoration: none;
-}
-.button {
-    background: #743f8d;
-    color: #fff;
-    display: block;
-    margin: 0 10px;
-    padding: 15px;
-    text-decoration: none;
-    text-shadow: none;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -o-border-radius: 5px;
-    border-radius: 5px;
-}
-img {
-    max-width: 100%;
-}
-.stp-nav {
-    background: #000;
-    border-right: 1px solid black;
-    width: 272px;
-}
-nav {
-    display: block;
-}
-nav > a {
-    background: #282828;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    color: rgba(255, 255, 255, 0.8);
-    display: block;
-    font-size: 17px;
-    font-weight: bold;
-    height: 42px;
-    line-height: 40px;
-    margin: 0;
-    padding: 0 0 0 10px;
-    position: relative;
-    text-decoration: none;
-}
-nav > a:after {
-    background: transparent url('/assets/arrow-right-white.png') no-repeat left center;
-    content: ' ';
-    display: block;
-    height: 41px;
-    opacity: 0.3;
-    position: absolute;
-    -webkit-transform: translatez(0);
-    -moz-transform: translatez(0);
-    -o-transform: translatez(0);
-    transform: translatez(0);
-    right: 0;
-    top: 0;
-    width: 19px;
-    -webkit-background-size: 19px 14px;
-    -moz-background-size: 19px 14px;
-    -o-background-size: 19px 14px;
-    background-size: 19px 14px;
-}
-nav > a.selected {
-    /*background: rgba(255, 255, 255, 0.1);*/
-    background: rgba(218, 28, 88, 1);
-    border-bottom: 1px solid rgba(255, 255, 255, 0);
-    color: white;
-}
-nav > a.selected:after {
-    opacity: 1;
-}
-header {
-    background: #333;
-    /*background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #743f8d), color-stop(100%, #532667));*/
-    /*background: -webkit-linear-gradient(top, #743f8d, #532667);*/
-    /*background: -moz-linear-gradient(top, #743f8d, #532667);*/
-    /*background: -o-linear-gradient(top, #743f8d, #532667);*/
-    /*background: linear-gradient(top, #743f8d, #532667);*/
-    border-bottom: 1px solid #282828;
-    color: white;
-    display: block;
-    height: 43px;
-    position: absolute;
-    -webkit-transform: translatez(0);
-    -moz-transform: translatez(0);
-    -o-transform: translatez(0);
-    transform: translatez(0);
-    text-align: center;
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
-    width: 100%;
-    z-index: 1;
-    -webkit-box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.2), 0px 1px 5px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.2), 0px 1px 5px rgba(0, 0, 0, 0.75);
-    -o-box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.2), 0px 1px 5px rgba(0, 0, 0, 0.75);
-    box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.2), 0px 1px 5px rgba(0, 0, 0, 0.75);
-}
-header .header-button {
-    background: #282828;
-    /*background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #66337c), color-stop(100%, #472457));*/
-    /*background: -webkit-linear-gradient(top, #66337c, #472457);*/
-    /*background: -moz-linear-gradient(top, #66337c, #472457);*/
-    /*background: -o-linear-gradient(top, #66337c, #472457);*/
-    /*background: linear-gradient(top, #66337c, #472457);*/
-    border: 1px solid #000;
-    color: white;
-    font-size: 13px;
-    font-weight: bold;
-    height: 28px;
-    left: 5px;
-    line-height: 26px;
-    padding: 0 8px;
-    position: absolute;
-    -webkit-transform: translatez(0);
-    -moz-transform: translatez(0);
-    -o-transform: translatez(0);
-    transform: translatez(0);
-    text-decoration: none;
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
-    top: 7px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -o-border-radius: 5px;
-    border-radius: 5px;
-    -webkit-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.15), 0 1px 0 rgba(255, 255, 255, 0.15);
-    -moz-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.15), 0 1px 0 rgba(255, 255, 255, 0.15);
-    -o-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.15), 0 1px 0 rgba(255, 255, 255, 0.15);
-    box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.15), 0 1px 0 rgba(255, 255, 255, 0.15);
-}
-header .header-button.right {
-    left: auto;
-    right: 5px;
-}
-header .header-button.icon span {
-    display: inline-block;
-    text-indent: -9999px;
-}
-header .header-button.menu span {
-    background: transparent url('/assets/menu.png') no-repeat;
-    height: 15px;
-    margin: 6px 2px 0;
-    width: 17px;
-    -webkit-background-size: 17px 15px;
-    -moz-background-size: 17px 15px;
-    -o-background-size: 17px 15px;
-    background-size: 17px 15px;
-}
-header .header-button.info span {
-    background: transparent url('/assets/info.png') no-repeat;
-    height: 17px;
-    margin: 5px 5px 0;
-    width: 8px;
-    -webkit-background-size: 8px 17px;
-    -moz-background-size: 8px 17px;
-    -o-background-size: 8px 17px;
-    background-size: 8px 17px;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
-header .header-button.like span {
-    background: transparent url('/assets/like.png') no-repeat;
-    height: 16px;
-    margin: 5px 5px 0;
-    width: 20px;
-    -webkit-background-size: 20px 16px;
-    -moz-background-size: 20px 16px;
-    -o-background-size: 20px 16px;
-    background-size: 20px 16px;
+/*
+Sidetap Default Theme
+Demo app: Stonehenge
+*/
+
+body {
+  background: rgb(255,255,255);
+  color: rgb(28,28,28);
+  font-family: 'Helvetica Neue', 'Helvetica-Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+  font-size: 80%;
+  line-height: 1.4;
+  -webkit-text-size-adjust: none;
+}
+
+h1 {
+  color: white;
+  font-size: 2em;
+  font-weight: bold;
+  line-height: 44px;
+}
+
+h2 {
+  font-size: 1.34em;
+  font-weight: bold;
+}
+
+a {
+  color: rgb(28,28,28);
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+.stp-nav {
+  background: rgb(0,0,0);
+  width: 256px;
+}
+
+nav {
+  display: block;
+}
+
+nav > a {
+  background: rgb(28,28,28);
+  color: rgba(255, 255, 255, 0.8);
+  display: block;
+  color: rgb(238,238,238);
+  font-size: 2em;
+  font-weight: bold;
+  height: 68px;
+  line-height: 68px;
+  margin: 0;
+  padding: 0 0 0 22px;
+  text-decoration: none;
+}
+
+nav > a:after {
+  display: block;
+  height: 68px;
+  position: absolute;
+  -webkit-transform: translatez(0);
+  -moz-transform: translatez(0);
+  -o-transform: translatez(0);
+  transform: translatez(0);
+  right: 0;
+  top: 0;
+  -webkit-background-size: 8px 17px;
+  -moz-background-size: 8px 17px;
+  -o-background-size: 8px 17px;
+  background-size: 8px 17px;
+}
+
+nav > a.selected {
+  background: rgb(218,28,88);
+  color: rgb(255,255,255);
+}
+
+nav > a.selected:after {
+  opacity: 1;
+}
+
+.stp-browse {
+  float: left;
+  margin: 17px;
+  width: 34px;
+  height: 34px;
+  background: url(icons/238-list.svg);
+  background-size: 34px 34px;
+}
+
+.stp-viewed {
+  float: left;
+  margin: 17px;
+  width: 34px;
+  height: 34px;
+  background: url(icons/238-target.svg);
+  background-size: 34px 34px;
+}
+
+.stp-likes {
+  float: left;
+  margin: 17px;
+  width: 34px;
+  height: 34px;
+  background: url(icons/238-heart.svg);
+  background-size: 34px 34px;
+}
+
+.stp-messages {
+  float: left;
+  margin: 17px;
+  width: 34px;
+  height: 34px;
+  background: url(icons/238-chat.svg);
+  background-size: 34px 34px;
+}
+
+header {
+  background: rgb(48,48,48);
+  display: block;
+  height: 44px;
+  position: absolute;
+  -webkit-transform: translatez(0);
+  -moz-transform: translatez(0);
+  -o-transform: translatez(0);
+  transform: translatez(0);
+  text-align: center;
+  width: 100%;
+  z-index: 1;
+}
+
+header .header-button {
+  top: 7px;
+  left: 7px;
+  width: 48px;
+  height: 28px;
+  background: rgb(28,28,28);
+  border: 1px solid rgb(0,0,0);
+  color: white;
+  position: absolute;
+  -webkit-transform: translatez(0);
+  -moz-transform: translatez(0);
+  -o-transform: translatez(0);
+  transform: translatez(0);
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+}
+
+header .header-button.menu span {
+  background: transparent url('/assets/menu.png') no-repeat;
+  height: 15px;
+  margin: 6px 2px 0;
+  width: 17px;
+  -webkit-background-size: 17px 15px;
+  -moz-background-size: 17px 15px;
+  -o-background-size: 17px 15px;
+  background-size: 17px 15px;
+  display: inline-block;
+  text-indent: -9999px;
+}
+
+header .icon span {
+  top: 10px;
+  position: absolute;
+  text-indent: -9999px;
+}
+
+header .right span {
+  left: auto;
+  right: 20px;
+}
+
+header .back span {
+  background: url(icons/255-back.svg);
+  left: 10px;
+  width: 27px;
+  height: 24px;
+  background-size: 27px 24px;
+  -webkit-background-size: 27px 24px;
+  -moz-background-size: 27px 24px;
+  -o-background-size: 27px 24px;
+}
+
+header .like span {
+  background: url(icons/255-heart.svg);
+  width: 26px;
+  height: 24px;
+  background-size: 26px 24px;
+  -webkit-background-size: 26px 24px;
+  -moz-background-size: 26px 24px;
+  -o-background-size: 26px 24px;
 }
 
 .stp-content {
-    background: #171a21;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -o-box-sizing: border-box;
-    box-sizing: border-box;
+  background: rgb(238,238,238);
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
 }
+
 .stp-content-panel {
-    background: #eee;
 }
+
 .container {
-    padding: 54px 10px 10px;
+  padding-top: 44px;
+}
+
+.container-10px {
+  padding: 10px;
+}
+
+.container-10px-238 {
+  background: rgb(238,238,238);
+  padding: 10px;
 }
 
 div.loader { height: 100px; line-height: 100px;text-align:center; }
+
 div.loader img { vertical-align:middle;}
 
 div.user-index-box {
-    background: #fff;
-    margin-bottom: 10px;
-    display: block;
-    height: 150px;
+  background: rgb(255,255,255);
+  margin-bottom: 10px;
+  display: block;
+  height: 120px;
+}
+
+div.clear {
+  clear: left;
 }
 
 div.user-photo {
-    width: 150px; height: 150px; overflow:hidden;
-    display: block;
-    float: left;
+  width: 120px;
+  height: 120px;
+  overflow:hidden;
+  display: block;
+  float: left;
 }
 
 div.user-photo img {
-    width: 150px; height: 200px; margin: -20px 0 0 0;
-    display: block;
+  width: 150px;
+  height: 180px;
+  margin: -10px -15px 0 0;
+  display: block;
+}
+
+div.user-photo-large {
+  width: 100%;
+  /*width: 320px;*/
+  /*height: 320px;*/
+  overflow: hidden;
+  display: inline-block;
 }
 
 div.user-index-info {
@@ -350,7 +388,7 @@ div.user-index-info {
 div.user-index-basic-info {
     float: left;
     padding: 10px;
-    height: 100px;
+    height: 70px;
 }
 
 div.user-index-basic-info h3 {
@@ -383,4 +421,60 @@ div.user-index-additional-info {
     clear: both;
     height: 20px;
     padding: 5px 0 5px 10px;
+}
+
+div.profile-user-age {
+  line-height: 54px;
+  border-bottom: 1px solid rgb(238,238,238);
+}
+
+div.user-age-icon {
+  float: left;
+  margin: 10px;
+  width: 34px;
+  height: 34px;
+  background: url(icons/48-calendar.svg);
+  background-size: 34px 34px;
+}
+
+div.profile-user-location {
+  line-height: 54px;
+  border-bottom: 1px solid rgb(238,238,238);
+}
+
+div.user-location-icon {
+  float: left;
+  margin: 10px;
+  width: 34px;
+  height: 34px;
+  background: url(icons/48-pin.svg);
+  background-size: 34px 34px;
+}
+
+div.profile-user-employer {
+  line-height: 54px;
+  border-bottom: 1px solid rgb(238,238,238);
+}
+
+div.user-employer-icon {
+  float: left;
+  margin: 10px;
+  width: 34px;
+  height: 34px;
+  background: url(icons/48-company.svg);
+  background-size: 34px 34px;
+}
+
+div.profile-user-school {
+  line-height: 54px;
+  border-bottom: 1px solid rgb(238,238,238);
+}
+
+div.user-school-icon {
+  float: left;
+  margin: 10px;
+  width: 34px;
+  height: 34px;
+  background: url(icons/48-book.svg);
+  background-size: 34px 34px;
 }
