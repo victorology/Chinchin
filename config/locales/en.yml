@@ -41,14 +41,14 @@ en:
       location: "%{location}"
     show:
       age: "%{age} years old"
-      location: "Lives in %{location}"
-      employer: "Works at %{employer}"
-      school: "Studied at %{school}"
+      location: "%{location}"
+      employer: "%{employer}"
+      school: "%{school}"
     chinchin:
       age: "%{age} years old"
-      location: "Lives in %{location}"
-      employer: "Works at %{employer}"
-      school: "Studied at %{school}"
+      location: "%{location}"
+      employer: "%{employer}"
+      school: "%{school}"
   likes:
     index:
       headline_html: "Hi <strong>%{name}</strong>! These are Chinchins you Like."

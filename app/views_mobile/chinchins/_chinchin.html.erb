@@ -3,17 +3,16 @@
 </div> <!-- .user-photo-large -->
 
 <h2>
-  <div class="profile-user-name"><%= @chinchin.first_name %></div>
   <% if age(@chinchin.birthday) %>
-      <div class="profile-user-age"><%= t '.age', :age => age(@chinchin.birthday) %></div>
+      <div class="profile-user-age"><div class="user-age-icon"></div><%= t '.age', :age => age(@chinchin.birthday) %></div>
   <% end %>
   <% if @chinchin.location %>
-      <div class="profile-user-location"><%= t '.location', :location => @chinchin.location %></div>
+      <div class="profile-user-location"><div class="user-location-icon"></div><%= t '.location', :location => @chinchin.location %></div>
   <% end %>
   <% if @chinchin.employer %>
-      <div class="profile-user-employer"><%= t '.employer', :employer => @chinchin.employer %></div>
+      <div class="profile-user-employer"><div class="user-employer-icon"></div><%= t '.employer', :employer => @chinchin.employer %></div>
   <% end %>
   <% if @chinchin.school %>
-      <div class="profile-user-school"><%= t '.school', :school => @chinchin.school %></div>
+      <div class="profile-user-school"><div class="user-school-icon"></div><%= t '.school', :school => @chinchin.school %></div>
   <% end %>
 </h2>

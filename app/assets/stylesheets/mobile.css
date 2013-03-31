@@ -274,11 +274,6 @@ header .header-button {
   border-radius: 6px;
 }
 
-header .header-button.icon span {
-  display: inline-block;
-  text-indent: -9999px;
-}
-
 header .header-button.menu span {
   background: transparent url('/assets/menu.png') no-repeat;
   height: 15px;
@@ -288,17 +283,23 @@ header .header-button.menu span {
   -moz-background-size: 17px 15px;
   -o-background-size: 17px 15px;
   background-size: 17px 15px;
+  display: inline-block;
+  text-indent: -9999px;
+}
+
+header .icon span {
+  top: 10px;
+  position: absolute;
+  text-indent: -9999px;
 }
 
 header .right span {
   left: auto;
-  top: 10px;
-  right: 10px;
+  right: 20px;
 }
 
 header .back span {
   background: url(icons/255-back.svg);
-  top: 10px;
   left: 10px;
   width: 27px;
   height: 24px;
@@ -306,8 +307,6 @@ header .back span {
   -webkit-background-size: 27px 24px;
   -moz-background-size: 27px 24px;
   -o-background-size: 27px 24px;
-  position: absolute;
-  text-indent: -9999px;
 }
 
 header .like span {
@@ -318,8 +317,6 @@ header .like span {
   -webkit-background-size: 26px 24px;
   -moz-background-size: 26px 24px;
   -o-background-size: 26px 24px;
-  position: absolute;
-  text-indent: -9999px;
 }
 
 .stp-content {
@@ -388,14 +385,18 @@ div.user-index-info {
   padding: 5px 10px;
 }
 
-div.profile-user-name {
+div.profile-user-age {
   line-height: 54px;
   border-bottom: 1px solid rgb(238,238,238);
 }
 
-div.profile-user-age {
-  line-height: 54px;
-  border-bottom: 1px solid rgb(238,238,238);
+div.user-age-icon {
+  float: left;
+  margin: 10px;
+  width: 34px;
+  height: 34px;
+  background: url(icons/48-calendar.svg);
+  background-size: 34px 34px;
 }
 
 div.profile-user-location {
@@ -403,12 +404,39 @@ div.profile-user-location {
   border-bottom: 1px solid rgb(238,238,238);
 }
 
+div.user-location-icon {
+  float: left;
+  margin: 10px;
+  width: 34px;
+  height: 34px;
+  background: url(icons/48-pin.svg);
+  background-size: 34px 34px;
+}
+
 div.profile-user-employer {
   line-height: 54px;
   border-bottom: 1px solid rgb(238,238,238);
 }
 
+div.user-employer-icon {
+  float: left;
+  margin: 10px;
+  width: 34px;
+  height: 34px;
+  background: url(icons/48-company.svg);
+  background-size: 34px 34px;
+}
+
 div.profile-user-school {
   line-height: 54px;
   border-bottom: 1px solid rgb(238,238,238);
+}
+
+div.user-school-icon {
+  float: left;
+  margin: 10px;
+  width: 34px;
+  height: 34px;
+  background: url(icons/48-book.svg);
+  background-size: 34px 34px;
 }
