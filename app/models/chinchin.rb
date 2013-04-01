@@ -27,6 +27,7 @@ class Chinchin < ActiveRecord::Base
   belongs_to :user
   has_many :friendships
   has_many :likes
+  has_many :profile_photos
   attr_accessible :birthday, :email, :employer, :first_name, :gender, :hometown, :last_name, :locale, :location, :name, :oauth_expires_at, :oauth_token, :position, :provider, :relationship_status, :school, :uid
   # attr_accessible :title, :body
 
@@ -64,5 +65,19 @@ class Chinchin < ActiveRecord::Base
 
   def score
     self.likes.count * 10
+  end
+
+  def fetch_profile_photos
+    self.photos.each do |photo|
+      if ProfilePhoto.find_by_picture_url(photo.source).nil?
+        pp = ProfilePhoto.new
+        pp.picture_url = photo.source
+        pp.source_url = photo.images.first.source
+        pp.created_at = photo.created_time
+        pp.facebook_likes = photo.likes.count
+        pp.chinchin = self
+        pp.save
+      end
+    end
   end
 end

@@ -32,7 +32,7 @@ Chinchin2::Application.routes.draw do
   match 'make_chinchin/:id', to: 'static_pages#make_chinchin'
   match 'make_friendship', to: 'static_pages#make_friendship'
   match 'connect_users_with_chinchins', to: 'static_pages#connect_users_with_chinchins'
-
+  match 'fetch_profile_photos', to: 'static_pages#fetch_chinchins_profile_photos'
   match 'fb4pp01', to: 'static_pages#fb4pp01'
 
   # The priority is based upon order of creation:

@@ -38,4 +38,12 @@ class StaticPagesController < ApplicationController
 
     render :text => "connecting..."
   end
+
+  def fetch_chinchins_profile_photos
+    Chinchin.all.each do |chinchin|
+      chinchin.delay.fetch_profile_photos
+    end
+
+    render :text => "fetching..."
+  end
 end
