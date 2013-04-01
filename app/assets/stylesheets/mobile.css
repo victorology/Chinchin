@@ -375,52 +375,56 @@ div.user-photo img {
 
 div.user-photo-large {
   width: 100%;
-  /*width: 320px;*/
-  /*height: 320px;*/
   overflow: hidden;
   display: inline-block;
+  position: relative;
+}
+
+div.dummy {
+  margin-top: 100%;
+}
+
+div.user-photo-large img {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 div.user-index-info {
-    float: left;
+  float: left;
 }
 
 div.user-index-basic-info {
-    float: left;
-    padding: 10px;
-    height: 70px;
+  float: left;
+  padding: 10px;
+  height: 70px;
 }
 
 div.user-index-basic-info h3 {
-    font-size: 1.5em;
+  font-size: 1.5em;
 }
 
 div.right-arrow {
-    background: transparent url('/assets/arrow-right-gray.png') no-repeat left center;
-    float: right;
-    /*content: ' ';*/
-    /*display: block;*/
-    height: 41px;
-    position: relative;
-    /*-webkit-transform: translatez(0);*/
-    /*-moz-transform: translatez(0);*/
-    /*-o-transform: translatez(0);*/
-    /*transform: translatez(0);*/
-    /*float: right;*/
-    top: 30px;
-    right: 0px;
-    width: 19px;
-    -webkit-background-size: 19px 14px;
-    -moz-background-size: 19px 14px;
-    -o-background-size: 19px 14px;
-    background-size: 19px 14px;
+  background: transparent url('/assets/arrow-right-gray.png') no-repeat left center;
+  float: right;
+  height: 41px;
+  position: relative;
+  top: 30px;
+  right: 0px;
+  width: 19px;
+  -webkit-background-size: 19px 14px;
+  -moz-background-size: 19px 14px;
+  -o-background-size: 19px 14px;
+  background-size: 19px 14px;
 }
 
 div.user-index-additional-info {
-    border-top: 1px solid #eee;
-    clear: both;
-    height: 20px;
-    padding: 5px 0 5px 10px;
+  border-top: 1px solid #eee;
+  clear: both;
+  height: 20px;
+  padding: 5px 0 5px 10px;
 }
 
 div.profile-user-age {
