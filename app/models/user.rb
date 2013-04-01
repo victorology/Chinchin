@@ -259,7 +259,7 @@ class User < ActiveRecord::Base
   def connect_with_chinchin
     c = Chinchin.find_by_uid(self.uid)
     if not c.nil?
-      c.user = u
+      c.user = self
       c.save
     end
   end
