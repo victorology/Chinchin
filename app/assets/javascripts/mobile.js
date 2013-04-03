@@ -26,6 +26,11 @@ $('#chinchin a.back').click(function() {
     });
 });
 
+$('#chinchin a.like').click(function() {
+    var chinchin_id = $('#chinchin').find('.dummy').attr('id')
+    $.post('/likes.js', {chinchin_id:chinchin_id});
+});
+
 show_chinchin = function(chinchin_id, chinchin_name) {
     chinchin.find('h1').text(chinchin_name);
     st.show_section(chinchin, {
@@ -66,3 +71,11 @@ st.stp_nav.find('nav a').click(function() {
     }
     show_chinchins(browse, title, url);
 });
+
+show_notification = function(message) {
+    $('.notification').remove();
+    var $noti = $('<div>').addClass('notification')
+        .html('<h2>'+message+'</h2>');
+    $('.container').after($noti);
+    $noti.fadeIn('fast').fadeOut(2000);
+}

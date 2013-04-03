@@ -482,3 +482,19 @@ div.user-school-icon {
   background: url(icons/48-book.svg);
   background-size: 34px 34px;
 }
+
+.notification {
+  background-color: rgba(0, 0, 0, 0.7);
+  top: 44px;
+  color:white;
+  display:none;
+  padding:15px;
+  position:absolute;
+  z-index:1;
+  width: 100%;
+  text-align: center;
+}
+
+.notification h2 {
+  margin-bottom:7px;
+}
