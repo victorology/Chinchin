@@ -11,6 +11,7 @@ class ChinchinsController < ApplicationController
   end
 
 	def show
+    @user = current_user
 		@chinchin = Chinchin.find(params[:id])
     @photos = @chinchin.profile_photos || []
 

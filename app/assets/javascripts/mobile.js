@@ -21,6 +21,7 @@ chinchin = $('#chinchin');
 
 $("header .menu").on("click",st.toggle_nav);
 $('#chinchin a.back').click(function() {
+    $('#chinchin a.like').removeClass('liked');
     return st.show_section(browse, {
         animation: 'infromleft'
     });
@@ -28,7 +29,12 @@ $('#chinchin a.back').click(function() {
 
 $('#chinchin a.like').click(function() {
     var chinchin_id = $('#chinchin').find('.dummy').attr('id')
-    $.post('/likes.js', {chinchin_id:chinchin_id});
+
+    if ($('#chinchin a.like').hasClass('liked')) {
+        $.post('/unlike.js', {chinchin_id:chinchin_id});
+    } else {
+        $.post('/likes.js', {chinchin_id:chinchin_id});
+    }
 });
 
 show_chinchin = function(chinchin_id, chinchin_name) {
