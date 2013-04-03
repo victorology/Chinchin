@@ -17,3 +17,13 @@
       <div class="profile-user-school"><div class="user-school-icon"></div><%= t '.school', :school => @chinchin.school %></div>
   <% end %>
 </h2>
+
+<div class="container-profile-photos">
+  <% if @photos %>
+    <% @photos.each do |photo| %>
+      <div class="user-photo-profile">
+        <%= image_tag photo.source, :align => "absmiddle", :width => "120", :style => "min-width: 120px; min-height: 120px;" %>
+      </div> <!-- .user--profile-photo -->
+    <% end %>
+  <% end  %>
+</div> <!-- .container-profile-photos -->
