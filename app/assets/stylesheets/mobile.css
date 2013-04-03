@@ -510,12 +510,12 @@ div.user-school-icon {
 }
 
 .container-profile-photos {
-  margin-right: 4px;
+  margin-right: 2px;
 }
 
 div.user-photo-profile {
   float: left;
-  margin: 4px 0 0 4px;
+  margin: 2px 0 0 2px;
   width: 104px;
   height: 104px;
   overflow:hidden;
