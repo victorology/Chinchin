@@ -513,11 +513,15 @@ div.user-school-icon {
   margin-right: 2px;
 }
 
-div.user-photo-profile {
+div.user-profile-photo {
   float: left;
   margin: 2px 0 0 2px;
   width: 104px;
   height: 104px;
   overflow:hidden;
   display: block;
+}
+
+div.profile-friends {
+  clear: both;
 }

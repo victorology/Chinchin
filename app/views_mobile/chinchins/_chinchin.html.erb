@@ -7,27 +7,39 @@
   <% end %>
 </div> <!-- .user-photo-large -->
 
-<h2>
-  <% if age(@chinchin.birthday) %>
-      <div class="profile-user-age"><div class="user-age-icon"></div><%= t '.age', :age => age(@chinchin.birthday) %></div>
-  <% end %>
-  <% if @chinchin.location %>
-      <div class="profile-user-location"><div class="user-location-icon"></div><%= t '.location', :location => @chinchin.location %></div>
-  <% end %>
-  <% if @chinchin.employer %>
-      <div class="profile-user-employer"><div class="user-employer-icon"></div><%= t '.employer', :employer => @chinchin.employer %></div>
-  <% end %>
-  <% if @chinchin.school %>
-      <div class="profile-user-school"><div class="user-school-icon"></div><%= t '.school', :school => @chinchin.school %></div>
-  <% end %>
-</h2>
-
-<div class="container-profile-photos">
-  <% if @photos %>
-    <% @photos.each do |photo| %>
-      <div class="user-photo-profile">
-        <%= image_tag photo.picture_url, :align => "absmiddle", :width => "120", :style => "min-width: 120px; min-height: 120px;" %>
-      </div> <!-- .user-photo-profile -->
+<div class="profile-info">
+  <h2>
+    <% if age(@chinchin.birthday) %>
+        <div class="profile-user-age"><div class="user-age-icon"></div><%= t '.age', :age => age(@chinchin.birthday) %></div>
     <% end %>
-  <% end  %>
-</div> <!-- .container-profile-photos -->
+    <% if @chinchin.location %>
+        <div class="profile-user-location"><div class="user-location-icon"></div><%= t '.location', :location => @chinchin.location %></div>
+    <% end %>
+    <% if @chinchin.employer %>
+        <div class="profile-user-employer"><div class="user-employer-icon"></div><%= t '.employer', :employer => @chinchin.employer %></div>
+    <% end %>
+    <% if @chinchin.school %>
+        <div class="profile-user-school"><div class="user-school-icon"></div><%= t '.school', :school => @chinchin.school %></div>
+    <% end %>
+  </h2>
+</div> <!-- .profile-info -->
+
+<div class="profile-photos">
+  <div class="container-profile-photos">
+    <% if @photos %>
+      <% @photos.each do |photo| %>
+        <div class="user-profile-photo">
+          <%= image_tag photo.picture_url, :align => "absmiddle", :width => "120", :style => "min-width: 120px; min-height: 120px;" %>
+        </div> <!-- .user-profile-photo -->
+      <% end %>
+    <% end  %>
+  </div> <!-- .container-profile-photos -->
+</div> <!-- .profile-photos -->
+
+<div class="profile-friends">
+  <h2>
+    <% @chinchin.friendships.each do |friendship| %>
+      <%= friendship.user.name %>
+    <% end %>
+  </h2>
+</div> <!-- .profile-friends -->
