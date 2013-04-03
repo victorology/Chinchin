@@ -26,8 +26,8 @@
   <% if @photos %>
     <% @photos.each do |photo| %>
       <div class="user-photo-profile">
-        <%= image_tag photo.source, :align => "absmiddle", :width => "120", :style => "min-width: 120px; min-height: 120px;" %>
-      </div> <!-- .user--profile-photo -->
+        <%= image_tag photo.picture_url, :align => "absmiddle", :width => "120", :style => "min-width: 120px; min-height: 120px;" %>
+      </div> <!-- .user-photo-profile -->
     <% end %>
   <% end  %>
 </div> <!-- .container-profile-photos -->
