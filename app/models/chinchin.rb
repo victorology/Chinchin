@@ -44,18 +44,18 @@ class Chinchin < ActiveRecord::Base
     _endpoint_ = ["#{self.endpoint}/picture", options.to_query].delete_if(&:blank?).join('?')
   end
 
-  def photos
-    friend = self.friendships.first.user
-    fb_user = FbGraph::User.new(self.uid, :access_token => friend.oauth_token)
-    albums = fb_user.albums
-    albums.each do |album|
-      if album.name == 'Profile Pictures' and album.photos.count > 0
-        return album.photos
-      end
+def photos
+  friend = self.friendships.first.user
+  fb_user = FbGraph::User.new(self.uid, :access_token => friend.oauth_token)
+  albums = fb_user.albums
+  albums.each do |album|
+    if album.name == 'Profile Pictures' and album.photos.count > 0
+      return album.photos
     end
-
-    return nil
   end
+
+  return nil
+end
 
   def facebook_likes
     friend = self.friendships.first.user

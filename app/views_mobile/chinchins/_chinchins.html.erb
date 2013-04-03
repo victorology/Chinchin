@@ -24,7 +24,7 @@
         </div> <!-- .user-index-basic-info -->
         <div class="right-arrow"></div>
         <div class="user-index-additional-info">
-          <span class="picture-count"><%= 25 %></span> <span class="mutual-friend-count"><%= friend.friendships.count %></span>
+          <span class="picture-count"><%= (friend.profile_photos || []).size %></span> <span class="mutual-friend-count"><%= friend.friendships.count %></span>
         </div>
       </div> <!-- .user-index-info -->
     </div> <!-- .user-index-box -->
