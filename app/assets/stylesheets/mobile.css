@@ -319,6 +319,16 @@ header .like span {
   -o-background-size: 26px 24px;
 }
 
+header .liked span {
+  background: url(icons/255-heart-red.svg);
+  width: 26px;
+  height: 24px;
+  background-size: 26px 24px;
+  -webkit-background-size: 26px 24px;
+  -moz-background-size: 26px 24px;
+  -o-background-size: 26px 24px;
+}
+
 .stp-content {
   background: rgb(238,238,238);
   -webkit-box-sizing: border-box;
@@ -481,4 +491,20 @@ div.user-school-icon {
   height: 34px;
   background: url(icons/48-book.svg);
   background-size: 34px 34px;
+}
+
+.notification {
+  background-color: rgba(0, 0, 0, 0.7);
+  top: 44px;
+  color:white;
+  display:none;
+  padding:15px;
+  position:absolute;
+  z-index:1;
+  width: 100%;
+  text-align: center;
+}
+
+.notification h2 {
+  margin-bottom:7px;
 }

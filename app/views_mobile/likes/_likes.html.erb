@@ -1,25 +1,35 @@
-<% likes.each do |like| %>
-  <div class="user-index-box" id="<%= like.chinchin.id %>">
-    <div class="user-photo">
-      <%= image_tag ( like.chinchin.picture('large') ), :align => "absmiddle", :width => "120", :style => "min-width: 120px; min-height: 120px;" %>
-    </div> <!-- .user-photo -->
-    <div class="user-index-info">
-      <h3><%= link_to like.chinchin.first_name, "#" %></h3>
-      <% if age(like.chinchin.birthday) %>
-        <div class="user-age"><%= t '.age', :age => age(like.chinchin.birthday) %></div>
-      <% end %>
-      <% if like.chinchin.location %>
-        <div class="user-location"><%= t '.location', :location => like.chinchin.location %></div>
-      <% end %>
-      <% if like.chinchin.employer %>
-        <div class="user-employer"><%= t '.employer', :employer => like.chinchin.employer %></div>
-      <% end %>
-      <% if like.chinchin.school %>
-        <div class="user-school"><%= t '.school', :school => like.chinchin.school %></div>
-      <% end %>
-      <% like.chinchin.friendships.each do |friendship| %>
-          <%= friendship.user.name %>
-      <% end %>
-    </div> <!-- .user-index-info -->
-  </div> <!-- .user-index-box -->
-<% end %>
+<div class="container-10px-238">
+
+  <% likes.each do |like| %>
+      <a href="#">
+        <div class="user-index-box" id="<%=like.chinchin.id%>">
+          <div class="user-photo">
+            <%= image_tag ( like.chinchin.picture('large') ), :align => "absmiddle", :width => "120", :style => "min-width: 120px; min-height: 120px;" %>
+          </div> <!-- .user-photo -->
+          <div class="user-index-info">
+            <div class="user-index-basic-info">
+              <h3><%= like.chinchin.first_name %></h3>
+              <% if age(like.chinchin.birthday) %>
+                  <div class="user-age"><%= t '.age', :age => age(like.chinchin.birthday) %></div>
+              <% end %>
+              <% if like.chinchin.location %>
+                  <div class="user-location"><%= t '.location', :location => like.chinchin.location %></div>
+              <% end %>
+              <% if like.chinchin.employer %>
+                  <div class="user-employer"><%= t '.employer', :employer => like.chinchin.employer %></div>
+              <% end %>
+              <% if like.chinchin.school %>
+                  <div class="user-school"><%= t '.school', :school => like.chinchin.school %></div>
+              <% end %>
+            </div> <!-- .user-index-basic-info -->
+            <div class="right-arrow"></div>
+            <div class="user-index-additional-info">
+              <span class="picture-count"><%= (like.chinchin.profile_photos || []).size %></span> <span class="mutual-friend-count"><%= like.chinchin.friendships.count %></span>
+            </div>
+          </div> <!-- .user-index-info -->
+        </div> <!-- .user-index-box -->
+      </a>
+      <div class="clear" />
+  <% end %>
+
+</div> <!-- .container-10px-238 -->
