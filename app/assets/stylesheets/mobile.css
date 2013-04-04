@@ -410,6 +410,7 @@ div.user-index-basic-info {
   float: left;
   padding: 5px 10px 10px 10px;
   height: 70px;
+  overflow: hidden;
 }
 
 div.user-index-basic-info h3 {
