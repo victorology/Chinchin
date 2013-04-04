@@ -4,7 +4,7 @@ class LikesController < ApplicationController
 
   def index
     @user = current_user # Added by Victor don't know if this is right
-    @likes = Like.find_all_by_user_id(@user.id)
+    @likes = Like.where(:user_id => @user.id).order("created_at DESC")
 
     respond_to do | format |
       format.html
