@@ -7,7 +7,13 @@
   <% end %>
 </div> <!-- .user-photo-large -->
 
-<div class="profile-info">
+<ul class="tabs">
+  <li><a href="#tab1">Tab 1</a></li>
+  <li><a href="#tab2">Tab 2</a></li>
+  <li><a href="#tab3">Tab 3</a></li>
+</ul>
+
+<div id="tab1">
   <h2>
     <% if age(@chinchin.birthday) %>
         <div class="profile-user-age"><div class="user-age-icon"></div><%= t '.age', :age => age(@chinchin.birthday) %></div>
@@ -22,24 +28,64 @@
         <div class="profile-user-school"><div class="user-school-icon"></div><%= t '.school', :school => @chinchin.school %></div>
     <% end %>
   </h2>
-</div> <!-- .profile-info -->
+</div> <!-- #tab1 -->
 
-<div class="profile-photos">
+<div id="tab2">
   <div class="container-profile-photos">
     <% if @photos %>
-      <% @photos.each do |photo| %>
-        <div class="user-profile-photo">
-          <%= image_tag photo.picture_url, :align => "absmiddle", :width => "120", :style => "min-width: 120px; min-height: 120px;" %>
-        </div> <!-- .user-profile-photo -->
-      <% end %>
+        <% @photos.each do |photo| %>
+            <div class="user-profile-photo">
+              <%= image_tag photo.picture_url, :align => "absmiddle", :width => "120", :style => "min-width: 120px; min-height: 120px;" %>
+            </div> <!-- .user-profile-photo -->
+        <% end %>
     <% end  %>
   </div> <!-- .container-profile-photos -->
-</div> <!-- .profile-photos -->
+</div> <!-- #tab2 -->
 
-<div class="profile-friends">
+<div id="tab3">
   <h2>
     <% @chinchin.friendships.each do |friendship| %>
-      <%= friendship.user.name %>
+        <%= friendship.user.name %>
     <% end %>
   </h2>
-</div> <!-- .profile-friends -->
+</div> <!-- #tab3 -->
+<script type="text/javascript">
+    // Wait until the DOM has loaded before querying the document
+    $(document).ready(function(){
+        $('ul.tabs').each(function(){
+            alert(this);
+            // For each set of tabs, we want to keep track of
+            // which tab is active and it's associated content
+            var $active, $content, $links = $(this).find('a');
+
+            // If the location.hash matches one of the links, use that as the active tab.
+            // If no match is found, use the first link as the initial active tab.
+            $active = $($links.filter('[href="'+location.hash+'"]')[0] || $links[0]);
+            $active.addClass('active');
+            $content = $($active.attr('href'));
+
+            // Hide the remaining content
+            $links.not($active).each(function () {
+                $($(this).attr('href')).hide();
+            });
+
+            // Bind the click event handler
+            $(this).on('click', 'a', function(e){
+                // Make the old tab inactive.
+                $active.removeClass('active');
+                $content.hide();
+
+                // Update the variables with the new link and content
+                $active = $(this);
+                $content = $($(this).attr('href'));
+
+                // Make the tab active.
+                $active.addClass('active');
+                $content.show();
+
+                // Prevent the anchor's default click action
+                e.preventDefault();
+            });
+        });
+    });
+</script>
