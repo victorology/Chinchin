@@ -7,7 +7,13 @@
   <% end %>
 </div> <!-- .user-photo-large -->
 
-<div class="profile-info">
+<ul class="tabs">
+  <li><a href="#tab1">Tab 1</a></li>
+  <li><a href="#tab2">Tab 2</a></li>
+  <li><a href="#tab3">Tab 3</a></li>
+</ul>
+
+<div id="tab1">
   <h2>
     <% if age(@chinchin.birthday) %>
         <div class="profile-user-age"><div class="user-age-icon"></div><%= t '.age', :age => age(@chinchin.birthday) %></div>
@@ -22,9 +28,9 @@
         <div class="profile-user-school"><div class="user-school-icon"></div><%= t '.school', :school => @chinchin.school %></div>
     <% end %>
   </h2>
-</div> <!-- .profile-info -->
+</div> <!-- #tab1 -->
 
-<div class="profile-photos">
+<div id="tab2">
   <div class="container-profile-photos">
     <% if @photos %>
       <% @photos.each do |photo| %>
@@ -34,12 +40,12 @@
       <% end %>
     <% end  %>
   </div> <!-- .container-profile-photos -->
-</div> <!-- .profile-photos -->
+</div> <!-- #tab2 -->
 
-<div class="profile-friends">
+<div id="tab3">
   <h2>
     <% @chinchin.friendships.each do |friendship| %>
       <%= friendship.user.name %>
     <% end %>
   </h2>
-</div> <!-- .profile-friends -->
+</div> <!-- #tab3 -->

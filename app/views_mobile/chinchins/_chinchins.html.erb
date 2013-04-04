@@ -22,11 +22,21 @@
                 <div class="user-school"><%= t '.school', :school => friend.school %></div>
             <% end %>
         </div> <!-- .user-index-basic-info -->
-        <div class="right-arrow"></div>
         <div class="user-index-additional-info">
-          <span class="picture-count"><%= (friend.profile_photos || []).size %></span> <span class="mutual-friend-count"><%= friend.friendships.count %></span>
+          <div class="user-photo-count"></div>
+          <span class="picture-count">
+            <%= (friend.profile_photos || []).size %>
+          </span>
+          <div class="user-friend-count"></div>
+          <span class="mutual-friend-count">
+            <%= friend.friendships.count %>
+            <% if friend.friendships.count == 1 %> mutual friend
+            <% else %> mutual friends
+            <% end %>
+          </span>
         </div>
       </div> <!-- .user-index-info -->
+      <div class="right-arrow"></div>
     </div> <!-- .user-index-box -->
   </a>
   <div class="clear" />
