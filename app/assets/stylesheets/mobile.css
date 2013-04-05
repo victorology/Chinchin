@@ -408,33 +408,64 @@ div.user-index-info {
 
 div.user-index-basic-info {
   float: left;
-  padding: 10px;
+  padding: 5px 10px 10px 10px;
   height: 70px;
+  overflow: hidden;
 }
 
 div.user-index-basic-info h3 {
   font-size: 1.5em;
 }
 
-div.right-arrow {
-  background: transparent url('/assets/arrow-right-gray.png') no-repeat left center;
-  float: right;
-  height: 41px;
-  position: relative;
-  top: 30px;
-  right: 0px;
-  width: 19px;
-  -webkit-background-size: 19px 14px;
-  -moz-background-size: 19px 14px;
-  -o-background-size: 19px 14px;
-  background-size: 19px 14px;
+div.user-index-additional-info {
+  clear: both;
+  padding: 8px 0 8px 10px;
 }
 
-div.user-index-additional-info {
-  border-top: 1px solid #eee;
-  clear: both;
-  height: 20px;
-  padding: 5px 0 5px 10px;
+div.right-arrow {
+  background: url(icons/238-arrow.svg);
+  float: right;
+  top: 48px;
+  right: 10px;
+  width: 16px;
+  height: 24px;
+  position: relative;
+  background-size: 16px 24px;
+  -webkit-background-size: 16px 24px;
+  -moz-background-size: 16px 24px;
+  -o-background-size: 16px 24px;
+}
+
+div.user-photo-count {
+  float: left;
+  margin-right: 5px;
+  width: 18px;
+  height: 18px;
+  background: url(icons/48-camera.svg);
+  background-size: 18px 18px;
+  -webkit-background-size: 18px 18px;
+  -moz-background-size: 18px 18px;
+  -o-background-size: 18px 18px;
+}
+
+span.picture-count {
+  float: left;
+}
+
+div.user-friend-count {
+  float: left;
+  margin: 0 5px;
+  width: 18px;
+  height: 18px;
+  background: url(icons/48-friends.svg);
+  background-size: 18px 18px;
+  -webkit-background-size: 18px 18px;
+  -moz-background-size: 18px 18px;
+  -o-background-size: 18px 18px;
+}
+
+span.mutual-friend-count {
+  float: left;
 }
 
 div.profile-user-age {
