@@ -1,9 +1,13 @@
+<div class="container-10px-238">
+
 <% views.each do |view| %>
+  <a href="#">
     <div class="user-index-box" id="<%= view.viewer.id %>">
       <div class="user-photo">
         <%= image_tag ( view.viewer.picture('large') ), :align => "absmiddle", :width => "120", :style => "min-width: 120px; min-height: 120px;" %>
       </div> <!-- .user-photo -->
       <div class="user-index-info">
+        <div class="user-index-basic-info">
         <h3><%= link_to view.viewer.first_name, "#" %></h3>
         <% if age(view.viewer.birthday) %>
             <div class="user-age"><%= t '.age', :age => age(view.viewer.birthday) %></div>
@@ -17,9 +21,25 @@
         <% if view.viewer.school %>
             <div class="user-school"><%= t '.school', :school => view.viewer.school %></div>
         <% end %>
-        <% view.viewer.mutual_friendships(current_user).each do |mutual_friend| %>
-            <%= mutual_friend.name %>
-        <% end %>
+        </div> <!-- .user-index-basic-info -->
+        <div class="user-index-additional-info">
+          <div class="user-photo-count"></div>
+          <span class="picture-count">
+            <%= (view.viewer.profile_photos || []).size %>
+          </span>
+          <div class="user-friend-count"></div>
+          <span class="mutual-friend-count">
+            <%= view.viewer.friendships.count %>
+            <% if view.viewer.friendships.count == 1 %> mutual friend
+            <% else %> mutual friends
+            <% end %>
+          </span>
+        </div>
       </div> <!-- .user-index-info -->
+      <div class="right-arrow"></div>
     </div> <!-- .user-index-box -->
+  </a>
+  <div class="clear" />
 <% end %>
+
+</div> <!-- .container-10px-238 -->
