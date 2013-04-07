@@ -345,12 +345,12 @@ header .liked span {
 }
 
 .container-10px {
-  padding: 10px;
+  padding: 10px 10px 0 10px;
 }
 
 .container-10px-238 {
   background: rgb(238,238,238);
-  padding: 10px;
+  padding: 10px 10px 0 10px;
 }
 
 div.loader { height: 100px; line-height: 100px;text-align:center; }
@@ -384,6 +384,7 @@ div.user-photo img {
 }
 
 div.user-photo-large {
+  margin-bottom: -5px;
   width: 100%;
   overflow: hidden;
   display: inline-block;
@@ -410,7 +411,6 @@ div.user-index-basic-info {
   float: left;
   padding: 5px 10px 10px 10px;
   height: 70px;
-  overflow: hidden;
 }
 
 div.user-index-basic-info h3 {
@@ -427,25 +427,25 @@ div.right-arrow {
   float: right;
   top: 48px;
   right: 10px;
-  width: 16px;
-  height: 24px;
+  width: 12px;
+  height: 18px;
   position: relative;
-  background-size: 16px 24px;
-  -webkit-background-size: 16px 24px;
-  -moz-background-size: 16px 24px;
-  -o-background-size: 16px 24px;
+  background-size: 12px 18px;
+  -webkit-background-size: 12px 18px;
+  -moz-background-size: 12px 18px;
+  -o-background-size: 12px 18px;
 }
 
 div.user-photo-count {
   float: left;
   margin-right: 5px;
-  width: 18px;
-  height: 18px;
+  width: 17px;
+  height: 17px;
   background: url(icons/48-camera.svg);
-  background-size: 18px 18px;
-  -webkit-background-size: 18px 18px;
-  -moz-background-size: 18px 18px;
-  -o-background-size: 18px 18px;
+  background-size: 17px 17px;
+  -webkit-background-size: 17px 17px;
+  -moz-background-size: 17px 17px;
+  -o-background-size: 17px 17px;
 }
 
 span.picture-count {
@@ -557,20 +557,48 @@ div.profile-friends {
   clear: both;
 }
 
+div.mutual-friends {
+  line-height: 54px;
+  border-bottom: 1px solid rgb(238,238,238);
+}
+
+div.mutual-friends img {
+  float: left;
+  margin: 10px;
+  width: 34px;
+  height: 34px;
+}
+
 .tabs li {
-  list-style:none;
-  display:inline;
+  list-style: none;
+  display: inline;
 }
 
 .tabs a {
-  padding:5px 10px;
-  display:inline-block;
-  background:#666;
-  color:#fff;
-  text-decoration:none;
+  margin-right: -4px;
+  padding-top: 14px;
+  height: 35px;
+  display: inline-block;
+  background: rgb(238,238,238);
+  color: rgb(48,48,48);
+  text-decoration: none;
+  text-align: center;
+  font-weight: bold;
+}
+
+.tab-profile a {
+  width: 33%;
+}
+
+.tab-photos a {
+  width: 34%;
+}
+
+.tab-friends a {
+  width: 33%;
 }
 
 .tabs a.active {
-  background:#fff;
-  color:#000;
+  background: rgb(238, 28, 88);
+  color: rgb(255,255,255);
 }

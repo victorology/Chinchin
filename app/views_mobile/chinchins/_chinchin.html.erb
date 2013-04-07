@@ -8,12 +8,12 @@
 </div> <!-- .user-photo-large -->
 
 <ul class="tabs">
-  <li><a href="#tab1">Tab 1</a></li>
-  <li><a href="#tab2">Tab 2</a></li>
-  <li><a href="#tab3">Tab 3</a></li>
+  <li class="tab-profile"><a href="#tab-profile">Profile</a></li>
+  <li class="tab-photos"><a href="#tab-photos">Photos</a></li>
+  <li class="tab-friends"><a href="#tab-friends">Mutual Friends</a></li>
 </ul>
 
-<div id="tab1">
+<div id="tab-profile">
   <h2>
     <% if age(@chinchin.birthday) %>
         <div class="profile-user-age"><div class="user-age-icon"></div><%= t '.age', :age => age(@chinchin.birthday) %></div>
@@ -28,9 +28,9 @@
         <div class="profile-user-school"><div class="user-school-icon"></div><%= t '.school', :school => @chinchin.school %></div>
     <% end %>
   </h2>
-</div> <!-- #tab1 -->
+</div> <!-- #tab-profile -->
 
-<div id="tab2">
+<div id="tab-photos">
   <div class="container-profile-photos">
     <% if @photos %>
         <% @photos.each do |photo| %>
@@ -40,15 +40,16 @@
         <% end %>
     <% end  %>
   </div> <!-- .container-profile-photos -->
-</div> <!-- #tab2 -->
+</div> <!-- #tab-photos -->
 
-<div id="tab3">
+<div id="tab-friends">
   <h2>
     <% @chinchin.friendships.each do |friendship| %>
-        <%= friendship.user.name %>
+      <div class="mutual-friends"><img src="<%= friendship.user.picture %>" /><%= friendship.user.name %></div>
     <% end %>
   </h2>
-</div> <!-- #tab3 -->
+</div> <!-- #tab-friends -->
+
 <script type="text/javascript">
     // Wait until the DOM has loaded before querying the document
     $(document).ready(function(){
