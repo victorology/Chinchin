@@ -406,6 +406,10 @@ div.user-photo-large img {
 
 div.user-index-info {
   float: left;
+  width: 50%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 div.user-index-basic-info {
@@ -602,4 +606,10 @@ div.mutual-friends img {
 .tabs a.active {
   background: rgb(238, 28, 88);
   color: rgb(255,255,255);
+}
+
+div.user-location {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
