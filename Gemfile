@@ -13,6 +13,7 @@ gem 'resque', "~> 1.22.0"
 gem 'thin'
 gem 'delayed_job_active_record'
 gem 'debugger'
+gem 'factory_girl_rails'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

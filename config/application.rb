@@ -68,5 +68,10 @@ module Chinchin2
     # Added for ActiveAdmin
     config.assets.initialize_on_precompile = false
     config.assets.precompile += %w( active_admin.css active_admin.js active_admin/print.css )
+
+    config.generators do |g|
+      g.test_framework  :rspec, :fixture => true
+      g.fixture_replacement :factory_girl, :dir=>"spec/factories"
+    end
   end
 end

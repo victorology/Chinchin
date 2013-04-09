@@ -129,6 +129,12 @@ class User < ActiveRecord::Base
     return results
   end
 
+  def pass_default_chinchin_filter(chinchin)
+    status = (not chinchin.gender.nil?) && chinchin.gender != self.gender
+    status = status && (chinchin.relationship_status != 'Married' and chinchin.relationship_status != 'Engaged')
+    return status
+  end
+
   def chinchin
     friendships = []
     self.friends_in_chinchin.each do |chinchin|
@@ -142,7 +148,7 @@ class User < ActiveRecord::Base
     chinchins = []
     friendships.each do |friendship|
       chinchin = friendship.chinchin
-      if chinchin.gender != self.gender
+      if pass_default_chinchin_filter(chinchin)
         chinchins.push(chinchin)
       end
 
