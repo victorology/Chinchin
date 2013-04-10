@@ -1,4 +1,14 @@
-<div class="container-10px-238">
+<div class="container-10px">
+
+<% if chinchins.nil? or chinchins.size == 0 %>
+
+<div class="empty-data">
+  <div class="empty-chinchins-icon"></div>
+  <h1>No Chinchins Yet :(</h1>
+  <p>It looks like none of your friends are on Chinchin yet. When a friend of yours signs up, we will let you know and you can start browsing Chinchins.</p>
+</div> <!-- .empty-data -->
+
+<% else %>
 
 <% chinchins.each do |friend| %>
   <a href="#">
@@ -41,11 +51,13 @@
   <div class="clear" />
 <% end %>
 
-</div> <!-- .container-10px-238 -->
+<% end %>
+
+</div> <!-- .container-10px -->
+
 <script type="text/javascript">
     $(document).ready(function(){
         var info_width = document.width - 120 - 30;
         $(".user-index-info").width(info_width+'px');
     });
 </script>
-

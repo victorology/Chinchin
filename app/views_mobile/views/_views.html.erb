@@ -1,4 +1,14 @@
-<div class="container-10px-238">
+<div class="container-10px">
+
+<% if views.nil? or views.size == 0 %>
+
+<div class="empty-data">
+  <div class="empty-views-icon"></div>
+  <h1>Hang In There!</h1>
+  <p>No one has viewed your profile yet. In the meantime, why don’t you browse the profiles of others.</p>
+</div> <!-- .empty-data -->
+
+<% else %>
 
 <% views.each do |view| %>
   <a href="#">
@@ -41,4 +51,6 @@
   <div class="clear" />
 <% end %>
 
-</div> <!-- .container-10px-238 -->
+<% end %>
+
+</div> <!-- .container-10px -->

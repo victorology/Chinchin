@@ -128,7 +128,7 @@ Demo app: Stonehenge
 */
 
 body {
-  background: rgb(255,255,255);
+  background: rgb(238,238,238);
   color: rgb(28,28,28);
   font-family: 'Helvetica Neue', 'Helvetica-Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;
   font-size: 80%;
@@ -168,7 +168,7 @@ nav {
 
 nav > a {
   background: rgb(28,28,28);
-  color: rgba(255, 255, 255, 0.8);
+  color: rgb(255, 255, 255);
   display: block;
   color: rgb(238,238,238);
   font-size: 2em;
@@ -330,7 +330,6 @@ header .liked span {
 }
 
 .stp-content {
-  background: rgb(238,238,238);
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -o-box-sizing: border-box;
@@ -346,12 +345,11 @@ header .liked span {
 
 .container-10px {
   padding: 10px 10px 0 10px;
+  height: 100%;
 }
 
-.container-10px-238 {
-  background: rgb(238,238,238);
+.container-10px-255 {
   padding: 10px 10px 0 10px;
-  height: 100%;
 }
 
 div.loader { height: 100px; line-height: 100px;text-align:center; }
@@ -612,4 +610,50 @@ div.user-location {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+/* Empty Data Set */
+
+div.empty-data {
+  text-align: center;
+}
+
+div.empty-data h1 {
+  color: rgb(48,48,48);
+}
+
+div.empty-chinchins-icon {
+  margin: 47px auto 37px auto;
+  width: 104px;
+  height: 70px;
+  position: relative;
+  background: url(icons/48-friends.svg);
+  background-size: 104px 70px;
+  -webkit-background-size: 104px 70px;
+  -moz-background-size: 104px 70px;
+  -o-background-size: 104px 70px;
+}
+
+div.empty-views-icon {
+  margin: 30px auto 20px auto;
+  width: 104px;
+  height: 104px;
+  position: relative;
+  background: url(icons/48-target.svg);
+  background-size: 104px 104px;
+  -webkit-background-size: 104px 104px;
+  -moz-background-size: 104px 104px;
+  -o-background-size: 104px 104px;
+}
+
+div.empty-likes-icon {
+  margin: 34px auto 24px auto;
+  width: 104px;
+  height: 96px;
+  position: relative;
+  background: url(icons/48-heart.svg);
+  background-size: 104px 96px;
+  -webkit-background-size: 104px 96px;
+  -moz-background-size: 104px 96px;
+  -o-background-size: 104px 96px;
 }

@@ -2,7 +2,6 @@ html,
 body {
   padding: 0;
   margin: 0;
-  background: rgb(235,235,235);
 }
 
 .sidetap {
@@ -23,7 +22,7 @@ body {
 }
 
 .stp-content {
-  background: white;
+  background: rgb(238,238,238);
   margin-left: 0;
   width: 100%;
   z-index: 10;
@@ -68,7 +67,7 @@ body {
 }
 
 .stp-content-panel {
-  background: white;
+  background: rgb(238,238,238);
 }
 
 .stp-content-panel.hidden {
