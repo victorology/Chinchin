@@ -199,7 +199,7 @@ class User < ActiveRecord::Base
     friends.each do |friend|
       c = Chinchin.find_by_uid(friend.raw_attributes['id'])
       if c.nil?
-        self.add_friend_to_chinchin(friend)
+        c = self.add_friend_to_chinchin(friend)
       end
 
       if Friendship.find_by_user_id_and_chinchin_id(self.id, c.id).nil?
