@@ -35,7 +35,7 @@
     <% if @photos %>
         <% @photos.each do |photo| %>
             <div class="user-profile-photo">
-              <%= image_tag photo.picture_url, :align => "absmiddle", :width => "120", :style => "min-width: 120px; min-height: 120px;" %>
+              <%= image_tag photo.picture_url %>
             </div> <!-- .user-profile-photo -->
         <% end %>
     <% end  %>
@@ -87,5 +87,9 @@
                 e.preventDefault();
             });
         });
+
+        var photo_size = (document.width - 8) / 3.0;
+        $('.user-profile-photo').width(photo_size+'px');
+        $('.user-profile-photo').height(photo_size+'px');
     });
 </script>
