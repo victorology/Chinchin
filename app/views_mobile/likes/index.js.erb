@@ -1,1 +1,1 @@
-$('#browse').find('.container').html("<%= j render(:partial => 'likes', :locals => {:likes => @likes}) %>");
+$('#browse').find('.container').html("<%= j render(:partial => 'chinchins/chinchins', :locals => {:chinchins => @likes.map { |like| like.chinchin }}) %>");

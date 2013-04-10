@@ -44,8 +44,8 @@
 
 <div id="tab-friends">
   <h2>
-    <% @chinchin.friendships.each do |friendship| %>
-      <div class="mutual-friends"><img src="<%= friendship.user.picture %>" /><%= friendship.user.name %></div>
+    <% @chinchin.mutual_friends(@user).each do |user| %>
+      <div class="mutual-friends"><img src="<%= user.picture %>" /><%= user.name %></div>
     <% end %>
   </h2>
 </div> <!-- #tab-friends -->

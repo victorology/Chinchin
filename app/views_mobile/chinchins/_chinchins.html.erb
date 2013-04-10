@@ -39,8 +39,8 @@
           </span>
           <div class="user-friend-count"></div>
           <span class="mutual-friend-count">
-            <%= friend.friendships.count %>
-            <% if friend.friendships.count == 1 %> mutual friend
+            <%= friend.mutual_friends(@user).count %>
+            <% if friend.mutual_friends(@user).count == 1 %> mutual friend
             <% else %> mutual friends
             <% end %>
           </span>
