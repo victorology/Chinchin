@@ -46,4 +46,28 @@ class StaticPagesController < ApplicationController
 
     render :text => "fetching..."
   end
+
+  def update_chinchin_photoscount
+    Chinchin.delay.update_photo_count
+
+    render :text => "update photo count..."
+  end
+
+  def update_chinchin_photos_where_no_photos
+    Chinchin.all.each do |chinchin|
+      if chinchin.photos.count == 0
+        chinchin.delay.fetch_profile_photos
+      end
+    end
+
+    render :text => "fetching..."
+  end
+
+  def stats
+    @total = Chinchin.all.count
+    @current = Chinchin.find(:all, :conditions => {:photo_count => nil}).count
+    @progressed_data = @total - @current
+    @progressed_time = Time.now - Delayed::Job.first.created_at
+    @progressed_ratio = ((@progressed_data / @total.to_f) * 100).round(2)
+  end
 end

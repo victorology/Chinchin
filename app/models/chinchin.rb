@@ -69,7 +69,8 @@ end
   end
 
   def fetch_profile_photos
-    self.photos.each do |photo|
+    photos = self.photos
+    photos.each do |photo|
       if ProfilePhoto.find_by_picture_url(photo.source).nil?
         pp = ProfilePhoto.new
         pp.picture_url = photo.source
@@ -80,9 +81,28 @@ end
         pp.save
       end
     end
+    if photos.nil?
+      photo_count = 0
+    else
+      photo_count = photos.size
+    end
+    self.photo_count = photo_count
+    self.save
   end
 
   def mutual_friends(current_user)
     @mutual_friends ||= self.users & current_user.friends_in_chinchin.map { |c| c.user }
+  end
+
+  def self.update_photo_count
+    Chinchin.all.each do |chinchin|
+      begin
+        photo_count = chinchin.photos.count
+      rescue
+        photo_count = 0
+      end
+      chinchin.photo_count = photo_count
+      chinchin.save!
+    end
   end
 end

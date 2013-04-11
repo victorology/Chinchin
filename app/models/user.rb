@@ -185,6 +185,7 @@ class User < ActiveRecord::Base
         :school => ra['school'],
         :locale => ra['locale']
     )
+    c.delay.fetch_profile_photos
     u = User.find_by_uid(c.uid)
     if not u.nil?
       c.user = u

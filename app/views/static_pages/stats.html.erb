@@ -1,0 +1,8 @@
+<div id="progress" style="width: 100%; background: black;">
+  <span id="progress-bar" style="width: <%= @progressed_ratio %>%; background: red;overflow: hidden;">
+    <%= @progressed_ratio  %>%
+  </span>
+</div>
+<div id="remain">
+  <%= (((@progressed_data / @progressed_time.to_f) * @current) / 60).round(2)  %> mins remains
+</div>
