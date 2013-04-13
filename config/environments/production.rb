@@ -70,4 +70,7 @@ Chinchin2::Application.configure do
 
   # Added for Amazon CloudFront
   config.action_controller.asset_host = "http://d3qg05jf7nda6s.cloudfront.net"
+
+  # Added when separating desktop and mobile stylesheets
+  config.assets.precompile += %w( application-desktop.css application-mobile.css )
 end
