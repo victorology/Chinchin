@@ -39,6 +39,12 @@ Chinchin2::Application.routes.draw do
   match 'fb4pp01', to: 'static_pages#fb4pp01'
   match 'stats', to: 'static_pages#stats'
 
+  # for testing
+
+  match 'test/browse', to: 'ab_test#browse'
+  match 'test/detail', to: 'ab_test#detail'
+  match 'test/likes', to: 'ab_test#likes'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
