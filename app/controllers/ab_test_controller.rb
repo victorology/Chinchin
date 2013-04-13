@@ -1,8 +1,4 @@
 class AbTestController < ApplicationController
-  USER, PASSWORD = 'chinchin', 'testchinchin!'
-
-  before_filter :authentication_check
-
   def browse
     @user = User.find(6)
 
@@ -33,13 +29,6 @@ class AbTestController < ApplicationController
     respond_to do | format |
       format.html
       format.js {render :layout => false}
-    end
-  end
-
-  private
-  def authentication_check
-    authenticate_or_request_with_http_basic do |user, password|
-      user == USER && password == PASSWORD
     end
   end
 end
