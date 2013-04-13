@@ -1,12 +1,10 @@
 class AbTestController < ApplicationController
   def browse
     @user = User.find(6)
+    @chinchins = @user.chinchin
 
     prepare_for_mobile
-    respond_to do | format |
-      format.js
-      format.html
-    end
+    render :nothing => true
   end
 
   def detail
