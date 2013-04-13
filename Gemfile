@@ -14,6 +14,7 @@ gem 'thin'
 gem 'delayed_job_active_record'
 gem 'debugger'
 gem 'factory_girl_rails'
+gem 'asset_sync' # Added for Heroku and S3 assets
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
