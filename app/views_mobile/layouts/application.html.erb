@@ -3,6 +3,7 @@
 <head>
   <title><%= full_title(yield(:title)) %></title>
 
+  <%= stylesheet_link_tag    "application-mobile", :media => "all" %>
   <%= csrf_meta_tags %>
   <%= render 'layouts/shim' %>
   <meta property="og:description" name="description" content="Chinchin aims to transform the most important industry in the world... introducing men and women so the human race continues to dominate the face of the earth for years to come.">
@@ -16,9 +17,6 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-
-  <%= stylesheet_link_tag "sidetap" %>
-  <%= stylesheet_link_tag "mobile" %>
 
   <!-- start Mixpanel -->
   <script type="text/javascript">(function(e,b){if(!b.__SV){var a,f,i,g;window.mixpanel=b;a=e.createElement("script");a.type="text/javascript";a.async=!0;a.src=("https:"===e.location.protocol?"https:":"http:")+'//cdn.mxpnl.com/libs/mixpanel-2.2.min.js';f=e.getElementsByTagName("script")[0];f.parentNode.insertBefore(a,f);b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==
@@ -41,8 +39,8 @@ mixpanel.init("53ba1bb796ef510bf1c77ccb3facd3c4");</script>
     })();
 
     // Added to track client side errors in GA
-    window.onerror = function(message, file, line) { 
-       var sFormattedMessage = '[' + file + ' (' + line + ')] ' + message; 
+    window.onerror = function(message, file, line) {
+       var sFormattedMessage = '[' + file + ' (' + line + ')] ' + message;
        _gaq.push(['_trackEvent', 'Exceptions', 'Application', sFormattedMessage, null, true]);
     }
 

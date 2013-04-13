@@ -1,0 +1,471 @@
+@import "bootstrap";
+
+/* mixins, variables, etc. */
+
+$ChinchinRed: #D81848;
+
+$grayDark: #181818;
+$grayMid: #484848;
+$grayLight: #888;
+$grayUltraLight: #ddd;
+
+$marginLarge: 30px;
+$marginMid: 20px;
+$marginSmall: 10px;
+$marginTiny: 5px;
+
+@mixin main-model {
+  margin: 0 0 $marginMid 0;
+
+  padding-top: 56.25%; /* 540px/960px = 0.5625 */
+  background: image-url('main-model-gr.jpg');
+  background-size: cover;
+  -moz-background-size: cover; /* Firefox 3.6 */
+  background-position: center; /* Internet Explorer 7/8 */
+}
+
+@mixin main-container {
+  margin: -56.25% 0 0 61.77%;
+  width: 38.23%;
+  height: 100%;
+  position: absolute;
+  bottom: 0;
+  p {
+    line-height: 1.5;
+    color: $white;
+  }
+  h2 {
+    color: $white;
+    letter-spacing: 0;
+  }
+}
+
+@mixin divider-thin {
+  height: 1px;
+  background-color: $grayUltraLight;
+  width: 100%;
+  clear: both;
+}
+
+@mixin box-sizing {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+// Smartphones 479px and below
+@media (max-width: 479px) {
+
+  .container-fluid {
+    max-width: 439px;
+  }
+
+  #logo {
+    font-size: 5em;
+  }
+
+  #navigation {
+    display: none;
+  }
+
+  figure.main-model {
+    @include main-model;
+  }
+
+  h2 {
+    font-size: 1.4em;
+  }
+
+  #main-container {
+    float: left;
+    margin: $marginSmall 0;
+    p {
+      font-size: 1.2em;
+    }
+    h2 {
+      font-size: 1.6em;
+    }
+  }
+
+  .user-index-box {
+    width: 100%;
+  }
+
+  .user-index-info {
+    width: 130px;
+    p {
+      font-size: 1em;
+    }
+  }
+
+  footer {
+    .box {
+      width: 100%;
+    }
+  }
+
+}
+
+// Smartphones 480px and above
+@media (min-width: 480px) and (max-width: 767px) {
+
+  .container-fluid {
+    max-width: 727px;
+  }
+
+  #logo {
+    font-size: 5em;
+  }
+
+  #navigation {
+    display: none;
+  }
+
+  figure.main-model {
+    @include main-model;
+  }
+
+  h2 {
+    font-size: 1.6em;
+  }
+
+  #main-container {
+    float: left;
+    margin: $marginSmall 0;
+    p {
+      font-size: 1.2em;
+    }
+  }
+
+  #main-content {
+    float: left;
+    margin: 0;
+    position: relative;
+    clear: both;
+  }
+
+  .user-index-box {
+    width: 100%;
+  }
+
+  .user-index-info {
+    width: 310px;
+    p {
+      font-size: 1em;
+    }
+  }
+
+  footer {
+    .box {
+      width: 50%;
+    }
+  }
+
+}
+
+// iPad portrait and mid-sized screens
+@media (min-width: 768px) and (max-width: 999px) {
+
+  .container-fluid {
+    max-width: 959px;
+  }
+
+  #logo {
+    font-size: 7em;
+  }
+
+  #navigation {
+    float: right;
+    margin-top: 6em;
+  }
+
+  #navigation ul li {
+    float: left;
+    margin-left: $marginMid;
+    list-style: none;
+  }
+
+  #navigation ul li a {
+    font-size: 1.1em;
+    color: $grayDark;
+  }
+
+  figure.main-model {
+    @include main-model;
+    position: relative;
+  }
+
+  #main-container {
+    @include main-container;
+    h2 {
+      font-size: 1.6em;
+    }
+  }
+
+  #main-content {
+    padding: 8%;
+  }
+
+  #main-content-btn {
+    float: left;
+    width: 100%;
+  }
+
+  .user-index-box {
+    width: 50%;
+  }
+
+  .user-index-info {
+    width: 234px;
+  }
+
+  footer {
+    .box {
+      width: 50%;
+    }
+  }
+
+}
+
+// Large screens
+@media (min-width: 1000px) {
+
+  .container-fluid {
+    max-width: 960px;
+  }
+
+  #logo {
+    font-size: 8em;
+  }
+
+  #navigation {
+    float: right;
+    margin-top: 7em;
+  }
+
+  #navigation ul li {
+    float: left;
+    margin-left: $marginMid;
+    list-style: none;
+  }
+
+  #navigation ul li a {
+    font-size: 1.3em;
+    color: $grayDark;
+  }
+
+  figure.main-model {
+    @include main-model;
+    position: relative;
+  }
+
+  #main-container {
+    @include main-container;
+  }
+
+  #main-content {
+    padding: 8%;
+  }
+
+  #main-content-btn {
+    float: left;
+    width: 100%;
+  }
+
+  .user-index-box {
+    width: 33.33%;
+  }
+
+  .user-index-info {
+    width: 170px;
+  }
+
+  footer {
+    .box {
+      width: 25%;
+    }
+  }
+
+}
+
+/* universal */
+
+html {
+  overflow-y: scroll;
+}
+
+body {
+  color: $grayMid;
+}
+
+section {
+  overflow: auto;
+}
+
+textarea {
+  resize: vertical;
+}
+
+a {
+  color: $ChinchinRed;
+}
+
+a:hover {
+  color: $grayDark;
+}
+
+.container-fluid {
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+#divider-header {
+  height: 18px;
+  width: 100%;
+  background-color: $grayDark;
+}
+
+.divider-thick {
+  height: 8px;
+  background-color: $grayDark;
+  margin-bottom: $marginMid;
+  width: 100%;
+  clear: both;
+}
+
+.divider-thin {
+  margin-bottom: $marginMid;
+  @include divider-thin;
+}
+
+.divider-thin-XL {
+  margin-bottom: $marginLarge;
+  @include divider-thin;
+}
+
+/* typography */
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.3;
+}
+
+h1 {
+  font-size: 2.8em;
+  letter-spacing: -4px;
+}
+
+h2 {
+  letter-spacing: -1px;
+  margin-bottom: $marginMid;
+  font-weight: normal;
+}
+
+p {
+  font-size: 1.1em;
+  line-height: 1.5;
+}
+
+/* header */
+
+#logo {
+  color: $grayDark;
+  letter-spacing: -4px;
+  font-weight: bold;
+  line-height: 1.3;
+  clear: both;
+  &:hover {
+    color: $grayMid;
+    text-decoration: none;
+  }
+}
+
+/* home */
+
+a.btn-cta {
+  float: left;
+  margin: $marginSmall 0;
+  width: 180px;
+  height: 68px;
+  background-color: $ChinchinRed;
+  display: block;
+  color: $white;
+  font-size: 1.8em;
+  font-weight: bold;
+  text-align: center;
+  line-height: 68px;
+  &:hover {
+    background-color: #B9113B;
+    text-decoration: none;
+  }
+  &:active {
+    background-color: #FF1751;
+  }
+}
+
+.social-share {
+  float: left;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  clear: both;
+  li {
+    float: left;
+    margin: $marginSmall $marginSmall 0 0;
+  }
+}
+
+/* user index + user page */
+
+.user-index-box {
+  float: left;
+  margin-bottom: $marginLarge;
+}
+
+.user-photo {
+  float: left;
+  width: 120px;
+  height: 120px;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.user-index-info {
+  float: left;
+  margin-left: $marginSmall;
+  height: 120px;
+}
+
+/* footer */
+
+footer {
+  clear: both;
+  h3 {
+    margin-bottom: $marginMid;
+    font-size: 1.3em;
+    font-weight: normal;
+  }
+  a {
+    color: $grayLight;
+    &:hover {
+      color: $grayDark;
+    }
+  }
+  small {
+    float: left;
+    margin-bottom: $marginLarge;
+  }
+  .box {
+    float: left;
+    margin-bottom: $marginSmall;
+  }
+}
+
+/* miscellaneous */
+
+.debug_dump {
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
+  @include box-sizing;
+}
