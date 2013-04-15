@@ -1,31 +1,29 @@
-<figure class="main-model">
+<div class="container-10px">
+	<div id="register">
 
-<div id="main-container">
-	<div id="main-content">
+		<h1>Chinchin</h1>
 
-	  	<h2>Wasabi!</h2>
-			<p><%= t '.call_to_action' %></p>
-			<div id="main-content-btn">
-				<%= link_to t('.log_in_message'), "/auth/facebook", class: "btn-cta" %>
-			</div> <!-- #main-content-btn -->
-			<!-- start Mixpanel CTA Click -->
-			<script type="text/javascript">
-				mixpanel.track_links('a.btn-cta', 'CTA Click');
-			</script>
-			<!-- end Mixpanel CTA Click -->
-			<!-- start Mixpanel Home Page Guest -->
-			<script type="text/javascript">
-			  mixpanel.track("Home Page");
-			</script>
-			<!-- end Mixpanel Home Page Guest -->
+		<div id="register-info">
+			<div class="register-description">
+				<div id="register-browse-icon"></div>
+				<h2>Browse</h2>
+				<p>Check out the profiles of your Chinchins (friends of your friends).</p>
+			</div> <!-- .register-description -->
+			<div class="register-description">
+			<div id="register-like-icon"></div>
+				<h2>Like</h2>
+				<p>If you see someone you Like, press the Like button.</p>
+			</div> <!-- .register-like-icon -->
+			<div class="register-description">
+			<div id="register-chat-icon"></div>
+				<h2>Chat</h2>
+				<p>You can start chatting if you mutually Like each other.</p>
+			</div> <!-- .register-chat-icon -->
+		</div> <!-- #register-info -->
 
-		<ul class="social-share">
-			<li><div class="fb-like" data-href="http://facebook.com/chinchinapp" data-send="false" data-layout="button_count" data-width="90" data-show-faces="true" data-font="lucida grande" data-colorscheme="dark"></div></li>
-			<li><a href="https://twitter.com/share" class="twitter-share-button" data-url="http://chinchinapp.com" data-text="Chinchin is an online dating service which introduces people to friends of friends. :D http://chinchinapp.com" data-via="Chinchinapp">Tweet</a>
-		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></li>
-		</ul>
+		<div id="cta-get-started">
+			<%= link_to t('.log_in_message'), "/auth/facebook", class: "cta-btn" %>
+		</div> <!-- #cta-get-started -->
 
-	</div> <!-- #main-content -->
-</div> <!-- #main-container -->
-
-</figure>
+	</div> <!-- #register -->
+</div> <!-- .container-10px -->
