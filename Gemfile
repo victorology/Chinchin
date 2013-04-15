@@ -13,8 +13,10 @@ gem 'resque', "~> 1.22.0"
 gem 'thin'
 gem 'delayed_job_active_record'
 gem 'debugger'
-gem 'factory_girl_rails'
+gem 'factory_girl_rails' # Added for rspec test for models
 gem 'asset_sync' # Added for Heroku and Amazon S3 assets
+gem 'memcachier' # Added for Caching
+gem 'dalli' # Added for Caching
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

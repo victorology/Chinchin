@@ -2,4 +2,8 @@ mixpanel.track("View");
 <% if @user.liked(@chinchin) %>
     $('#chinchin a.like').addClass('liked');
 <% end %>
-$('#chinchin').find('.container').html("<%= j render(:partial => 'chinchin', :locals => {:chinchin => @chinchin}) %>");
+var html =
+<% cache ["show", @chinchin] do %>
+    "<%= j render(:partial => 'chinchin', :locals => {:chinchin => @chinchin}) %>"
+<% end %>
+$('#chinchin').find('.container').html(html);

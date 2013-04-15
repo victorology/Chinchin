@@ -1,1 +1,5 @@
-$('#browse').find('.container').html("<%= j render(:partial => 'chinchins/chinchins', :locals => {:chinchins => @likes.map { |like| like.chinchin }}) %>");
+var html =
+<% cache ["like", @user] do %>
+    "<%= j render(:partial => 'chinchins/chinchins', :locals => {:chinchins => @likes.map { |like| like.chinchin }}) %>";
+<% end %>
+$('#browse').find('.container').html(html);
