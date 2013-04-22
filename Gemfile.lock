@@ -283,6 +283,8 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
+    urbanairship (2.3.1)
+      json
     vegas (0.1.11)
       rack (>= 1.0.0)
     warden (1.1.1)
@@ -323,3 +325,4 @@ DEPENDENCIES
   thin
   uglifier (>= 1.2.3)
   unicorn
+  urbanairship

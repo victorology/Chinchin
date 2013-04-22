@@ -23,6 +23,7 @@ Chinchin2::Application.routes.draw do
   resources :leaderboards, :only => [:index]
 
   match 'chinchins/:id/profile_photos', to: 'chinchins#profile_photos'
+  match 'register_device_token', to: 'users#register_device_token'
 
   #match 'users', to: 'users#users'
   #match 'user/:id/chinchin', to: 'users#chinchin'

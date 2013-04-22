@@ -12,4 +12,14 @@ class UsersController < ApplicationController
     end
     @user = User.find(params[:id])
   end
+
+  def register_device_token
+    device_token = params[:device_token]
+    user = current_user
+    user.device_token = device_token
+    if user.save
+      Urbanairship.register_device(device_token)
+    end
+    render :nothing => true
+  end
 end

@@ -59,5 +59,8 @@
     $(document).ready(function(){
         var info_width = document.width - 120 - 30;
         $(".user-index-info").width(info_width+'px');
+        <% if @user.device_token.nil? %>
+        document.location = "chinchinapp://local/send_device_token/";
+        <% end %>
     });
 </script>

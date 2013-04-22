@@ -77,3 +77,7 @@ st.stp_nav.find('nav a').click(function() {
     }
     show_chinchins(browse, title, url);
 });
+
+register_device_token = function(device_token) {
+    $.post('/register_device_token', {device_token:device_token})
+}

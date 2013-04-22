@@ -18,6 +18,7 @@ gem 'asset_sync' # Added for Heroku and Amazon S3 assets
 gem 'memcachier' # Added for Caching
 gem 'dalli' # Added for Caching
 gem 'unicorn' # new web server
+gem 'urbanairship' # Added for push notification
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
