@@ -56,11 +56,25 @@
 </div> <!-- .container-10px -->
 
 <script type="text/javascript">
-    $(document).ready(function(){
-        var info_width = document.width - 120 - 30;
-        $(".user-index-info").width(info_width+'px');
-        <% if @user.device_token.nil? %>
-        document.location = "chinchinapp://local/send_device_token/";
-        <% end %>
-    });
+  $(document).ready(function(){
+    var info_width = document.width - 120 - 30;
+    $(".user-index-info").width(info_width+'px');
+    <% if @user.device_token.nil? %>
+    document.location = "chinchinapp://local/send_device_token/";
+    <% end %>
+  });
 </script>
+
+<!-- start Mixpanel Chinchin List -->
+<script type="text/javascript">
+  mixpanel.track("Chinchin List");
+  mixpanel.identify(<%= current_user.id %>);
+  mixpanel.people.set({
+    "$name": "<%= current_user.name %>",
+    "$email": "<%= current_user.email %>",
+    "$last_login": new Date(),
+    "referrer": document.referrer
+  });
+  mixpanel.people.increment("visits");
+</script>
+<!-- end Mixpanel Chinchin List -->
