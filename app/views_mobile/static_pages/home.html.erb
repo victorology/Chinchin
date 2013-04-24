@@ -25,5 +25,17 @@
 			<%= link_to t('.log_in_message'), "/auth/facebook", class: "cta-btn" %>
 		</div> <!-- #cta-get-started -->
 
+		<!-- start Mixpanel Log In/Register Click -->
+		<script type="text/javascript">
+			mixpanel.track_links('a.cta-btn', 'Log In/Register Click');
+		</script>
+		<!-- end Mixpanel Log In/Register Click -->
+
+		<!-- start Mixpanel Log In/Register -->
+		<script type="text/javascript">
+		  mixpanel.track("Log In/Register");
+		</script>
+		<!-- end Mixpanel Log In/Register -->
+
 	</div> <!-- #register -->
 </div> <!-- .container-10px -->
