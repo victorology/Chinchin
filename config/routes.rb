@@ -39,6 +39,7 @@ Chinchin2::Application.routes.draw do
   match 'update_chinchin_photos_where_no_photos', to: 'static_pages#update_chinchin_photos_where_no_photos'
   match 'fb4pp01', to: 'static_pages#fb4pp01'
   match 'stats', to: 'static_pages#stats'
+  match 'apns_test/:userId/:message', to: 'static_pages#apns_test'
 
   # for testing
 

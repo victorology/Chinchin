@@ -19,15 +19,15 @@ var browse, chinchin, show_contents;
 browse = $('#browse');
 chinchin = $('#chinchin');
 
-$("header .menu").on("click",st.toggle_nav);
-$('#chinchin a.back').click(function() {
+$("header .menu").on("vclick",st.toggle_nav);
+$('#chinchin a.back').on("vclick", function() {
     $('#chinchin a.like').removeClass('liked');
     return st.show_section(browse, {
         animation: 'infromleft'
     });
 });
 
-$('#chinchin a.like').click(function() {
+$('#chinchin a.like').on("vclick", function() {
     var chinchin_id = $('#chinchin').find('.dummy').attr('id')
 
     if ($('#chinchin a.like').hasClass('liked')) {
@@ -52,7 +52,7 @@ show_chinchins = function(section, title, url) {
     section.find('h1').text(title);
     section.find('.container').html('<div class="loader"><img src="/assets/ajax-loader.gif" /></div>');
     $.get(url, function() {
-        section.find('.container').find('a').click(function() {
+        section.find('.container').find('a').on("vclick", function() {
             show_chinchin($(this).find('.user-index-box').attr('id'), $(this).find('h3').text());
         });
     });
@@ -60,7 +60,7 @@ show_chinchins = function(section, title, url) {
 
 show_chinchins(browse, "Chinchin", "/chinchins.js");
 
-st.stp_nav.find('nav a').click(function() {
+st.stp_nav.find('nav a').on("vclick", function() {
     $(this).addClass('selected').siblings().removeClass('selected');
     st.toggle_nav();
     var link_text = $(this).text();

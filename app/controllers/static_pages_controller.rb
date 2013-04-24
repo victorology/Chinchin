@@ -73,4 +73,16 @@ class StaticPagesController < ApplicationController
     @progressed_time = Time.now - Delayed::Job.first.created_at
     @progressed_ratio = ((@progressed_data / @total.to_f) * 100).round(2)
   end
+
+  def apns_test
+    user = User.find(45)
+    message = "test!!!"
+    notification = {
+      :device_tokens => [user.device_token],
+      :aps => {:alert => message, :badge => 1}
+    }
+
+    Urbanairship.push(notification)
+    render :nothing => true
+  end
 end
