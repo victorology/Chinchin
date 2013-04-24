@@ -33,6 +33,16 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_user
 
+  def logged_in?
+    current_user
+  end
+
+  def login_required
+    unless logged_in?
+      redirect_to root_url
+    end
+  end
+
   # Added for i18n
   def set_locale
     I18n.locale = params[:locale] if params[:locale].present?
