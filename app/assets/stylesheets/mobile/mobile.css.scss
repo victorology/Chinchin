@@ -122,8 +122,6 @@ table {
   border-spacing: 0;
 }
 
-* { -webkit-tap-highlight-color: rgba(255,255,255,0); }
-
 *:not(input):not(textarea) {
   -webkit-touch-callout: none;
   -webkit-user-select: none; /* Disable selection/Copy of UIWebView */
