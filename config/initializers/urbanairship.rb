@@ -1,5 +1,5 @@
-Urbanairship.application_key = 'Q-6PYA_PQ1G1eSGlkjYzkQ'
-Urbanairship.application_secret = 'h3txB32cROaomvHLVhSiBw'
-Urbanairship.master_secret = '9rq_P7CMQ1y5ir_u4hcO9w'
+Urbanairship.application_key = '_HE9tRRfRyi3nS5f8EHkzQ'
+Urbanairship.application_secret = 'ZIdKDGqKQx-CnntJMyf-Vw'
+Urbanairship.master_secret = 's5JmgmfjRwq-ULOKj9yHjQ'
 Urbanairship.logger = Rails.logger
 Urbanairship.request_timeout = 5 # default
