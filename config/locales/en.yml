@@ -39,6 +39,9 @@ en:
     chinchins:
       age: "%{age} years old"
       location: "%{location}"
+    chinchin_rows:
+      age: "%{age} years old"
+      location: "%{location}"
     show:
       age: "%{age} years old"
       location: "%{location}"

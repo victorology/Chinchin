@@ -3,7 +3,9 @@ class ViewsController < ApplicationController
   before_filter :check_for_mobile, :only => [:index]
 
   def index
-    @views = current_user.viewers
+    @user = current_user
+    avatar = Chinchin.find_by_uid(current_user.uid)
+    @chinchins = avatar.viewers.map { |view| Chinchin.find_by_uid(view.viewer.uid) }
 
     respond_to do | format |
       format.html
@@ -12,9 +14,8 @@ class ViewsController < ApplicationController
   end
 
   def create
-    chinchin = Chinchin.find(params[:viewee_id].to_i)
+    viewee = Chinchin.find(params[:viewee_id].to_i)
     viewer = current_user
-    viewee = User.find_by_uid(chinchin.uid)
     if not viewer.nil? and not viewee.nil?
       v = View.new
       v.viewer = viewer

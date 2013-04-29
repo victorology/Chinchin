@@ -29,7 +29,6 @@ class User < ActiveRecord::Base
   has_many :friendships
   has_many :chinchins, :through => :friendships
   has_many :likes
-  has_many :viewers, :class_name => 'View', :foreign_key => 'viewee_id'
   has_many :viewees, :class_name => 'View', :foreign_key => 'viewer_id'
 
   def self.from_omniauth(auth)

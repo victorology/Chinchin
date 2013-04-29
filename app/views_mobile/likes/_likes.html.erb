@@ -1,6 +1,6 @@
 <div class="container-10px">
 
-<% if likes.nil? or likes.size == 0 %>
+<% if @likes.nil? or @likes.size == 0 %>
 
 <div class="empty-data">
   <div class="empty-likes-icon"></div>
@@ -10,47 +10,7 @@
 
 <% else %>
 
-<% likes.each do |like| %>
-    <a href="#">
-      <div class="user-index-box" id="<%=like.chinchin.id%>">
-        <div class="user-photo">
-          <%= image_tag ( like.chinchin.picture('large') ), :align => "absmiddle", :width => "120", :style => "min-width: 120px; min-height: 120px;" %>
-        </div> <!-- .user-photo -->
-        <div class="user-index-info">
-          <div class="user-index-basic-info">
-            <h3><%= like.chinchin.first_name %></h3>
-            <% if age(like.chinchin.birthday) %>
-                <div class="user-age"><%= t '.age', :age => age(like.chinchin.birthday) %></div>
-            <% end %>
-            <% if like.chinchin.location %>
-                <div class="user-location"><%= t '.location', :location => like.chinchin.location %></div>
-            <% end %>
-            <% if like.chinchin.employer %>
-                <div class="user-employer"><%= t '.employer', :employer => like.chinchin.employer %></div>
-            <% end %>
-            <% if like.chinchin.school %>
-                <div class="user-school"><%= t '.school', :school => like.chinchin.school %></div>
-            <% end %>
-
-          </div> <!-- .user-index-basic-info -->
-          <div class="user-index-additional-info">
-            <div class="user-photo-count"></div>
-            <span class="picture-count">
-              <%= (like.chinchin.profile_photos || []).size %>
-            </span>
-            <div class="user-friend-count"></div>
-            <span class="mutual-friend-count">
-              <%= like.chinchin.friendships.count %>
-              <% if like.chinchin.friendships.count == 1 %> mutual friend
-              <% else %> mutual friends
-              <% end %>
-            </span>
-          </div>
-        </div> <!-- .user-index-info -->
-      </div> <!-- .user-index-box -->
-    </a>
-    <div class="clear" />
-<% end %>
+  <%= render :partial => "chinchins/chinchin_rows", :locals => {:chinchins => chinchins} %>
 
 <% end %>
 

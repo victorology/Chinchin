@@ -29,6 +29,7 @@ class Chinchin < ActiveRecord::Base
   has_many :users, :through => :friendships
   has_many :likes
   has_many :profile_photos
+  has_many :viewers, :class_name => 'View', :foreign_key => 'viewee_id'
   attr_accessible :birthday, :email, :employer, :first_name, :gender, :hometown, :last_name, :locale, :location, :name, :oauth_expires_at, :oauth_token, :position, :provider, :relationship_status, :school, :uid
   # attr_accessible :title, :body
 
