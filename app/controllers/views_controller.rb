@@ -16,7 +16,7 @@ class ViewsController < ApplicationController
   def create
     viewee = Chinchin.find(params[:viewee_id].to_i)
     viewer = current_user
-    if not viewer.nil? and not viewee.nil?
+    if not viewee.nil? and not View.find_by_viewer_id_and_viewee_id(viewer.id, viewee.id)
       v = View.new
       v.viewer = viewer
       v.viewee = viewee

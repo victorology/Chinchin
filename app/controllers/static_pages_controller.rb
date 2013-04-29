@@ -75,8 +75,8 @@ class StaticPagesController < ApplicationController
   end
 
   def apns_test
-    user = User.find(45)
-    message = "test!!!"
+    user = User.find(params[:userId])
+    message = params[:message]
     notification = {
       :device_tokens => [user.device_token],
       :aps => {:alert => message, :badge => 1}
