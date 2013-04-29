@@ -215,6 +215,8 @@ class User < ActiveRecord::Base
     like.user = self
     like.chinchin = chinchin
     like.save!
+    UrbanairshipWrapper.send([chinchin.user], "Someone likes you!")
+    UrbanairshipWrapper.send(chinchin.users, "Someone likes #{chinchin.first_name}!")
   end
 
   def liked(chinchin)

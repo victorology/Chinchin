@@ -20,7 +20,9 @@ class ViewsController < ApplicationController
       v = View.new
       v.viewer = viewer
       v.viewee = viewee
-      v.save
+      if v.save and not viewee.user.nil?
+        UrbanairshipWrapper.send(viewee.user, "Someone viewed your profile!")
+      end
     end
 
     render :nothing => true
