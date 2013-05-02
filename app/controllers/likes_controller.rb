@@ -1,6 +1,7 @@
 class LikesController < ApplicationController
   # Render mobile or desktop depending on User-Agent for these actions.
   before_filter :check_for_mobile, :only => [:index, :create, :destroy]
+  before_filter :login_required
 
   def index
     @user = current_user # Added by Victor don't know if this is right

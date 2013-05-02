@@ -71,9 +71,15 @@ st.stp_nav.find('nav a').on("click", function() {
     } else if (link_text == 'Browse') {
         title = "Chinchin";
         url = "/chinchins.js";
-    }  else if (link_text == 'Viewed You') {
+    } else if (link_text == 'Viewed You') {
         title = "Viewed You";
         url = "/views.js";
+    } else if (link_text == 'Hot Friends') {
+        title = "Hot Friends";
+        url = "/leaderboards.js";
+    } else if (link_text == 'Messages') {
+        title = "Messages";
+        url = "/messages.js";
     }
     show_chinchins(browse, title, url);
 });

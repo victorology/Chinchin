@@ -1,0 +1,24 @@
+<% leaders.each do |leader| %>
+    <a href="#">
+      <div class="user-index-box" id="<%=leader[:chinchin].id%>">
+        <div class="user-photo">
+          <%= image_tag ( leader[:chinchin].picture('large') ), :align => "absmiddle", :width => "120", :style => "min-width: 120px; min-height: 120px;" %>
+        </div> <!-- .user-photo -->
+        <div class="user-index-info">
+          <div class="user-index-basic-info">
+            <h3><%= leader[:chinchin].first_name %></h3>
+            <div class="total-score">Total Score : <%= leader[:total_score] %></div>
+          </div> <!-- .user-index-basic-info -->
+          <div class="user-index-additional-info">
+          <span class="likes-count">
+            Likes : <%= leader[:likes] %>
+          </span>
+          <span class="viewed-count">
+            Viewed : <%= leader[:viewed] %>
+          </span>
+          </div>
+        </div> <!-- .user-index-info -->
+      </div> <!-- .user-index-box -->
+    </a>
+    <div class="clear" />
+<% end %>

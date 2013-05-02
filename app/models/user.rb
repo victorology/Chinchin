@@ -112,20 +112,24 @@ class User < ActiveRecord::Base
   end
 
   def people_in_leaderboard
-    likes = Like.all
-    leaders = Hash.new(0)
+    chinchins = self.chinchins
+    leaders = []
 
-    likes.each do |like|
-      c = like.chinchin
-      leaders[c.uid] = leaders[c.uid] + 10
+    chinchins.each do |chinchin|
+      leader = Hash.new(0)
+      leader[:chinchin] = chinchin
+      leader[:likes] = chinchin.likes.count #Like.where("likes.chinchin_id == ", chinchin.id).count
+      leader[:viewed] = chinchin.viewers.count
+      leader[:total_score] = leader[:likes] * 10 + leader[:viewed]
+
+      if leader[:total_score] > 0
+        leaders.push(leader)
+      end
     end
 
-    results = []
-    leaders.keys.each do |uid|
-      results.push({:chinchin => Chinchin.find_by_uid(uid), :score => leaders[uid]})
-    end
+    leaders.sort_by { |leader| leader[:total_score] }
 
-    return results
+    return leaders
   end
 
   def pass_default_chinchin_filter(chinchin)
