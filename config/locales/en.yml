@@ -11,6 +11,12 @@ en:
       copyright: "Chinchin. All rights reserved."
   static_pages:
     home:
+      browse: "Browse"
+      browse_long: "Check out the profiles of your Chinchins (friends of your friends)."
+      like: "Like"
+      like_long: "If you see someone you Like, press the Like button."
+      chat: "Chat"
+      chat_long: "You can start chatting if you mutually Like each other."
       headline_html: "<strong>Chinchin</strong> is a social club where you can meet new people through your mutual friends."
       call_to_action: "We are currently accepting signups for a private preview of our service. If you would like to be one of the first to be invited, click 'Get Started!'"
       log_in_message: "Get Started!"
@@ -37,6 +43,8 @@ en:
       employer: "%{employer}"
       school: "%{school}"
     chinchins:
+      no_chinchins: "No Chinchins Yet :("
+      no_chinchins_long: "It looks like none of your friends are on Chinchin yet. When a friend of yours signs up, we will let you know and you can start browsing Chinchins."
       age: "%{age} years old"
       location: "%{location}"
     chinchin_rows:
@@ -48,6 +56,9 @@ en:
       employer: "%{employer}"
       school: "%{school}"
     chinchin:
+      profile: "Profile"
+      photos: "Photos"
+      friends: "Mutual Friends"
       age: "%{age} years old"
       location: "%{location}"
       employer: "%{employer}"
@@ -60,8 +71,13 @@ en:
       employer: "%{employer}"
       school: "%{school}"
     likes:
+      see_anyone: "See Anyone You Like?"
+      see_anyone_long: "If you see someone you would like to meet, press the Like button on their profile. If they Like you back, you will be connected to each other."
       headline_html: "Hi <strong>%{name}</strong>! These are Chinchins you Like."
       age: "%{age} years old"
       location: "%{location}"
       employer: "%{employer}"
       school: "%{school}"
+    views:
+      hang_in: "Hang In There!"
+      hang_in_long: "No one has viewed your profile yet. In the meantime, why don't you browse the profile of others."
