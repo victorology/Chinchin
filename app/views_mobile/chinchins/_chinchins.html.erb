@@ -28,7 +28,6 @@
 
 <!-- start Mixpanel Chinchin List -->
 <script type="text/javascript">
-  mixpanel.track("Chinchin List");
   mixpanel.identify(<%= current_user.id %>);
   mixpanel.people.set({
     "$name": "<%= current_user.name %>",
