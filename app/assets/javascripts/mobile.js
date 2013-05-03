@@ -84,6 +84,10 @@ st.stp_nav.find('nav a').on("click", function() {
     show_chinchins(browse, title, url);
 });
 
+$('#cta-get-started').find('a').on('click', function() {
+    $('#cta-get-started').html('<div class="loader"><img src="/assets/ajax-loader.gif" /></div>');
+});
+
 register_device_token = function(device_token) {
     $.post('/register_device_token', {device_token:device_token})
 }
