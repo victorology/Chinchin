@@ -37,6 +37,10 @@ $('#chinchin a.like').on("click", function() {
     }
 });
 
+$('#browse a.refresh').on("click", function() {
+    show_chinchins(browse, "Chinchin", "/chinchins.js");
+});
+
 show_chinchin = function(chinchin_id, chinchin_name) {
     chinchin.find('h1').text(chinchin_name);
     st.show_section(chinchin, {
@@ -65,10 +69,12 @@ st.stp_nav.find('nav a').on("click", function() {
     st.toggle_nav();
     var link_text = $(this).text();
     var title, url;
+    $('#browse').find('.refresh').hide();
     if (link_text == 'Your Likes') {
         title = "Your Likes";
         url = "/likes.js";
     } else if (link_text == 'Browse') {
+        $('#browse').find('.refresh').show();
         title = "Chinchin";
         url = "/chinchins.js";
     } else if (link_text == 'Viewed You') {
