@@ -206,11 +206,6 @@ $marginTiny: 5px;
     padding: 8%;
   }
 
-  #main-content-btn {
-    float: left;
-    width: 100%;
-  }
-
   .user-index-box {
     width: 50%;
   }
@@ -265,11 +260,6 @@ $marginTiny: 5px;
 
   #main-content {
     padding: 8%;
-  }
-
-  #main-content-btn {
-    float: left;
-    width: 100%;
   }
 
   .user-index-box {
@@ -381,25 +371,23 @@ p {
 
 /* home */
 
-a.btn-cta {
+#main-content-btn {
+  float: left;
+  margin-left: -18px;
+  width: 100%;
+}
+
+a.app-store {
+  background: image-url('appstore.svg');
   float: left;
   margin: $marginSmall 0;
-  width: 180px;
-  height: 68px;
-  background-color: $ChinchinRed;
-  display: block;
-  color: $white;
-  font-size: 1.8em;
-  font-weight: bold;
-  text-align: center;
-  line-height: 68px;
-  &:hover {
-    background-color: #B9113B;
-    text-decoration: none;
-  }
-  &:active {
-    background-color: #FF1751;
-  }
+  width: 224px;
+  height: 56px;
+  background-size: 224px 56px;
+  -webkit-background-size: 224px 56px;
+  -moz-background-size: 224px 56px;
+  -o-background-size: 224px 56px;
+  text-indent: -9999px
 }
 
 .social-share {

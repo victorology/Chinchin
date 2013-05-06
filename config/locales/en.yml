@@ -18,8 +18,8 @@ en:
       chat: "Chat"
       chat_long: "You can start chatting if you mutually Like each other."
       headline_html: "<strong>Chinchin</strong> is a social club where you can meet new people through your mutual friends."
-      call_to_action: "We are currently accepting signups for a private preview of our service. If you would like to be one of the first to be invited, click 'Get Started!'"
-      log_in_message: "Get Started!"
+      call_to_action: "We are currently available for iOS so if you want to check us out, download Chinchin on the App Store."
+      app_store: "Download on the App Store"
       thanks_html: "Thank you for signing up for early access to Chinchin, <strong>%{username}</strong>!"
       let_you_know: "When we start the private preview of our service, we will make sure you are one of the first to know! In the meantime, please help spread the word by pressing Like on Facebook or sending a Tweet!"
   users:
