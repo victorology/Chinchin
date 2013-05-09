@@ -17,6 +17,7 @@ en:
       like_long: "If you see someone you Like, press the Like button."
       chat: "Chat"
       chat_long: "You can start chatting if you mutually Like each other."
+      log_in_message: "Get Started!"
       headline_html: "<strong>Chinchin</strong> is a social club where you can meet new people through your mutual friends."
       call_to_action: "We are currently available for iOS so if you want to check us out, download Chinchin on the App Store."
       app_store: "Download on the App Store"
