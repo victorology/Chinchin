@@ -255,6 +255,10 @@ header {
   display: block;
   height: 44px;
   position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  overflow: auto;
   -webkit-transform: translatez(0);
   -moz-transform: translatez(0);
   -o-transform: translatez(0);
@@ -348,14 +352,22 @@ header .liked span {
   -o-background-size: 26px 24px;
 }
 
+.stp-content-frame {
+//  position: absolute;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  left: 0;
+  right: 0;
+}
+
+.stp-content-body {
+}
+
 .stp-content {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -o-box-sizing: border-box;
   box-sizing: border-box;
-}
-
-.stp-content-panel {
 }
 
 .container {

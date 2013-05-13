@@ -62,5 +62,15 @@ mixpanel.init("53ba1bb796ef510bf1c77ccb3facd3c4");</script>
 <%= javascript_include_tag "jquery-1.9.1.min" %>
 <%= javascript_include_tag "sidetap" %>
 <%= javascript_include_tag "mobile" %>
+<script>
+  if(isMobile.Android()) {
+      var es = document.getElementsByTagName("header");
+
+      for (var i=0; i < es.length; i++) {
+          alert(es[i].style.position);
+          es[i].style.position = "fixed";
+      }
+  };
+</script>
 </body>
 </html>
