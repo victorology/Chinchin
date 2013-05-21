@@ -62,6 +62,7 @@ class User < ActiveRecord::Base
 	    user.oauth_expires_at = Time.at(auth.credentials.expires_at) unless auth.credentials.expires_at.nil?
 	    user.save!
       user.delay.add_friends_to_chinchin
+      user.delay.connect_with_chinchin
 	  end
 	end
 
