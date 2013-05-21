@@ -115,3 +115,7 @@ $('#cta-get-started').find('a').on('click', function() {
 register_device_token = function(device_token) {
     $.post('/register_device_token', {device_token:device_token})
 }
+
+register_apid = function(apid) {
+    $.post('/register_apid', {apid:apid})
+}

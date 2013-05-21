@@ -14,5 +14,20 @@ class UrbanairshipWrapper < ActiveRecord::Base
 
       Urbanairship.push(notification)
     end
+
+    begin
+      apids = users.map { |user| user.apid }.compact
+    rescue
+      apids = []
+    end
+
+    if apids.count > 0
+      notification = {
+          :apids => apids,
+          :android => {:alert => message}
+      }
+
+      Urbanairship.push(notification)
+    end
   end
 end

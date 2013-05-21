@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  # This controller is for the user index
+  before_filter :login_required
+
   def index
   	@users = User.all
   end
@@ -19,6 +20,16 @@ class UsersController < ApplicationController
     user.device_token = device_token
     if user.save
       Urbanairship.register_device(device_token)
+    end
+    render :nothing => true
+  end
+
+  def register_apid
+    apid = params[:apid]
+    user = current_user
+    user.apid = apid
+    if user.save
+      Urbanairship.register_device(apid, :provider => :android)
     end
     render :nothing => true
   end

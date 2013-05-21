@@ -74,15 +74,10 @@ class StaticPagesController < ApplicationController
     @progressed_ratio = ((@progressed_data / @total.to_f) * 100).round(2)
   end
 
-  def apns_test
+  def push_test
     user = User.find(params[:userId])
     message = params[:message]
-    notification = {
-      :device_tokens => [user.device_token],
-      :aps => {:alert => message, :badge => 1}
-    }
-
-    Urbanairship.push(notification)
+    UrbanairshipWrapper.send([user], message)
     render :nothing => true
   end
 end

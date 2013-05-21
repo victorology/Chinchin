@@ -24,6 +24,7 @@ Chinchin2::Application.routes.draw do
 
   match 'chinchins/:id/profile_photos', to: 'chinchins#profile_photos'
   match 'register_device_token', to: 'users#register_device_token'
+  match 'register_apid', to: 'users#register_apid'
 
   #match 'users', to: 'users#users'
   #match 'user/:id/chinchin', to: 'users#chinchin'
@@ -39,7 +40,7 @@ Chinchin2::Application.routes.draw do
   match 'update_chinchin_photos_where_no_photos', to: 'static_pages#update_chinchin_photos_where_no_photos'
   match 'fb4pp01', to: 'static_pages#fb4pp01'
   match 'stats', to: 'static_pages#stats'
-  match 'apns_test/:userId/:message', to: 'static_pages#apns_test'
+  match 'push_test/:userId/:message', to: 'static_pages#push_test'
 
   # for testing
 
