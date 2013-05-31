@@ -255,17 +255,13 @@ header {
   display: block;
   height: 44px;
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  overflow: auto;
   -webkit-transform: translatez(0);
   -moz-transform: translatez(0);
   -o-transform: translatez(0);
   transform: translatez(0);
   text-align: center;
   width: 100%;
-  z-index: 20;
+  z-index: 1;
 }
 
 header .header-button {
@@ -352,22 +348,14 @@ header .liked span {
   -o-background-size: 26px 24px;
 }
 
-.stp-content-frame {
-//  position: absolute;
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
-  left: 0;
-  right: 0;
-}
-
-.stp-content-body {
-}
-
 .stp-content {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -o-box-sizing: border-box;
   box-sizing: border-box;
+}
+
+.stp-content-panel {
 }
 
 .container {
@@ -428,10 +416,6 @@ div.user-photo-large {
   position: relative;
 }
 
-div.dummy {
-  margin-top: 100%;
-}
-
 div.user-photo-large img {
   position: absolute;
   top: 0;
@@ -440,12 +424,35 @@ div.user-photo-large img {
   right: 0;
 }
 
+div.hot-user-photo {
+  float: left;
+  margin: 0 10px 10px 0;
+  width: 34px;
+  height: 34px;
+  overflow:hidden;
+  display: block;
+}
+
+div.total-score {
+  float: right;
+  text-align: right;
+}
+
+div.dummy {
+  margin-top: 100%;
+}
+
 div.user-index-info {
   float: left;
   width: 50%;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+div.hot-user-index-info h3 {
+  margin-top: 4px;
+  font-size: 1.5em;
 }
 
 div.user-index-basic-info {
