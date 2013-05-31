@@ -1,0 +1,9 @@
+class CreateReports < ActiveRecord::Migration
+  def change
+    create_table :reports do |t|
+      t.string :title
+      t.decimal :value
+      t.timestamps
+    end
+  end
+end

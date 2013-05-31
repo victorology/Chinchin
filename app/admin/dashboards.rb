@@ -1,4 +1,10 @@
 ActiveAdmin::Dashboards.build do
+  section "Statistics" do
+    table_for Report.order("created_at asc") do
+      column :title
+      column :value
+    end
+  end
 
   section "Users" do
     table_for User.order("created_at desc").limit(10) do
