@@ -128,7 +128,7 @@ class User < ActiveRecord::Base
       end
     end
 
-    leaders.sort_by { |leader| leader[:total_score] }
+    leaders.sort_by! { |leader| leader[:total_score] }.reverse!
 
     return leaders
   end
