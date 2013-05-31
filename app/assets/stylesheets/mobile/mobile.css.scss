@@ -703,6 +703,17 @@ div.empty-likes-icon {
   -o-background-size: 104px 96px;
 }
 
+div.empty-data h2 a {
+  margin-top: 40px;
+  width: 100%;
+  padding: 10px 0;
+  font-size: 1.5em;
+  color: rgb(255,255,255);
+  text-align: center;
+  background-color: rgb(59,89,152);
+  display: block;
+}
+
 div#register h1 {
   margin: 28px 0;
   font-size: 4.8em;
