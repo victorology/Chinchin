@@ -373,21 +373,34 @@ p {
 
 #main-content-btn {
   float: left;
-  margin-left: -18px;
   width: 100%;
 }
 
 a.app-store {
   background: image-url('appstore.svg');
   float: left;
-  margin: $marginSmall 0;
-  width: 224px;
-  height: 56px;
-  background-size: 224px 56px;
-  -webkit-background-size: 224px 56px;
-  -moz-background-size: 224px 56px;
-  -o-background-size: 224px 56px;
-  text-indent: -9999px
+  margin: $marginSmall 0 $marginSmall -18px;
+  width: 232px;
+  height: 58px;
+  background-size: 232px 58px;
+  -webkit-background-size: 232px 58px;
+  -moz-background-size: 232px 58px;
+  -o-background-size: 232px 58px;
+  text-indent: -9999px;
+}
+
+a.google-play {
+  background: image-url('googleplay.svg');
+  float: left;
+  margin: 0 0 $marginSmall 0;
+  width: 170px;
+  height: 58px;
+  background-size: 170px 58px;
+  -webkit-background-size: 170px 58px;
+  -moz-background-size: 170px 58px;
+  -o-background-size: 170px 58px;
+  text-indent: -9999px;
+  clear: both;
 }
 
 .social-share {

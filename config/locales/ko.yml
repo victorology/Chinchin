@@ -21,6 +21,7 @@ ko:
       headline_html: "<strong>친친</strong> 은 친구에 친구를 만날 수 있게 해주는 신개념 소셜 클럽입니다."
       call_to_action: "현재 비공개 시범 운영 기간을 위한 프리미엄 유저 모집 중입니다. 가장 먼저 서비스 이용해보실 프리미엄 유저 모집에 참여하실 분들은 'Get Started!'를 클릭해주세요."
       app_store: "앱스토어에 다운 받으세요"
+      google_play: "구글플레이에 다운 받으세요"
       thanks_html: "비공개 시범 운영 모집에 참여해 주셔서 감사합니다.<strong>%{username}</strong>!"
       let_you_know: "비공개 시범 운영 시작 시, 꼭 1등으로 알려 드릴게요! 페이스북 Like나 트위터로 저희를 당신의 친친에게 소개해주세요!"
   users:

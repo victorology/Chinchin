@@ -21,6 +21,7 @@ en:
       headline_html: "<strong>Chinchin</strong> is a social club where you can meet new people through your mutual friends."
       call_to_action: "We are currently available for iOS so if you want to check us out, download Chinchin on the App Store."
       app_store: "Download on the App Store"
+      google_play: "Get it on Google Play"
       thanks_html: "Thank you for signing up for early access to Chinchin, <strong>%{username}</strong>!"
       let_you_know: "When we start the private preview of our service, we will make sure you are one of the first to know! In the meantime, please help spread the word by pressing Like on Facebook or sending a Tweet!"
   users:
