@@ -39,6 +39,7 @@
   mixpanel.people.set({
     "$name": "<%= current_user.name %>",
     "$email": "<%= current_user.email %>",
+    "$created": "<%= current_user.created_at %>",
     "$last_login": new Date(),
     "referrer": document.referrer
   });
