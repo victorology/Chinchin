@@ -1,6 +1,8 @@
 ActiveAdmin::Dashboards.build do
   section "Statistics" do
-    table_for Report.order("created_at asc") do
+    lastGeneratedDate = Report.last.created_at
+    reports = Report.where('created_at BETWEEN ? AND ?', lastGeneratedDate.beginning_of_day, lastGeneratedDate.end_of_day).order('created_at asc')
+    table_for reports do
       column :title
       column :value
     end
