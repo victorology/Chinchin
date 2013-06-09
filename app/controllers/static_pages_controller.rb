@@ -77,7 +77,7 @@ class StaticPagesController < ApplicationController
   def push_test
     user = User.find(params[:userId])
     message = params[:message]
-    UrbanairshipWrapper.send([user], message)
+    UrbanairshipWrapper.delay.send([user], message)
     render :nothing => true
   end
 end

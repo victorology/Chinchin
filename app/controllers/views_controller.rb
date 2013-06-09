@@ -22,7 +22,7 @@ class ViewsController < ApplicationController
       v.viewer = viewer
       v.viewee = viewee
       if v.save and not viewee.user.nil?
-        UrbanairshipWrapper.send(viewee.user, "Someone viewed your profile!")
+        UrbanairshipWrapper.delay.send([viewee.user], "Someone viewed your profile!")
       end
     end
 

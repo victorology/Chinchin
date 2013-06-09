@@ -220,8 +220,22 @@ class User < ActiveRecord::Base
     like.user = self
     like.chinchin = chinchin
     like.save!
-    UrbanairshipWrapper.send([chinchin.user], "Someone likes you!")
-    UrbanairshipWrapper.send(chinchin.users, "Someone likes #{chinchin.first_name}!")
+
+    UrbanairshipWrapper.delay.send(chinchin.users, "Someone likes #{chinchin.first_name}!")
+
+    if not chinchin.user.nil?
+      UrbanairshipWrapper.delay.send([chinchin.user], "Someone likes you!")
+      me = Chinchin.find_by_uid(self.uid)
+      if chinchin.user.liked(me)
+        messageRoom = MessageRoom.new
+        messageRoom.user1 = chinchin.user
+        messageRoom.user2 = self
+        messageRoom.status = MessageRoom::WAITING_FOR_OPEN
+        if messageRoom.save
+          UrbanairshipWrapper.delay.send([chinchin.user, self], "You are connected with someone you liked! Check out your messages")
+        end
+      end
+    end
   end
 
   def liked(chinchin)
