@@ -1,0 +1,46 @@
+<% chinchins.each do |friend| %>
+    <a href="#">
+      <div class="user-browse-box" id="<%=friend.id%>">
+        <div class="user-photo-large">
+          <div class="dummy" id="<%= friend.id %>" />
+          <% if not friend.profile_photos.first.nil? %>
+            <img src="<%= friend.profile_photos.first.source_url %>" align="absmiddle" width=100% style="min-width: 320px; min-height: 320px;" />
+          <% else  %>
+            <img src="http://graph.facebook.com/<%= friend.uid %>/picture?type=large" align="absmiddle" width=100% style="min-width: 320px; min-height: 320px;" />
+          <% end %>
+        </div> <!-- .user-photo-large -->
+      </div> <!-- .user-browse-box -->
+    </a>
+    <% if false %>
+      <div class="user-browse-info">
+        <% if age(friend.birthday) %>
+          <%= t '.age', :age => age(friend.birthday) %>
+        <% end %>
+        <% if friend.location %>
+          <%= t '.location', :location => friend.location %>
+        <% end %>
+      </div> <!-- .user-browse-info -->
+      <div class="user-browse-photos">
+        <div class="user-photo-count"></div>
+        <span class="picture-count">
+          <%= (friend.profile_photos || []).size %>
+        </span>
+      </div> <!-- .user-browse-photos -->
+    <% end %>
+    <div class="browse-pass">
+      <div class="browse-pass-icon"></div><h1>PASS</h1>
+    </div> <!-- .browse-pass -->
+    <div class="browse-like">
+      <div class="browse-like-icon"></div><h1>LIKE</h1>
+    </div> <!-- .browse-like -->
+    <a href="#">
+      <div class="user-index-box" id="<%=friend.id%>">
+        <h2>
+          <% friend.mutual_friends(@user).each do |user| %>
+            <div class="mutual-friends"><img src="<%= user.picture %>" /><%= user.name %></div>
+          <% end %>
+        </h2>
+      </div> <!-- .user-index-box -->
+    </a>
+    <div class="clear" />
+<% end %>
