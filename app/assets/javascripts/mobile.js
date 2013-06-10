@@ -80,7 +80,17 @@ show_chinchins = function(section, title, url) {
     });
 }
 
-show_chinchins(browse, "Chinchin", "/chinchins.js");
+show_chinchin_card = function(section, title, url) {
+    section.find('h1').text(title);
+    section.find('.container').html('<div class="loader"><img src="/assets/ajax-loader.gif" /></div>');
+    $.get(url, function() {
+        section.find('.container').find('a').on("click", function() {
+            show_chinchin(section.find('.user-browse-box').attr('id'), section.find('h3').text());
+        });
+    });
+}
+
+show_chinchin_card(browse, "Chinchin", "/chinchins.js");
 
 st.stp_nav.find('nav a').on("click", function() {
     $(this).addClass('selected').siblings().removeClass('selected');
@@ -95,6 +105,8 @@ st.stp_nav.find('nav a').on("click", function() {
         $('#browse').find('.refresh').show();
         title = "Chinchin";
         url = "/chinchins.js";
+        show_chinchin_card(browse, title, url);
+        return;
     } else if (link_text == 'Viewed You') {
         title = "Viewed You";
         url = "/views.js";

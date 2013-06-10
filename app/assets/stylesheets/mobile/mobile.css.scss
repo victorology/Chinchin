@@ -359,6 +359,7 @@ header .liked span {
 }
 
 .container {
+  padding-top: 44px;
 }
 
 .container-10px {
@@ -381,9 +382,17 @@ div.loader { height: 100px; line-height: 100px;text-align:center; }
 
 div.loader img { vertical-align:middle;}
 
-div.user-index-box {
+div.user-browse-box {
+  margin-top: -44px;
   background: rgb(255,255,255);
   display: block;
+}
+
+div.user-index-box {
+  background: rgb(255,255,255);
+  margin-bottom: 10px;
+  display: block;
+  height: 120px;
 }
 
 div.clear {
@@ -628,13 +637,13 @@ div.profile-friends {
 }
 
 div.mutual-friends {
-  line-height: 44px;
+  line-height: 54px;
   border-bottom: 1px solid rgb(238,238,238);
 }
 
 div.mutual-friends img {
   float: left;
-  margin: 10px 10px 0 10px;
+  margin: 10px;
   width: 34px;
   height: 34px;
 }
