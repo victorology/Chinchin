@@ -128,7 +128,7 @@ table {
 }
 
 body {
-  background: rgb(238,238,238);
+  background: rgb(255,255,255);
   color: rgb(28,28,28);
   font-family: 'Helvetica Neue', 'Helvetica-Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;
   font-size: 80%;
@@ -359,7 +359,6 @@ header .liked span {
 }
 
 .container {
-  padding-top: 44px;
 }
 
 .container-10px {
@@ -384,9 +383,7 @@ div.loader img { vertical-align:middle;}
 
 div.user-index-box {
   background: rgb(255,255,255);
-  margin-bottom: 10px;
   display: block;
-  height: 120px;
 }
 
 div.clear {
@@ -440,6 +437,31 @@ div.total-score {
 
 div.dummy {
   margin-top: 100%;
+}
+
+div.user-browse-info {
+  width: 100%;
+  background-color: rgba(0,0,0,0.48);
+  color: white;
+  position: absolute;
+  top: 320px;
+}
+
+div.browse-pass h1 {
+  float: left;
+  padding: 15px 0;
+  width: 50%;
+  color: rgb(48,48,48);
+  text-align: center;
+  background-color: rgb(238,238,238);
+}
+
+div.browse-like h1 {
+  float: right;
+  padding: 15px 0;
+  width: 50%;
+  text-align: center;
+  background-color: rgb(238,28,88);
 }
 
 div.user-index-info {
@@ -606,13 +628,13 @@ div.profile-friends {
 }
 
 div.mutual-friends {
-  line-height: 54px;
+  line-height: 44px;
   border-bottom: 1px solid rgb(238,238,238);
 }
 
 div.mutual-friends img {
   float: left;
-  margin: 10px;
+  margin: 10px 10px 0 10px;
   width: 34px;
   height: 34px;
 }
