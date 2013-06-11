@@ -49,6 +49,9 @@ en:
       no_chinchins_long: "It looks like none of your friends are on Chinchin yet. When a friend of yours signs up, we will let you know and you can start browsing Chinchins."
       age: "%{age} years old"
       location: "%{location}"
+    chinchin_card:
+      age: "%{age} years."
+      location: "%{location}"
     chinchin_rows:
       age: "%{age} years old"
       location: "%{location}"

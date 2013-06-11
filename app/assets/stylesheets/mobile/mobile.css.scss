@@ -448,12 +448,38 @@ div.dummy {
   margin-top: 100%;
 }
 
-div.user-browse-info {
+div.user-browse-info { 
+  float: left;
+  padding: 12px 0;
   width: 100%;
-  background-color: rgba(0,0,0,0.48);
+  background-color: rgb(48,48,48);
   color: white;
-  position: absolute;
-  top: 320px;
+}
+
+div.user-browse-basic {
+  float: left;
+  margin-left: 10px;
+}
+
+div.user-browse-photos {
+  float: right;
+  margin-right: 10px;
+}
+
+div.user-browse-photos h2 {
+  float: left;
+}
+
+div.browse-photos-icon {
+  float: right;
+  margin-left: 8px;
+  width: 24px;
+  height: 24px;
+  background: image-url('icons/255-camera.svg');
+  background-size: 24px 24px;
+  -webkit-background-size: 24px 24px;
+  -moz-background-size: 24px 24px;
+  -o-background-size: 24px 24px;
 }
 
 div.browse-pass {
@@ -466,7 +492,7 @@ div.browse-like {
 
 div.browse-pass h1 {
   float: left;
-  padding: 15px 0;
+  padding: 12px 0;
   width: 50%;
   color: rgb(48,48,48);
   text-align: center;
@@ -475,7 +501,7 @@ div.browse-pass h1 {
 
 div.browse-like h1 {
   float: right;
-  padding: 15px 0;
+  padding: 12px 0;
   width: 50%;
   text-align: center;
   background-color: rgb(238,28,88);
@@ -645,13 +671,12 @@ div.profile-friends {
 }
 
 div.mutual-friends {
-  line-height: 54px;
-  border-bottom: 1px solid rgb(238,238,238);
+  line-height: 44px;
 }
 
 div.mutual-friends img {
   float: left;
-  margin: 10px;
+  margin: 10px 10px 0 10px;
   width: 34px;
   height: 34px;
 }

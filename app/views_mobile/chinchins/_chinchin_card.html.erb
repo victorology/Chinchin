@@ -9,24 +9,24 @@
             <img src="http://graph.facebook.com/<%= friend.uid %>/picture?type=large" align="absmiddle" width=100% style="min-width: 320px; min-height: 320px;" />
           <% end %>
         </div> <!-- .user-photo-large -->
+        <div class="user-browse-info">
+          <div class="user-browse-basic">
+            <h2>
+              <% if age(friend.birthday) %>
+                <%= t '.age', :age => age(friend.birthday) %>
+              <% end %>
+              <% if friend.location %>
+                <%= t '.location', :location => friend.location %>
+              <% end %>
+            </h2>
+          </div> <!-- .user-browse-basic -->
+          <div class="user-browse-photos">
+            <h2><%= (friend.profile_photos || []).size %></h2>
+            <div class="browse-photos-icon"></div>
+          </div> <!-- user.browse-photos -->
+        </div> <!-- .user-browse-info -->
       </div> <!-- .user-browse-box -->
     </a>
-    <% if false %>
-      <div class="user-browse-info">
-        <% if age(friend.birthday) %>
-          <%= t '.age', :age => age(friend.birthday) %>
-        <% end %>
-        <% if friend.location %>
-          <%= t '.location', :location => friend.location %>
-        <% end %>
-      </div> <!-- .user-browse-info -->
-      <div class="user-browse-photos">
-        <div class="user-photo-count"></div>
-        <span class="picture-count">
-          <%= (friend.profile_photos || []).size %>
-        </span>
-      </div> <!-- .user-browse-photos -->
-    <% end %>
     <div class="browse-pass">
       <div class="browse-pass-icon"></div><h1>PASS</h1>
     </div> <!-- .browse-pass -->

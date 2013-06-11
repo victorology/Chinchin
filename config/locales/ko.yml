@@ -49,6 +49,9 @@ ko:
       no_chinchins_long: "찬구 중에 아직 친친 유저가 없습니다. 친구가 가입하면 알려 드릴게요! 바로 친친을 즐기실 수 있습니다."
       age: "%{age} 살"
       location: "%{location}"
+    chinchin_card:
+      age: "%{age} 살"
+      location: "%{location}"
     chinchin_rows:
       age: "%{age} 살"
       location: "%{location}"
@@ -61,7 +64,7 @@ ko:
       profile: "프로필"
       photos: "사진"
       friends: "함께 아는 친구"
-      age: "%{age} 살"
+      age: "%{age} 살."
       location: "%{location}"
       employer: "%{employer}"
       school: "%{school}"
