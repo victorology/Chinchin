@@ -47,5 +47,12 @@
         $('#browse .browse-pass').on("click", function() {
             show_chinchin_card($('#browse'), "Chinchin", "/chinchins.js");
         });
+
+        $('#browse .browse-like').on("click", function() {
+            var chinchin_id = $('#browse').find('.dummy').attr('id')
+            $.post('/likes.js', {chinchin_id:chinchin_id}, function() {
+                show_chinchin_card($('#browse'), "Chinchin", "/chinchins.js");
+            });
+        });
     </script>
 <% end %>
