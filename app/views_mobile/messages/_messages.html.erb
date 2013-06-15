@@ -1,0 +1,7 @@
+<% @messages.each do |message| %>
+    <% if message.writer == user %>
+        <div class="user-message"><%= message.content %></div>
+    <% else %>
+        <div class="other-user-message"><%= message.content %></div>
+    <% end %>
+<% end %>

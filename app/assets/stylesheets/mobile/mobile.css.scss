@@ -439,6 +439,32 @@ div.hot-user-photo {
   display: block;
 }
 
+div.message-room-index-box {
+  background: rgb(255,255,255);
+  margin-bottom: 10px;
+  display: block;
+  height: 120px;
+}
+
+div.message-room-user-photo {
+  width: 120px;
+  height: 120px;
+  overflow:hidden;
+  display: block;
+  float: left;
+}
+
+div.message-room-user-photo img {
+  width: 150px;
+  height: 180px;
+  margin: -10px -15px 0 0;
+  display: block;
+}
+
+div.message-room-last-message {
+  padding-left: 10px;
+}
+
 div.total-score {
   float: right;
   text-align: right;

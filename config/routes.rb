@@ -21,6 +21,10 @@ Chinchin2::Application.routes.draw do
   end
   resources :chinchins, :only => [:show]
   resources :leaderboards, :only => [:index]
+  resources :message_rooms, :only => [:index, :show] do
+    resources :messages
+  end
+
 
   match 'chinchins/:id/profile_photos', to: 'chinchins#profile_photos'
   match 'register_device_token', to: 'users#register_device_token'

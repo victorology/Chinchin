@@ -1,0 +1,30 @@
+<% message_rooms.each do |message_room| %>
+    <a href="#">
+        <div class="message-room-index-box message-room-status-<%= message_room.status %>" id="<%=message_room.id%>">
+            <div class="message-room-user-photo">
+                <% if message_room.user1 == @user %>
+                    <%= image_tag ( message_room.user2.picture('large') ), :align => "absmiddle", :width => "120", :style => "min-width: 120px; min-height: 120px;" %>
+                <% else %>
+                    <%= image_tag ( message_room.user1.picture('large') ), :align => "absmiddle", :width => "120", :style => "min-width: 120px; min-height: 120px;" %>
+                <% end %>
+            </div> <!-- .user-photo -->
+            <div class="message-room-last-message">
+              <% if message_room.status == 0 %>
+                <h3><%= t '.message_room_is_not_yet_opened' %></h3>
+              <% else %>
+                <% if message_room.messages.count > 0 %>
+                    <h3><%= message_room.messages.last %></h3>
+                <% end %>
+              <% end %>
+            </div> <!-- .user-index-info -->
+        </div> <!-- .user-index-box -->
+    </a>
+    <div class="clear" />
+<% end %>
+<script type="text/javascript">
+    $(document).ready(function() {
+        var info_width = document.width - 120 - 30;
+        $(".message-room-last-message").width(info_width+'px');
+    });
+</script>
+

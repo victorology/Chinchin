@@ -86,3 +86,6 @@ en:
     views:
       hang_in: "Hang In There!"
       hang_in_long: "No one has viewed your profile yet. In the meantime, why don't you browse the profile of others."
+  message_rooms:
+    message_rooms_rows:
+      message_room_is_not_yet_opened: "Message room is not yet opened"

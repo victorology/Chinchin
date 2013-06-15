@@ -1,0 +1,2 @@
+mixpanel.track("Enter the Message Room");
+$('#message_room').find('.container').html("<%= j render(:partial => 'message_room', :locals => {:message_room => @message_room}) %>");

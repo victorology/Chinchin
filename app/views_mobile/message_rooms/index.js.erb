@@ -1,0 +1,2 @@
+mixpanel.track("Message Room List");
+$('#browse').find('.container').html("<%= j render(:partial => 'message_rooms', :locals => {:message_rooms => @user.message_rooms}) %>");

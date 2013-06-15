@@ -289,4 +289,8 @@ class User < ActiveRecord::Base
       c.save
     end
   end
+
+  def message_rooms
+    MessageRoom.message_rooms(self.id)
+  end
 end

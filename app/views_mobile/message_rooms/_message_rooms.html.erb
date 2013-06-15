@@ -1,0 +1,17 @@
+<div class="container">
+
+  <% if message_rooms.nil? or message_rooms.size == 0 %>
+
+      <div class="empty-data">
+        <div class="empty-message-rooms-icon"></div>
+        <h1><%= t '.no_message_rooms' %></h1>
+        <p><%= t '.no_message_rooms_long' %></p>
+      </div> <!-- .empty-data -->
+
+  <% else %>
+
+      <%= render :partial => "message_rooms_rows", :locals => {:message_rooms => message_rooms} %>
+
+  <% end %>
+
+</div> <!-- .container -->

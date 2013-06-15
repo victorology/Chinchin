@@ -1,0 +1,32 @@
+<div id="messages">
+  <% message_room.messages.each do |message| %>
+    <%= message.content %>
+    <br />
+  <% end %>
+</div>
+<div id="message_input">
+    <input type="text" onkeypress="return sendMessage(event);"/>
+</div>
+<script>
+    function refreshMessages() {
+        $.get('/message_rooms/<%= message_room.id %>/messages.js');
+    }
+
+    $(document).ready(function () {
+      $('#message_input').find('input').focus();
+
+      setInterval(function () {
+          refreshMessages();
+      }, 1000);
+  });
+
+  function sendMessage(e) {
+      if (e.keyCode == 13) {
+          var message = $('#message_input').find('input');
+          var messages = $('#messages');
+          messages.append('<div class="user-message">'+message.val()+'</div>');
+          $.post('/message_rooms/<%= message_room.id %>/messages.js', {message:message.val()});
+          message.val("");
+      }
+  }
+</script>

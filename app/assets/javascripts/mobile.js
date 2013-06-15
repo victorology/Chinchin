@@ -36,10 +36,17 @@ var st = sidetap();
 var browse, chinchin, show_contents;
 browse = $('#browse');
 chinchin = $('#chinchin');
+message_room = $('#message_room');
 
 $("header .menu").on("click",st.toggle_nav);
 $('#chinchin a.back').on("click", function() {
     $('#chinchin a.like').removeClass('liked');
+    return st.show_section(browse, {
+        animation: 'infromleft'
+    });
+});
+
+$('#message_room a.back').on("click", function() {
     return st.show_section(browse, {
         animation: 'infromleft'
     });
@@ -66,6 +73,15 @@ show_chinchin = function(chinchin_id, chinchin_name) {
     });
 }
 
+show_message_room = function(message_room_id, message_room_title) {
+    message_room.find('h1').text(message_room_title);
+    st.show_section(message_room, {
+        animation: 'infromright'
+    });
+    $('#message_room').find('.container').html('<div class="loader"><img src="/assets/ajax-loader.gif" /></div>');
+    $.get('/message_rooms/'+message_room_id+'.js');
+}
+
 show_chinchins = function(section, title, url) {
     section.find('h1').text(title);
     section.find('.container').html('<div class="loader"><img src="/assets/ajax-loader.gif" /></div>');
@@ -82,6 +98,16 @@ show_chinchin_card = function(section, title, url) {
     $.get(url, function() {
         section.find('.container').find('a').on("click", function() {
             show_chinchin(section.find('.user-browse-box').attr('id'), section.find('.dummy_name').attr('id'));
+        });
+    });
+}
+
+show_messages = function(section, title, url) {
+    section.find('h1').text(title);
+    section.find('.container').html('<div class="loader"><img src="/assets/ajax-loader.gif" /></div>');
+    $.get(url, function() {
+        section.find('.container').find('a').on('click', function() {
+            show_message_room($(this).find('.message-room-index-box').attr('id'), 'Messages');
         });
     });
 }
@@ -109,7 +135,9 @@ st.stp_nav.find('nav a').on("click", function() {
         url = "/leaderboards.js";
     } else if (link_text == 'Messages') {
         title = "Messages";
-        url = "/messages.js";
+        url = "/message_rooms.js";
+        show_messages(browse, title, url);
+        return;
     }
     show_chinchins(browse, title, url);
 });
