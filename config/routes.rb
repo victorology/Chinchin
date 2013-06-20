@@ -21,7 +21,7 @@ Chinchin2::Application.routes.draw do
   end
   resources :chinchins, :only => [:show]
   resources :leaderboards, :only => [:index]
-  resources :message_rooms, :only => [:index, :show] do
+  resources :message_rooms, :only => [:index, :show, :update] do
     resources :messages
   end
 

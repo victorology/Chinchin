@@ -461,8 +461,26 @@ div.message-room-user-photo img {
   display: block;
 }
 
+div.message-room-info {
+  float: left;
+  width: 50%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+div.message-room-last-message h3 {
+  font-size: 1.5em;
+}
+
 div.message-room-last-message {
-  padding-left: 10px;
+  float: left;
+  padding: 5px 10px 10px 10px;
+  height: 70px;
+}
+
+.message-room-status-0 {
+  color: gray;
 }
 
 div.total-score {
@@ -871,4 +889,100 @@ a.cta-btn {
   line-height: 48px;
   background-color: rgb(238,28,88);
   display: block;
+}
+
+.message-box {
+  height: 45px;
+}
+
+.message-mine,.message-other {
+  margin-top: 3px;
+  padding: 3px 5px 3px 5px;
+  max-width: 80%;
+  clear: both;
+}
+
+.message-other {
+  float: left;
+  margin-right: auto;
+}
+
+.message-other .message-content {
+  float: left;
+  background-color: #d3d3d3;
+
+  margin-left: 5px;
+  padding: 4px 10px 4px 15px;
+
+  border-radius: 20px 20px 20px 0px;
+  -webkit-border-radius: 20px 20px 20px 0px;
+  -moz-border-radius: 20px 20px 20px 0px;
+  -o-border-radius: 20px 20px 20px 0px;
+  -ms-border-radius: 20px 20px 20px 0px;
+}
+
+.message-mine {
+  float: right;
+  margin-left: auto;
+}
+
+.message-mine .message-content {
+  float: right;
+  text-align: right;
+  color: white;
+  background-color: #4455ff;
+
+  margin-right: 5px;
+  padding: 4px 15px 4px 10px;
+
+  border-radius: 20px 20px 0px 20px;
+  -webkit-border-radius: 20px 20px 0px 20px;
+  -moz-border-radius: 20px 20px 0px 20px;
+  -o-border-radius: 20px 20px 0px 20px;
+  -ms-border-radius: 20px 20px 0px 20px;
+}
+
+.message-user-profile {
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -o-border-radius: 3px;
+  -ms-border-radius: 3px;
+}
+
+.message-other .message-user-profile {
+  float: left;
+}
+
+.message-mine .message-user-profile {
+  float: right;
+}
+
+#message-input {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  height: 30px;
+  width: 100%;
+  background-color: red;
+}
+
+#message-input input {
+  float: left;
+  height: 30px;
+  margin: 0;
+  padding: 0;
+}
+
+#message-input input.text {
+  width: auto;
+  background-color: #add8e6;
+  padding-left: 5px;
+}
+
+#message-input input.submit {
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 80px;
 }

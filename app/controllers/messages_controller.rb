@@ -5,13 +5,13 @@ class MessagesController < ApplicationController
   def index
     room = MessageRoom.find(params[:message_room_id])
     @user = current_user
+    @receiver = nil
+    if room.user1 == @user
+      @receiver = room.user2
+    elsif
+      @receiver = room.user1
+    end
     @messages = room.messages
-  end
-
-  # params[:user] => {admin: true}
-  def temp
-    user = User.find(1)
-    user.upate_attribute(params[:user])
   end
 
   def create

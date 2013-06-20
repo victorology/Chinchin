@@ -48,7 +48,8 @@ $('#chinchin a.back').on("click", function() {
 
 $('#message_room a.back').on("click", function() {
     return st.show_section(browse, {
-        animation: 'infromleft'
+        animation: 'infromleft',
+        callback: show_messages(browse, "Messages", "/message_rooms.js")
     });
 });
 
@@ -102,12 +103,38 @@ show_chinchin_card = function(section, title, url) {
     });
 }
 
+open_message_room = function(message_room_id) {
+    $.ajax({
+        url: '/message_rooms/'+message_room_id+'.js',
+        type: 'PUT',
+        data: {room_action: "open"},
+        success: function(response) {
+            if (response.status) {
+                show_message_room(message_room_id, 'Messages');
+            } else {
+                alert(response.message);
+            }
+        }
+    });
+}
+
+check_message_room = function(message_room_id, message_room_status) {
+    if (message_room_status != 1 && message_room_status != 2) {
+        var response = confirm('Do you really want to open this message room?');
+        if (response) {
+            open_message_room(message_room_id);
+        }
+    } else {
+        open_message_room(message_room_id);
+    }
+}
+
 show_messages = function(section, title, url) {
     section.find('h1').text(title);
     section.find('.container').html('<div class="loader"><img src="/assets/ajax-loader.gif" /></div>');
     $.get(url, function() {
         section.find('.container').find('a').on('click', function() {
-            show_message_room($(this).find('.message-room-index-box').attr('id'), 'Messages');
+            check_message_room($(this).find('.message-room-index-box').attr('id'), $(this).find('.message-room-index-box').attr('class').split(" ")[1].split("-")[3]);
         });
     });
 }

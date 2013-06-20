@@ -10,7 +10,10 @@ class MessageRoom < ActiveRecord::Base
   has_many :messages
 
   scope :message_rooms, lambda { |pid|
-    { :conditions => ['(user1_id = ? or user2_id = ?) and status <= 2', pid, pid] }
+    {
+        :conditions => ['(user1_id = ? or user2_id = ?) and status <= 2', pid, pid],
+        :order => 'updated_at DESC'
+    }
   }
 
   def sendMessage(writer, text)

@@ -8,16 +8,25 @@
                     <%= image_tag ( message_room.user1.picture('large') ), :align => "absmiddle", :width => "120", :style => "min-width: 120px; min-height: 120px;" %>
                 <% end %>
             </div> <!-- .user-photo -->
-            <div class="message-room-last-message">
-              <% if message_room.status == 0 %>
-                <h3><%= t '.message_room_is_not_yet_opened' %></h3>
-              <% else %>
-                <% if message_room.messages.count > 0 %>
-                    <h3><%= message_room.messages.last %></h3>
-                <% end %>
-              <% end %>
-            </div> <!-- .user-index-info -->
-        </div> <!-- .user-index-box -->
+            <div class="message-room-info">
+                <div class="message-room-last-message">
+                  <% if message_room.user1 == @user %>
+                      <h3><%= message_room.user2.first_name %></h3>
+                  <% else %>
+                      <h3><%= message_room.user1.first_name %></h3>
+                  <% end %>
+                    <div class="last-message">
+                  <% if message_room.status == 0 %>
+                    <%= t '.message_room_is_not_yet_opened' %>
+                  <% else %>
+                    <% if message_room.messages.count > 0 %>
+                      <%= message_room.messages.last.content %>
+                    <% end %>
+                  <% end %>
+                    </div>
+                </div> <!-- .message-room-last-message -->
+            </div> <!-- .message-room-info -->
+        </div> <!-- .message-room-index-box -->
     </a>
     <div class="clear" />
 <% end %>

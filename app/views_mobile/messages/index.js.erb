@@ -1,1 +1,1 @@
-$('#message_room').find('#messages').html("<%= j render(:partial => 'messages', :locals => {:messages => @messages, :user => @user}) %>");
+$('#message_room').find('#messages').html("<%= j render(:partial => 'messages', :locals => {:messages => @messages, :user => @user, :receiver => @receiver}) %>");

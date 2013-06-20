@@ -3,6 +3,6 @@ class Message < ActiveRecord::Base
 
   TEXT = 0
 
-  belongs_to :message_room
+  belongs_to :message_room, touch: true
   belongs_to :writer, :class_name => 'User'
 end

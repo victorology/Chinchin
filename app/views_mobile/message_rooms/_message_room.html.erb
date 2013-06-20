@@ -1,32 +1,58 @@
 <div id="messages">
-  <% message_room.messages.each do |message| %>
-    <%= message.content %>
-    <br />
-  <% end %>
 </div>
-<div id="message_input">
-    <input type="text" onkeypress="return sendMessage(event);"/>
+<div id="message-input">
+    <input class="text" type="text" onkeypress="return sendMessage(event);" />
+    <input class="submit" type="submit" value="<%= "Send" %>" onclick="return sendMessage(event);" />
+    <div class="clear" />
 </div>
 <script>
     function refreshMessages() {
-        $.get('/message_rooms/<%= message_room.id %>/messages.js');
+        $.get('/message_rooms/<%= message_room.id %>/messages.js', function() {
+            $('.stp-content-body').scrollTop($('#messages').height());
+            $('#message-input').find('input.text').focus();
+        });
     }
 
     $(document).ready(function () {
-      $('#message_input').find('input').focus();
+        refreshMessages();
+//      setInterval(function () {
+//          refreshMessages();
+//      }, 1000);
 
-      setInterval(function () {
-          refreshMessages();
-      }, 1000);
+        positionFooter();
+        $('#message-input').find('.text').width($(document).width() - ($('#message-input').find('.submit').width()+25));
+        $(window).scroll(positionFooter).resize(positionFooter)
   });
 
   function sendMessage(e) {
-      if (e.keyCode == 13) {
-          var message = $('#message_input').find('input');
+      if (e.type == "click" || e.keyCode == 13) {
+          var message = $('#message-input').find('input.text');
+          var message_text = message.val();
+          if (message_text.trim() == "") return;
           var messages = $('#messages');
-          messages.append('<div class="user-message">'+message.val()+'</div>');
-          $.post('/message_rooms/<%= message_room.id %>/messages.js', {message:message.val()});
           message.val("");
+          $.post('/message_rooms/<%= message_room.id %>/messages.js', {message:message_text}, function () {
+              refreshMessages();
+          });
       }
   }
+
+function positionFooter() {
+    var $footer = $('#message-input');
+    var footerHeight = $footer.height();
+    var footerTop = ($(window).scrollTop()+$(window).height()-footerHeight)+"px";
+
+    if ( ($(document.body).height()+footerHeight) < $(window).height()) {
+        $footer.css({
+            position: "absolute",
+            top: footerTop
+        })
+    } else {
+        $footer.css({
+            position: "static"
+        })
+    }
+
+}
+
 </script>

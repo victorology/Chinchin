@@ -19,4 +19,16 @@ class MessageRoomsController < ApplicationController
       format.html
     end
   end
+
+  def update
+    message_room = MessageRoom.find(params[:id])
+    action_type = params[:room_action]
+
+    if action_type == "open"
+      message_room.open(current_user)
+    end
+
+    #render :json => {status: false, message: "You don't have enough money to open this message room"}
+    render :json => {status: true, message: "success"}
+  end
 end
