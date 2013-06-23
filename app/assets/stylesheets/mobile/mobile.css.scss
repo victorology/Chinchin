@@ -492,22 +492,12 @@ div.dummy {
   margin-top: 100%;
 }
 
-div.user-browse-info { 
-  float: left;
-  padding: 12px 0;
-  width: 100%;
-  background-color: rgb(48,48,48);
-  color: white;
-}
-
-div.user-browse-basic {
-  float: left;
-  margin-left: 10px;
-}
-
 div.user-browse-photos {
   float: right;
-  margin-right: 10px;
+  padding: 10px;
+  margin: -54px 10px 0 0;
+  color: white;
+  background: rgb(48,48,48);
 }
 
 div.user-browse-photos h2 {
@@ -526,6 +516,23 @@ div.browse-photos-icon {
   -o-background-size: 24px 24px;
 }
 
+div.browse-action-box {
+  float: left;
+  padding: 10px;
+  width: 100%;
+  color: white;
+  background: rgb(48,48,48);
+}
+
+div.browse-action-box h2 {
+  margin-bottom: 10px;
+}
+
+div.browse-action-box p {
+  float: left;
+  margin-top: 10px;
+}
+
 div.browse-pass {
   cursor: pointer;
 }
@@ -534,21 +541,21 @@ div.browse-like {
   cursor: pointer;
 }
 
-div.browse-pass h1 {
+div.browse-like h1 {
   float: left;
-  padding: 12px 0;
-  width: 50%;
+  padding: 4px 0;
+  width: 49%;
+  text-align: center;
+  background-color: rgb(238,28,88);
+}
+
+div.browse-pass h1 {
+  float: right;
+  padding: 4px 0;
+  width: 49%;
   color: rgb(48,48,48);
   text-align: center;
   background-color: rgb(238,238,238);
-}
-
-div.browse-like h1 {
-  float: right;
-  padding: 12px 0;
-  width: 50%;
-  text-align: center;
-  background-color: rgb(238,28,88);
 }
 
 div.user-index-info {
