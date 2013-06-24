@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  # Required for i18n 
+  # Required for i18n
   before_filter :set_locale
 
   def check_for_mobile
@@ -45,7 +45,9 @@ class ApplicationController < ActionController::Base
 
   # Added for i18n
   def set_locale
-    I18n.locale = params[:locale] if params[:locale].present?
-  end
+    accept_language = request.env["HTTP_ACCEPT_LANGUAGE"].split(",")[0]
+    user_locale = current_user.locale if current_user
 
+    I18n.locale = FindLocale.call(:user_locale => user_locale, :accept_language => accept_language)
+  end
 end

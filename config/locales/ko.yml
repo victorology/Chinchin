@@ -27,7 +27,7 @@ ko:
   users:
     index:
       headline: "친친은 현재 %{users} 명의 유저가 사용 중입니다.."
-      age: "%{age} 살"
+      age: "%{age}살"
       location: "%{location}"
       employer: "%{employer}"
       school: "%{school}"
@@ -38,25 +38,31 @@ ko:
       school: "%{school} 졸업 "
   chinchins:
     index:
+      chinchin: "친친"
       headline_html: "어서오세요. <strong>%{name}</strong>! 현재 %{chinchin_count} 명의 친친들을 보고 계십니다. (친구의 친구들). 마음이 드시는 분이 있나요? 그렇지 않다면, %{href}."
       headline_href: "다음 친친들을 만나보세요!"
       age: "%{age} 살"
       location: "%{location}"
       employer: "%{employer}"
       school: "%{school}"
+      browse: "둘러보기"
+      viewed_you: "나를 본 사람"
+      my_likes: "내가 좋아한 사람"
+      hot_friends: "인기많은 내 친구"
+      messages: "대화방"
     chinchins:
       no_chinchins: "친친이 아직 없군요 :( "
       no_chinchins_long: "찬구 중에 아직 친친 유저가 없습니다. 친구가 가입하면 알려 드릴게요! 바로 친친을 즐기실 수 있습니다."
-      age: "%{age} 살"
+      age: "%{age}살"
       location: "%{location}"
     chinchin_card:
-      age: "%{age} 살"
+      age: "%{age}살"
       location: "%{location}"
     chinchin_rows:
-      age: "%{age} 살"
+      age: "%{age}살"
       location: "%{location}"
     show:
-      age: "%{age} 살"
+      age: "%{age}살"
       location: "%{location}"
       employer: "%{employer}"
       school: "%{school}"
@@ -64,14 +70,14 @@ ko:
       profile: "프로필"
       photos: "사진"
       friends: "함께 아는 친구"
-      age: "%{age} 살."
+      age: "%{age}살."
       location: "%{location}"
       employer: "%{employer}"
       school: "%{school}"
   likes:
     index:
       headline_html: "쨔잔! <strong>%{name}</strong>! 당신이 좋아한 친친들입니다."
-      age: "%{age} 살"
+      age: "%{age}살"
       location: "%{location}"
       employer: "%{employer}"
       school: "%{school}"
@@ -79,7 +85,7 @@ ko:
       see_anyone: "호감 가는 사람이 있나요?"
       see_anyone_long: "마음에 드는 사람이 있을 땐, 프로필의 Like 버튼을 누르세요. 서로 Like를 누르게 되면 바로 이야기를 나눌 수 있답니다."
       headline_html: "짜잔! <strong>%{name}</strong>! 당신이 좋아한 친친들입니다."
-      age: "%{age} 살"
+      age: "%{age}살"
       location: "%{location}"
       employer: "%{employer}"
       school: "%{school}"
