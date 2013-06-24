@@ -10,37 +10,31 @@
             <img src="http://graph.facebook.com/<%= friend.uid %>/picture?type=large" align="absmiddle" width=100% style="min-width: 320px; min-height: 320px;" />
           <% end %>
         </div> <!-- .user-photo-large -->
-        <div class="user-browse-info">
-          <div class="user-browse-basic">
-            <h2>
-              <% if age(friend.birthday) %>
-                <%= t '.age', :age => age(friend.birthday) %>
-              <% end %>
-              <% if friend.location %>
-                <%= t '.location', :location => friend.location %>
-              <% end %>
-            </h2>
-          </div> <!-- .user-browse-basic -->
-          <div class="user-browse-photos">
-            <h2><%= (friend.profile_photos || []).size %></h2>
-            <div class="browse-photos-icon"></div>
-          </div> <!-- user.browse-photos -->
-        </div> <!-- .user-browse-info -->
+        <div class="user-browse-photos">
+          <h2><%= (friend.profile_photos || []).size %></h2>
+          <div class="browse-photos-icon"></div>
+        </div> <!-- user.browse-photos -->
       </div> <!-- .user-browse-box -->
     </a>
-    <div class="browse-pass">
-      <div class="browse-pass-icon"></div><h1>PASS</h1>
-    </div> <!-- .browse-pass -->
-    <div class="browse-like">
-      <div class="browse-like-icon"></div><h1>LIKE</h1>
-    </div> <!-- .browse-like -->
+    <div class="browse-action-box">
+      <% if friend.gender = 'male' %>
+        <h2>Like Him?</h2>
+      <% else %>
+        <h2>Like Her?</h2>
+      <% end %>
+      <div class="browse-like">
+        <div class="browse-like-icon"></div><h1>YES</h1>
+      </div> <!-- .browse-like -->
+      <div class="browse-pass">
+        <div class="browse-pass-icon"></div><h1>NO</h1>
+      </div> <!-- .browse-pass -->
+      <p>Likes are anonymous unless you both like each other</p>
+    </div> <!-- .browse-action-box -->
     <a href="#">
       <div class="user-index-box" id="<%=friend.id%>">
-        <h2>
-          <% friend.mutual_friends(@user).each do |user| %>
-            <div class="mutual-friends"><img src="<%= user.picture %>" /><%= user.name %></div>
-          <% end %>
-        </h2>
+        <% friend.mutual_friends(@user).each do |user| %>
+          <div class="mutual-friends"><img src="<%= user.picture %>" /><h2><%= user.name %></h2></div>
+        <% end %>
       </div> <!-- .user-index-box -->
     </a>
     <div class="clear" />
