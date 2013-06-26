@@ -493,11 +493,15 @@ div.dummy {
 }
 
 div.user-browse-photos {
-  float: right;
+  position: absolute;
+  //float: right;
+  //padding: 10px;
+  //margin: -54px 10px 0 0;
   padding: 10px;
-  margin: -54px 10px 0 0;
+  right: 10px;
+  top: 300px;
   color: white;
-  background: rgb(48,48,48);
+  background: rgba(48,48,48, 0.48);
 }
 
 div.user-browse-photos h2 {
