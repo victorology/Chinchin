@@ -19,9 +19,10 @@
 </div> <!-- .empty-data -->
 
 <% else %>
-
   <%= render :partial => "chinchin_card", :locals => {:chinchins => chinchins} %>
-
+  <script>
+      mixpanel.track("With Chinchins");
+  </script>
 <% end %>
 
 </div> <!-- .container -->
