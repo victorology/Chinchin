@@ -45,7 +45,11 @@ class ApplicationController < ActionController::Base
 
   # Added for i18n
   def set_locale
-    accept_language = request.env["HTTP_ACCEPT_LANGUAGE"].split(",")[0]
+    begin
+      accept_language = request.env["HTTP_ACCEPT_LANGUAGE"].split(",")[0]
+    rescue
+      accept_language = 'ko_KR'
+    end
     user_locale = current_user.locale if current_user
 
     I18n.locale = FindLocale.call(:user_locale => user_locale, :accept_language => accept_language)
