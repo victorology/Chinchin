@@ -145,9 +145,10 @@ st.stp_nav.find('nav a').on("click", function() {
     $(this).addClass('selected').siblings().removeClass('selected');
     st.toggle_nav();
     var link_href = $(this).attr('href');
+    var link_title = $(this).text();
     var title, url;
     if (link_href == '#my_likes') {
-        title = "My Likes";
+        title = link_title;
         url = "/likes.js";
     } else if (link_href == '#browse') {
         title = "Chinchin";
@@ -155,13 +156,13 @@ st.stp_nav.find('nav a').on("click", function() {
         show_chinchin_card(browse, title, url);
         return;
     } else if (link_href == '#notifications') {
-        title = "Viewed You";
+        title = link_title;
         url = "/views.js";
     } else if (link_href == '#hot_friends') {
-        title = "Hot Friends";
+        title = link_title;
         url = "/leaderboards.js";
     } else if (link_href == '#messages') {
-        title = "Messages";
+        title = link_title;
         url = "/message_rooms.js";
         show_messages(browse, title, url);
         return;
