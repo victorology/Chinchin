@@ -144,23 +144,23 @@ show_chinchin_card(browse, "Chinchin", "/chinchins.js");
 st.stp_nav.find('nav a').on("click", function() {
     $(this).addClass('selected').siblings().removeClass('selected');
     st.toggle_nav();
-    var link_text = $(this).text();
+    var link_href = $(this).attr('href');
     var title, url;
-    if (link_text == 'Your Likes') {
-        title = "Your Likes";
+    if (link_href == '#my_likes') {
+        title = "My Likes";
         url = "/likes.js";
-    } else if (link_text == 'Browse') {
+    } else if (link_href == '#browse') {
         title = "Chinchin";
         url = "/chinchins.js";
         show_chinchin_card(browse, title, url);
         return;
-    } else if (link_text == 'Viewed You') {
+    } else if (link_href == '#notifications') {
         title = "Viewed You";
         url = "/views.js";
-    } else if (link_text == 'Hot Friends') {
+    } else if (link_href == '#hot_friends') {
         title = "Hot Friends";
         url = "/leaderboards.js";
-    } else if (link_text == 'Messages') {
+    } else if (link_href == '#messages') {
         title = "Messages";
         url = "/message_rooms.js";
         show_messages(browse, title, url);

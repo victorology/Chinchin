@@ -18,9 +18,9 @@
     </a>
     <div class="browse-action-box">
       <% if friend.gender == 'male' %>
-        <h2>Like Him?</h2>
+        <h2><%= t ".like_him" %></h2>
       <% else %>
-        <h2>Like Her?</h2>
+        <h2><%= t ".like_her" %></h2>
       <% end %>
       <div class="browse-like">
         <div class="browse-like-icon"></div><h1>YES</h1>
@@ -28,7 +28,7 @@
       <div class="browse-pass">
         <div class="browse-pass-icon"></div><h1>NO</h1>
       </div> <!-- .browse-pass -->
-      <p>Likes are anonymous unless you both like each other</p>
+      <p><%= t ".like_description" %></p>
     </div> <!-- .browse-action-box -->
     <a href="#">
       <div class="user-index-box" id="<%=friend.id%>">
@@ -46,6 +46,13 @@
     </script>
     <!-- end Mixpanel Chinchins -->
     <script>
+        $(document).ready(function() {
+            var box_width = document.width - 20;
+            $(".browse-action-box").width(box_width+'px');
+
+            $(".user-browse-photos").css("top", document.width-10+"px");
+        });
+
         $('#browse .browse-pass').on("click", function() {
             show_chinchin_card($('#browse'), "Chinchin", "/chinchins.js");
         });

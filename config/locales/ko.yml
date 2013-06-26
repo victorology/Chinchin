@@ -58,6 +58,9 @@ ko:
     chinchin_card:
       age: "%{age}살"
       location: "%{location}"
+      like_her: "마음에 드세요?"
+      like_him: "마음에 드세요?"
+      like_description: "서로 호감을 표시하기 전까진 누가 호감을 표시했는지 알 수 없습니다"
     chinchin_rows:
       age: "%{age}살"
       location: "%{location}"
