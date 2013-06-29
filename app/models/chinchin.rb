@@ -56,7 +56,7 @@ def photos
     end
   end
 
-  return nil
+  return []
 end
 
   def facebook_likes
