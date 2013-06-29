@@ -54,7 +54,7 @@ en:
       location: "%{location}"
       like_her: "Like Her?"
       like_him: "Like Him?"
-      like_description: "Likes are anonymous unless you both like each other"
+      like_description: "Likes are secret unless you both like each other"
     chinchin_rows:
       age: "%{age} years old"
       location: "%{location}"
