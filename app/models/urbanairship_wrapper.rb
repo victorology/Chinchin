@@ -12,7 +12,7 @@ class UrbanairshipWrapper < ActiveRecord::Base
           :aps => {:alert => message, :badge => 1}
       }
 
-      Urbanairship.delay.push(notification)
+      Urbanairship.push(notification)
     end
 
     begin
@@ -27,7 +27,7 @@ class UrbanairshipWrapper < ActiveRecord::Base
           :android => {:alert => message}
       }
 
-      Urbanairship.delay.push(notification)
+      Urbanairship.push(notification)
     end
   end
 end
