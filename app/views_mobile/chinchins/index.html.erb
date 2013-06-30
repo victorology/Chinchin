@@ -58,3 +58,18 @@
     </div>
   </div>
 </div>
+
+<!-- start Mixpanel Chinchin List -->
+<script type="text/javascript">
+  mixpanel.identify(<%= current_user.id %>);
+  mixpanel.people.set({
+    "$name": "<%= current_user.name %>",
+    "$email": "<%= current_user.email %>",
+    "$created": "<%= current_user.created_at %>",
+    "$gender": "<%= current_user.gender %>",
+    "$last_login": new Date(),
+    "referrer": document.referrer
+  });
+  mixpanel.people.increment("visits");
+</script>
+<!-- end Mixpanel Chinchin List -->
