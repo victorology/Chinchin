@@ -14,6 +14,7 @@
       "$chinchins": "no"
     });
     mixpanel.track_links('a.invite-friends', 'Invite Friends');
+    mixpanel.register({"Chinchins": "no"});
   </script>
   <!-- end Mixpanel No Chinchins -->
 </div> <!-- .empty-data -->
@@ -22,6 +23,7 @@
   <%= render :partial => "chinchin_card", :locals => {:chinchins => chinchins} %>
   <script>
       mixpanel.track("With Chinchins");
+      mixpanel.register({"Chinchins": "yes"});
   </script>
 <% end %>
 

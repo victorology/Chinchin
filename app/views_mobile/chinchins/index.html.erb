@@ -70,6 +70,7 @@
     "$last_login": new Date(),
     "referrer": document.referrer
   });
-  mixpanel.people.increment("visits");
+  mixpanel.people.increment("Visits");
+  mixpanel.register({"Gender": "<%= current_user.gender %>"});
 </script>
 <!-- end Mixpanel Chinchin List -->
