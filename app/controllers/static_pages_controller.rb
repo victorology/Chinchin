@@ -18,6 +18,10 @@ class StaticPagesController < ApplicationController
     render :layout => false
   end
 
+  # This controller is for the Privacy Policy
+  def privacy_policy
+  end
+
   def make_chinchin
     @user = User.find(params[:id])
     @user.delay.add_friends_to_chinchin

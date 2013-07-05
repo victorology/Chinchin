@@ -44,6 +44,7 @@ Chinchin2::Application.routes.draw do
   match 'update_chinchin_photos_where_no_photos', to: 'static_pages#update_chinchin_photos_where_no_photos'
   match 'fb4pp01', to: 'static_pages#fb4pp01'
   match 'stats', to: 'static_pages#stats'
+  match 'privacypolicy', to: 'static_pages#privacy_policy'
   match 'push_test/:userId/:message', to: 'static_pages#push_test'
 
   # for testing
