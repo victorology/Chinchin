@@ -34,13 +34,13 @@
     var info_width = document.width - 120 - 30;
     $(".user-index-info").width(info_width+'px');
 
-    if (isMobile.iOS()) {
-    <% if @user.device_token.nil? %>
-        document.location = "chinchinapp://local/send_device_token/";
-    <% end %>
-    } else if (isMobile.Android()) {
-        document.location = "chinchinapp://local/send_apid/";
-    }
+//    if (isMobile.iOS()) {
+    <!--<%# if @user.device_token.nil? %>-->
+//        document.location = "chinchinapp://local/send_device_token/";
+    <!--<%# end %>-->
+//    } else if (isMobile.Android()) {
+//        document.location = "chinchinapp://local/send_apid/";
+//    }
 
   });
 </script>
