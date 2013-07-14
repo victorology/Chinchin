@@ -1,7 +1,9 @@
 <% chinchins.each do |friend| %>
+  <div class="card">
+    
     <a href="#">
-      <div class="user-browse-box" id="<%=friend.id%>">
-        <div class="user-photo-large">
+      <div class="profile-click" id="<%=friend.id%>">
+        <div class="photo-large">
           <div class="dummy" id="<%= friend.id %>" />
           <div class="dummy_name" id="<%= friend.first_name %>" />
           <% if not friend.profile_photos.first.nil? %>
@@ -9,35 +11,39 @@
           <% else  %>
             <img src="http://graph.facebook.com/<%= friend.uid %>/picture?type=large" align="absmiddle" width=100% style="min-width: 320px; min-height: 320px;" />
           <% end %>
-        </div> <!-- .user-photo-large -->
-        <div class="user-browse-photos">
+        </div> <!-- .photo-large -->
+        <div class="card-photo-count">
           <h2><%= (friend.profile_photos || []).size %></h2>
-          <div class="browse-photos-icon"></div>
+          <div class="card-photo-icon"></div>
         </div> <!-- user.browse-photos -->
-      </div> <!-- .user-browse-box -->
+      </div> <!-- .profile-click -->
     </a>
-    <div class="browse-action-box">
+
+    <div class="card-choose">
       <% if friend.gender == 'male' %>
         <h2><%= t ".like_him" %></h2>
       <% else %>
         <h2><%= t ".like_her" %></h2>
       <% end %>
-      <div class="browse-like">
-        <div class="browse-like-icon"></div><h1>YES</h1>
-      </div> <!-- .browse-like -->
-      <div class="browse-pass">
-        <div class="browse-pass-icon"></div><h1>NO</h1>
-      </div> <!-- .browse-pass -->
+      <div class="card-like">
+        <div class="card-like-icon"></div><h1>YES</h1>
+      </div> <!-- .card-like -->
+      <div class="card-pass">
+        <div class="card-pass-icon"></div><h1>NO</h1>
+      </div> <!-- .card-pass -->
       <p><%= t ".like_description" %></p>
-    </div> <!-- .browse-action-box -->
+    </div> <!-- .card-choose -->
+
     <a href="#">
-      <div class="user-index-box" id="<%=friend.id%>">
-        <% friend.mutual_friends(@user).each do |user| %>
-          <div class="mutual-friends"><img src="<%= user.picture %>" /><h2><%= user.name %></h2></div>
-        <% end %>
-      </div> <!-- .user-index-box -->
+      <div class="profile-click" id="<%=friend.id%>">
+        <div class="container-10px">
+          <% friend.mutual_friends(@user).each do |user| %>
+            <div class="list"><img src="<%= user.picture %>" /><h2><%= user.name %></h2></div>
+          <% end %>
+        </div> <!-- container-10px -->
+      </div> <!-- .profile-click -->
     </a>
-    <div class="clear" />
+
     <!-- start Mixpanel Chinchins -->
     <script type="text/javascript">
       mixpanel.people.set({
@@ -46,23 +52,26 @@
       mixpanel.people.increment("Views");
     </script>
     <!-- end Mixpanel Chinchins -->
+
     <script>
-        $(document).ready(function() {
-            var box_width = document.width - 20;
-            $(".browse-action-box").width(box_width+'px');
+      $(document).ready(function() {
+        var box_width = document.width - 20;
+        $(".card-choose").width(box_width+'px');
 
-            $(".user-browse-photos").css("top", document.width-10+"px");
-        });
+        $(".card-photo-count").css("top", document.width-10+"px");
+      });
 
-        $('#browse .browse-pass').on("click", function() {
-            show_chinchin_card($('#browse'), "Chinchin", "/chinchins.js");
-        });
+      $('#browse .card-pass').on("click", function() {
+        show_chinchin_card($('#browse'), "Chinchin", "/chinchins.js");
+      });
 
-        $('#browse .browse-like').on("click", function() {
-            var chinchin_id = $('#browse').find('.dummy').attr('id')
-            $.post('/likes.js', {chinchin_id:chinchin_id}, function() {
-                show_chinchin_card($('#browse'), "Chinchin", "/chinchins.js");
-            });
+      $('#browse .card-like').on("click", function() {
+        var chinchin_id = $('#browse').find('.dummy').attr('id')
+        $.post('/likes.js', {chinchin_id:chinchin_id}, function() {
+          show_chinchin_card($('#browse'), "Chinchin", "/chinchins.js");
         });
+      });
     </script>
+
+  </div> <!-- .card -->
 <% end %>

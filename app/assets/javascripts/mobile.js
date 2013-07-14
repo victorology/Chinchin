@@ -88,7 +88,7 @@ show_chinchins = function(section, title, url) {
     section.find('.container').html('<div class="loader"><img src="/assets/ajax-loader.gif" /></div>');
     $.get(url, function() {
         section.find('.container').find('a').on("click", function() {
-            show_chinchin($(this).find('.user-index-box').attr('id'), $(this).find('h3').text());
+            show_chinchin($(this).find('.profile-click').attr('id'), $(this).find('h2').text());
         });
     });
 }
@@ -98,7 +98,7 @@ show_chinchin_card = function(section, title, url) {
     section.find('.container').html('<div class="loader"><img src="/assets/ajax-loader.gif" /></div>');
     $.get(url, function() {
         section.find('.container').find('a').on("click", function() {
-            show_chinchin(section.find('.user-browse-box').attr('id'), section.find('.dummy_name').attr('id'));
+            show_chinchin(section.find('.profile-click').attr('id'), section.find('.dummy_name').attr('id'));
         });
     });
 }

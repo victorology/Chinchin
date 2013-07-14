@@ -1,4 +1,5 @@
 /* Reset */
+
 html,
 body,
 div,
@@ -127,9 +128,25 @@ table {
   -webkit-user-select: none; /* Disable selection/Copy of UIWebView */
 }
 
+/* mixins, variables, etc. */
+
+$ChinchinRed: rgb(218,28,88);
+
+$black: rgb(28,28,28);
+$grayDark: rgb(48,48,48);
+$grayLight: rgb(238,238,238);
+$white: rgb(255,255,255);
+
+$marginLarge: 30px;
+$marginMid: 20px;
+$marginSmall: 10px;
+$marginTiny: 5px;
+
+/* universal */
+
 body {
-  background: rgb(255,255,255);
-  color: rgb(28,28,28);
+  background: $white;
+  color: $black;
   font-family: 'Helvetica Neue', 'Helvetica-Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;
   font-size: 80%;
   line-height: 1.4;
@@ -137,19 +154,19 @@ body {
 }
 
 h1 {
-  color: white;
-  font-size: 2em;
+  color: $white;
+  font-size: 1.8em;
   font-weight: bold;
   line-height: 44px;
 }
 
 h2 {
-  font-size: 1.34em;
+  font-size: 1.18em;
   font-weight: bold;
 }
 
 a {
-  color: rgb(28,28,28);
+  color: $black;
   text-decoration: none;
 }
 
@@ -157,8 +174,10 @@ img {
   max-width: 100%;
 }
 
+/* navigation */
+
 .stp-nav {
-  background: rgb(0,0,0);
+  background: $black;
   width: 256px;
 }
 
@@ -167,11 +186,11 @@ nav {
 }
 
 nav > a {
-  background: rgb(28,28,28);
-  color: rgb(255, 255, 255);
+  background: $black;
+  color: $white;
   display: block;
-  color: rgb(238,238,238);
-  font-size: 2em;
+  color: $grayLight;
+  font-size: 1.8em;
   font-weight: bold;
   height: 68px;
   line-height: 68px;
@@ -197,8 +216,8 @@ nav > a:after {
 }
 
 nav > a.selected {
-  background: rgb(218,28,88);
-  color: rgb(255,255,255);
+  background: $ChinchinRed;
+  color: $white;
 }
 
 nav > a.selected:after {
@@ -251,7 +270,7 @@ nav > a.selected:after {
 }
 
 header {
-  background: rgb(48,48,48);
+  background: $grayDark;
   display: block;
   height: 44px;
   position: absolute;
@@ -269,7 +288,7 @@ header .header-button {
   left: 7px;
   width: 48px;
   height: 28px;
-  background: rgb(28,28,28);
+  background: $black;
   border: 1px solid rgb(0,0,0);
   color: white;
   position: absolute;
@@ -358,29 +377,215 @@ header .liked span {
 .stp-content-panel {
 }
 
+/* container */
+
 .container {
   padding-top: 44px;
 }
 
 .container-10px {
-  padding: 10px 10px 0 10px;
+  float: left;
+  padding: 10px;
   height: 100%;
 }
 
-.container-10px-255 {
-  padding: 10px 10px 0 10px;
-  background: rgb(255,255,255);
-  height: 100%;
+/* loaders */
+
+div.loader { height: 100px; line-height: 100px; text-align:center; }
+
+div.loader img { vertical-align:middle; }
+
+/* profile click */
+
+div.profile-click { }
+
+/* photos */
+
+div.photo-large {
+  margin-bottom: -5px;
+  width: 100%;
+  overflow: hidden;
+  display: inline-block;
+  position: relative;
 }
 
-.container-255 {
-  background: rgb(255,255,255);
-  height: 100%;
+div.photo-large img {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
-div.loader { height: 100px; line-height: 100px;text-align:center; }
+div.photo-mid {
+  float: left;
+  width: 120px;
+  height: 120px;
+  overflow: hidden;
+  display: block;
+}
 
-div.loader img { vertical-align:middle;}
+div.photo-mid img {
+  float: left;
+  width: 150px;
+  height: 180px;
+  margin: -10px -15px 0 0;
+  display: block;
+}
+
+/* list */
+
+div.list {
+  float: left;
+  margin-bottom: 10px;
+  clear: both;
+}
+
+div.list img {
+  float: left;
+  margin-right: 10px;
+  width: 34px;
+  height: 34px;
+}
+
+div.list h2 {
+  float: right;
+  line-height: 34px;
+}
+
+/* card */
+
+div.card { 
+  margin-top: -44px;
+}
+
+div.card-photo-count {
+  position: absolute;
+  padding: 10px;
+  right: 10px;
+  top: 300px;
+  color: white;
+  background: rgba(48,48,48, 0.48);
+}
+
+div.card-photo-count h2 {
+  float: left;
+}
+
+div.card-photo-icon {
+  float: right;
+  margin-left: 8px;
+  width: 24px;
+  height: 24px;
+  background: image-url('icons/255-camera.svg');
+  background-size: 24px 24px;
+  -webkit-background-size: 24px 24px;
+  -moz-background-size: 24px 24px;
+  -o-background-size: 24px 24px;
+}
+
+div.card-choose {
+  float: left;
+  padding: 10px;
+  width: 100%;
+  color: $white;
+  background: $grayDark;
+}
+
+div.card-choose h2 {
+  margin-bottom: 10px;
+}
+
+div.card-like {
+  cursor: pointer;
+}
+
+div.card-pass {
+  cursor: pointer;
+}
+
+div.card-choose p {
+  float: left;
+  margin-top: 10px;
+}
+
+div.card-like h1 {
+  float: left;
+  padding: 4px 0;
+  width: 49%;
+  text-align: center;
+  background-color: $ChinchinRed;
+}
+
+div.card-pass h1 {
+  float: right;
+  padding: 4px 0;
+  width: 49%;
+  color: $grayDark;
+  text-align: center;
+  background-color: $grayLight;
+}
+
+/* row */
+
+div.row { 
+  margin-bottom: 10px;
+  height: 120px;
+  display: block;
+}
+
+div.row-content {
+  float: left;
+  width: 50%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+div.row-content-info {
+  float: left;
+  padding: 5px 10px 10px 10px;
+  height: 75px;
+}
+
+div.row-content-more {
+  padding: 8px 0 8px 10px;
+  clear: both;
+}
+
+div.row-photo-icon {
+  float: left;
+  margin-right: 5px;
+  width: 17px;
+  height: 17px;
+  background: image-url('icons/48-camera.svg');
+  background-size: 17px 17px;
+  -webkit-background-size: 17px 17px;
+  -moz-background-size: 17px 17px;
+  -o-background-size: 17px 17px;
+}
+
+span.row-photo-count {
+  float: left;
+}
+
+div.row-friend-icon {
+  float: left;
+  margin: 0 5px;
+  width: 18px;
+  height: 18px;
+  background: image-url('icons/48-friends.svg');
+  background-size: 18px 18px;
+  -webkit-background-size: 18px 18px;
+  -moz-background-size: 18px 18px;
+  -o-background-size: 18px 18px;
+}
+
+span.row-friend-count {
+  float: left;
+}
+
+/* content */
 
 div.user-browse-box {
   margin-top: -44px;
