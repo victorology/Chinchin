@@ -395,6 +395,77 @@ div.loader { height: 100px; line-height: 100px; text-align:center; }
 
 div.loader img { vertical-align:middle; }
 
+/* login/register */
+
+div#register h1 {
+  margin: 28px 0;
+  font-size: 4.8em;
+  color: $grayDark;
+}
+
+div#register-info {
+  float: left;
+  clear: both;
+}
+
+div.register-description {
+  height: 80px;
+  clear: both;
+}
+
+div#register-browse-icon {
+  float: left;
+  margin-right: 10px;
+  width: 70px;
+  height: 47px;
+  position: relative;
+  background: image-url('icons/48-friends.svg');
+  background-size: 70px 47px;
+  -webkit-background-size: 70px 47px;
+  -moz-background-size: 70px 47px;
+  -o-background-size: 70px 47px;
+}
+
+div#register-like-icon {
+  float: left;
+  margin-right: 10px;
+  width: 70px;
+  height: 65px;
+  position: relative;
+  background: image-url('icons/48-heart.svg');
+  background-size: 70px 65px;
+  -webkit-background-size: 70px 65px;
+  -moz-background-size: 70px 65px;
+  -o-background-size: 70px 65px;
+}
+
+div#register-chat-icon {
+  float: left;
+  margin-right: 10px;
+  width: 70px;
+  height: 69px;
+  position: relative;
+  background: image-url('icons/48-chat.svg');
+  background-size: 70px 69px;
+  -webkit-background-size: 70px 69px;
+  -moz-background-size: 70px 69px;
+  -o-background-size: 70px 69px;
+}
+
+a.cta-btn {
+  float: left;
+  margin-top: 18px;
+  width: 100%;
+  height: 48px;
+  font-size: 2em;
+  font-weight: bold;
+  color: $white;
+  text-align: center;
+  line-height: 48px;
+  background-color: $ChinchinRed;
+  display: block;
+}
+
 /* profile click */
 
 div.profile-click { }
@@ -565,6 +636,8 @@ span.row-friend-count {
   float: left;
 }
 
+/* messages */
+
 /* list */
 
 div.list {
@@ -581,11 +654,17 @@ div.list img {
 }
 
 div.list h2 {
-  float: right;
+  float: left;
   line-height: 34px;
 }
 
-/* tabs */
+div.list-score {
+  float: right;
+  line-height: 34px;
+  text-align: right;
+}
+
+/* profile tabs */
 
 .tabs li {
   list-style: none;
@@ -597,7 +676,7 @@ div.list h2 {
   padding-top: 14px;
   height: 35px;
   display: inline-block;
-  background: $ChinchinRed;
+  background: $grayLight;
   color: $grayDark;
   text-decoration: none;
   text-align: center;
@@ -621,7 +700,52 @@ div.list h2 {
   color: $white;
 }
 
-/* icons */
+div.tab-profile-photo {
+  float: left;
+  margin: 2px 0 0 2px;
+  width: 104px;
+  height: 104px;
+  overflow:hidden;
+  display: block;
+}
+
+/* profile icons */
+
+div.user-age-icon {
+  float: left;
+  margin-right: 10px;
+  width: 34px;
+  height: 34px;
+  background: image-url('icons/48-calendar.svg');
+  background-size: 34px 34px;
+}
+
+div.user-location-icon {
+  float: left;
+  margin-right: 10px;
+  width: 34px;
+  height: 34px;
+  background: image-url('icons/48-pin.svg');
+  background-size: 34px 34px;
+}
+
+div.user-employer-icon {
+  float: left;
+  margin-right: 10px;
+  width: 34px;
+  height: 34px;
+  background: image-url('icons/48-company.svg');
+  background-size: 34px 34px;
+}
+
+div.user-school-icon {
+  float: left;
+  margin-right: 10px;
+  width: 34px;
+  height: 34px;
+  background: image-url('icons/48-book.svg');
+  background-size: 34px 34px;
+}
 
 /* empty data */
 
@@ -692,54 +816,10 @@ div.empty-messages-icon {
   -o-background-size: 104px 103px;
 }
 
-/* deprecated? */
-
-div.user-browse-box {
-  margin-top: -44px;
-  background: rgb(255,255,255);
-  display: block;
-}
-
-div.user-index-box {
-  background: rgb(255,255,255);
-  margin-bottom: 10px;
-  display: block;
-  height: 120px;
-}
+/* not yet organized */
 
 div.clear {
   clear: left;
-}
-
-div.user-photo {
-  width: 120px;
-  height: 120px;
-  overflow:hidden;
-  display: block;
-  float: left;
-}
-
-div.user-photo img {
-  width: 150px;
-  height: 180px;
-  margin: -10px -15px 0 0;
-  display: block;
-}
-
-div.user-photo-large {
-  margin-bottom: -5px;
-  width: 100%;
-  overflow: hidden;
-  display: inline-block;
-  position: relative;
-}
-
-div.user-photo-large img {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
 }
 
 div.hot-user-photo {
@@ -795,213 +875,13 @@ div.message-room-last-message {
   color: gray;
 }
 
-div.total-score {
-  float: right;
-  text-align: right;
-}
-
 div.dummy {
   margin-top: 100%;
-}
-
-div.user-browse-photos {
-  position: absolute;
-  //float: right;
-  //padding: 10px;
-  //margin: -54px 10px 0 0;
-  padding: 10px;
-  right: 10px;
-  top: 300px;
-  color: white;
-  background: rgba(48,48,48, 0.48);
-}
-
-div.user-browse-photos h2 {
-  float: left;
-}
-
-div.browse-photos-icon {
-  float: right;
-  margin-left: 8px;
-  width: 24px;
-  height: 24px;
-  background: image-url('icons/255-camera.svg');
-  background-size: 24px 24px;
-  -webkit-background-size: 24px 24px;
-  -moz-background-size: 24px 24px;
-  -o-background-size: 24px 24px;
-}
-
-div.browse-action-box {
-  float: left;
-  padding: 10px;
-  width: 100%;
-  color: white;
-  background: rgb(48,48,48);
-}
-
-div.browse-action-box h2 {
-  margin-bottom: 10px;
-}
-
-div.browse-action-box p {
-  float: left;
-  margin-top: 10px;
-}
-
-div.browse-pass {
-  cursor: pointer;
-}
-
-div.browse-like {
-  cursor: pointer;
-}
-
-div.browse-like h1 {
-  float: left;
-  padding: 4px 0;
-  width: 49%;
-  text-align: center;
-  background-color: rgb(238,28,88);
-}
-
-div.browse-pass h1 {
-  float: right;
-  padding: 4px 0;
-  width: 49%;
-  color: rgb(48,48,48);
-  text-align: center;
-  background-color: rgb(238,238,238);
-}
-
-div.user-index-info {
-  float: left;
-  width: 50%;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
 }
 
 div.hot-user-index-info h3 {
   margin-top: 4px;
   font-size: 1.5em;
-}
-
-div.user-index-basic-info {
-  float: left;
-  padding: 5px 10px 10px 10px;
-  height: 70px;
-}
-
-div.user-index-basic-info h3 {
-  font-size: 1.5em;
-}
-
-div.user-index-additional-info {
-  clear: both;
-  padding: 8px 0 8px 10px;
-}
-
-div.right-arrow {
-  background: image-url('icons/238-arrow.svg');
-  float: right;
-  top: 48px;
-  right: 10px;
-  width: 12px;
-  height: 18px;
-  position: relative;
-  background-size: 12px 18px;
-  -webkit-background-size: 12px 18px;
-  -moz-background-size: 12px 18px;
-  -o-background-size: 12px 18px;
-}
-
-div.user-photo-count {
-  float: left;
-  margin-right: 5px;
-  width: 17px;
-  height: 17px;
-  background: image-url('icons/48-camera.svg');
-  background-size: 17px 17px;
-  -webkit-background-size: 17px 17px;
-  -moz-background-size: 17px 17px;
-  -o-background-size: 17px 17px;
-}
-
-span.picture-count {
-  float: left;
-}
-
-div.user-friend-count {
-  float: left;
-  margin: 0 5px;
-  width: 18px;
-  height: 18px;
-  background: image-url('icons/48-friends.svg');
-  background-size: 18px 18px;
-  -webkit-background-size: 18px 18px;
-  -moz-background-size: 18px 18px;
-  -o-background-size: 18px 18px;
-}
-
-span.mutual-friend-count {
-  float: left;
-}
-
-div.profile-user-age {
-  line-height: 54px;
-  border-bottom: 1px solid rgb(238,238,238);
-}
-
-div.user-age-icon {
-  float: left;
-  margin: 10px;
-  width: 34px;
-  height: 34px;
-  background: image-url('icons/48-calendar.svg');
-  background-size: 34px 34px;
-}
-
-div.profile-user-location {
-  line-height: 54px;
-  border-bottom: 1px solid rgb(238,238,238);
-}
-
-div.user-location-icon {
-  float: left;
-  margin: 10px;
-  width: 34px;
-  height: 34px;
-  background: image-url('icons/48-pin.svg');
-  background-size: 34px 34px;
-}
-
-div.profile-user-employer {
-  line-height: 54px;
-  border-bottom: 1px solid rgb(238,238,238);
-}
-
-div.user-employer-icon {
-  float: left;
-  margin: 10px;
-  width: 34px;
-  height: 34px;
-  background: image-url('icons/48-company.svg');
-  background-size: 34px 34px;
-}
-
-div.profile-user-school {
-  line-height: 54px;
-  border-bottom: 1px solid rgb(238,238,238);
-}
-
-div.user-school-icon {
-  float: left;
-  margin: 10px;
-  width: 34px;
-  height: 34px;
-  background: image-url('icons/48-book.svg');
-  background-size: 34px 34px;
 }
 
 .notification {
@@ -1018,109 +898,6 @@ div.user-school-icon {
 
 .notification h2 {
   margin-bottom:7px;
-}
-
-.container-profile-photos {
-  margin-right: 2px;
-}
-
-div.user-profile-photo {
-  float: left;
-  margin: 2px 0 0 2px;
-  width: 104px;
-  height: 104px;
-  overflow:hidden;
-  display: block;
-}
-
-div.profile-friends {
-  clear: both;
-}
-
-div.mutual-friends {
-  line-height: 44px;
-}
-
-div.mutual-friends img {
-  float: left;
-  margin: 10px 10px 0 10px;
-  width: 34px;
-  height: 34px;
-}
-
-div.user-location {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-div#register h1 {
-  margin: 28px 0;
-  font-size: 4.8em;
-  color: rgb(48,48,48);
-}
-
-div#register-info {
-  float: left;
-  clear: both;
-}
-
-div.register-description {
-  height: 80px;
-  clear: both;
-}
-
-div#register-browse-icon {
-  float: left;
-  margin-right: 10px;
-  width: 70px;
-  height: 47px;
-  position: relative;
-  background: image-url('icons/48-friends.svg');
-  background-size: 70px 47px;
-  -webkit-background-size: 70px 47px;
-  -moz-background-size: 70px 47px;
-  -o-background-size: 70px 47px;
-}
-
-div#register-like-icon {
-  float: left;
-  margin-right: 10px;
-  width: 70px;
-  height: 65px;
-  position: relative;
-  background: image-url('icons/48-heart.svg');
-  background-size: 70px 65px;
-  -webkit-background-size: 70px 65px;
-  -moz-background-size: 70px 65px;
-  -o-background-size: 70px 65px;
-}
-
-div#register-chat-icon {
-  float: left;
-  margin-right: 10px;
-  width: 70px;
-  height: 69px;
-  position: relative;
-  background: image-url('icons/48-chat.svg');
-  background-size: 70px 69px;
-  -webkit-background-size: 70px 69px;
-  -moz-background-size: 70px 69px;
-  -o-background-size: 70px 69px;
-}
-
-a.cta-btn {
-  float: left;
-  margin-top: 18px;
-  width: 100%;
-  height: 48px;
-  font-size: 2em;
-  font-weight: bold;
-  color: rgb(255,255,255);
-  text-align: center;
-  line-height: 48px;
-  background-color: rgb(238,28,88);
-  display: block;
 }
 
 .message-box {
