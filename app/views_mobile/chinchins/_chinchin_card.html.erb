@@ -52,25 +52,25 @@
       mixpanel.people.increment("Views");
     </script>
     <!-- end Mixpanel Chinchins -->
-
+    
     <script>
-      $(document).ready(function() {
-        var box_width = document.width - 20;
-        $(".card-choose").width(box_width+'px');
+        $(document).ready(function() {
+            var box_width = document.width - 20;
+            $(".card-choose").width(box_width+'px');
 
-        $(".card-photo-count").css("top", document.width-10+"px");
-      });
-
-      $('#browse .card-pass').on("click", function() {
-        show_chinchin_card($('#browse'), "Chinchin", "/chinchins.js");
-      });
-
-      $('#browse .card-like').on("click", function() {
-        var chinchin_id = $('#browse').find('.dummy').attr('id')
-        $.post('/likes.js', {chinchin_id:chinchin_id}, function() {
-          show_chinchin_card($('#browse'), "Chinchin", "/chinchins.js");
+            $(".card-photo-count").css("top", document.width-10+"px");
         });
-      });
+
+        $('#browse .card-pass').on("click", function() {
+            show_chinchin_card($('#browse'), "Chinchin", "/chinchins.js");
+        });
+
+        $('#browse .card-like').on("click", function() {
+            var chinchin_id = $('#browse').find('.dummy').attr('id')
+            $.post('/likes.js', {chinchin_id:chinchin_id}, function() {
+                show_chinchin_card($('#browse'), "Chinchin", "/chinchins.js");
+            });
+        });
     </script>
 
   </div> <!-- .card -->
