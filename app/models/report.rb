@@ -1,4 +1,24 @@
 class Report < ActiveRecord::Base
+  def self.total_user_per_day(started_at, ended_at)
+    total = User.where("created_at >= ? and created_at <= ?", started_at, ended_at).group("DATE_TRUNC('day', created_at)").count
+    male = User.where("created_at >= ? and created_at <= ? and gender = ?", started_at, ended_at, "male").group("DATE_TRUNC('day', created_at)").count
+    female = User.where("created_at >= ? and created_at <= ? and gender = ?", started_at, ended_at, "female").group("DATE_TRUNC('day', created_at)").count
+      
+    keys = total.keys
+    total.default = 0
+    male.default = 0
+    female.default = 0
+    result = {}
+    keys.each do |key|
+      t = total[key]
+      m = male[key]
+      f = female[key]
+      result[key] = {'total'=>t, 'male'=>m, 'female'=>f}
+    end
+
+    result
+  end
+
   def self.generate
     total_user = User.all.count
     total_male_user = 0
