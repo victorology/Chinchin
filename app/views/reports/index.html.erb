@@ -30,7 +30,7 @@
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
-	var parseDate = d3.time.format("%Y-%m-%d %H:%M:%S").parse;
+	var parseDate = d3.time.format("%Y-%m-%d").parse;
 
 	var x = d3.time.scale()
 	    .range([0, width]);
@@ -66,9 +66,7 @@
 			return d3.ascending(a.key, b.key);
 		});
 
-
-		console.log(data);
-		color.domain(["total", "male", "female"]);
+		color.domain(["none", "one", "two", "three"]);
 
 		data.forEach(function(d) {
 			d.key = parseDate(d.key);
@@ -105,8 +103,6 @@
   	        .attr("dy", ".71em")
   	        .style("text-anchor", "end")
   
-		 console.log(heads);
-
 		var head = svg.selectAll(".head")
 			.data(heads)
 			.enter().append("g")
@@ -117,10 +113,12 @@
 			.attr("d", function(d) { return line(d.values); })
 			.style("stroke", function(d) { return color(d.name); });
 
-	    // svg.append("path")
-     //    	.datum(data)
-  	  //       .attr("class", "line")
-  	  //       .attr("d", line);
+		head.append("text")
+      		.datum(function(d) { return {name: d.name, value: d.values[d.values.length - 1]}; })
+      		.attr("transform", function(d) { return "translate(" + x(d.value.key) + "," + y(d.value.count) + ")"; })
+      		.attr("x", 3)
+      		.attr("dy", ".35em")
+      		.text(function(d) { return d.name; });
 	});
 	</script>
 </body>

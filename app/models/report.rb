@@ -13,10 +13,43 @@ class Report < ActiveRecord::Base
       t = total[key]
       m = male[key]
       f = female[key]
-      result[key] = {'total'=>t, 'male'=>m, 'female'=>f}
+      result[key[0..9]] = {'total'=>t, 'male'=>m, 'female'=>f}
     end
 
     result
+  end
+
+  def self.count_chinchins_per_day(started_at, ended_at)
+    result = {}
+
+    # started_at = Date.strptime(started_at, "%Y-%m-%d")
+    # ended_at = Date.strptime(ended_at, "%Y-%m-%d")
+    if ended_at > Date.today
+      ended_at = Date.today
+    end
+    started_at.upto(ended_at) do |day|
+      result[day.strftime("%Y-%m-%d")] = count_chinchins_at_certain_day(day)
+    end
+
+    result
+  end
+
+  def self.count_chinchins_at_certain_day(day)
+    count = {"none"=>0, "one"=>0, "two"=>0, "three"=>0}
+    User.where("created_at >= ? and created_at <= ?", day.beginning_of_day, day.end_of_day).each do |user|
+      c = Chinchin.joins(:users).where("users.id = ?", user.id)
+                                .where("chinchins.user_id is not null")
+                                .where("users.created_at >= ? and users.created_at <= ?", day.beginning_of_day, day.end_of_day)
+                                .count
+
+      case c
+      when 0 then count["none"] += 1
+      when 1 then count["one"] += 1
+      when 2 then count["two"] += 1
+      else count["three"] += 1
+      end
+    end
+    count
   end
 
   def self.generate
