@@ -36,10 +36,10 @@ class Report < ActiveRecord::Base
 
   def self.count_chinchins_at_certain_day(day)
     count = {"none"=>0, "one"=>0, "two"=>0, "three"=>0}
-    User.where("created_at >= ? and created_at <= ?", day.beginning_of_day, day.end_of_day).each do |user|
+    User.where("created_at <= ?", day.end_of_day).each do |user|
       c = Chinchin.joins(:users).where("users.id = ?", user.id)
                                 .where("chinchins.user_id is not null")
-                                .where("users.created_at >= ? and users.created_at <= ?", day.beginning_of_day, day.end_of_day)
+                                .where("users.created_at <= ?", day.end_of_day)
                                 .count
 
       case c

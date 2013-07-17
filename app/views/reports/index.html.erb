@@ -1,9 +1,26 @@
 <html lang=ko>
 <head>
 	<script type="text/javascript" src="/assets/d3.v3.js"></script>
+	<script type="text/javascript" src="/assets/jquery.js"></script>
 	<style>
 	body {
-	  font: 10px sans-serif;
+		font: 10px sans-serif;
+	}
+
+	svg .title {
+		font-size: 1.2em;
+		font-weight: bold;
+	}
+
+	.container {
+		float: left;
+		/*width: auto;
+		height: auto;
+		padding: 10px 10px 10px 10px;
+		border-style: solid;
+		border-width: 1px;*/
+		margin-left: 20px;
+		margin-top: 20px;
 	}
 
 	.axis path,
@@ -26,53 +43,49 @@
 </head>
 <body>
 	<script type="text/javascript">
-	var margin = {top: 20, right: 20, bottom: 30, left: 50},
-    width = 960 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
-
 	var parseDate = d3.time.format("%Y-%m-%d").parse;
-
-	var x = d3.time.scale()
-	    .range([0, width]);
-
 	var color = d3.scale.category10();
 
-	var y = d3.scale.linear()
-	    .range([height, 0]);
+    var drawMultiLineGraph = function(data, title, domain, width, height) {
+		var margin = {top: 20, right: 20, bottom: 30, left: 50};
+	    width = width - margin.left - margin.right;
+	    height = height - margin.top - margin.bottom;
 
-	var xAxis = d3.svg.axis()
-	    .scale(x)
-	    .orient("bottom");
+		var x = d3.time.scale()
+		    .range([0, width]);
 
-	var yAxis = d3.svg.axis()
-	    .scale(y)
-	    .orient("left");
+		var y = d3.scale.linear()
+		    .range([height, 0]);
 
-	var line = d3.svg.line()
-		.interpolate("basis")
-	    .x(function(d) { return x(d.key); })
-	    .y(function(d) { return y(d.count); });
+		var xAxis = d3.svg.axis()
+		    .scale(x)
+		    .orient("bottom");
 
-	var svg = d3.select("body").append("svg")
-    	.attr("width", width + margin.left + margin.right)
-    	.attr("height", height + margin.top + margin.bottom)
-  		.append("g")
-    	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+		var yAxis = d3.svg.axis()
+		    .scale(y)
+		    .orient("left");
 
-	var url = '/reports/2013-04-01/2013-07-12/'		
-	d3.json(url, function(error, data) {
-		data = d3.entries(data);
-		data = data.sort(function(a, b) {
-			return d3.ascending(a.key, b.key);
-		});
+		var line = d3.svg.line()
+			.interpolate("basis")
+		    .x(function(d) { return x(d.key); })
+		    .y(function(d) { return y(d.count); });
 
-		color.domain(["none", "one", "two", "three"]);
+		var svg = d3.select("body").append("svg")
+			.attr("class", "container")
+	    	.attr("width", width + margin.left + margin.right)
+	    	.attr("height", height + margin.top + margin.bottom)
+	  		.append("g")
+	    	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-		data.forEach(function(d) {
-			d.key = parseDate(d.key);
-		});
+		svg.append("text")
+			.attr("class", "title")
+			.attr("dx", function(d) { return 10; })
+			.attr("dy", function(d) { return -10; })
+			.text(''+title);
 
-		var heads = color.domain().map(function(name) {
+		color.domain(domain);
+
+    	var heads = color.domain().map(function(name) {
 			return {
 				name: name,
 				values: data.map(function(d) {
@@ -113,12 +126,41 @@
 			.attr("d", function(d) { return line(d.values); })
 			.style("stroke", function(d) { return color(d.name); });
 
-		head.append("text")
-      		.datum(function(d) { return {name: d.name, value: d.values[d.values.length - 1]}; })
-      		.attr("transform", function(d) { return "translate(" + x(d.value.key) + "," + y(d.value.count) + ")"; })
-      		.attr("x", 3)
-      		.attr("dy", ".35em")
-      		.text(function(d) { return d.name; });
+		// head.append("text")
+  //     		.datum(function(d) { return {name: d.name, value: d.values[d.values.length - 1]}; })
+  //     		.attr("transform", function(d) { return "translate(" + x(d.value.key) + "," + y(d.value.count) + ")"; })
+  //     		.attr("x", 3)
+  //     		.attr("dy", ".35em")
+  //     		.text(function(d) { return d.name; });
+    }
+
+    var drawDashboard = function(data) {
+    	data = d3.entries(data);
+		data = data.sort(function(a, b) {
+			return d3.ascending(a.key, b.key);
+		});
+
+		data.forEach(function(d) {
+			d.key = parseDate(d.key);
+		});
+
+		drawMultiLineGraph(data, 'Total User', ["total", "male", "female"], 600, 300);
+		drawMultiLineGraph(data, 'Friends in Chinchin', ["total", "male", "female"], 600, 300);
+    }
+
+    var gdata;
+    var getDataAndCopy = function(error, data) {
+    	gdata = data;
+    	drawDashboard(gdata);
+    }
+
+	var url = '/reports/2013-04-01/2013-07-12/'		
+	d3.json(url, getDataAndCopy);
+
+	$(document).ready(function() {
+		$("#draw").click(function() {
+			alert(gdata);
+		});
 	});
 	</script>
 </body>

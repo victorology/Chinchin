@@ -37,9 +37,19 @@ class ApplicationController < ActionController::Base
     current_user
   end
 
+  def admin_logged_in?
+    admin_user_signed_in?
+  end
+
   def login_required
     unless logged_in?
       redirect_to root_url
+    end
+  end
+
+  def admin_login_required
+    unless admin_logged_in?
+      redirect_to "/admin"
     end
   end
 
