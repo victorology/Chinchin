@@ -1,40 +1,46 @@
 <% chinchins.each do |friend| %>
     <a href="#">
-      <div class="user-index-box" id="<%=friend.id%>">
-        <div class="user-photo">
-          <%= image_tag ( friend.picture('large') ), :align => "absmiddle", :width => "120", :style => "min-width: 120px; min-height: 120px;" %>
-        </div> <!-- .user-photo -->
-        <div class="user-index-info">
-          <div class="user-index-basic-info">
-            <h3><%= friend.first_name %></h3>
-            <% if age(friend.birthday) %>
-                <div class="user-age"><%= t '.age', :age => age(friend.birthday) %></div>
-            <% end %>
-            <% if friend.location %>
-                <div class="user-location"><%= t '.location', :location => friend.location %></div>
-            <% end %>
-            <% if friend.employer %>
-                <div class="user-employer"><%= t '.employer', :employer => friend.employer %></div>
-            <% end %>
-            <% if friend.school %>
-                <div class="user-school"><%= t '.school', :school => friend.school %></div>
-            <% end %>
-          </div> <!-- .user-index-basic-info -->
-          <div class="user-index-additional-info">
-            <div class="user-photo-count"></div>
-          <span class="picture-count">
-            <%= (friend.profile_photos || []).size %>
-          </span>
-            <div class="user-friend-count"></div>
-          <span class="mutual-friend-count">
-            <%= friend.mutual_friends(@user).count %>
-            <% if friend.mutual_friends(@user).count == 1 %> mutual friend
-            <% else %> mutual friends
-            <% end %>
-          </span>
-          </div>
-        </div> <!-- .user-index-info -->
-      </div> <!-- .user-index-box -->
+      <div class="profile-click" id="<%=friend.id%>">
+        <div class="row">
+
+          <div class="photo-mid">
+            <%= image_tag ( friend.picture('large') ), :align => "absmiddle", :width => "120", :style => "min-width: 120px; min-height: 120px;" %>
+          </div> <!-- .photo-mid -->
+
+          <div class="row-content">
+
+            <div class="row-content-info">
+              <h2><%= friend.first_name %></h2>
+              <% if age(friend.birthday) %>
+                <p><%= t '.age', :age => age(friend.birthday) %></p>
+              <% end %>
+              <% if friend.location %>
+                <p><%= t '.location', :location => friend.location %></p>
+              <% end %>
+              <% if friend.employer %>
+                <p><%= t '.employer', :employer => friend.employer %></p>
+              <% end %>
+              <% if friend.school %>
+                <p><%= t '.school', :school => friend.school %></p>
+              <% end %>
+            </div> <!-- .row-content-info -->
+
+            <div class="row-content-more">
+              <div class="row-photo-icon"></div>
+              <span class="row-photo-count">
+                <%= (friend.profile_photos || []).size %>
+              </span>
+              <div class="row-friend-icon"></div>
+              <span class="row-friend-count">
+                <%= friend.mutual_friends(@user).count %>
+                  <% if friend.mutual_friends(@user).count == 1 %> mutual friend <% else %> mutual friends
+                <% end %>
+              </span>
+            </div> <!-- .row-content-more -->
+
+          </div> <!-- .row-content -->
+
+        </div> <!-- .row -->
+      </div> <!-- .profile-click -->
     </a>
-    <div class="clear" />
 <% end %>

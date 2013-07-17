@@ -1,11 +1,11 @@
-<div class="user-photo-large">
+<div class="photo-large">
   <div class="dummy" id="<%= @chinchin.id %>" />
   <% if not @chinchin.profile_photos.first.nil? %>
     <img src="<%= @chinchin.profile_photos.first.source_url %>" align="absmiddle" width=100% style="min-width: 320px; min-height: 320px;" />
   <% else  %>
     <img src="http://graph.facebook.com/<%= @chinchin.uid %>/picture?type=large" align="absmiddle" width=100% style="min-width: 320px; min-height: 320px;" />
   <% end %>
-</div> <!-- .user-photo-large -->
+</div> <!-- .photo-large -->
 
 <ul class="tabs">
   <li class="tab-profile"><a href="#tab-profile"><%= t '.profile' %></a></li>
@@ -14,40 +14,38 @@
 </ul>
 
 <div id="tab-profile">
-  <h2>
+  <div class="container-10px">
     <% if age(@chinchin.birthday) %>
-        <div class="profile-user-age"><div class="user-age-icon"></div><%= t '.age', :age => age(@chinchin.birthday) %></div>
+      <div class="list"><div class="user-age-icon"></div><h2><%= t '.age', :age => age(@chinchin.birthday) %></h2></div>
     <% end %>
     <% if @chinchin.location %>
-        <div class="profile-user-location"><div class="user-location-icon"></div><%= t '.location', :location => @chinchin.location %></div>
+      <div class="list"><div class="user-location-icon"></div><h2><%= t '.location', :location => @chinchin.location %></h2></div>
     <% end %>
     <% if @chinchin.employer %>
-        <div class="profile-user-employer"><div class="user-employer-icon"></div><%= t '.employer', :employer => @chinchin.employer %></div>
+      <div class="list"><div class="user-employer-icon"></div><h2><%= t '.employer', :employer => @chinchin.employer %></h2></div>
     <% end %>
     <% if @chinchin.school %>
-        <div class="profile-user-school"><div class="user-school-icon"></div><%= t '.school', :school => @chinchin.school %></div>
+      <div class="list"><div class="user-school-icon"></div><h2><%= t '.school', :school => @chinchin.school %></h2></div>
     <% end %>
-  </h2>
+  </div> <!-- .container-10px -->
 </div> <!-- #tab-profile -->
 
 <div id="tab-photos">
-  <div class="container-profile-photos">
-    <% if @photos %>
-        <% @photos.each do |photo| %>
-            <div class="user-profile-photo">
-              <%= image_tag photo.picture_url %>
-            </div> <!-- .user-profile-photo -->
-        <% end %>
-    <% end  %>
-  </div> <!-- .container-profile-photos -->
+  <% if @photos %>
+    <% @photos.each do |photo| %>
+      <div class="tab-profile-photo">
+        <%= image_tag photo.picture_url %>
+      </div> <!-- .user-profile-photo -->
+    <% end %>
+  <% end  %>
 </div> <!-- #tab-photos -->
 
 <div id="tab-friends">
-  <h2>
+  <div class="container-10px">
     <% @chinchin.mutual_friends(@user).each do |user| %>
-      <div class="mutual-friends"><img src="<%= user.picture %>" /><%= user.name %></div>
+      <div class="list"><img src="<%= user.picture %>" /><h2><%= user.name %></h2></div>
     <% end %>
-  </h2>
+  </div> <!-- .container-10px -->
 </div> <!-- #tab-friends -->
 
 <script type="text/javascript">
@@ -89,7 +87,7 @@
         });
 
         var photo_size = (document.width - 8) / 3.0;
-        $('.user-profile-photo').width(photo_size+'px');
-        $('.user-profile-photo').height(photo_size+'px');
+        $('.tab-profile-photo').width(photo_size+'px');
+        $('.tab-profile-photo').height(photo_size+'px');
     });
 </script>

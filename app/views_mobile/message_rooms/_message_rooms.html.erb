@@ -3,7 +3,7 @@
   <% if message_rooms.nil? or message_rooms.size == 0 %>
 
       <div class="empty-data">
-        <div class="empty-message-rooms-icon"></div>
+        <div class="empty-messages-icon"></div>
         <h1><%= t '.no_message_rooms' %></h1>
         <p><%= t '.no_message_rooms_long' %></p>
       </div> <!-- .empty-data -->
@@ -14,7 +14,8 @@
 
   <% end %>
 
-</div> <!-- .container -->
+</div> <!-- .container-10px -->
+
 <script>
     $(document).ready(function() {
         var info_width = document.width - 120 - 30;

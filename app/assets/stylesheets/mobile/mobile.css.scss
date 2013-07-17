@@ -1,4 +1,5 @@
 /* Reset */
+
 html,
 body,
 div,
@@ -127,9 +128,25 @@ table {
   -webkit-user-select: none; /* Disable selection/Copy of UIWebView */
 }
 
+/* mixins, variables, etc. */
+
+$ChinchinRed: rgb(218,28,88);
+
+$black: rgb(28,28,28);
+$grayDark: rgb(48,48,48);
+$grayLight: rgb(238,238,238);
+$white: rgb(255,255,255);
+
+$marginLarge: 30px;
+$marginMid: 20px;
+$marginSmall: 10px;
+$marginTiny: 5px;
+
+/* universal */
+
 body {
-  background: rgb(255,255,255);
-  color: rgb(28,28,28);
+  background: $white;
+  color: $black;
   font-family: 'Helvetica Neue', 'Helvetica-Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;
   font-size: 80%;
   line-height: 1.4;
@@ -137,19 +154,19 @@ body {
 }
 
 h1 {
-  color: white;
-  font-size: 2em;
+  color: $white;
+  font-size: 1.8em;
   font-weight: bold;
   line-height: 44px;
 }
 
 h2 {
-  font-size: 1.34em;
+  font-size: 1.18em;
   font-weight: bold;
 }
 
 a {
-  color: rgb(28,28,28);
+  color: $black;
   text-decoration: none;
 }
 
@@ -157,8 +174,10 @@ img {
   max-width: 100%;
 }
 
+/* navigation */
+
 .stp-nav {
-  background: rgb(0,0,0);
+  background: $black;
   width: 256px;
 }
 
@@ -167,11 +186,11 @@ nav {
 }
 
 nav > a {
-  background: rgb(28,28,28);
-  color: rgb(255, 255, 255);
+  background: $black;
+  color: $white;
   display: block;
-  color: rgb(238,238,238);
-  font-size: 2em;
+  color: $grayLight;
+  font-size: 1.8em;
   font-weight: bold;
   height: 68px;
   line-height: 68px;
@@ -197,8 +216,8 @@ nav > a:after {
 }
 
 nav > a.selected {
-  background: rgb(218,28,88);
-  color: rgb(255,255,255);
+  background: $ChinchinRed;
+  color: $white;
 }
 
 nav > a.selected:after {
@@ -251,7 +270,7 @@ nav > a.selected:after {
 }
 
 header {
-  background: rgb(48,48,48);
+  background: $grayDark;
   display: block;
   height: 44px;
   position: absolute;
@@ -269,7 +288,7 @@ header .header-button {
   left: 7px;
   width: 48px;
   height: 28px;
-  background: rgb(28,28,28);
+  background: $black;
   border: 1px solid rgb(0,0,0);
   color: white;
   position: absolute;
@@ -358,485 +377,30 @@ header .liked span {
 .stp-content-panel {
 }
 
+/* container */
+
 .container {
   padding-top: 44px;
 }
 
 .container-10px {
-  padding: 10px 10px 0 10px;
-  height: 100%;
-}
-
-.container-10px-255 {
-  padding: 10px 10px 0 10px;
-  background: rgb(255,255,255);
-  height: 100%;
-}
-
-.container-255 {
-  background: rgb(255,255,255);
-  height: 100%;
-}
-
-div.loader { height: 100px; line-height: 100px;text-align:center; }
-
-div.loader img { vertical-align:middle;}
-
-div.user-browse-box {
-  margin-top: -44px;
-  background: rgb(255,255,255);
-  display: block;
-}
-
-div.user-index-box {
-  background: rgb(255,255,255);
-  margin-bottom: 10px;
-  display: block;
-  height: 120px;
-}
-
-div.clear {
-  clear: left;
-}
-
-div.user-photo {
-  width: 120px;
-  height: 120px;
-  overflow:hidden;
-  display: block;
-  float: left;
-}
-
-div.user-photo img {
-  width: 150px;
-  height: 180px;
-  margin: -10px -15px 0 0;
-  display: block;
-}
-
-div.user-photo-large {
-  margin-bottom: -5px;
-  width: 100%;
-  overflow: hidden;
-  display: inline-block;
-  position: relative;
-}
-
-div.user-photo-large img {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-
-div.hot-user-photo {
-  float: left;
-  margin: 0 10px 10px 0;
-  width: 34px;
-  height: 34px;
-  overflow:hidden;
-  display: block;
-}
-
-div.message-room-index-box {
-  background: rgb(255,255,255);
-  margin-bottom: 10px;
-  display: block;
-  height: 120px;
-}
-
-div.message-room-user-photo {
-  width: 120px;
-  height: 120px;
-  overflow:hidden;
-  display: block;
-  float: left;
-}
-
-div.message-room-user-photo img {
-  width: 150px;
-  height: 180px;
-  margin: -10px -15px 0 0;
-  display: block;
-}
-
-div.message-room-info {
-  float: left;
-  width: 50%;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-div.message-room-last-message h3 {
-  font-size: 1.5em;
-}
-
-div.message-room-last-message {
-  float: left;
-  padding: 5px 10px 10px 10px;
-  height: 70px;
-}
-
-.message-room-status-0 {
-  color: gray;
-}
-
-div.total-score {
-  float: right;
-  text-align: right;
-}
-
-div.dummy {
-  margin-top: 100%;
-}
-
-div.user-browse-photos {
-  position: absolute;
-  //float: right;
-  //padding: 10px;
-  //margin: -54px 10px 0 0;
-  padding: 10px;
-  right: 10px;
-  top: 300px;
-  color: white;
-  background: rgba(48,48,48, 0.48);
-}
-
-div.user-browse-photos h2 {
-  float: left;
-}
-
-div.browse-photos-icon {
-  float: right;
-  margin-left: 8px;
-  width: 24px;
-  height: 24px;
-  background: image-url('icons/255-camera.svg');
-  background-size: 24px 24px;
-  -webkit-background-size: 24px 24px;
-  -moz-background-size: 24px 24px;
-  -o-background-size: 24px 24px;
-}
-
-div.browse-action-box {
   float: left;
   padding: 10px;
-  width: 100%;
-  color: white;
-  background: rgb(48,48,48);
+  height: 100%;
 }
 
-div.browse-action-box h2 {
-  margin-bottom: 10px;
-}
+/* loaders */
 
-div.browse-action-box p {
-  float: left;
-  margin-top: 10px;
-}
+div.loader { height: 100px; line-height: 100px; text-align:center; }
 
-div.browse-pass {
-  cursor: pointer;
-}
+div.loader img { vertical-align:middle; }
 
-div.browse-like {
-  cursor: pointer;
-}
-
-div.browse-like h1 {
-  float: left;
-  padding: 4px 0;
-  width: 49%;
-  text-align: center;
-  background-color: rgb(238,28,88);
-}
-
-div.browse-pass h1 {
-  float: right;
-  padding: 4px 0;
-  width: 49%;
-  color: rgb(48,48,48);
-  text-align: center;
-  background-color: rgb(238,238,238);
-}
-
-div.user-index-info {
-  float: left;
-  width: 50%;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-div.hot-user-index-info h3 {
-  margin-top: 4px;
-  font-size: 1.5em;
-}
-
-div.user-index-basic-info {
-  float: left;
-  padding: 5px 10px 10px 10px;
-  height: 70px;
-}
-
-div.user-index-basic-info h3 {
-  font-size: 1.5em;
-}
-
-div.user-index-additional-info {
-  clear: both;
-  padding: 8px 0 8px 10px;
-}
-
-div.right-arrow {
-  background: image-url('icons/238-arrow.svg');
-  float: right;
-  top: 48px;
-  right: 10px;
-  width: 12px;
-  height: 18px;
-  position: relative;
-  background-size: 12px 18px;
-  -webkit-background-size: 12px 18px;
-  -moz-background-size: 12px 18px;
-  -o-background-size: 12px 18px;
-}
-
-div.user-photo-count {
-  float: left;
-  margin-right: 5px;
-  width: 17px;
-  height: 17px;
-  background: image-url('icons/48-camera.svg');
-  background-size: 17px 17px;
-  -webkit-background-size: 17px 17px;
-  -moz-background-size: 17px 17px;
-  -o-background-size: 17px 17px;
-}
-
-span.picture-count {
-  float: left;
-}
-
-div.user-friend-count {
-  float: left;
-  margin: 0 5px;
-  width: 18px;
-  height: 18px;
-  background: image-url('icons/48-friends.svg');
-  background-size: 18px 18px;
-  -webkit-background-size: 18px 18px;
-  -moz-background-size: 18px 18px;
-  -o-background-size: 18px 18px;
-}
-
-span.mutual-friend-count {
-  float: left;
-}
-
-div.profile-user-age {
-  line-height: 54px;
-  border-bottom: 1px solid rgb(238,238,238);
-}
-
-div.user-age-icon {
-  float: left;
-  margin: 10px;
-  width: 34px;
-  height: 34px;
-  background: image-url('icons/48-calendar.svg');
-  background-size: 34px 34px;
-}
-
-div.profile-user-location {
-  line-height: 54px;
-  border-bottom: 1px solid rgb(238,238,238);
-}
-
-div.user-location-icon {
-  float: left;
-  margin: 10px;
-  width: 34px;
-  height: 34px;
-  background: image-url('icons/48-pin.svg');
-  background-size: 34px 34px;
-}
-
-div.profile-user-employer {
-  line-height: 54px;
-  border-bottom: 1px solid rgb(238,238,238);
-}
-
-div.user-employer-icon {
-  float: left;
-  margin: 10px;
-  width: 34px;
-  height: 34px;
-  background: image-url('icons/48-company.svg');
-  background-size: 34px 34px;
-}
-
-div.profile-user-school {
-  line-height: 54px;
-  border-bottom: 1px solid rgb(238,238,238);
-}
-
-div.user-school-icon {
-  float: left;
-  margin: 10px;
-  width: 34px;
-  height: 34px;
-  background: image-url('icons/48-book.svg');
-  background-size: 34px 34px;
-}
-
-.notification {
-  background-color: rgba(0, 0, 0, 0.7);
-  top: 44px;
-  color:white;
-  display:none;
-  padding:15px;
-  position:absolute;
-  z-index:1;
-  width: 100%;
-  text-align: center;
-}
-
-.notification h2 {
-  margin-bottom:7px;
-}
-
-.container-profile-photos {
-  margin-right: 2px;
-}
-
-div.user-profile-photo {
-  float: left;
-  margin: 2px 0 0 2px;
-  width: 104px;
-  height: 104px;
-  overflow:hidden;
-  display: block;
-}
-
-div.profile-friends {
-  clear: both;
-}
-
-div.mutual-friends {
-  line-height: 44px;
-}
-
-div.mutual-friends img {
-  float: left;
-  margin: 10px 10px 0 10px;
-  width: 34px;
-  height: 34px;
-}
-
-.tabs li {
-  list-style: none;
-  display: inline;
-}
-
-.tabs a {
-  margin-right: -4px;
-  padding-top: 14px;
-  height: 35px;
-  display: inline-block;
-  background: rgb(238,238,238);
-  color: rgb(48,48,48);
-  text-decoration: none;
-  text-align: center;
-  font-weight: bold;
-}
-
-.tab-profile a {
-  width: 33.3%;
-}
-
-.tab-photos a {
-  width: 33.4%;
-}
-
-.tab-friends a {
-  width: 33.3%;
-}
-
-.tabs a.active {
-  background: rgb(238, 28, 88);
-  color: rgb(255,255,255);
-}
-
-div.user-location {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-/* Empty Data Set */
-
-div.empty-data {
-  text-align: center;
-}
-
-div.empty-data h1 {
-  color: rgb(48,48,48);
-}
-
-div.empty-chinchins-icon {
-  margin: 47px auto 37px auto;
-  width: 104px;
-  height: 70px;
-  position: relative;
-  background: image-url('icons/48-friends.svg');
-  background-size: 104px 70px;
-  -webkit-background-size: 104px 70px;
-  -moz-background-size: 104px 70px;
-  -o-background-size: 104px 70px;
-}
-
-div.empty-views-icon {
-  margin: 30px auto 20px auto;
-  width: 104px;
-  height: 104px;
-  position: relative;
-  background: image-url('icons/48-target.svg');
-  background-size: 104px 104px;
-  -webkit-background-size: 104px 104px;
-  -moz-background-size: 104px 104px;
-  -o-background-size: 104px 104px;
-}
-
-div.empty-likes-icon {
-  margin: 34px auto 24px auto;
-  width: 104px;
-  height: 96px;
-  position: relative;
-  background: image-url('icons/48-heart.svg');
-  background-size: 104px 96px;
-  -webkit-background-size: 104px 96px;
-  -moz-background-size: 104px 96px;
-  -o-background-size: 104px 96px;
-}
-
-div.empty-data h2 a {
-  margin-top: 40px;
-  width: 100%;
-  padding: 10px 0;
-  font-size: 1.5em;
-  color: rgb(255,255,255);
-  text-align: center;
-  background-color: rgb(59,89,152);
-  display: block;
-}
+/* login/register */
 
 div#register h1 {
   margin: 28px 0;
   font-size: 4.8em;
-  color: rgb(48,48,48);
+  color: $grayDark;
 }
 
 div#register-info {
@@ -895,11 +459,439 @@ a.cta-btn {
   height: 48px;
   font-size: 2em;
   font-weight: bold;
-  color: rgb(255,255,255);
+  color: $white;
   text-align: center;
   line-height: 48px;
-  background-color: rgb(238,28,88);
+  background-color: $ChinchinRed;
   display: block;
+}
+
+/* profile click */
+
+div.profile-click { }
+
+/* photos */
+
+div.photo-large {
+  margin-bottom: -5px;
+  width: 100%;
+  overflow: hidden;
+  display: inline-block;
+  position: relative;
+}
+
+div.photo-large img {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+div.photo-mid {
+  float: left;
+  width: 120px;
+  height: 120px;
+  overflow: hidden;
+  display: block;
+}
+
+div.photo-mid img {
+  float: left;
+  width: 150px;
+  height: 180px;
+  margin: -10px -15px 0 0;
+  display: block;
+}
+
+/* card */
+
+div.card { 
+  margin-top: -44px;
+}
+
+div.card-photo-count {
+  position: absolute;
+  padding: 10px;
+  right: 10px;
+  top: 300px;
+  color: white;
+  background: rgba(48,48,48, 0.48);
+}
+
+div.card-photo-count h2 {
+  float: left;
+}
+
+div.card-photo-icon {
+  float: right;
+  margin-left: 8px;
+  width: 24px;
+  height: 24px;
+  background: image-url('icons/255-camera.svg');
+  background-size: 24px 24px;
+  -webkit-background-size: 24px 24px;
+  -moz-background-size: 24px 24px;
+  -o-background-size: 24px 24px;
+}
+
+div.card-choose {
+  float: left;
+  padding: 10px;
+  width: 100%;
+  color: $white;
+  background: $grayDark;
+}
+
+div.card-choose h2 {
+  margin-bottom: 10px;
+}
+
+div.card-like {
+  cursor: pointer;
+}
+
+div.card-pass {
+  cursor: pointer;
+}
+
+div.card-choose p {
+  float: left;
+  margin-top: 10px;
+}
+
+div.card-like h1 {
+  float: left;
+  padding: 4px 0;
+  width: 49%;
+  text-align: center;
+  background-color: $ChinchinRed;
+}
+
+div.card-pass h1 {
+  float: right;
+  padding: 4px 0;
+  width: 49%;
+  color: $grayDark;
+  text-align: center;
+  background-color: $grayLight;
+}
+
+/* row */
+
+div.row { 
+  margin-bottom: 10px;
+  height: 120px;
+  display: block;
+}
+
+div.row-content {
+  float: left;
+  width: 50%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+div.row-content-info {
+  float: left;
+  padding: 5px 10px 10px 10px;
+  height: 75px;
+}
+
+div.row-content-more {
+  padding: 8px 0 8px 10px;
+  clear: both;
+}
+
+div.row-photo-icon {
+  float: left;
+  margin-right: 5px;
+  width: 17px;
+  height: 17px;
+  background: image-url('icons/48-camera.svg');
+  background-size: 17px 17px;
+  -webkit-background-size: 17px 17px;
+  -moz-background-size: 17px 17px;
+  -o-background-size: 17px 17px;
+}
+
+span.row-photo-count {
+  float: left;
+}
+
+div.row-friend-icon {
+  float: left;
+  margin: 0 5px;
+  width: 18px;
+  height: 18px;
+  background: image-url('icons/48-friends.svg');
+  background-size: 18px 18px;
+  -webkit-background-size: 18px 18px;
+  -moz-background-size: 18px 18px;
+  -o-background-size: 18px 18px;
+}
+
+span.row-friend-count {
+  float: left;
+}
+
+/* messages */
+
+/* list */
+
+div.list {
+  float: left;
+  margin-bottom: 10px;
+  clear: both;
+}
+
+div.list img {
+  float: left;
+  margin-right: 10px;
+  width: 34px;
+  height: 34px;
+}
+
+div.list h2 {
+  float: left;
+  line-height: 34px;
+}
+
+/* profile tabs */
+
+.tabs li {
+  list-style: none;
+  display: inline;
+}
+
+.tabs a {
+  margin-right: -4px;
+  padding-top: 14px;
+  height: 35px;
+  display: inline-block;
+  background: $grayLight;
+  color: $grayDark;
+  text-decoration: none;
+  text-align: center;
+  font-weight: bold;
+}
+
+.tab-profile a {
+  width: 33.3%;
+}
+
+.tab-photos a {
+  width: 33.4%;
+}
+
+.tab-friends a {
+  width: 33.3%;
+}
+
+.tabs a.active {
+  background: $ChinchinRed;
+  color: $white;
+}
+
+div.tab-profile-photo {
+  float: left;
+  margin: 2px 0 0 2px;
+  width: 104px;
+  height: 104px;
+  overflow:hidden;
+  display: block;
+}
+
+/* profile icons */
+
+div.user-age-icon {
+  float: left;
+  margin-right: 10px;
+  width: 34px;
+  height: 34px;
+  background: image-url('icons/48-calendar.svg');
+  background-size: 34px 34px;
+}
+
+div.user-location-icon {
+  float: left;
+  margin-right: 10px;
+  width: 34px;
+  height: 34px;
+  background: image-url('icons/48-pin.svg');
+  background-size: 34px 34px;
+}
+
+div.user-employer-icon {
+  float: left;
+  margin-right: 10px;
+  width: 34px;
+  height: 34px;
+  background: image-url('icons/48-company.svg');
+  background-size: 34px 34px;
+}
+
+div.user-school-icon {
+  float: left;
+  margin-right: 10px;
+  width: 34px;
+  height: 34px;
+  background: image-url('icons/48-book.svg');
+  background-size: 34px 34px;
+}
+
+/* empty data */
+
+div.empty-data {
+  text-align: center;
+}
+
+div.empty-data h1 {
+  color: $grayDark;
+}
+
+div.empty-data h2 a {
+  margin-top: 40px;
+  width: 100%;
+  padding: 10px 0;
+  font-size: 1.5em;
+  color: $white;
+  text-align: center;
+  background-color: rgb(59,89,152); /* Facebook blue */
+  display: block;
+}
+
+div.empty-chinchins-icon {
+  margin: 47px auto 37px auto;
+  width: 104px;
+  height: 70px;
+  position: relative;
+  background: image-url('icons/48-friends.svg');
+  background-size: 104px 70px;
+  -webkit-background-size: 104px 70px;
+  -moz-background-size: 104px 70px;
+  -o-background-size: 104px 70px;
+}
+
+div.empty-views-icon {
+  margin: 30px auto 20px auto;
+  width: 104px;
+  height: 104px;
+  position: relative;
+  background: image-url('icons/48-target.svg');
+  background-size: 104px 104px;
+  -webkit-background-size: 104px 104px;
+  -moz-background-size: 104px 104px;
+  -o-background-size: 104px 104px;
+}
+
+div.empty-likes-icon {
+  margin: 34px auto 24px auto;
+  width: 104px;
+  height: 96px;
+  position: relative;
+  background: image-url('icons/48-heart.svg');
+  background-size: 104px 96px;
+  -webkit-background-size: 104px 96px;
+  -moz-background-size: 104px 96px;
+  -o-background-size: 104px 96px;
+}
+
+div.empty-messages-icon {
+  margin: 30px auto 20px auto;
+  width: 104px;
+  height: 103px;
+  position: relative;
+  background: image-url('icons/48-chat.svg');
+  background-size: 104px 103px;
+  -webkit-background-size: 104px 103px;
+  -moz-background-size: 104px 103px;
+  -o-background-size: 104px 103px;
+}
+
+/* not yet organized */
+
+div.clear {
+  clear: left;
+}
+
+div.hot-user-photo {
+  float: left;
+  margin: 0 10px 10px 0;
+  width: 34px;
+  height: 34px;
+  overflow:hidden;
+  display: block;
+}
+
+div.message-room-index-box {
+  background: rgb(255,255,255);
+  margin-bottom: 10px;
+  display: block;
+  height: 120px;
+}
+
+div.message-room-user-photo {
+  width: 120px;
+  height: 120px;
+  overflow:hidden;
+  display: block;
+  float: left;
+}
+
+div.message-room-user-photo img {
+  width: 150px;
+  height: 180px;
+  margin: -10px -15px 0 0;
+  display: block;
+}
+
+div.message-room-info {
+  float: left;
+  width: 50%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+div.message-room-last-message h3 {
+  font-size: 1.5em;
+}
+
+div.message-room-last-message {
+  float: left;
+  padding: 5px 10px 10px 10px;
+  height: 70px;
+}
+
+.message-room-status-0 {
+  color: gray;
+}
+
+div.dummy {
+  margin-top: 100%;
+}
+
+div.hot-user-index-info h3 {
+  margin-top: 4px;
+  font-size: 1.5em;
+}
+
+.notification {
+  background-color: rgba(0, 0, 0, 0.7);
+  top: 44px;
+  color:white;
+  display:none;
+  padding:15px;
+  position:absolute;
+  z-index:1;
+  width: 100%;
+  text-align: center;
+}
+
+.notification h2 {
+  margin-bottom:7px;
 }
 
 .message-box {

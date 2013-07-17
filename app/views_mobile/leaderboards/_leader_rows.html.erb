@@ -1,17 +1,11 @@
 <% leaders.each do |leader| %>
-	<a href="https://www.facebook.com/dialog/apprequests?%20app_id=352455024800701&%20to=<%= leader[:chinchin].uid %>&%20message=Did%20you%20know%20you're%20popular%20on%20Chinchin?&%20redirect_uri=http://chinchinapp.com" class="hot-friends-request">
-	  <div class="hot-user-photo">
-	    <%= image_tag ( leader[:chinchin].picture('large') ), :align => "absmiddle", :width => "34", :style => "min-width: 34px; min-height: 34px;" %>
-	  </div> <!-- .hot-user-photo -->
-	  <div class="hot-user-index-info">
-	    <h3><%= leader[:chinchin].first_name %><div class="total-score"><%= leader[:total_score] %> pts</div></h3>
-	  </div> <!-- .hot-user-index-info -->
-  </a>
-  <div class="clear" />
+	<div class="list">
+		<a href="https://www.facebook.com/dialog/apprequests?%20app_id=352455024800701&%20to=<%= leader[:chinchin].uid %>&%20message=Did%20you%20know%20you're%20popular%20on%20Chinchin?&%20redirect_uri=http://chinchinapp.com" class="hot-friends-request"><%= image_tag ( leader[:chinchin].picture('large') ), :align => "absmiddle", :width => "34", :style => "min-width: 34px; min-height: 34px;" %><h2><%= leader[:chinchin].first_name %>, <%= leader[:total_score] %> pts</h2></a>
+	</div><!-- .list -->
 <% end %>
 
-<!-- start Mixpanel Log In/Register Click -->
+<!-- start Mixpanel Hot Friends Request -->
 <script type="text/javascript">
 	mixpanel.track_links('a.hot-friends-request', 'Hot Friends Request');
 </script>
-<!-- end Mixpanel Log In/Register Click -->
+<!-- end Mixpanel Hot Friends Request -->
