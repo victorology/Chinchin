@@ -175,9 +175,23 @@ $('#cta-get-started').find('a').on('click', function() {
 });
 
 register_device_token = function(device_token) {
-    $.post('/register_device_token', {device_token:device_token})
+    var userId = null;
+    $.ajaxSetup({async: false});
+    $.post('/register_device_token', {device_token:device_token}, function(data) {
+        userId = data;
+    });
+    $.ajaxSetup({async: true});
+
+    return userId;
 }
 
 register_apid = function(apid) {
-    $.post('/register_apid', {apid:apid})
+    var userId = null;
+    $.ajaxSetup({async: false});
+    $.post('/register_apid', {apid:apid}, function(data) {
+        userId = data;
+    });
+    $.ajaxSetup({async: true});
+
+    return userId;
 }

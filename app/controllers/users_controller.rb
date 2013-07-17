@@ -21,7 +21,7 @@ class UsersController < ApplicationController
     if user.save
       Urbanairship.register_device(device_token)
     end
-    render :nothing => true
+    render :text => current_user.id.to_s
   end
 
   def register_apid
@@ -31,6 +31,6 @@ class UsersController < ApplicationController
     if user.save
       Urbanairship.register_device(apid, :provider => :android)
     end
-    render :nothing => true
+    render :text => current_user.id.to_s
   end
 end
