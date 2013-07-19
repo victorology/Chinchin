@@ -14,20 +14,22 @@ class ReportsController < ApplicationController
 		ended_at = params[:ended_at].to_date
 		# @chinchins = Report.count_chinchins_per_day(started_at, ended_at)
 		@users = Report.total_user_per_day(started_at, ended_at)
-		@users.default = {'total_users'=>0, 'male_users'=>0, 'female_users'=>0}
+		# @users.default = {'total_users'=>0, 'male_users'=>0, 'female_users'=>0}
 		@likes = Report.total_like_per_day(started_at, ended_at)
-		@likes.default = {'total_likes'=>0, 'likes_from_male'=>0, 'likes_from_female'=>0}
+		# @likes.default = {'total_likes'=>0, 'likes_from_male'=>0, 'likes_from_female'=>0}
 		@uniq_likes = Report.total_like_per_day(started_at, ended_at)
-		@uniq_likes.default = {'uniq_male_liked'=>0, 'uniq_female_liked'=>0}
+		# @uniq_likes.default = {'uniq_male_liked'=>0, 'uniq_female_liked'=>0}
+		@chinchins = Report.total_chinchin_per_day(started_at, ended_at)
 
-		keys = @users.merge(@likes).merge(@uniq_likes).keys
+		keys = @users.keys
 
 		@results = {}
 		keys.each do |key|
 			u = @users[key]
 			l = @likes[key]
 			q = @uniq_likes[key]
-			@results[key] = u.merge(l).merge(q)
+			c = @chinchins[key]
+			@results[key] = u.merge(l).merge(q).merge(c)
 		end
 
 		# render json: @results

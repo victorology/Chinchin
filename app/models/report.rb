@@ -1,61 +1,54 @@
 class Report < ActiveRecord::Base
-  def self.total_like_per_day(started_at, ended_at)
-    total = Like.where("created_at >= ? and created_at <= ?", started_at, ended_at).group("DATE_TRUNC('day', created_at)").count
-    like_from_male = Like.joins(:user)
-                         .where("likes.created_at >= ? and likes.created_at <= ? and users.gender = ?", started_at, ended_at, "male")
-                         .group("DATE_TRUNC('day', likes.created_at)")
-                         .count
-    like_from_female = Like.joins(:user)
-                           .where("likes.created_at >= ? and likes.created_at <= ? and users.gender = ?", started_at, ended_at, "female")
-                           .group("DATE_TRUNC('day', likes.created_at)")
-                           .count
+  def self.make_report(started_at, ended_at, sqls)
+    keys = started_at.to_date.upto(ended_at.to_date).map { |day| day.strftime("%Y-%m-%d 00:00:00") }.compact
+    results = {}
 
-    uniq_male_liked = Like.joins(:user)
-                          .where("likes.created_at >= ? and likes.created_at <= ? and users.gender = ?", started_at, ended_at, "male")
-                          .group("DATE_TRUNC('day', likes.created_at)")
-                          .count("users.id", distinct: true)
-    uniq_female_liked = Like.joins(:user)
-                            .where("likes.created_at >= ? and likes.created_at <= ? and users.gender = ?", started_at, ended_at, "female")
-                            .group("DATE_TRUNC('day', likes.created_at)")
-                            .count("users.id", distinct: true)
-
-    keys = total.keys
-    total.default = 0
-    like_from_male.default = 0
-    like_from_female.default = 0
-    uniq_male_liked.default = 0
-    uniq_female_liked.default = 0
-    result = {}
     keys.each do |key|
-      t = total[key]
-      m = like_from_male[key]
-      f = like_from_female[key]
-      um = uniq_male_liked[key]
-      uf = uniq_female_liked[key]
-      result[key[0..9]] = {'total_likes'=>t, 'likes_from_male'=>m, 'likes_from_female'=>f, 'uniq_male_liked'=>um, 'uniq_female_liked'=>uf}
-    end
+      result = {}
+      sqls.each do |sql|
+        sql[:result].default = 0
+        result[sql[:title]] = sql[:result][key]
+      end
+      results[key[0..9]] = result
+    end 
+    results
+  end
 
-    result
+  def self.total_like_per_day(started_at, ended_at)
+    sqls = [
+      {:title => 'total_likes', :result => Like.where("created_at >= ? and created_at <= ?", started_at, ended_at).group("DATE_TRUNC('day', created_at)").count },
+      {:title => 'likes_from_male', :result => Like.joins(:user)
+        .where("likes.created_at >= ? and likes.created_at <= ? and users.gender = ?", started_at, ended_at, "male")
+        .group("DATE_TRUNC('day', likes.created_at)").count},
+      {:title => 'likes_from_female', :result => Like.joins(:user)
+        .where("likes.created_at >= ? and likes.created_at <= ? and users.gender = ?", started_at, ended_at, "female")
+        .group("DATE_TRUNC('day', likes.created_at)").count},
+      {:title => 'uniq_male_liked', :result => Like.joins(:user)
+        .where("likes.created_at >= ? and likes.created_at <= ? and users.gender = ?", started_at, ended_at, "male")
+        .group("DATE_TRUNC('day', likes.created_at)").count("users.id", distinct: true)},
+      {:title => 'uniq_female_liked', :result => Like.joins(:user)
+        .where("likes.created_at >= ? and likes.created_at <= ? and users.gender = ?", started_at, ended_at, "female")
+        .group("DATE_TRUNC('day', likes.created_at)").count("users.id", distinct: true)}
+    ]
+    make_report(started_at, ended_at, sqls)
   end
 
   def self.total_user_per_day(started_at, ended_at)
-    total = User.where("created_at >= ? and created_at <= ?", started_at, ended_at).group("DATE_TRUNC('day', created_at)").count
-    male = User.where("created_at >= ? and created_at <= ? and gender = ?", started_at, ended_at, "male").group("DATE_TRUNC('day', created_at)").count
-    female = User.where("created_at >= ? and created_at <= ? and gender = ?", started_at, ended_at, "female").group("DATE_TRUNC('day', created_at)").count
-      
-    keys = total.keys
-    total.default = 0
-    male.default = 0
-    female.default = 0
-    result = {}
-    keys.each do |key|
-      t = total[key]
-      m = male[key]
-      f = female[key]
-      result[key[0..9]] = {'total_users'=>t, 'male_users'=>m, 'female_users'=>f}
-    end
+    sqls = [
+      {:title => 'total_users', :result => User.where("created_at >= ? and created_at <= ?", started_at, ended_at).group("DATE_TRUNC('day', created_at)").count},
+      {:title => 'male_users', :result => User.where("created_at >= ? and created_at <= ? and gender = ?", started_at, ended_at, "male").group("DATE_TRUNC('day', created_at)").count},
+      {:title => 'female_users', :result => female = User.where("created_at >= ? and created_at <= ? and gender = ?", started_at, ended_at, "female").group("DATE_TRUNC('day', created_at)").count}
+    ]
+    make_report(started_at, ended_at, sqls)
+  end
 
-    result
+  def self.total_chinchin_per_day(started_at, ended_at)
+    sqls = [
+      {:title => 'total_chinchins', :result => Chinchin.where("created_at >= ? and created_at <= ?", started_at, ended_at).group("DATE_TRUNC('day', created_at)").count},
+      {:title => 'male_chinchins', :result => Chinchin.where("created_at >= ? and created_at <= ? and gender = ?", started_at, ended_at, "male").group("DATE_TRUNC('day', created_at)").count},
+      {:title => 'female_chinchins', :result => Chinchin.where("created_at >= ? and created_at <= ? and gender = ?", started_at, ended_at, "female").group("DATE_TRUNC('day', created_at)").count}
+    ]
+    make_report(started_at, ended_at, sqls)
   end
 
   def self.count_chinchins_per_day(started_at, ended_at)
