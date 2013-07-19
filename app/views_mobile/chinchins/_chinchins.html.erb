@@ -2,6 +2,8 @@
 
 <% if chinchins.nil? or chinchins.size == 0 %>
 
+<div class="container-10px">
+
 <div class="empty-data">
   <div class="empty-chinchins-icon"></div>
   <h1><%= t '.no_chinchins' %></h1>
@@ -18,6 +20,8 @@
   </script>
   <!-- end Mixpanel No Chinchins -->
 </div> <!-- .empty-data -->
+
+</div> <!-- .container-10px -->
 
 <% else %>
   <%= render :partial => "chinchin_card", :locals => {:chinchins => chinchins} %>
