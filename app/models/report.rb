@@ -1,4 +1,43 @@
 class Report < ActiveRecord::Base
+  def self.total_like_per_day(started_at, ended_at)
+    total = Like.where("created_at >= ? and created_at <= ?", started_at, ended_at).group("DATE_TRUNC('day', created_at)").count
+    like_from_male = Like.joins(:user)
+                         .where("likes.created_at >= ? and likes.created_at <= ? and users.gender = ?", started_at, ended_at, "male")
+                         .group("DATE_TRUNC('day', likes.created_at)")
+                         .count
+    like_from_female = Like.joins(:user)
+                           .where("likes.created_at >= ? and likes.created_at <= ? and users.gender = ?", started_at, ended_at, "female")
+                           .group("DATE_TRUNC('day', likes.created_at)")
+                           .count
+
+    uniq_male_liked = Like.joins(:user)
+                          .where("likes.created_at >= ? and likes.created_at <= ? and users.gender = ?", started_at, ended_at, "male")
+                          .group("DATE_TRUNC('day', likes.created_at)")
+                          .count("users.id", distinct: true)
+    uniq_female_liked = Like.joins(:user)
+                            .where("likes.created_at >= ? and likes.created_at <= ? and users.gender = ?", started_at, ended_at, "female")
+                            .group("DATE_TRUNC('day', likes.created_at)")
+                            .count("users.id", distinct: true)
+
+    keys = total.keys
+    total.default = 0
+    like_from_male.default = 0
+    like_from_female.default = 0
+    uniq_male_liked.default = 0
+    uniq_female_liked.default = 0
+    result = {}
+    keys.each do |key|
+      t = total[key]
+      m = like_from_male[key]
+      f = like_from_female[key]
+      um = uniq_male_liked[key]
+      uf = uniq_female_liked[key]
+      result[key[0..9]] = {'total_likes'=>t, 'likes_from_male'=>m, 'likes_from_female'=>f, 'uniq_male_liked'=>um, 'uniq_female_liked'=>uf}
+    end
+
+    result
+  end
+
   def self.total_user_per_day(started_at, ended_at)
     total = User.where("created_at >= ? and created_at <= ?", started_at, ended_at).group("DATE_TRUNC('day', created_at)").count
     male = User.where("created_at >= ? and created_at <= ? and gender = ?", started_at, ended_at, "male").group("DATE_TRUNC('day', created_at)").count
@@ -13,7 +52,7 @@ class Report < ActiveRecord::Base
       t = total[key]
       m = male[key]
       f = female[key]
-      result[key[0..9]] = {'total'=>t, 'male'=>m, 'female'=>f}
+      result[key[0..9]] = {'total_users'=>t, 'male_users'=>m, 'female_users'=>f}
     end
 
     result
