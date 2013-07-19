@@ -77,6 +77,10 @@ ko:
       location: "%{location}"
       employer: "%{employer}"
       school: "%{school}"
+  leaderboards:
+    leaders:
+      hot_friends: "Hot Friends?"
+      hot_friends_long: "You can see who your most popular friends here. Since you don't have any friends on Chinchin yet, why don't you invite some?"
   likes:
     index:
       headline_html: "쨔잔! <strong>%{name}</strong>! 당신이 좋아한 친친들입니다."

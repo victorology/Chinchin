@@ -71,6 +71,10 @@ en:
       location: "%{location}"
       employer: "%{employer}"
       school: "%{school}"
+  leaderboards:
+    leaders:
+      hot_friends: "Hot Friends?"
+      hot_friends_long: "You can see who your most popular friends here. Since you don't have any friends on Chinchin yet, why don't you invite some?"
   likes:
     index:
       headline_html: "Hi <strong>%{name}</strong>! These are Chinchins you Like."
@@ -80,7 +84,7 @@ en:
       school: "%{school}"
     likes:
       see_anyone: "See Anyone You Like?"
-      see_anyone_long: "If you see someone you would like to meet, press the Like button on their profile. If they Like you back, you will be connected to each other."
+      see_anyone_long: "When you and a Chinchin mutually like each other, you will be a match! Since you haven't found someone yet, invite your friends to see more Chinchins."
       headline_html: "Hi <strong>%{name}</strong>! These are Chinchins you Like."
       age: "%{age} years old"
       location: "%{location}"
