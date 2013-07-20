@@ -37,6 +37,10 @@ en:
       employer: "Works at %{employer}"
       school: "Studied at %{school}"
   chinchins:
+    finding:
+      finding_chinchins: "Finding Chinchins..."
+      finding_chinchins_long: "We are currently searching for your Chinchins. Chinchins are people who are connected to you by a mutual friend."
+      finding_chinchins_long_2: "The more friends you have on Chinchin, the more Chinchins you see so get going and invite your friends!"
     index:
       headline_html: "Hi <strong>%{name}</strong>! You are viewing %{chinchin_count} Chinchins (friends of your friends). Hopefully, you see somebody you like but if not, you can %{href}."
       headline_href: "check out a new set of Chinchins"
