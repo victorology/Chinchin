@@ -1,3 +1,5 @@
+<div class="container-10px">
+
 <% message_rooms.each do |message_room| %>
     <a href="#">
         <div class="message-room-index-box message-room-status-<%= message_room.status %>" id="<%=message_room.id%>">
@@ -30,10 +32,12 @@
     </a>
     <div class="clear" />
 <% end %>
+
+</div> <!-- .container-10px -->
+
 <script type="text/javascript">
     $(document).ready(function() {
         var info_width = document.width - 120 - 30;
         $(".message-room-last-message").width(info_width+'px');
     });
 </script>
-

@@ -1,6 +1,6 @@
-<div class="container">
-
 <% if chinchins.nil? or chinchins.size == 0 %>
+
+<div class="container-10px">
 
 <div class="empty-data">
   <div class="empty-chinchins-icon"></div>
@@ -19,6 +19,8 @@
   <!-- end Mixpanel No Chinchins -->
 </div> <!-- .empty-data -->
 
+</div> <!-- .container-10px -->
+
 <% else %>
   <%= render :partial => "chinchin_card", :locals => {:chinchins => chinchins} %>
   <script>
@@ -26,8 +28,6 @@
       mixpanel.register({"Chinchins": "yes"});
   </script>
 <% end %>
-
-</div> <!-- .container -->
 
 <script type="text/javascript">
   $(document).ready(function() {

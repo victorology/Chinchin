@@ -25,6 +25,10 @@ ko:
       thanks_html: "비공개 시범 운영 모집에 참여해 주셔서 감사합니다.<strong>%{username}</strong>!"
       let_you_know: "비공개 시범 운영 시작 시, 꼭 1등으로 알려 드릴게요! 페이스북 Like나 트위터로 저희를 당신의 친친에게 소개해주세요!"
   users:
+    finding:
+      finding_chinchins: "Finding Chinchins..."
+      finding_chinchins_long: "We are currently searching for your Chinchins. Chinchins are people who are connected to you by a mutual friend."
+      finding_chinchins_long_2: "The more friends you have on Chinchin, the more Chinchins you see so get going and invite your friends!"
     index:
       headline: "친친은 현재 %{users} 명의 유저가 사용 중입니다.."
       age: "%{age}살"
@@ -77,6 +81,10 @@ ko:
       location: "%{location}"
       employer: "%{employer}"
       school: "%{school}"
+  leaderboards:
+    leaders:
+      hot_friends: "Hot Friends?"
+      hot_friends_long: "You can see who your most popular friends here. Since you don't have any friends on Chinchin yet, why don't you invite some?"
   likes:
     index:
       headline_html: "쨔잔! <strong>%{name}</strong>! 당신이 좋아한 친친들입니다."
