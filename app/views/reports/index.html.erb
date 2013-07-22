@@ -2,6 +2,9 @@
 <head>
 	<script type="text/javascript" src="/assets/d3.v3.js"></script>
 	<script type="text/javascript" src="/assets/jquery.js"></script>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+  	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 	<style>
 	body {
 		font: 10px sans-serif;
@@ -36,8 +39,48 @@
 	  stroke-width: 1.5px;
 	}
 	</style>
+	<script>
+	$(document).ready(function() {
+		$('#from').datepicker({
+			defaultDate: "2013-01-01",
+			changeMonth: true,
+			numberOfMonths: 3,
+			onClose: function(selectedDate) {
+				$("#to").datepicker("option", "minDate", selectedDate);
+			}
+		});
+		$('#from').datepicker("option", "dateFormat", "yy-mm-dd");
+		$('#to').datepicker({
+			defaultDate: new Date(),
+			changeMonth: true,
+			numberOfMonths: 3,
+			onClose: function(selectedDate) {
+				$("#from").datepicker("option", "maxDate", selectedDate);
+			}
+		});
+		$('#to').datepicker("option", "dateFormat", "yy-mm-dd");
+
+		$("#redraw").click(function() {
+			$('svg').remove();
+			getDataAndDraw($('#from').val(), $('#to').val());
+		});
+		$('#from').val('2013-01-01');
+		var d = new Date();
+	    var curr_date = d.getDate();
+	    var curr_month = d.getMonth() + 1;
+	    var curr_year = d.getFullYear();
+		$('#to').val(curr_year + "-" +curr_month + "-" + curr_date);
+		from = $('#from').val() == "" ? "2013-01-01" : $('#from').val();
+		getDataAndDraw(from, $('#to').val());
+	})
+	</script>
 </head>
 <body>
+	<div id="controls">
+		From: <input type="text" id="from" value="2013-01-01" />
+		To: <input type="text" id="to" value="" />
+		<button id="redraw">Redraw Chars</button>
+	</div>
 	<script type="text/javascript">
 	var parseDate = d3.time.format("%Y-%m-%d").parse;
 	var color = d3.scale.category10();
@@ -142,26 +185,22 @@
 			d.key = parseDate(d.key);
 		});
 
-		drawMultiLineGraph(data, 'Total Users', ["total_users", "male_users", "female_users"], 500, 300);
-		drawMultiLineGraph(data, 'Total Chinchins', ["total_chinchins", "male_chinchins", "female_chinchins"], 500, 300);
-		drawMultiLineGraph(data, 'Total Likes', ["total_likes", "likes_from_male", "likes_from_female"], 500, 300);
-		drawMultiLineGraph(data, 'Uniq Liked Users', ["uniq_male_liked", "uniq_female_liked"], 500, 300);
+		drawMultiLineGraph(data, 'Total Users', ["total_users", "male_users", "female_users"], 500, 250);
+		drawMultiLineGraph(data, 'Total Chinchins', ["total_chinchins", "male_chinchins", "female_chinchins"], 500, 250);
+		drawMultiLineGraph(data, 'Total Likes', ["total_likes", "likes_from_male", "likes_from_female"], 500, 250);
+		drawMultiLineGraph(data, 'Uniq Liked Users', ["uniq_male_liked", "uniq_female_liked"], 500, 250);
     }
 
     var gdata;
-    var getDataAndCopy = function(error, data) {
-    	gdata = data;
-    	drawDashboard(gdata);
-    }
-
-	var url = '/reports/2013-04-01/2013-07-12/'		
-	d3.json(url, getDataAndCopy);
-
-	$(document).ready(function() {
-		$("#draw").click(function() {
-			alert(gdata);
+    
+    var getDataAndDraw = function(started_at, ended_at) {
+		var url = '/reports/'+started_at+'/'+ended_at+'/';
+		// var url = '/reports/2013-04-01/2013-07-12/';
+		d3.json(url, function(error, data) {
+			gdata = data;
+	    	drawDashboard(gdata);	
 		});
-	});
+    }
 	</script>
 </body>
 </html>
