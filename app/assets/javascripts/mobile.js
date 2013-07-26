@@ -186,12 +186,11 @@ register_device_token = function(device_token) {
 }
 
 register_apid = function(apid) {
-    var userId = null;
-    $.ajaxSetup({async: false});
+    // var userId = null;
+    // $.ajaxSetup({async: false});
     $.post('/register_apid', {apid:apid}, function(data) {
-        userId = data;
+        var userId = data;
+        window.android.setUserId(userId);
     });
-    $.ajaxSetup({async: true});
-
-    return userId;
+    // $.ajaxSetup({async: true});
 }
