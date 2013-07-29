@@ -223,23 +223,7 @@ class User < ActiveRecord::Base
     like = Like.new
     like.user = self
     like.chinchin_id = chinchin.id
-    like.save!
-
-    UrbanairshipWrapper.send(chinchin.users, "Someone likes #{chinchin.first_name}!")
-
-    if not chinchin.user.nil?
-      UrbanairshipWrapper.send([chinchin.user], "Someone likes you!")
-      me = Chinchin.find_by_uid(self.uid)
-      if chinchin.user.liked(me)
-        messageRoom = MessageRoom.new
-        messageRoom.user1 = chinchin.user
-        messageRoom.user2 = self
-        messageRoom.status = MessageRoom::WAITING_FOR_OPEN
-        if messageRoom.save
-          UrbanairshipWrapper.send([chinchin.user, self], "You are connected with someone you liked! Check out your messages")
-        end
-      end
-    end
+    like.save
   end
 
   def liked(chinchin)
@@ -259,14 +243,18 @@ class User < ActiveRecord::Base
     v = View.new
     v.viewer = self
     v.viewee_id = chinchin.id
-    if v.save and not chinchin.user.nil?
-      UrbanairshipWrapper.send([chinchin.user], "Someone viewed your profile!")
-    end
+    v.save
   end
 
   def viewed(chinchin)
     return nil if chinchin.nil?
     View.where(viewer_id: self.id, viewee_id: chinchin.id).present?    
+  end
+
+  def mutual_like(chinchin)
+    return false if chinchin.user.nil?
+    me = Chinchin.find_by_uid(self.uid)
+    self.liked(chinchin) and chinchin.user.liked(me)
   end
 
   def make_friendship

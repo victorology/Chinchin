@@ -17,7 +17,7 @@ class LikesController < ApplicationController
     @chinchinId = params[:chinchin_id]
     chinchin = Chinchin.find(@chinchinId)
     if Like.find_by_user_id_and_chinchin_id(current_user.id, @chinchinId).nil?
-      current_user.like(chinchin)
+      InteractionManager.like(chinchin)
     end
 
     respond_to do | format |
