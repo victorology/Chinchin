@@ -2,10 +2,13 @@ require_relative '../../app/services/interaction_manager'
 require 'active_support/all'
 
 class UrbanairshipWrapper; end
+class MessageRoom
+	WAITING_FOR_OPEN = 0
+end	
 
 describe InteractionManager do
-	let(:user) { stub(:user) }
-	let(:chinchin) { stub(:chinchin, first_name: "first_name", user: stub(:chinchin_user), users: []) }
+	let(:user) { stub(:user, id: 100) }
+	let(:chinchin) { stub(:chinchin, id: 200, first_name: "first_name", user: stub(:chinchin_user, id: 201), users: []) }
 
 	context '.view a user' do
 		it 'can try to view a user and send a push message when viewed' do
@@ -34,7 +37,7 @@ describe InteractionManager do
 			user.should_receive(:like).with(chinchin) { true }
 			user.stub(:mutual_like).with(chinchin) { true }
 
-      MessageRoomCreator.should_receive(:create).with(actor: user, receiver: chinchin)
+			MessageRoom.should_receive(:create).with(user1_id: chinchin.user.id, user2_id: user.id, status: MessageRoom::WAITING_FOR_OPEN)
 			UrbanairshipWrapper.should_receive(:send).exactly(3).times
 			InteractionManager.like(actor: user, receiver: chinchin)
 		end
