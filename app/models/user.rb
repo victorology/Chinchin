@@ -255,6 +255,20 @@ class User < ActiveRecord::Base
     end
   end
 
+  def view(chinchin)
+    v = View.new
+    v.viewer = self
+    v.viewee_id = chinchin.id
+    if v.save and not chinchin.user.nil?
+      UrbanairshipWrapper.send([chinchin.user], "Someone viewed your profile!")
+    end
+  end
+
+  def viewed(chinchin)
+    return nil if chinchin.nil?
+    View.where(viewer_id: self.id, viewee_id: chinchin.id).present?    
+  end
+
   def make_friendship
     friends = self.friends
     friends.each do |friend|

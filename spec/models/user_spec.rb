@@ -61,4 +61,13 @@ describe User do
       user.liked(chinchin).should be_true
     end
   end
+
+  context 'View' do
+    it 'can view somebody' do
+      user = FactoryGirl.create(:user, gender: 'male')
+      chinchin = stub(:user_or_chinchin, id: "100", first_name: "my_name", users: [], user: nil)
+      user.view(chinchin)
+      user.viewed(chinchin).should be_true
+    end
+  end
 end
