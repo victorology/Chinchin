@@ -25,6 +25,7 @@ Chinchin2::Application.routes.draw do
     resources :messages
   end
 
+  resources :tutorials, :only => [:index]
   resources :reports, :only => [:index]
   match 'reports/:started_at/:ended_at', to: 'reports#show'
 

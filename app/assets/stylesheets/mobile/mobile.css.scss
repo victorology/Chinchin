@@ -384,7 +384,7 @@ header .liked span {
 }
 
 .container-10px {
-  float: left;
+  /*float: left;*/
   padding: 10px;
   height: 100%;
 }
@@ -745,6 +745,7 @@ div.user-school-icon {
 
 div.empty-data {
   text-align: center;
+  width: 100%;
 }
 
 div.empty-data h1 {
@@ -752,13 +753,24 @@ div.empty-data h1 {
 }
 
 div.empty-data h2 a {
-  margin-top: 40px;
+  margin-top: 20px;
+  width: 100%;
+  padding: 10px 0px;
+  font-size: 1.5em;
+  color: $white;
+  text-align: center;
+  background-color: rgb(59,89,152); /* Facebook blue */
+  display: block;
+}
+
+div.empty-data h2 a.close {
+  margin-top: 20px;
   width: 100%;
   padding: 10px 0;
   font-size: 1.5em;
   color: $white;
   text-align: center;
-  background-color: rgb(59,89,152); /* Facebook blue */
+  background-color: $ChinchinRed;
   display: block;
 }
 
