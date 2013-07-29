@@ -52,4 +52,13 @@ describe User do
       friends_in_chinchin.map(&:uid).should == friends_uids
     end
   end
+
+  context 'Like' do
+    it 'can like somebody' do
+      user = FactoryGirl.create(:user, gender: 'male')
+      chinchin = stub(:user_or_chinchin, id: "100", first_name: "my_name", users: [], user: nil)
+      user.like(chinchin)
+      user.liked(chinchin).should be_true
+    end
+  end
 end

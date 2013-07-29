@@ -222,7 +222,7 @@ class User < ActiveRecord::Base
   def like(chinchin)
     like = Like.new
     like.user = self
-    like.chinchin = chinchin
+    like.chinchin_id = chinchin.id
     like.save!
 
     UrbanairshipWrapper.send(chinchin.users, "Someone likes #{chinchin.first_name}!")
