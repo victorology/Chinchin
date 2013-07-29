@@ -160,11 +160,13 @@ ActiveRecord::Schema.define(:version => 20130726105118) do
     t.string   "locale"
     t.string   "oauth_token"
     t.datetime "oauth_expires_at"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
     t.string   "device_token"
     t.string   "apid"
     t.datetime "last_login"
+    t.integer  "status",              :default => 0
+    t.integer  "photo_count"
   end
 
   create_table "views", :force => true do |t|

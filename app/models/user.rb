@@ -25,6 +25,9 @@
 #
 
 class User < ActiveRecord::Base
+  UNREGISTERED = 0
+  REGISTERED = 1
+
   attr_accessible :birthday, :email, :employer, :first_name, :gender, :hometown, :last_name, :locale, :location, :name, :oauth_expires_at, :oauth_token, :position, :provider, :relationship_status, :school, :uid
   has_many :friendships
   has_many :chinchins, :through => :friendships
