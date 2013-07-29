@@ -1,3 +1,3 @@
-puts `rake db:migrate:up VERSION=20130705105405`
+puts `rake db:migrate:up VERSION=20130728105405`
 User.update_all(status: User::REGISTERED)
-puts `rake db:migrate:up VERSION=20130705111206`
+puts `rake db:migrate:up VERSION=20130728111206`

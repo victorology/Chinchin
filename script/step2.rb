@@ -1,4 +1,4 @@
-puts `rake db:migrate:up VERSION=20130705111521`
+puts `rake db:migrate:up VERSION=20130728111521`
 
 saved_count = 0
 failed_count = 0

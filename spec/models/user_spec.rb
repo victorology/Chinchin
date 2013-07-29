@@ -27,19 +27,29 @@
 require 'spec_helper'
 
 describe User do
-  it 'return false when a given chinchin has same gender' do
-    user = FactoryGirl.create(:user, gender: 'male')
-    chinchin = FactoryGirl.create(:chinchin, gender:'male')
-    user.pass_default_chinchin_filter(chinchin).should == false
-  end
-  it 'return false when a given chinchin is married' do
-    user = FactoryGirl.create(:user, gender: 'male')
-    chinchin = FactoryGirl.create(:chinchin, gender:'female', relationship_status:'Married')
-    user.pass_default_chinchin_filter(chinchin).should == false
-  end
-  it 'return false when a given chinchin is engaged' do
-    user = FactoryGirl.create(:user, gender: 'male')
-    chinchin = FactoryGirl.create(:chinchin, gender:'female', relationship_status:'Engaged')
-    user.pass_default_chinchin_filter(chinchin).should == false
+  # it 'return false when a given chinchin has same gender' do
+  #   user = FactoryGirl.create(:user, gender: 'male')
+  #   chinchin = FactoryGirl.create(:chinchin, gender:'male')
+  #   user.pass_default_chinchin_filter(chinchin).should == false
+  # end
+  # it 'return false when a given chinchin is married' do
+  #   user = FactoryGirl.create(:user, gender: 'male')
+  #   chinchin = FactoryGirl.create(:chinchin, gender:'female', relationship_status:'Married')
+  #   user.pass_default_chinchin_filter(chinchin).should == false
+  # end
+  # it 'return false when a given chinchin is engaged' do
+  #   user = FactoryGirl.create(:user, gender: 'male')
+  #   chinchin = FactoryGirl.create(:chinchin, gender:'female', relationship_status:'Engaged')
+  #   user.pass_default_chinchin_filter(chinchin).should == false
+  # end
+
+  it 'can register' do
+    VCR.use_cassette("fetched_facebook_friends") do
+      user = FactoryGirl.create(:user, gender: 'male', oauth_token: "CAAFAjlSNc70BADjEJEn2nmOCeHq9EkOiCX4YMtZCcDIHYA8jZBv663japYreY0rYxNtJIPzkuwZAOb7C7V7GnB4f0IugaTHrdwbWnLhQY8ZAMC3eparTEQZAgydqGbkIL09jCPPH9LYYq7dYo5U3J")
+      friends_uids = user.friends.map(&:identifier)
+      user.add_friends_to_chinchin
+      friends_in_chinchin = user.chinchins
+      friends_in_chinchin.map(&:uid).should == friends_uids
+    end
   end
 end
