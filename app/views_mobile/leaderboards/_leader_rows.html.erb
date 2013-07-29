@@ -2,7 +2,7 @@
 
 <% leaders.each do |leader| %>
 	<div class="list">
-		<a href="https://www.facebook.com/dialog/apprequests?%20app_id=352455024800701&%20to=<%= leader[:chinchin].uid %>&%20message=Did%20you%20know%20you're%20popular%20on%20Chinchin?&%20redirect_uri=http://chinchinapp.com" class="hot-friends-request"><%= image_tag ( leader[:chinchin].picture('large') ), :align => "absmiddle", :width => "34", :style => "min-width: 34px; min-height: 34px;" %><h2><%= leader[:chinchin].first_name %>, <%= leader[:total_score] %> pts</h2></a>
+		<a href="https://www.facebook.com/dialog/apprequests?%20app_id=352455024800701&%20to=<%= leader[:chinchin].uid %>&%20message=Did%20you%20know%20you're%20popular%20on%20Chinchin?&%20redirect_uri=http://bit.ly/16hNEod" class="hot-friends-request"><%= image_tag ( leader[:chinchin].picture('large') ), :align => "absmiddle", :width => "34", :style => "min-width: 34px; min-height: 34px;" %><h2><%= leader[:chinchin].first_name %>, <%= leader[:total_score] %> pts</h2></a>
 	</div><!-- .list -->
 <% end %>
 
