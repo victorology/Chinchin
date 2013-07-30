@@ -6,6 +6,8 @@ failed_count = 0
 Chinchin.all.each do |chinchin|
   attrs = chinchin.attributes
 
+  p chinchin.id
+
   user_id = attrs["user_id"]
   attrs.delete("id")
   attrs.delete("user_id")
@@ -13,7 +15,7 @@ Chinchin.all.each do |chinchin|
   if user_id.nil?
     saved_count += 1
     user = User.new
-    attrs.keys.each do |k, v|
+    attrs.each do |k, v|
       user.send("#{k}=", v)
     end
 

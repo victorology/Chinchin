@@ -4,25 +4,27 @@ describe Chinchin do
   it 'returns empty array when chinchin has no mutual friends with current_user' do
     user = FactoryGirl.create(:user, name: 'kim', gender: 'male')
     user2 = FactoryGirl.create(:user, name: 'lee', gender: 'male')
-    chinchin = FactoryGirl.create(:chinchin, name: 'lee', gender:'male')
-    FactoryGirl.create(:friendship, user: user2, chinchin: chinchin)
+    chinchin = FactoryGirl.create(:user, name: 'lee', gender:'male')
+    FactoryGirl.create(:friendship, user: user2, chinchin: user)
 
-    chinchin.mutual_friends(user).count.should == 0
+    chinchin.mutual_friendships(user).count.should == 0
   end
 
   it 'returns user array when chinchin has mutual friends with current_user' do
-    user = FactoryGirl.create(:user, name: 'kim', gender: 'male', uid: '0000')
-    user2 = FactoryGirl.create(:user, name: 'lee', gender: 'male', uid: '1234')
-    chinchin = FactoryGirl.create(:chinchin, name: 'lee', gender:'male', user:user2, uid: '1234')
-    chinchin2 = FactoryGirl.create(:chinchin, name: 'park', gender:'female', uid: '1111')
+    user = FactoryGirl.create(:user, name: 'kim', gender: 'male', uid: '0000', status: 1)
+    user2 = FactoryGirl.create(:user, name: 'lee', gender: 'male', uid: '1234', status: 1)
+    chinchin = FactoryGirl.create(:user, name: 'lee', gender:'male', uid: '3456', status: 1)
+    chinchin2 = FactoryGirl.create(:user, name: 'park', gender:'female', uid: '1111', status: 0)
     FactoryGirl.create(:friendship, user: user, chinchin: chinchin)
+    FactoryGirl.create(:friendship, user: user, chinchin: chinchin2)
     FactoryGirl.create(:friendship, user: user2, chinchin: chinchin2)
 
-    chinchin.user.should == user2
-    user.chinchins.should == [chinchin]
+    user.chinchins.should == [chinchin, chinchin2]
     user2.chinchins.should == [chinchin2]
-    user.friends_in_chinchin.should == [chinchin]
-    chinchin2.users.should == [user2]
-    chinchin2.mutual_friends(user).should == [user2]
+    user.registered_friends.should == [chinchin]
+    chinchin2.mutual_friendships(user).should == []
+
+    FactoryGirl.create(:friendship, user: user2, chinchin: chinchin)
+    user.mutual_friendships(user2).should == [chinchin]
   end
 end

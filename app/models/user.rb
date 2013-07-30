@@ -63,6 +63,7 @@ class User < ActiveRecord::Base
     user.locale = auth.extra.raw_info.locale
     user.oauth_token = auth.credentials.token
     user.oauth_expires_at = Time.at(auth.credentials.expires_at) unless auth.credentials.expires_at.nil?
+    user.status = REGISTERED
     user.save!
     user.delay.add_friends_to_chinchin
     user.delay.connect_with_chinchin
@@ -82,8 +83,12 @@ class User < ActiveRecord::Base
     end
 	end
 
+  def registered_friends
+    self.chinchins.where('users.status = 1')
+  end
+
   def friends_in_chinchin
-    self.chinchins.joins("INNER JOIN users u on chinchins.uid = u.uid")
+    registered_friends
   end
 
   def friends_in_chinchin2
@@ -177,7 +182,7 @@ class User < ActiveRecord::Base
     ra['position'] = ra['position'].first['name'] unless ra['position'].nil?
     ra['school'] = ra['school'].last['name'] unless ra['school'].nil?
 
-    c = Chinchin.new(
+    u = User.new(
         :uid => ra['id'],
         :name => ra['name'],
         :email => ra['email'],
@@ -191,18 +196,32 @@ class User < ActiveRecord::Base
         :gender => ra['gender'],
         :relationship_status => ra['relationship_status'],
         :school => ra['school'],
-        :locale => ra['locale']
+        :locale => ra['locale'],
     )
-    u = User.find_by_uid(c.uid)
-    if not u.nil?
-      c.user = u
-    end
-    c.save!
-    c.delay.fetch_profile_photos
-    return c
+    u.status = UNREGISTERED
+    u.save!
+    u.delay.fetch_profile_photos
+    u
   end
 
   def add_friends_to_chinchin
+    friends = self.friends
+    friends.each do |friend|
+      u = User.find_by_uid(friend.raw_attributes['id'])
+      if u.nil?
+        u = self.add_friend_to_chinchin(friend)
+      end
+
+      if Friendship.find_by_user_id_and_chinchin_id(self.id, u.id).nil?
+        friendship = Friendship.new
+        friendship.user = self
+        friendship.chinchin = u
+        friendship.save!
+      end
+    end
+  end
+
+  def add_friends_to_chinchin2
     friends = self.friends
     friends.each do |friend|
       c = Chinchin.find_by_uid(friend.raw_attributes['id'])
@@ -257,6 +276,10 @@ class User < ActiveRecord::Base
     self.liked(chinchin) and chinchin.user.liked(me)
   end
 
+  # def mutual_friends(current_user)
+  #   @mutual_friends ||= self.users & current_user.friends_in_chinchin
+  # end
+
   def make_friendship
     friends = self.friends
     friends.each do |friend|
@@ -288,8 +311,8 @@ class User < ActiveRecord::Base
     _endpoint_ = ["#{self.endpoint}/picture", options.to_query].delete_if(&:blank?).join('?')
   end
 
-  def mutual_friendships(current_user)
-    @mutual_friendships ||= current_user.friends_in_chinchin & self.friends_in_chinchin
+  def mutual_friendships(user)
+    @mutual_friendships ||= user.friends_in_chinchin & self.friends_in_chinchin
   end
 
   def connect_with_chinchin
@@ -302,5 +325,27 @@ class User < ActiveRecord::Base
 
   def message_rooms
     MessageRoom.message_rooms(self.id)
+  end
+
+  def fetch_profile_photos
+    photos = self.photos
+    photos.each do |photo|
+      if ProfilePhoto.find_by_picture_url(photo.source).nil?
+        pp = ProfilePhoto.new
+        pp.picture_url = photo.source
+        pp.source_url = photo.images.first.source
+        pp.created_at = photo.created_time
+        pp.facebook_likes = photo.likes.count
+        pp.chinchin = self
+        pp.save
+      end
+    end
+    if photos.nil?
+      photo_count = 0
+    else
+      photo_count = photos.size
+    end
+    self.photo_count = photo_count
+    self.save
   end
 end
