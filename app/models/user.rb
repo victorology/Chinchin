@@ -271,9 +271,9 @@ class User < ActiveRecord::Base
   end
 
   def mutual_like(chinchin)
-    return false if chinchin.user.nil?
-    me = Chinchin.find_by_uid(self.uid)
-    self.liked(chinchin) and chinchin.user.liked(me)
+    # return false if chinchin.user.nil?
+    # me = Chinchin.find_by_uid(self.uid)
+    self.liked(chinchin) and chinchin.liked(self)
   end
 
   # def mutual_friends(current_user)

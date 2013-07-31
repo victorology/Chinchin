@@ -1,46 +1,35 @@
 require 'spec_helper'
 
 describe MessageRoom do
+  let(:user1) { FactoryGirl.create(:user, gender:'male', name:'Kim', uid:'123', status: User::REGISTERED) }
+  let(:user2) { FactoryGirl.create(:user, gender:'female', name:'Lee', uid:'345', status: User::REGISTERED) }
+
   it 'returns one message room when two user like each other' do
     MessageRoom.all.count.should == 0
-    user1 = FactoryGirl.create(:user, gender:'male', name:'Kim', uid:'123')
-    chinchin1 = FactoryGirl.create(:chinchin, user:user1, name:'Kim', uid:'123')
-    user2 = FactoryGirl.create(:user, gender:'female', name:'Lee', uid:'345')
-    chinchin2 = FactoryGirl.create(:chinchin, user:user2, name:'Lee', uid:'345')
+    InteractionManager.like(actor: user1, receiver: user2)
+    user1.liked(user2).should == true
+    InteractionManager.like(actor: user2, receiver: user1)
+    user2.liked(user1).should == true
 
-    user1.like(chinchin2)
-    user1.liked(chinchin2).should == true
-    MessageRoom.all.count.should == 0
-    user2.like(chinchin1)
-    user2.liked(chinchin1).should == true
-    MessageRoom.all.count.should == 1
+    user1.mutual_like(user2).should == true
+    user2.mutual_like(user1).should == true
+    MessageRoom.count.should == 1
     MessageRoom.last.status = MessageRoom::WAITING_FOR_OPEN
   end
 
   it 'returns MessageRoom list with current user if it is activated' do
-    user1 = FactoryGirl.create(:user, gender:'male', name:'Kim', uid:'123')
-    chinchin1 = FactoryGirl.create(:chinchin, user:user1, name:'Kim', uid:'123')
-    user2 = FactoryGirl.create(:user, gender:'female', name:'Lee', uid:'345')
-    chinchin2 = FactoryGirl.create(:chinchin, user:user2, name:'Lee', uid:'345')
-
     user1.message_rooms.count.should == 0
-
-    user1.like(chinchin2)
+    InteractionManager.like(actor: user1, receiver: user2)
     user1.message_rooms.count.should == 0
-    user2.like(chinchin1)
+    InteractionManager.like(actor: user2, receiver: user1)
 
     user1.message_rooms.count.should == 1
     user2.message_rooms.count.should == 1
   end
 
   it 'returns no MessageRoom list with current user if it is not activated' do
-    user1 = FactoryGirl.create(:user, gender:'male', name:'Kim', uid:'123')
-    chinchin1 = FactoryGirl.create(:chinchin, user:user1, name:'Kim', uid:'123')
-    user2 = FactoryGirl.create(:user, gender:'female', name:'Lee', uid:'345')
-    chinchin2 = FactoryGirl.create(:chinchin, user:user2, name:'Lee', uid:'345')
-
-    user1.like(chinchin2)
-    user2.like(chinchin1)
+    InteractionManager.like(actor: user1, receiver: user2)
+    InteractionManager.like(actor: user2, receiver: user1)
     messageRoom = user1.message_rooms.first
     messageRoom.close(user1)
     messageRoom.status.should == MessageRoom::CLOSED_BY_USER1
@@ -49,14 +38,8 @@ describe MessageRoom do
   end
 
   it 'returns its status OPENED_BY_USER1 when user1 open the message room' do
-    user1 = FactoryGirl.create(:user, gender:'male', name:'Kim', uid:'123')
-    chinchin1 = FactoryGirl.create(:chinchin, user:user1, name:'Kim', uid:'123')
-    user2 = FactoryGirl.create(:user, gender:'female', name:'Lee', uid:'345')
-    chinchin2 = FactoryGirl.create(:chinchin, user:user2, name:'Lee', uid:'345')
-
-    user1.like(chinchin2)
-    user2.like(chinchin1)
-
+    InteractionManager.like(actor: user1, receiver: user2)
+    InteractionManager.like(actor: user2, receiver: user1)
     messageRoom = user1.message_rooms.first
     messageRoom.status.should == MessageRoom::WAITING_FOR_OPEN
 
@@ -65,14 +48,8 @@ describe MessageRoom do
   end
 
   it 'returns its status CLOSED_BY_USER2 when user2 close the message room' do
-    user1 = FactoryGirl.create(:user, gender:'male', name:'Kim', uid:'123')
-    chinchin1 = FactoryGirl.create(:chinchin, user:user1, name:'Kim', uid:'123')
-    user2 = FactoryGirl.create(:user, gender:'female', name:'Lee', uid:'345')
-    chinchin2 = FactoryGirl.create(:chinchin, user:user2, name:'Lee', uid:'345')
-
-    user1.like(chinchin2)
-    user2.like(chinchin1)
-
+    InteractionManager.like(actor: user1, receiver: user2)
+    InteractionManager.like(actor: user2, receiver: user1)
     messageRoom = user1.message_rooms.first
     messageRoom.status.should == MessageRoom::WAITING_FOR_OPEN
 

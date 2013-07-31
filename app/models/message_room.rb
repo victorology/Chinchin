@@ -9,6 +9,8 @@ class MessageRoom < ActiveRecord::Base
   belongs_to :user2, :class_name => 'User'
   has_many :messages
 
+  attr_accessible :user1_id, :user2_id, :status
+
   scope :message_rooms, lambda { |pid|
     {
         :conditions => ['(user1_id = ? or user2_id = ?) and status <= 2', pid, pid],

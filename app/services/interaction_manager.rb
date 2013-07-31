@@ -16,8 +16,8 @@ class InteractionManager
 
 	def view()
 		saved = actor.view(receiver)
-		if saved and receiver.user.present?
- 	  	UrbanairshipWrapper.send([receiver.user], "Someone viewed your profile!")
+		if saved
+ 	  	UrbanairshipWrapper.send([receiver], "Someone viewed your profile!")
     end
 	end
 
@@ -25,16 +25,16 @@ class InteractionManager
 		saved = actor.like(receiver)
 
 		if saved
-	    UrbanairshipWrapper.send(receiver.users, "Someone likes #{receiver.first_name}!")
+	    UrbanairshipWrapper.send(receiver.registered_friends, "Someone likes #{receiver.first_name}!")
 		end
 
-    if not receiver.user.nil?
-      UrbanairshipWrapper.send([receiver.user], "Someone likes you!")
+    if receiver.status == User::REGISTERED
+      UrbanairshipWrapper.send([receiver], "Someone likes you!")
       if actor.mutual_like(receiver)
-      	MessageRoom.create(user1_id: receiver.user.id,
+      	MessageRoom.create(user1_id: receiver.id,
       										 user2_id: actor.id,
 								       		 status: MessageRoom::WAITING_FOR_OPEN)
-        UrbanairshipWrapper.send([receiver.user, self], "You are connected with someone you liked! Check out your messages")
+        UrbanairshipWrapper.send([receiver, self], "You are connected with someone you liked! Check out your messages")
       end
     end
 	end
