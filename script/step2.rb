@@ -1,7 +1,7 @@
 puts `rake db:migrate:up VERSION=20130728111521`
 
-saved_count = 0
-failed_count = 0
+new_count = 0
+existed_count = 0
 
 Chinchin.all.each do |chinchin|
   attrs = chinchin.attributes
@@ -13,7 +13,7 @@ Chinchin.all.each do |chinchin|
   attrs.delete("user_id")
 
   if user_id.nil?
-    saved_count += 1
+    new_count += 1
     user = User.new
     attrs.each do |k, v|
       user.send("#{k}=", v)
@@ -28,9 +28,13 @@ Chinchin.all.each do |chinchin|
       puts user.errors.full_messages
     end
   else
-    failed_count += 1
+    existed_count += 1
+    tu = TempChinchin.new
+    tu.user_id = user_id
+    tu.chinchin_id = chinchin.id
+    tu.save
   end
 end
 
-puts "saved_count #{saved_count}"
-puts "faild_count #{failed_count}"
+puts "New from chinchin #{new_count}"
+puts "Already existed user #{existed_count}"
