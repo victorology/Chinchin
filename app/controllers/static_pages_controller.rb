@@ -9,11 +9,11 @@ class StaticPagesController < ApplicationController
       else
         redirect_to "/chinchins"
       end
-    else
-      if mobile_device?
-        redirect_to "/m"
-      end
-    end
+    # else
+    #   if mobile_device?
+    #     redirect_to "/m"
+    #   end
+    # end
   end
 
 # This controller is for a Facebook canvas app
