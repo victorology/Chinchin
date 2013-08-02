@@ -69,27 +69,27 @@ end
     self.likes.count * 10
   end
 
-  def fetch_profile_photos
-    photos = self.photos
-    photos.each do |photo|
-      if ProfilePhoto.find_by_picture_url(photo.source).nil?
-        pp = ProfilePhoto.new
-        pp.picture_url = photo.source
-        pp.source_url = photo.images.first.source
-        pp.created_at = photo.created_time
-        pp.facebook_likes = photo.likes.count
-        pp.chinchin = self
-        pp.save
-      end
-    end
-    if photos.nil?
-      photo_count = 0
-    else
-      photo_count = photos.size
-    end
-    self.photo_count = photo_count
-    self.save
-  end
+  # def fetch_profile_photos
+  #   photos = self.photos
+  #   photos.each do |photo|
+  #     if ProfilePhoto.find_by_picture_url(photo.source).nil?
+  #       pp = ProfilePhoto.new
+  #       pp.picture_url = photo.source
+  #       pp.source_url = photo.images.first.source
+  #       pp.created_at = photo.created_time
+  #       pp.facebook_likes = photo.likes.count
+  #       pp.chinchin = self
+  #       pp.save
+  #     end
+  #   end
+  #   if photos.nil?
+  #     photo_count = 0
+  #   else
+  #     photo_count = photos.size
+  #   end
+  #   self.photo_count = photo_count
+  #   self.save
+  # end
 
   def mutual_friends(current_user)
     @mutual_friends ||= self.users & current_user.friends_in_chinchin.map { |c| c.user }

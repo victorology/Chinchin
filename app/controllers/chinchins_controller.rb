@@ -13,7 +13,7 @@ class ChinchinsController < ApplicationController
 
 	def show
     @user = current_user
-		@chinchin = Chinchin.find(params[:id])
+		@chinchin = User.find(params[:id])
     @photos = @chinchin.profile_photos || []
 
     respond_to do | format |
@@ -24,7 +24,7 @@ class ChinchinsController < ApplicationController
   end
 
   def profile_photos
-    @chinchin = Chinchin.find(params[:id])
+    @chinchin = User.find(params[:id])
     @photos = @chinchin.profile_photos || []
 
     respond_to do | format |

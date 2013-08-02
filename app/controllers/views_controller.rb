@@ -5,8 +5,9 @@ class ViewsController < ApplicationController
 
   def index
     @user = current_user
-    avatar = Chinchin.find_by_uid(current_user.uid)
-    @chinchins = avatar.viewers.map { |view| Chinchin.find_by_uid(view.viewer.uid) }
+    # avatar = Chinchin.find_by_uid(current_user.uid)
+    # @chinchins = avatar.viewers.map { |view| Chinchin.find_by_uid(view.viewer.uid) }
+    @chinchins = @user.viewers.map { |view| User.find(view.viewer.id) }
 
     respond_to do | format |
       format.html
@@ -15,10 +16,10 @@ class ViewsController < ApplicationController
   end
 
   def create
-    viewee = Chinchin.find(params[:viewee_id].to_i)
+    viewee = User.find(params[:viewee_id].to_i)
     viewer = current_user
     if not viewee.nil? and not View.find_by_viewer_id_and_viewee_id(viewer.id, viewee.id)
-      InteractionManager.view(viewer)
+      InteractionManager.view(:actor => current_user, :receiver => viewer)
     end
 
     #   v = View.new

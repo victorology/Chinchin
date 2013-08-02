@@ -33,6 +33,8 @@ class User < ActiveRecord::Base
   has_many :chinchins, :through => :friendships
   has_many :likes
   has_many :viewees, :class_name => 'View', :foreign_key => 'viewer_id'
+  has_many :viewers, :class_name => 'View', :foreign_key => 'viewee_id'
+  has_many :profile_photos, :foreign_key => 'chinchin_id'
 
   def self.create_from_omniauth(auth)
 	  user = User.new
@@ -128,7 +130,7 @@ class User < ActiveRecord::Base
     chinchins.each do |chinchin|
       leader = Hash.new(0)
       leader[:chinchin] = chinchin
-      leader[:likes] = chinchin.likes.count #Like.where("likes.chinchin_id == ", chinchin.id).count
+      leader[:likes] = Like.where("chinchin_id = ?", chinchin.id).count
       leader[:viewed] = chinchin.viewers.count
       leader[:total_score] = leader[:likes] * 10 + leader[:viewed]
 
@@ -150,8 +152,8 @@ class User < ActiveRecord::Base
 
   def chinchin
     friendships = []
-    self.friends_in_chinchin.each do |chinchin|
-      friend = chinchin.user
+    self.friends_in_chinchin.each do |friend|
+      # friend = chinchin.user
       friendships.push(Friendship.find_all_by_user_id(friend.id))
     end
 
@@ -276,9 +278,15 @@ class User < ActiveRecord::Base
     self.liked(chinchin) and chinchin.liked(self)
   end
 
-  # def mutual_friends(current_user)
-  #   @mutual_friends ||= self.users & current_user.friends_in_chinchin
-  # end
+  def mutual_friends(user)
+    # @mutual_friends ||= self.users & current_user.friends_in_chinchin
+    mutual_friendships(user)
+  end
+
+  def mutual_friendships(user)
+    @mutual_friendships ||= user.friends_in_chinchin & self.friends_in_chinchin
+  end
+
 
   def make_friendship
     friends = self.friends
@@ -309,10 +317,6 @@ class User < ActiveRecord::Base
                 options_or_size
               end
     _endpoint_ = ["#{self.endpoint}/picture", options.to_query].delete_if(&:blank?).join('?')
-  end
-
-  def mutual_friendships(user)
-    @mutual_friendships ||= user.friends_in_chinchin & self.friends_in_chinchin
   end
 
   def connect_with_chinchin

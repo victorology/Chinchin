@@ -15,9 +15,9 @@ class LikesController < ApplicationController
 
   def create
     @chinchinId = params[:chinchin_id]
-    chinchin = Chinchin.find(@chinchinId)
+    chinchin = User.find(@chinchinId)
     if Like.find_by_user_id_and_chinchin_id(current_user.id, @chinchinId).nil?
-      InteractionManager.like(chinchin)
+      InteractionManager.like(:actor => current_user, :receiver => chinchin)
     end
 
     respond_to do | format |
