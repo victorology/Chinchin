@@ -9,7 +9,8 @@ Chinchin2::Application.routes.draw do
   match 'auth/failure', to: redirect('/')
   match 'signout', to: 'sessions#destroy', as: 'signout'
 
-  match 'm', to: 'chinchins#index'
+  # match 'm', to: 'chinchins#index'
+  match 'm', to: 'chinchins#under_construction'
   match 'chinchins', to: 'chinchins#index'
   resources :likes
   match 'unlike', to: 'likes#destroy'

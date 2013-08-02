@@ -1,7 +1,7 @@
 class ChinchinsController < ApplicationController
 	# Render mobile or desktop depending on User-Agent for these actions.
-  before_filter :check_for_mobile, :only => [:index, :show]
-  before_filter :login_required
+  before_filter :check_for_mobile, :only => [:index, :show, :under_construction]
+  before_filter :login_required, :except => [:under_construction]
 
   def index
     @user = current_user
@@ -30,5 +30,9 @@ class ChinchinsController < ApplicationController
     respond_to do | format |
       format.js {render :layout => false}
     end
+  end
+
+  def under_construction
+    render :layout => false
   end
 end

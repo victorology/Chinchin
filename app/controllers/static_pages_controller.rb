@@ -9,6 +9,10 @@ class StaticPagesController < ApplicationController
       else
         redirect_to "/chinchins"
       end
+    else
+      if mobile_device?
+        redirect_to "/m"
+      end
     end
   end
 
