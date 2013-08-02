@@ -142,6 +142,7 @@ show_messages = function(section, title, url) {
 show_chinchin_card(browse, "Chinchin", "/chinchins.js");
 
 st.stp_nav.find('nav a').on("click", function() {
+    window.location = "/m";
     $(this).addClass('selected').siblings().removeClass('selected');
     st.toggle_nav();
     var link_href = $(this).attr('href');
