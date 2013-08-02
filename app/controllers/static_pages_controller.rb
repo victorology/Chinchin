@@ -13,7 +13,7 @@ class StaticPagesController < ApplicationController
     #   if mobile_device?
     #     redirect_to "/m"
     #   end
-    # end
+    end
   end
 
 # This controller is for a Facebook canvas app
