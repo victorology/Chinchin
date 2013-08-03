@@ -68,7 +68,7 @@ class User < ActiveRecord::Base
     user.status = REGISTERED
     user.save!
     user.delay.add_friends_to_chinchin
-    user.delay.connect_with_chinchin
+    # user.delay.connect_with_chinchin
 
     return user
 	end
@@ -220,6 +220,13 @@ class User < ActiveRecord::Base
         friendship.chinchin = u
         friendship.save!
       end
+
+      if Friendship.find_by_user_id_and_chinchin_id(u.id, self.id).nil?
+        friendship = Friendship.new
+        friendship.user = u
+        friendship.chinchin = self
+        friendship.save!
+      end
     end
   end
 
@@ -330,6 +337,20 @@ class User < ActiveRecord::Base
   def message_rooms
     MessageRoom.message_rooms(self.id)
   end
+
+  def photos
+    friend = self.friends_in_chinchin.last || self
+    fb_user = FbGraph::User.new(self.uid, :access_token => friend.oauth_token)
+    albums = fb_user.albums
+    albums.each do |album|
+      if album.name == 'Profile Pictures' and album.photos.count > 0
+        return album.photos
+      end
+    end
+
+    return []
+  end
+
 
   def fetch_profile_photos
     photos = self.photos
