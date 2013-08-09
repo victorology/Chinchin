@@ -29,6 +29,7 @@ Chinchin2::Application.routes.draw do
   resources :tutorials, :only => [:index]
   resources :reports, :only => [:index]
   match 'reports/:started_at/:ended_at', to: 'reports#show'
+  match 'reports/csv', to: 'reports#csv'
 
   match 'chinchins/:id/profile_photos', to: 'chinchins#profile_photos'
   match 'register_device_token', to: 'users#register_device_token'

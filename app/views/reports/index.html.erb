@@ -80,15 +80,16 @@
 		From: <input type="text" id="from" value="2013-01-01" />
 		To: <input type="text" id="to" value="" />
 		<button id="redraw">Redraw Chars</button>
+		<a id="downloadButton" href="/reports/csv" class="button tiny success" download="chinchin_report.csv" onclick="exportCSV();">Export to csv</a>
 	</div>
 	<script type="text/javascript">
 	var parseDate = d3.time.format("%Y-%m-%d").parse;
 	var color = d3.scale.category10();
 
-    var drawMultiLineGraph = function(data, title, domain, width, height) {
+  var drawMultiLineGraph = function(data, title, domain, width, height) {
 		var margin = {top: 20, right: 20, bottom: 30, left: 50};
-	    width = width - margin.left - margin.right;
-	    height = height - margin.top - margin.bottom;
+	  width = width - margin.left - margin.right;
+	  height = height - margin.top - margin.bottom;
 
 		var x = d3.time.scale()
 		    .range([0, width]);
@@ -106,15 +107,15 @@
 
 		var line = d3.svg.line()
 			.interpolate("basis")
-		    .x(function(d) { return x(d.key); })
-		    .y(function(d) { return y(d.count); });
+	    .x(function(d) { return x(d.key); })
+	    .y(function(d) { return y(d.count); });
 
 		var svg = d3.select("body").append("svg")
 			.attr("class", "container")
-	    	.attr("width", width + margin.left + margin.right)
-	    	.attr("height", height + margin.top + margin.bottom)
-	  		.append("g")
-	    	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    	.attr("width", width + margin.left + margin.right)
+    	.attr("height", height + margin.top + margin.bottom)
+  		.append("g")
+    	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 		svg.append("text")
 			.attr("class", "title")
@@ -124,13 +125,14 @@
 
 		color.domain(domain);
 
-    	var heads = color.domain().map(function(name) {
-    		var prev_value = 0;
+  	var heads = color.domain().map(function(name) {
+			var prev_value = 0;
 			return {
 				name: name,
 				values: data.map(function(d) {
-					var current_value = prev_value + d.value[name];
-					prev_value = current_value;
+					// var current_value = prev_value + d.value[name];
+					// prev_value = current_value;
+					var current_value = d.value[name];
 					return {key: d.key, count: current_value};
 				})
 			};
@@ -143,20 +145,20 @@
 			d3.max(heads, function(h) { return d3.max(h.values, function(v) { return v.count; })})
 			]);
   
-	    svg.append("g")
-  	        .attr("class", "x axis")
-  	        .attr("transform", "translate(0," + height + ")")
-  	        .call(xAxis);
-  
-	    svg.append("g")
-  	        .attr("class", "y axis")
-  	        .call(yAxis)
-  	      	.append("text")
-  	        .attr("transform", "rotate(-90)")
-  	        .attr("y", 6)
-  	        .attr("dy", ".71em")
-  	        .style("text-anchor", "end")
-  
+    svg.append("g")
+	        .attr("class", "x axis")
+	        .attr("transform", "translate(0," + height + ")")
+	        .call(xAxis);
+
+    svg.append("g")
+	        .attr("class", "y axis")
+	        .call(yAxis)
+	      	.append("text")
+	        .attr("transform", "rotate(-90)")
+	        .attr("y", 6)
+	        .attr("dy", ".71em")
+	        .style("text-anchor", "end")
+
 		var head = svg.selectAll(".head")
 			.data(heads)
 			.enter().append("g")
@@ -167,39 +169,40 @@
 			.attr("d", function(d) { return line(d.values); })
 			.style("stroke", function(d) { return color(d.name); });
 
-		head.append("text")				
-	      	.datum(function(d) { return {name: d.name, value: d.values[d.values.length - 1]}; })
-	      	.attr("transform", function(d) { return "translate(" + x(d.value.key) + "," + y(d.value.count) + ")"; })
-	      	.attr("x", 3)
-	      	.attr("dy", ".35em")
-	      	.text(function(d) { return d.name; });
-    }
+		// head.append("text")
+  //   	.datum(function(d) { return {name: d.name, value: d.values[d.values.length - 1]}; })
+  //   	.attr("transform", function(d) { return "translate(" + x(d.value.key) + "," + y(d.value.count) + ")"; })
+  //   	.attr("x", 3)
+  //   	.attr("dy", ".35em")
+  //   	.text(function(d) { return d.name; });
+  }
 
     var drawDashboard = function(data) {
     	data = d3.entries(data);
-		data = data.sort(function(a, b) {
-			return d3.ascending(a.key, b.key);
-		});
+			data = data.sort(function(a, b) {
+				return d3.ascending(a.key, b.key);
+			});
 
-		data.forEach(function(d) {
-			d.key = parseDate(d.key);
-		});
+			data.forEach(function(d) {
+				d.key = parseDate(d.key);
+			});
 
-		drawMultiLineGraph(data, 'Total Users', ["total_users", "male_users", "female_users"], 500, 250);
-		drawMultiLineGraph(data, 'Total Chinchins', ["total_chinchins", "male_chinchins", "female_chinchins"], 500, 250);
-		drawMultiLineGraph(data, 'Total Likes', ["total_likes", "likes_from_male", "likes_from_female"], 500, 250);
-		drawMultiLineGraph(data, 'Uniq Liked Users', ["uniq_male_liked", "uniq_female_liked"], 500, 250);
-    }
+			drawMultiLineGraph(data, 'Users', ["male_users", "female_users"], 500, 250);
+			drawMultiLineGraph(data, 'Chinchins', ["male_chinchins", "female_chinchins"], 500, 250);
+			drawMultiLineGraph(data, 'Likes', ["likes_from_male", "likes_from_female"], 500, 250);
+			drawMultiLineGraph(data, 'Uniq Liked Users', ["uniq_male_liked", "uniq_female_liked"], 500, 250);
+			drawMultiLineGraph(data, 'Chinchin Count', ["no_chinchins", "one_chinchin", "two_chinchins", "three_more_chinchins"], 500, 250);
+	    }
 
-    var gdata;
-    
-    var getDataAndDraw = function(started_at, ended_at) {
-		var url = '/reports/'+started_at+'/'+ended_at+'/';
-		// var url = '/reports/2013-04-01/2013-07-12/';
-		d3.json(url, function(error, data) {
-			gdata = data;
-	    	drawDashboard(gdata);	
-		});
+	    var gdata;
+	    
+	    var getDataAndDraw = function(started_at, ended_at) {
+			var url = '/reports/'+started_at+'/'+ended_at+'/';
+			// var url = '/reports/2013-04-01/2013-07-12/';
+			d3.json(url, function(error, data) {
+				gdata = data;
+		    	drawDashboard(gdata);	
+			});
     }
 	</script>
 </body>
