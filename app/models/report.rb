@@ -5,6 +5,7 @@ class Report < ActiveRecord::Base
     uniq_likes = Report.total_like_per_day(started_at, ended_at)
     chinchins = Report.total_chinchin_per_day(started_at, ended_at)
     chinchin_counts = Report.count_chinchins_per_day(started_at, ended_at)
+    total_uniq_likes = Report.count_total_uniq_like_per_day(started_at, ended_at)
 
     keys = users.keys
 
@@ -15,7 +16,8 @@ class Report < ActiveRecord::Base
       q = uniq_likes[key]
       c = chinchins[key]
       cc = chinchin_counts[key]
-      results[key] = u.merge(l).merge(q).merge(c).merge(cc)
+      tu = total_uniq_likes[key]
+      results[key] = u.merge(l).merge(q).merge(c).merge(cc).merge(tu)
     end
     results
   end
@@ -72,6 +74,8 @@ class Report < ActiveRecord::Base
     store_total_like_per_day(started_at, ended_at)
     puts "chinchin count"
     store_chinchins_per_day(started_at, ended_at)
+    puts "total uniq likes"
+    store_total_uniq_like_per_day(started_at, ended_at)
   end
 
   def self.total_user_per_day_sql(started_at, ended_at)
@@ -153,9 +157,17 @@ class Report < ActiveRecord::Base
     make_report(started_at, ended_at, sqls)
   end
 
-  def self.store_chinchins_per_day(started_at, ended_at)
-    result = {}
+  def self.count_total_uniq_like_per_day(started_at, ended_at)
+    total_uniq_male_reports = Report.where("created_at >=? and created_at <= ? and title = 'total_uniq_male_liked'", started_at, ended_at).select(['created_at', 'value'])
+    total_uniq_female_reports = Report.where("created_at >=? and created_at <= ? and title = 'total_uniq_female_liked'", started_at, ended_at).select(['created_at', 'value'])
+    sqls = [
+      {:title => 'total_uniq_male_liked', :result => sql_to_hash(total_uniq_male_reports)},
+      {:title => 'total_uniq_female_liked', :result => sql_to_hash(total_uniq_female_reports)},
+    ]
+    make_report(started_at, ended_at, sqls)
+  end
 
+  def self.store_chinchins_per_day(started_at, ended_at)
     started_at = started_at.to_date
     ended_at = ended_at.to_date
     
@@ -176,14 +188,30 @@ class Report < ActiveRecord::Base
     end
   end
 
+  def self.store_total_uniq_like_per_day(started_at, ended_at)
+    started_at = started_at.to_date
+    ended_at = ended_at.to_date
+    
+    if ended_at > Date.today
+      ended_at = Date.today
+    end
+    started_at.upto(ended_at) do |day|
+      report_count = 0
+      begin
+        report_count = Report.where('title like ? and created_at BETWEEN ? and ?' , "total_uniq_%", day.beginning_of_day, day.end_of_day).count
+      rescue
+      end
+      if report_count == 0
+        store_total_uniq_like_at_certain_day(day)
+      else
+        puts 'skip...'
+      end
+    end
+  end
+
   def self.store_chinchins_at_certain_day(day)
     count = {"none"=>0, "one"=>0, "two"=>0, "three"=>0}
     User.where("created_at <= ? and status = 1", day.end_of_day).each do |user|
-      # c = Chinchin.joins(:users).where("users.id = ?", user.id)
-      #                           .where("chinchins.user_id is not null")
-      #                           .where("users.created_at <= ?", day.end_of_day)
-      #                           .count
-
       c = user.registered_friends.where('users.created_at <= ?', day.end_of_day).count
 
       case c
@@ -198,6 +226,20 @@ class Report < ActiveRecord::Base
       report = Report.new
       report.title = "count_chinchins_"+key
       report.value = count[key]
+      report.created_at = day.end_of_day
+      report.save
+    end
+  end
+
+  def self.store_total_uniq_like_at_certain_day(day)
+    ['male', 'female'].each do |gender|
+      count = Like.joins(:user)
+                  .where('likes.created_at <= ? and users.gender = ?', day.end_of_day, gender)
+                  .count('users.id', distinct:true)
+
+      report = Report.new
+      report.title = "total_uniq_"+gender+"_liked"
+      report.value = count
       report.created_at = day.end_of_day
       report.save
     end

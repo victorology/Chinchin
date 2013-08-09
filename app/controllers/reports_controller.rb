@@ -18,15 +18,15 @@ class ReportsController < ApplicationController
 	end
 
 	def csv		
-		csv = "Day,New Male User,New Female User,New Male Chinchin,New Female Chinchin,New Like From Male,New Like From Female,Unique Daily Like From Male,Unique Daily Like From Female,User has no chinchins,User has one chinchin,User has two chinchins,User has three or more chinchins"
+		csv = "Day,New Male User,New Female User,New Male Chinchin,New Female Chinchin,New Like From Male,New Like From Female,Unique Daily Like From Male,Unique Daily Like From Female,Total Unique Like From Male,Total Unique Like From Female,User has no chinchins,User has one chinchin,User has two chinchins,User has three or more chinchins"
 
 		@results = Report.make_reports('2013-01-01'.to_date, Time.now.to_date)
 
 		@results.each do |result|
 			items = []
 			d = result[1]
-			keys = ['male_users', 'female_users', 'male_chinchins', 'female_chinchins', 'likes_from_male', 'likes_from_female', 'uniq_male_liked', 'uniq_female_liked', 'no_chinchins', 'one_chinchin', 'two_chinchins', 'three_more_chinchins']
-			keys.each do |key|			
+			keys = ['male_users', 'female_users', 'male_chinchins', 'female_chinchins', 'likes_from_male', 'likes_from_female', 'uniq_male_liked', 'uniq_female_liked', 'total_uniq_male_liked', 'total_uniq_female_liked', 'no_chinchins', 'one_chinchin', 'two_chinchins', 'three_more_chinchins']
+			keys.each do |key|
 				items << d[key]
 			end
 			row = result[0] + "," + items.join(",")
