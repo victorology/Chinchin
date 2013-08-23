@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= full_title(yield(:title)) %></title>
+  <%= stylesheet_link_tag    "application-desktop", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  <%= render 'layouts/shim' %>
+  <meta property="og:description" name="description" content="Chinchin aims to transform the most important industry in the world... introducing men and women so the human race continues to dominate the face of the earth for years to come.">
+  <meta name="author" content="Victor Ching">
+  <meta property="og:title" content="Chinchin" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="http://chinchinapp.com" />
+  <meta property="og:image" content="http://chinchinapp.com/assets/fb-icon.png" />
+  <meta property="og:site_name" content="Chinchin" />
+  <meta property="fb:admins" content="500912461" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- start Mixpanel -->
+  <script type="text/javascript">(function(e,b){if(!b.__SV){var a,f,i,g;window.mixpanel=b;a=e.createElement("script");a.type="text/javascript";a.async=!0;a.src=("https:"===e.location.protocol?"https:":"http:")+'//cdn.mxpnl.com/libs/mixpanel-2.2.min.js';f=e.getElementsByTagName("script")[0];f.parentNode.insertBefore(a,f);b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==
+typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.increment".split(" ");for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2}})(document,window.mixpanel||[]);
+mixpanel.init("53ba1bb796ef510bf1c77ccb3facd3c4");</script>
+  <!-- end Mixpanel -->
+
+  <!-- start Google Analytics -->
+  <script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30640878-1']);
+    _gaq.push(['_setDomainName', 'chinchinapp.com']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+    // Added to track client side errors in GA
+    window.onerror = function(message, file, line) {
+       var sFormattedMessage = '[' + file + ' (' + line + ')] ' + message;
+       _gaq.push(['_trackEvent', 'Exceptions', 'Application', sFormattedMessage, null, true]);
+    }
+
+  </script>
+  <!-- end Google Analytics -->
+  <script type="text/javascript"> // <![CDATA[
+	//iPhone Version:
+	if((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i))) {
+	    window.location = "http://bit.ly/chchios";
+	}
+	//Android Version:
+	if(navigator.userAgent.match(/android/i)) {
+	    window.location = "http://bit.ly/chchdroid";
+	}
+	 
+	</script>
+</head>
+<body>
+
+<div class="container-fluid">
+
+<header>
+  <div id="divider-header"></div>
+  <%= link_to "Chinchin", root_path, id: "logo" %>
+  <% if current_user %>
+	  <div id="navigation">
+	    <ul>
+	      <li><%= link_to "Browse Chinchins", "/users/#{current_user.id}/chinchins" %></li>
+	      <li><%= link_to "My Likes", "/users/#{current_user.id}/likes" %></li>
+	      <li><%= link_to "Profile", "/users/#{current_user.id}" %></li>
+	      <li><%= link_to "Sign Out", "/signout" %></li>
+	    </ul>
+	  </div> <!-- #navigation -->
+	<% end %>
+</header>
+
+<figure class="main-model">
+
+<div id="main-container">
+	<div id="main-content">
+
+		<% if current_user %>
+			<h2><%= t '.thanks_html', :username => current_user.name %></h2>
+		  <p><%= t '.let_you_know' %> <%= link_to "Sign out", signout_path, id: "sign_out" %></p>
+		<% else %>
+	  	<h2><%= t '.headline_html' %></h2>
+			<p><%= t '.call_to_action' %></p>
+			<div id="main-content-btn">
+				<%= link_to t('.app_store'), "http://bit.ly/chchios", class: "app-store" %>
+				<%= link_to t('.google_play'), "http://bit.ly/chchdroid", class: "google-play" %>
+			</div> <!-- #main-content-btn -->
+			<!-- start Mixpanel CTA Click -->
+			<script type="text/javascript">
+				mixpanel.track_links('a.btn-cta', 'CTA Click');
+			</script>
+			<!-- end Mixpanel CTA Click -->
+			<!-- start Mixpanel Home Page Guest -->
+			<script type="text/javascript">
+			  mixpanel.track("Home Page");
+			</script>
+			<!-- end Mixpanel Home Page Guest -->
+		<% end %>
+
+		<ul class="social-share">
+			<li><div class="fb-like" data-href="http://facebook.com/chinchinapp" data-send="false" data-layout="button_count" data-width="90" data-show-faces="true" data-font="lucida grande" data-colorscheme="dark"></div></li>
+			<li><a href="https://twitter.com/share" class="twitter-share-button" data-url="http://chinchinapp.com" data-text="Chinchin is an online dating service which introduces people to friends of friends. :D http://chinchinapp.com" data-via="Chinchinapp">Tweet</a>
+		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></li>
+		</ul>
+
+	</div> <!-- #main-content -->
+</div> <!-- #main-container -->
+
+</figure>
+
+<footer>
+
+	<div class="divider-thick"></div>
+	<h3><%= t '.in_touch' %></h3>
+	<div class="divider-thin"></div>
+
+	<div class="box">
+		<p><%= t '.blog' %><br />
+		<a href="http://blog.chinchinapp.com">blog.chinchinapp.com »</a></p>
+	</div> <!-- .footer-box -->
+	<div class="box">
+		<p><%= t '.social_networks' %><br />
+		<a href="http://facebook.com/chinchinapp"><%= t '.facebook' %> »</a><br />
+		<a href="http://twitter.com/chinchinapp"><%= t '.twitter' %> »</a></p>
+	</div> <!-- .footer-box -->
+	<div class="box">
+		<p><%= t '.contact' %><br />
+		<a href="mailto:victor@chinchinapp.com">victor@chinchinapp.com »</a></p>
+	</div> <!-- .footer-box -->
+	<div class="box">
+		<p><%= t '.jobs' %><br />
+		<a href="mailto:jobs@chinchinapp.com">jobs@chinchinapp.com »</a></p>
+	</div> <!-- .footer-box -->
+	<div class="divider-thin"></div>
+	<small>© <%= Date.today.year %>. <%= t '.copyright' %></small>
+
+</footer>
+
+</div> <!-- .container-fluid -->
+
+<%= debug(params) if Rails.env.development? %>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=352455024800701";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+</body>
+</html>
