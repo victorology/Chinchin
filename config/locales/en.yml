@@ -38,6 +38,14 @@ en:
       google_play: "Get it on Google Play"
       thanks_html: "Thank you for signing up for early access to Chinchin, <strong>%{username}</strong>!"
       let_you_know: "When we start the private preview of our service, we will make sure you are one of the first to know! In the meantime, please help spread the word by pressing Like on Facebook or sending a Tweet!"
+      in_touch: "Thanks for looking. We'd love to stay in touch!"
+      blog: "Check out our blog"
+      social_networks: "Find us on social networks"
+      facebook: "Facebook"
+      twitter: "Twitter"
+      contact: "General inquiries, contact"
+      jobs: "Careers, send portfolio to"
+      copyright: "Chinchin. All rights reserved."
   users:
     index:
       headline: "Chinchin currently has %{users} users."

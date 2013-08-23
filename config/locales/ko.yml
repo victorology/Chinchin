@@ -38,6 +38,14 @@ ko:
       google_play: "구글플레이에 다운 받으세요"
       thanks_html: "비공개 시범 운영 모집에 참여해 주셔서 감사합니다.<strong>%{username}</strong>!"
       let_you_know: "비공개 시범 운영 시작 시, 꼭 1등으로 알려 드릴게요! 페이스북 Like나 트위터로 저희를 당신의 친친에게 소개해주세요!"
+      in_touch: "친친에 오신 것을 환영합니다! 우리 자주 봐요. ^_^"
+      blog: "블로그로 구경 가기"
+      social_networks: "SNS 친친!"
+      facebook: "페이스북"
+      twitter: "트위터"
+      contact: "문의사항"
+      jobs: "친친! 같이 일해요"
+      copyright: "Chinchin. All rights reserved."
   users:
     finding:
       finding_chinchins: "Finding Chinchins..."
