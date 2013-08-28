@@ -3,6 +3,12 @@ Chinchin2::Application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
 
+  # Added for subdomain direction
+  require 'subdomain'
+  constraints(Subdomain) do
+    match '/' => 'static_pages#download'
+  end
+
   root to: 'static_pages#home'
 
   match 'auth/:provider/callback', to: 'sessions#create'
