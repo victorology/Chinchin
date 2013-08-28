@@ -36,40 +36,43 @@ class User < ActiveRecord::Base
   has_many :viewers, :class_name => 'View', :foreign_key => 'viewee_id'
   has_many :profile_photos, :foreign_key => 'chinchin_id'
 
-  def self.create_from_omniauth(auth)
-	  user = User.new
-    user.provider = auth.provider
-    user.uid = auth.uid
-    user.name = auth.info.name
-    user.email = auth.info.email
-    user.first_name = auth.info.first_name
-    user.last_name = auth.info.last_name
-    user.birthday = auth.extra.raw_info.birthday
-    user.location = auth.extra.raw_info.location.name unless auth.extra.raw_info.location.nil?
-    user.hometown = auth.extra.raw_info.hometown.name unless auth.extra.raw_info.hometown.nil?
+  def update_from_omniauth(auth)
+    self.provider = auth.provider
+    self.uid = auth.uid
+    self.name = auth.info.name
+    self.email = auth.info.email
+    self.first_name = auth.info.first_name
+    self.last_name = auth.info.last_name
+    self.birthday = auth.extra.raw_info.birthday
+    self.location = auth.extra.raw_info.location.name unless auth.extra.raw_info.location.nil?
+    self.hometown = auth.extra.raw_info.hometown.name unless auth.extra.raw_info.hometown.nil?
     # Takes the most recent employer and position.
     unless auth.extra.raw_info.work.nil?
-	    unless auth.extra.raw_info.work.first.employer.nil?
-	    	user.employer = auth.extra.raw_info.work.first.employer.name
-	    end
-	    unless auth.extra.raw_info.work.first.position.nil?
-	    	user.position = auth.extra.raw_info.work.first.position.name
-	    end
-  	end
-    user.gender = auth.extra.raw_info.gender
-    user.relationship_status = auth.extra.raw_info.relationship_status
+      unless auth.extra.raw_info.work.first.employer.nil?
+        self.employer = auth.extra.raw_info.work.first.employer.name
+      end
+      unless auth.extra.raw_info.work.first.position.nil?
+        self.position = auth.extra.raw_info.work.first.position.name
+      end
+    end
+    self.gender = auth.extra.raw_info.gender
+    self.relationship_status = auth.extra.raw_info.relationship_status
     # Takes the most recent entry but should take College if it exists.
     unless auth.extra.raw_info.education.nil?
-    	user.school = auth.extra.raw_info.education.first.school.name
+      self.school = auth.extra.raw_info.education.first.school.name
     end
-    user.locale = auth.extra.raw_info.locale
-    user.oauth_token = auth.credentials.token
-    user.oauth_expires_at = Time.at(auth.credentials.expires_at) unless auth.credentials.expires_at.nil?
-    user.status = REGISTERED
-    user.save!
-    user.delay.add_friends_to_chinchin
-    # user.delay.connect_with_chinchin
+    self.locale = auth.extra.raw_info.locale
+    self.oauth_token = auth.credentials.token
+    self.oauth_expires_at = Time.at(auth.credentials.expires_at) unless auth.credentials.expires_at.nil?
+    self.status = REGISTERED
+    self.save!
+    self.delay.add_friends_to_chinchin
+    self.delay.fetch_profile_photos
+  end
 
+  def self.create_from_omniauth(auth)
+	  user = User.new
+    user.update_from_omniauth(auth)
     return user
 	end
 
@@ -185,6 +188,7 @@ class User < ActiveRecord::Base
     ra['school'] = ra['school'].last['name'] unless ra['school'].nil?
 
     u = User.new(
+        :provider => 'facebook',
         :uid => ra['id'],
         :name => ra['name'],
         :email => ra['email'],

@@ -1,0 +1,6 @@
+<ul id="chinchin_dialog_friends_list">
+<% mutual_friends.each do |friend| %>
+	<li class="friend_row"><input class="friend_list" type="checkbox" name="alert_friend" value="<%=friend.id%>" /><img class="friend_list" src="<%= friend.picture %>" /><h2 class="friend_list"><%= friend.name %></h2></li>
+<% end %>
+</ul>
+<div class="clear" />

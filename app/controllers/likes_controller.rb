@@ -15,9 +15,15 @@ class LikesController < ApplicationController
 
   def create
     @chinchinId = params[:chinchin_id]
+    alert_list = params[:alert_list]
+
     chinchin = User.find(@chinchinId)
     if Like.find_by_user_id_and_chinchin_id(current_user.id, @chinchinId).nil?
       InteractionManager.like(:actor => current_user, :receiver => chinchin)
+    end
+
+    if not alert_list.nil?
+      InteractionManager.alert(:actor => current_user, :friends_ids => alert_list)
     end
 
     respond_to do | format |

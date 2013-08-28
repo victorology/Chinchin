@@ -1,10 +1,27 @@
-require_relative '../../app/services/interaction_manager'
-require 'active_support/all'
+require 'spec_helper'
+# require_relative '../../app/services/interaction_manager'
+# require 'active_support/all'
 
-class UrbanairshipWrapper; end
-class MessageRoom
-	WAITING_FOR_OPEN = 0
-end	
+# class UrbanairshipWrapper; end
+# class User
+# 	REGISTERED = 1
+# end
+
+# class MessageRoom
+# 	WAITING_FOR_OPEN = 0
+# 	OPENED_BY_USER2 = 2
+
+# 	def self.messageRoom(user1_id, user2_id)
+# 		return MessageRoom.where("user1_id = ? and user2_id = ?", user1_id, user2_id).first || MessageRoom.where("user1_id = ? and user2_id = ?", user2_id, user1_id).first
+# 	end
+
+# 	def sendMessage(writer, text)
+# 	end
+# end	
+
+# class Message
+# 	TEXT = 0
+# end
 
 describe InteractionManager do
 	let(:user) { stub(:user, id: 100, status: 1) }
@@ -40,6 +57,17 @@ describe InteractionManager do
 			MessageRoom.should_receive(:create).with(user1_id: chinchin.id, user2_id: user.id, status: MessageRoom::WAITING_FOR_OPEN)
 			UrbanairshipWrapper.should_receive(:send).exactly(3).times
 			InteractionManager.like(actor: user, receiver: chinchin)
+		end
+	end
+
+	context '.alert to friends' do
+		it 'can send a message for introduce to friends' do
+			ids = ['1','2']
+
+			MessageRoom.should_receive(:create).with(user1_id: 1, user2_id: user.id, status: MessageRoom::OPENED_BY_USER2)
+			MessageRoom.should_receive(:create).with(user1_id: 2, user2_id: user.id, status: MessageRoom::OPENED_BY_USER2)
+			UrbanairshipWrapper.should_receive(:send).exactly(2).times
+			InteractionManager.alert(actor: user, receiver: chinchin, friends_ids: ids)
 		end
 	end
 end

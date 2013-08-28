@@ -634,11 +634,20 @@ div.row-friend-icon {
 
 span.row-friend-count {
   float: left;
+  margin: 10px 10px;
 }
 
 /* messages */
 
 /* list */
+
+.friend_list {
+  float: left;
+}
+
+li.friend_row {
+  clear: both;
+}
 
 div.list {
   float: left;

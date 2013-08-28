@@ -3,6 +3,11 @@ class SessionsController < ApplicationController
   	auth = env["omniauth.auth"]
     user = User.where(auth.slice(:provider, :uid)).first
     next_url = root_url
+
+    if user.status == User::UNREGISTERED
+      user.update_from_omniauth(auth)
+    end
+
     unless user
     	user = User.create_from_omniauth(auth)
     	next_url = tutorials_url

@@ -34,6 +34,10 @@ class MessageRoom < ActiveRecord::Base
     return true
   end
 
+  def self.messageRoom(user1_id, user2_id)
+    return MessageRoom.where("user1_id = ? and user2_id = ?", user1_id, user2_id).first || MessageRoom.where("user1_id = ? and user2_id = ?", user2_id, user1_id).first
+  end
+
   def open(user)
     if user == self.user1
       self.status = OPENED_BY_USER1

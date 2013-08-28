@@ -1,5 +1,5 @@
 class InteractionManager
-	attr_reader :actor, :receiver
+	attr_reader :actor, :receiver, :friends_ids
 
 	def self.view(options)
 		new(options).view		
@@ -9,9 +9,25 @@ class InteractionManager
 		new(options).like		
 	end
 
+	def self.alert(options)
+		new(options).alert
+	end
+
 	def initialize(options)
 		@actor = options[:actor]
 		@receiver = options[:receiver]
+		@friends_ids = options[:friends_ids]
+	end
+
+	def alert()
+		@friends_ids.each do |friend_id|
+			friend_id = friend_id.to_i
+			messageRoom = MessageRoom.messageRoom(friend_id, actor.id)
+			if messageRoom.nil?
+				messageRoom = MessageRoom.create(user1_id: friend_id, user2_id: actor.id, status: MessageRoom::OPENED_BY_USER2)
+			end
+			messageRoom.sendMessage(actor, "I like #{receiver.first_name}")
+		end
 	end
 
 	def view()
