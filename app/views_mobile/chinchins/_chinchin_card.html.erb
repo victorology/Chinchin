@@ -37,11 +37,14 @@
 
     <a href="#">
       <div class="profile-click" id="<%=friend.id%>">
-        <div class="container-10px">
+        <!-- <div class="container-10px"> -->
+        <div class="clear" />
+        <div class="friend_list">
           <% friend.mutual_friends(@user).each do |user| %>
             <div class="list"><img src="<%= user.picture %>" /><h2><%= user.name %></h2></div>
           <% end %>
-        </div> <!-- container-10px -->
+        </div>
+        <!-- </div> container-10px -->
       </div> <!-- .profile-click -->
     </a>
 

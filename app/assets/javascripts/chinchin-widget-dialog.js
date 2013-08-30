@@ -16,7 +16,7 @@ function chinchin_dialog(title, message, list, callback) {
 	dialog.appendTo('body');
 	header.append(title).appendTo(inner);
 	content.append(message).appendTo(inner);
-	inner.append('<div class="container-10px">'+list+'</div>');
+	inner.append(list);
 	inner.appendTo(dialog);
 
 	inner.append(buttons);
