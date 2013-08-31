@@ -66,7 +66,7 @@ describe MessageRoom do
       user1.message_rooms.count.should == 2
       messageRoom = user1.message_rooms.first
       messageRoom.status.should == MessageRoom::OPENED_BY_USER2
-      messageRoom.messages.first.content.should == "I like #{user2.first_name}"
+      messageRoom.messages.first.content.should == "What do you think about #{user2.name}?"
     end
 
     it 'only make one message room with two friends_ids when the other is already created' do
@@ -78,7 +78,7 @@ describe MessageRoom do
       user1.message_rooms.count.should == 2
       messageRoom = user1.message_rooms.last
       messageRoom.status.should == MessageRoom::OPENED_BY_USER2
-      messageRoom.messages.last.content.should == "I like #{user2.first_name}"
+      messageRoom.messages.last.content.should == "What do you think about #{user2.name}?"
     end
   end
 end

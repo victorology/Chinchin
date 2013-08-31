@@ -26,7 +26,7 @@ class InteractionManager
 			if messageRoom.nil?
 				messageRoom = MessageRoom.create(user1_id: friend_id, user2_id: actor.id, status: MessageRoom::OPENED_BY_USER2)
 			end
-			messageRoom.sendMessage(actor, "I like #{receiver.first_name}")
+			messageRoom.sendMessage(actor, "What do you think about #{receiver.name}?")
 		end
 	end
 
