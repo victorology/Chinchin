@@ -957,10 +957,11 @@ div.hot-user-index-info h3 {
 }
 
 .message-box {
-  height: 45px;
+  /*height: 45px;*/
 }
 
 .message-mine,.message-other {
+  display: table-cell;
   margin-top: 3px;
   padding: 3px 5px 3px 5px;
   max-width: 80%;
@@ -993,9 +994,11 @@ div.hot-user-index-info h3 {
 
 .message-mine .message-content {
   float: right;
-  text-align: right;
+  text-align: left;
   color: white;
   background-color: #4455ff;
+
+  max-width: 80%;
 
   margin-right: 5px;
   padding: 4px 15px 4px 10px;
@@ -1021,6 +1024,7 @@ div.hot-user-index-info h3 {
 
 .message-mine .message-user-profile {
   float: right;
+  vertical-align: bottom;
 }
 
 #message-input {
@@ -1030,7 +1034,7 @@ div.hot-user-index-info h3 {
   right: 0px;
   height: 30px;
   width: 100%;
-  background-color: red;
+  /*background-color: red;*/
 }
 
 #message-input input {
