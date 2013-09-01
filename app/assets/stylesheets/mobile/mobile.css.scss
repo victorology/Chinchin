@@ -650,9 +650,8 @@ li.friend_row span {
 
 .big-checkbox {
   -webkit-appearance: none;
-  background-color: #fafafa;
-  border: 1px solid #cacece;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+  background-color: $white;
+  border: 1px solid $grayDark;
   padding: 18px;
   display: inline-block;
   position: relative;
@@ -663,7 +662,7 @@ li.friend_row span {
 }
 
 .big-checkbox:checked{
-  border: 1px solid #adb8c0;
+  border: 1px solid $grayDark;
   box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
   color: $ChinchinRed;
 }

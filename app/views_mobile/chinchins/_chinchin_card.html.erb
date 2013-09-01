@@ -73,8 +73,8 @@
             var chinchin_id = $('#browse').find('.dummy').attr('id');
             // $.post('/likes.js', {chinchin_id:chinchin_id}, function() {
             chinchin_dialog(
-              "You Liked <%=friend.first_name%>", 
-              "Why don't you ask a friend to tell you more about her!", 
+              "You liked <%=friend.first_name%>", 
+              "Check the box next to a friends name to ask for more info on the person you just liked!", 
               "<%= j render :partial => 'mutual_friends_check_list', :locals => {:mutual_friends => friend.mutual_friends(@user)} %>",
               function(result) {
                 $.post('/likes.js', {chinchin_id:chinchin_id, alert_list:result}, function() {
