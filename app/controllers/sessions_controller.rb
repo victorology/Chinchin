@@ -6,6 +6,7 @@ class SessionsController < ApplicationController
 
     if user.status == User::UNREGISTERED
       user.update_from_omniauth(auth)
+      next_url = tutorials_url
     end
 
     unless user
