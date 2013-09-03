@@ -19,13 +19,13 @@
 
 <% else %>
 
-  <%= render :partial => "chinchins/chinchin_rows", :locals => {:chinchins => chinchins} %>
+  <%= render :partial => "chinchins/chinchin_rows_my_likes", :locals => {:chinchins => chinchins} %>
 
 <% end %>
 
 <script type="text/javascript">
     $(document).ready(function(){
         var info_width = document.width - 120 - 30;
-        $(".row-content").width(info_width+'px');
+        $(".row2-content").width(info_width+'px');
     });
 </script>
