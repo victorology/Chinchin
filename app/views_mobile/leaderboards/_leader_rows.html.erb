@@ -1,18 +1,18 @@
 <div class="container-10px">
 
 <% leaders.each do |leader| %>
-	<div class="list2">
+	<div class="row2">
 		<div class="photo-small">
 			<%= image_tag ( leader[:chinchin].picture('large') ), :align => "absmiddle", :width => "54", :style => "min-width: 54px; min-height: 54px;" %>
 		</div> <!-- .photo-small -->
-		<div class="list2-content">
+		<div class="row2-content">
 			<h2><%= leader[:chinchin].name %></h2>
 			<p><%= leader[:total_score] %> points</p>
-		</div> <!-- .list2-content -->
-	</div> <!-- .list2 -->
-	<div class="list2-share">
+		</div> <!-- .row2-content -->
+	</div> <!-- .row2 -->
+	<div class="row2-share">
 		<h2><a href="https://www.facebook.com/dialog/apprequests?%20app_id=352455024800701&%20to=<%= leader[:chinchin].uid %>&%20message=Did%20you%20know%20you're%20popular%20on%20Chinchin?&%20redirect_uri=http://chinchinapp.com/#hotfriends" class="hot-friends-request">Share</a></h2>
-	</div> <!-- .list2-share -->
+	</div> <!-- .row2-share -->
 <% end %>
 
 </div> <!-- .container-10px -->
