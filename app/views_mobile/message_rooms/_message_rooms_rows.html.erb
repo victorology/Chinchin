@@ -3,19 +3,18 @@
 <% message_rooms.each do |message_room| %>
     <a href="#">
         <div class="message-room-index-box message-room-status-<%= message_room.status %>" id="<%=message_room.id%>">
-            <div class="message-room-user-photo">
+            <div class="photo-small">
                 <% if message_room.user1 == @user %>
-                    <%= image_tag ( message_room.user2.picture('large') ), :align => "absmiddle", :width => "120", :style => "min-width: 120px; min-height: 120px;" %>
+                    <%= image_tag ( message_room.user2.picture('large') ), :align => "absmiddle", :width => "54", :style => "min-width: 54px; min-height: 54px;" %>
                 <% else %>
-                    <%= image_tag ( message_room.user1.picture('large') ), :align => "absmiddle", :width => "120", :style => "min-width: 120px; min-height: 120px;" %>
+                    <%= image_tag ( message_room.user1.picture('large') ), :align => "absmiddle", :width => "54", :style => "min-width: 54px; min-height: 54px;" %>
                 <% end %>
-            </div> <!-- .user-photo -->
-            <div class="message-room-info">
-                <div class="message-room-last-message">
+            </div> <!-- .photo-small -->
+            <div class="row2-content">
                   <% if message_room.user1 == @user %>
-                      <h3><%= message_room.user2.first_name %></h3>
+                      <h2><%= message_room.user2.name %></h2>
                   <% else %>
-                      <h3><%= message_room.user1.first_name %></h3>
+                      <h2><%= message_room.user1.name %></h2>
                   <% end %>
                     <div class="last-message">
                   <% if message_room.status == 0 %>
@@ -26,8 +25,7 @@
                     <% end %>
                   <% end %>
                     </div>
-                </div> <!-- .message-room-last-message -->
-            </div> <!-- .message-room-info -->
+            </div> <!-- .row2-content -->
         </div> <!-- .message-room-index-box -->
     </a>
     <div class="clear" />

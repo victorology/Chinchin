@@ -656,6 +656,9 @@ div.row2 {
 div.row2-content {
   float: left;
   margin: 6px 0 0 10px;
+  height: 42px;
+  overflow: hidden;
+  clear: right;
 }
 
 div.row2-share {
@@ -925,7 +928,7 @@ div.message-room-index-box {
   background: rgb(255,255,255);
   margin-bottom: 10px;
   display: block;
-  height: 120px;
+  height: 54px;
 }
 
 div.message-room-user-photo {
