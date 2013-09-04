@@ -65,6 +65,7 @@ class User < ActiveRecord::Base
     self.oauth_token = auth.credentials.token
     self.oauth_expires_at = Time.at(auth.credentials.expires_at) unless auth.credentials.expires_at.nil?
     self.status = REGISTERED
+    self.created_at = Time.now
     self.save!
     self.delay.add_friends_to_chinchin
     self.delay.fetch_profile_photos
