@@ -10,7 +10,7 @@
           <div class="row2-content">
             <h2><%= friend.first_name %></h2>
             <p>
-              Friends with <%= friend.mutual_friends(@user).first %>
+              Friends with <%= friend.mutual_friends(@user).first.name %>
               <% if friend.mutual_friends(@user).count > 1 %>
                 + <%= friend.mutual_friends(@user).count - 1 %> more
               <% end %>

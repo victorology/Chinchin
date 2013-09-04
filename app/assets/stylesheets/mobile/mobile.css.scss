@@ -658,7 +658,13 @@ div.row2-content {
   margin: 6px 0 0 10px;
   height: 42px;
   overflow: hidden;
-  clear: right;
+}
+
+div.row2-content-hot-friends {
+  float: left;
+  margin: 6px 0 0 10px;
+  height: 42px;
+  overflow: hidden;
 }
 
 div.row2-share {
