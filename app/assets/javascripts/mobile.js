@@ -139,7 +139,17 @@ show_messages = function(section, title, url) {
     });
 }
 
-show_chinchin_card(browse, "Chinchin", "/chinchins.js");
+route_menu = function(pathname) {
+    var re = /#.*/;
+    var destination = re.exec(pathname);
+    if (destination && destination[0] == '#feed') {
+        show_chinchins(browse, "Feed", "feeds.js");
+    } else {
+        show_chinchin_card(browse, "Chinchin", "/chinchins.js");
+    }
+}
+
+route_menu(window.location.href);
 
 st.stp_nav.find('nav a').on("click", function() {
     // window.location = "/m";
@@ -156,9 +166,9 @@ st.stp_nav.find('nav a').on("click", function() {
         url = "/chinchins.js";
         show_chinchin_card(browse, title, url);
         return;
-    } else if (link_href == '#notifications') {
+    } else if (link_href == '#feed') {
         title = link_title;
-        url = "/views.js";
+        url = "/feeds.js";
     } else if (link_href == '#hot_friends') {
         title = link_title;
         url = "/leaderboards.js";

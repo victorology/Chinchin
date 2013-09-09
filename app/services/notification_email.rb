@@ -1,0 +1,2 @@
+class NotificationEmail < NotificationMedia
+end

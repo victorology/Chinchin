@@ -1,0 +1,53 @@
+<% if feeds.nil? or feeds.size == 0 %>
+
+<div class="container-10px">
+
+<div class="empty-data">
+  <div class="empty-views-icon"></div>
+  <h1><%= t '.hang_in_there' %></h1>
+  <p>No one has viewed your profile yet but why don't you view others first? Or invite your firends and see even more Chinchins!</p>
+  <h2><a href="https://www.facebook.com/dialog/feed?app_id=%20352455024800701&link=http://chinchinapp.com/&picture=http://chinchinapp.com/assets/fb-icon.png&name=Chinchin&caption=Where%20will%20you%20find%20your%20next%20hot%20date?&description=Chinchin%20is%20a%20social%20club%20where%20you%20can%20meet%20new%20people%20through%20your%20mutual%20friends.&redirect_uri=%20http://chinchinapp.com/#viewedyou" class="invite-friends">Invite Friends</a></h2>
+  <!-- start Mixpanel No Views -->
+  <script type="text/javascript">
+    mixpanel.track("No Views");
+    mixpanel.track_links('a.invite-friends', 'Invite Friends');
+  </script>
+  <!-- end Mixpanel No Views -->
+</div> <!-- .empty-data -->
+
+</div> <!-- .container-10px -->
+
+<% else %>
+  <div class="container-10px">
+
+<% feeds.each do |feed| %>
+    <a href="#">
+      <div class="profile-click" id="<%=feed.user.id%>">
+        <div class="row2">
+          <div class="photo-small">
+            <% if feed.target_user %>
+              <%= image_tag ( feed.target_user.picture('large') ), :align => "absmiddle", :width => "54", :style => "min-width: 54px; min-height: 54px;" %>
+            <% else %>
+              <%= image_tag ( "chinchin_default" ), :align => "absmiddle", :width => "54", :style => "min-width: 54px; min-height: 54px;" %>
+            <% end %>
+          </div> <!-- .photo-small -->
+          <div class="row2-content">
+            <h2><%= feed.message %></h2>
+            <p>
+              <%= time_ago_in_words(feed.created_at) + " 전" %>
+            </p>
+          </div> <!-- .row2-content -->
+        </div> <!-- .row2 -->
+      </div> <!-- .profile-click -->
+    </a>
+<% end %>
+
+</div> <!-- .container-10px -->
+<% end %>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        var info_width = document.width - 120 - 30;
+        $(".row-content").width(info_width+'px');
+    });
+</script>

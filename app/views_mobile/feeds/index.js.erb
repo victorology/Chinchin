@@ -1,0 +1,2 @@
+$('#browse').find('.container').html("<%= j render(:partial => 'feeds', :locals => {:feeds => @feeds}) %>");
+mixpanel.track("Show Feeds");

@@ -23,7 +23,8 @@ class LikesController < ApplicationController
     end
 
     if not alert_list.nil?
-      InteractionManager.alert(:actor => current_user, :receiver => chinchin, :friends_ids => alert_list)
+      friends = alert_list.map {|id| User.find(id)}.compact
+      InteractionManager.alert(:actor => current_user, :receiver => chinchin, :friends => friends)
     end
 
     respond_to do | format |
