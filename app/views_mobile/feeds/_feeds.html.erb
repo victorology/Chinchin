@@ -21,25 +21,23 @@
   <div class="container-10px">
 
 <% feeds.each do |feed| %>
-    <a href="#">
-      <div class="profile-click" id="<%=feed.user.id%>">
-        <div class="row2">
-          <div class="photo-small">
-            <% if feed.target_user %>
-              <%= image_tag ( feed.target_user.picture('large') ), :align => "absmiddle", :width => "54", :style => "min-width: 54px; min-height: 54px;" %>
-            <% else %>
-              <%= image_tag ( "chinchin_default" ), :align => "absmiddle", :width => "54", :style => "min-width: 54px; min-height: 54px;" %>
-            <% end %>
-          </div> <!-- .photo-small -->
-          <div class="row2-content">
-            <h2><%= feed.message %></h2>
-            <p>
-              <%= time_ago_in_words(feed.created_at) + " 전" %>
-            </p>
-          </div> <!-- .row2-content -->
-        </div> <!-- .row2 -->
-      </div> <!-- .profile-click -->
-    </a>
+  <div class="profile-click" id="<%=feed.user.id%>">
+    <div class="row2">
+      <div class="photo-small">
+        <% if feed.target_user %>
+          <%= image_tag ( feed.target_user.picture('large') ), :align => "absmiddle", :width => "54", :style => "min-width: 54px; min-height: 54px;" %>
+        <% else %>
+          <%= image_tag ( "chinchin_default" ), :align => "absmiddle", :width => "54", :style => "min-width: 54px; min-height: 54px;" %>
+        <% end %>
+      </div> <!-- .photo-small -->
+      <div class="row2-content">
+        <h2><%= feed.message %></h2>
+        <p>
+          <%= time_ago_in_words(feed.created_at) + " 전" %>
+        </p>
+      </div> <!-- .row2-content -->
+    </div> <!-- .row2 -->
+  </div> <!-- .profile-click -->
 <% end %>
 
 </div> <!-- .container-10px -->
