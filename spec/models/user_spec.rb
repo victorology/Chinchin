@@ -43,7 +43,7 @@ describe User do
     user.pass_default_chinchin_filter(chinchin).should == false
   end
 
-  it 'can register' do
+  xit 'can register' do
     VCR.use_cassette("fetched_facebook_friends") do
       user = FactoryGirl.create(:user, gender: 'male', oauth_token: "CAAFAjlSNc70BADjEJEn2nmOCeHq9EkOiCX4YMtZCcDIHYA8jZBv663japYreY0rYxNtJIPzkuwZAOb7C7V7GnB4f0IugaTHrdwbWnLhQY8ZAMC3eparTEQZAgydqGbkIL09jCPPH9LYYq7dYo5U3J")
       friends_uids = user.friends.map(&:identifier)

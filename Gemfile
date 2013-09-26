@@ -19,6 +19,7 @@ gem 'memcachier' # Added for Caching
 gem 'dalli' # Added for Caching
 gem 'unicorn' # new web server
 gem 'urbanairship' # Added for push notification
+gem 'pg', '0.12.2' # Added for postgresql management
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -26,6 +27,7 @@ gem 'urbanairship' # Added for push notification
 group :development, :test do
 	gem 'sqlite3', '1.3.5'
 	gem 'rspec-rails', '2.10.0'
+  gem 'spork', '~> 0.9.0.rc'
 end
 
 group :development do
@@ -46,11 +48,9 @@ gem 'jquery-rails', '2.0.2'
 
 group :test do
 	gem 'capybara', '1.1.2'
-        gem 'vcr'
-        gem 'webmock'
+  gem 'vcr'
+  gem 'webmock'
 end
-
-gem 'pg', '0.12.2'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

@@ -60,9 +60,9 @@ describe MessageRoom do
 
   context '.alert to friends' do
     it 'can make a message room with friends who the user want to share his likeness and send a initial message' do
-      friends_ids = ['300', '301']
+      friends = [mock_model('User'), mock_model('User')]
       user1.message_rooms.count.should == 0
-      InteractionManager.alert(actor: user1, receiver: user2, friends_ids: friends_ids)
+      InteractionManager.alert(actor: user1, receiver: user2, friends: friends)
       user1.message_rooms.count.should == 2
       messageRoom = user1.message_rooms.first
       messageRoom.status.should == MessageRoom::OPENED_BY_USER2
@@ -70,11 +70,11 @@ describe MessageRoom do
     end
 
     it 'only make one message room with two friends_ids when the other is already created' do
-      friends_ids = ['300', friend.id]
+      friends = [friend, mock_model('User')]
       user1.message_rooms.count.should == 0
       MessageRoom.create(:user1_id => friend.id, :user2_id => user1.id, :status => MessageRoom::OPENED_BY_USER2)
       user1.message_rooms.count.should == 1
-      InteractionManager.alert(actor: user1, receiver: user2, friends_ids: friends_ids)
+      InteractionManager.alert(actor: user1, receiver: user2, friends: friends)
       user1.message_rooms.count.should == 2
       messageRoom = user1.message_rooms.last
       messageRoom.status.should == MessageRoom::OPENED_BY_USER2
