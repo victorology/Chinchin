@@ -11,6 +11,7 @@ describe Report do
     user.status = 1
     user.save
     Report.delete_all
+    Like.delete_all
   end
 
   after(:each) do
@@ -41,5 +42,33 @@ describe Report do
 
     result = Report.total_user_per_day(@started_at, @ended_at)
     result.should == {"2013-09-01" => {"total_users" => 1, "male_users" => 1, "female_users" => 0}}
+  end
+
+  it 'about mutual likes' do
+    Report.store_mutual_likes_at_certain_day('2013-09-01'.to_date.end_of_day)
+    result = Report.count_mutual_likes_per_day(@started_at, @ended_at)
+    result.should == {"2013-09-01" => {"total_mutual_likes" => 0}}
+
+    user = FactoryGirl.create(:user, name: 'kim', gender: 'male', uid: '0000', status: 1)
+    user2 = FactoryGirl.create(:user, name: 'lee', gender: 'female', uid: '1234', status: 1)
+
+    Like.count.should == 0
+
+    l = Like.new
+    l.user = user
+    l.chinchin = user2
+    l.created_at = "2013-06-01".to_date.beginning_of_day
+    l.save
+
+    l2 = Like.new
+    l2.user = user2
+    l2.chinchin = user
+    l2.created_at = "2013-09-01".to_date.beginning_of_day
+    l2.save
+
+    Like.count.should == 2
+    Report.store_mutual_likes_at_certain_day('2013-09-01'.to_date.end_of_day)
+    result = Report.count_mutual_likes_per_day(@started_at, @ended_at)
+    result.should == {"2013-09-01" => {"total_mutual_likes" => 1}}
   end
 end
