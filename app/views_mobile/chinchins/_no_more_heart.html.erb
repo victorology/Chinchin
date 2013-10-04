@@ -1,0 +1,23 @@
+<div class="container-10px">
+  <div class="empty-heart">
+    <div class="empty-heart-icon"></div>
+    <h1><%= t '.no_hearts' %></h1>
+    <p><%= t '.no_hearts_long' %></p>
+    <div id="time-left-big"></div>
+    <script type="text/javascript">
+        mixpanel.track("No Hearts");
+        $("#time-left-small").hide();
+        timer(
+            <%= currency_timeleft(@user, Currency::HEART) %>,
+            function(timeleft) {
+                var min = Math.ceil(timeleft / 60);
+                var second = timeleft % 60;
+                $("#time-left-big").html(min + ":" + second);
+            },
+            function() {
+                $("#time-left-big").html('<a href="/m">Refresh!</a>');
+            }
+        );
+    </script>
+  </div> <!-- .empty-heart -->
+</div> <!-- .container-10px -->

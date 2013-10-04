@@ -9,7 +9,7 @@ describe Notification do
 	context 'feed' do
 		it 'like' do
 			Notification.notify(type: "like", media: ['feed'], receivers: [target_user])
-			Feed.all.count.should == 1
+			Feed.all.count.should eq 1
 			Feed.first.message.should == "Someone likes you!"
 		end
 
@@ -27,9 +27,9 @@ describe Notification do
 		it 'alert' do
 			Notification.notify(type: "alert", media: ['feed'], people: [user, target_user], receivers: [friend1, friend2])
 			Feed.all.count.should == 2
-			Feed.first.message.should == "Charlie likes Eunmi!"
-			Feed.first.user = friend1
-			Feed.first.target_user = user
+			Feed.first.message.should eq "Charlie likes Eunmi!"
+			Feed.first.user.should == friend1
+			Feed.first.target_user.should == user
 		end
 	end
 

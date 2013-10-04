@@ -1,1 +1,5 @@
-$('#browse').find('.container').html("<%= j render(:partial => 'chinchins', :locals => {:chinchins => @user.chinchin}) %>");
+<% if @no_more_heart and @no_more_heart == true %>
+    $('#browse').find('.container').html("<%= j render(:partial => 'no_more_heart') %>")
+<% else %>
+    $('#browse').find('.container').html("<%= j render(:partial => 'chinchins', :locals => {:chinchins => @user.chinchin}) %>")
+<% end %>

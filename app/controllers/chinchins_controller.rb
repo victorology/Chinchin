@@ -5,6 +5,12 @@ class ChinchinsController < ApplicationController
 
   def index
     @user = current_user
+    heart = @user.currency(Currency::HEART)
+    heart.recalculate
+    if not heart.is_available
+      @no_more_heart = true
+    end
+
     respond_to do | format |
       format.js {render :layout => false}
       format.html

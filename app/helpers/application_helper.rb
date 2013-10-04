@@ -9,4 +9,13 @@ module ApplicationHelper
       "#{base_title} | #{page_title}"                 # String interpolation
     end
   end
+
+  def currency_count(user, currency_type)
+    user.currency(currency_type).current_count
+  end
+
+  def currency_timeleft(user, currency_type)
+    c = user.currency(currency_type)
+    return ((30*60) - (Time.now - c.last_used_log.created_at)) * 1000
+  end
 end

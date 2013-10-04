@@ -19,10 +19,10 @@ describe Chinchin do
     FactoryGirl.create(:friendship, user: user, chinchin: chinchin2)
     FactoryGirl.create(:friendship, user: user2, chinchin: chinchin2)
 
-    user.chinchins.should == [chinchin, chinchin2]
-    user2.chinchins.should == [chinchin2]
-    user.registered_friends.should == [chinchin]
-    chinchin2.mutual_friendships(user).should == []
+    user.chinchins.should eq [chinchin, chinchin2]
+    user2.chinchins.should eq [chinchin2]
+    user.registered_friends.should eq [chinchin]
+    chinchin2.mutual_friendships(user).should eq []
 
     FactoryGirl.create(:friendship, user: user2, chinchin: chinchin)
     user.mutual_friendships(user2).should == [chinchin]

@@ -35,6 +35,7 @@ class User < ActiveRecord::Base
   has_many :viewees, :class_name => 'View', :foreign_key => 'viewer_id'
   has_many :viewers, :class_name => 'View', :foreign_key => 'viewee_id'
   has_many :profile_photos, :foreign_key => 'chinchin_id'
+  has_many :currencies
 
   def update_from_omniauth(auth)
     self.provider = auth.provider
@@ -356,7 +357,6 @@ class User < ActiveRecord::Base
     return []
   end
 
-
   def fetch_profile_photos
     photos = self.photos
     photos.each do |photo|
@@ -377,5 +377,21 @@ class User < ActiveRecord::Base
     end
     self.photo_count = photo_count
     self.save
+  end
+
+  def currency(currency_type)
+    c = Currency.where('user_id = ? and currency_type = ?', self.id, currency_type).last
+    if c.nil?
+      c = Currency.init(self, currency_type)
+    end
+
+    return c
+  end
+
+  def use_currency(currency_type)
+    c = self.currency(currency_type)
+    if c.current_count > 0
+      c.use(1)
+    end
   end
 end

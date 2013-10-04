@@ -321,9 +321,20 @@ header .icon span {
   text-indent: -9999px;
 }
 
+header .time-left-small span {
+  top: 10px;
+  position: absolute;
+  color: white;
+}
+
 header .right span {
   left: auto;
   right: 20px;
+}
+
+header .time-left-small span.current_count {
+  color: red;
+  right: 60px;
 }
 
 header .back span {

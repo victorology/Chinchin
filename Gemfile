@@ -26,7 +26,7 @@ gem 'pg', '0.12.2' # Added for postgresql management
 
 group :development, :test do
 	gem 'sqlite3', '1.3.5'
-	gem 'rspec-rails', '2.10.0'
+	gem 'rspec-rails', '~> 2.12.0'
   gem 'spork', '~> 0.9.0.rc'
 end
 

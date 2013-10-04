@@ -66,7 +66,7 @@
         });
 
         $('#browse .card-pass').on("click", function() {
-            show_chinchin_card($('#browse'), "Chinchin", "/chinchins.js");
+            show_chinchin_card($('#browse'), "Chinchin", "/m.js");
         });
 
         $('#browse .card-like').on("click", function() {
@@ -78,10 +78,24 @@
               "<%= j render :partial => 'mutual_friends_check_list', :locals => {:mutual_friends => friend.mutual_friends(@user)} %>",
               function(result) {
                 $.post('/likes.js', {chinchin_id:chinchin_id, alert_list:result}, function() {
-                  show_chinchin_card($('#browse'), "Chinchin", "/chinchins.js");
+                  show_chinchin_card($('#browse'), "Chinchin", "/m.js");
                 });
               });
         });
+
+        timer(
+            <%= currency_timeleft(@user, Currency::HEART) %>,
+            function(timeleft) {
+                var min = Math.ceil(timeleft / 60);
+                var second = timeleft % 60;
+                var current_count = <%= currency_count(@user, Currency::HEART) %>
+                $("header .time-left-small span.current_count").html(current_count);
+                $("header .time-left-small span.timer").html(min + ":" + second);
+            },
+            function() {
+                $("header .time-left-small span.timer").hide();
+            }
+        );
     </script>
 
   </div> <!-- .card -->
