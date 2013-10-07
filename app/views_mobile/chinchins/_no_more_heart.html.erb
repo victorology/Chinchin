@@ -10,12 +10,12 @@
         timer(
             <%= currency_timeleft(@user, Currency::HEART) %>,
             function(timeleft) {
-                var min = Math.ceil(timeleft / 60);
+                var min = Math.floor(timeleft / 60);
                 var second = timeleft % 60;
-                $("#time-left-big").html(min + ":" + second);
+                $("#time-left-big").html(pad(min, 2) + ":" + pad(second, 2));
             },
             function() {
-                $("#time-left-big").html('<a href="/m">Refresh!</a>');
+                $("#time-left-big").html('<a href="/m#browse">Refresh!</a>');
             }
         );
     </script>

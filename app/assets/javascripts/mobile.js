@@ -217,3 +217,7 @@ function timer(time,update,complete) {
         else update(Math.floor(now/1000));
     },100); // the smaller this number, the more accurate the timer will be
 }
+
+function pad (str, max) {
+    return (str).toString().length < max ? pad("0" + (str).toString(), max) : (str).toString();
+}

@@ -86,11 +86,11 @@
         timer(
             <%= currency_timeleft(@user, Currency::HEART) %>,
             function(timeleft) {
-                var min = Math.ceil(timeleft / 60);
+                var min = Math.floor(timeleft / 60);
                 var second = timeleft % 60;
                 var current_count = <%= currency_count(@user, Currency::HEART) %>
                 $("header .time-left-small span.current_count").html(current_count);
-                $("header .time-left-small span.timer").html(min + ":" + second);
+                $("header .time-left-small span.timer").html(pad(min, 2) + ":" + pad(second, 2));
             },
             function() {
                 $("header .time-left-small span.timer").hide();
