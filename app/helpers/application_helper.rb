@@ -16,6 +16,9 @@ module ApplicationHelper
 
   def currency_timeleft(user, currency_type)
     c = user.currency(currency_type)
-    return ((30*60) - (Time.now - c.last_used_log.created_at)) * 1000
+    if c.last_used_log.nil?
+      return 0
+    end
+    return ((30*60) - (TimeUtil.get - c.last_used_log.created_at)) * 1000
   end
 end

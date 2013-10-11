@@ -208,10 +208,14 @@ register_apid = function(apid) {
 
 function timer(time,update,complete) {
     var start = new Date().getTime();
-    var interval = setInterval(function() {
+    if (window.timerInterval != null) {
+        clearInterval(timerInterval);
+        window.timerInterval = null;
+    }
+    window.timerInterval = setInterval(function() {
         var now = time-(new Date().getTime()-start);
         if( now <= 0) {
-            clearInterval(interval);
+            clearInterval(timerInterval);
             complete();
         }
         else update(Math.floor(now/1000));

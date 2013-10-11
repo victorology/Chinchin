@@ -37,6 +37,8 @@ class User < ActiveRecord::Base
   has_many :profile_photos, :foreign_key => 'chinchin_id'
   has_many :currencies
 
+  serialize :sorted_chinchin
+
   def update_from_omniauth(auth)
     self.provider = auth.provider
     self.uid = auth.uid
@@ -155,29 +157,67 @@ class User < ActiveRecord::Base
     return status
   end
 
-  def chinchin
-    friendships = []
+  def generate_sorted_chinchin
+    chinchin_in_chinchin = []
+    chinchin_not_in_chinchin = []
     self.friends_in_chinchin.each do |friend|
-      # friend = chinchin.user
-      friendships.push(Friendship.find_all_by_user_id(friend.id))
+      chinchin_in_chinchin.push(friend.friends_in_chinchin.collect{|x| x.id})
+      chinchin_not_in_chinchin.push(friend.chinchins.collect{|x| x.id})
     end
 
-    friendships.flatten!
-    friendships.shuffle!
+    chinchin_in_chinchin.flatten!
+    chinchin_in_chinchin.shuffle!
 
-    chinchins = []
-    friendships.each do |friendship|
-      chinchin = friendship.chinchin
+    chinchin_not_in_chinchin.flatten!
+    chinchin_not_in_chinchin.shuffle!
+
+    sorted_chinchin = (chinchin_in_chinchin + chinchin_not_in_chinchin).uniq
+    if sorted_chinchin.count > 0
+      self.sorted_chinchin = sorted_chinchin
+      self.save
+    end
+
+    return sorted_chinchin
+  end
+
+  def chinchin
+    chinchins = self.sorted_chinchin
+    if chinchins.nil? or chinchins.count == 0
+      chinchins = self.generate_sorted_chinchin
+    end
+
+    while chinchins.count > 0
+      chinchin_id = chinchins.shift
+      self.sorted_chinchin = chinchins
+      self.save
+
+      chinchin = User.find(chinchin_id)
       if pass_default_chinchin_filter(chinchin)
-        chinchins.push(chinchin)
-      end
-
-      if chinchins.size >= 1
-        break
+        return [chinchin]
       end
     end
+    #friendships = []
+    #self.friends_in_chinchin.each do |friend|
+    #  # friend = chinchin.user
+    #  friendships.push(Friendship.find_all_by_user_id(friend.id))
+    #end
+    #
+    #friendships.flatten!
+    #friendships.shuffle!
 
-    return chinchins
+    #chinchins = []
+    #friendships.each do |friendship|
+    #  chinchin = friendship.chinchin
+    #  if pass_default_chinchin_filter(chinchin)
+    #    chinchins.push(chinchin)
+    #  end
+    #
+    #  if chinchins.size >= 1
+    #    break
+    #  end
+    #end
+    #
+    #return chinchins
   end
 
   def add_friend_to_chinchin(friend)
@@ -232,6 +272,11 @@ class User < ActiveRecord::Base
         friendship.user = u
         friendship.chinchin = self
         friendship.save!
+
+        if u.status == User::REGISTERED
+          # TODO: Notification.notify(type: "friend_join", people: [self], receivers: [u])
+          # TODO: u.update_sorted_friends
+        end
       end
     end
   end

@@ -3,5 +3,6 @@ FactoryGirl.define do
     u.uid nil
     u.name nil
     u.gender nil
+    u.sorted_chinchin nil
   end
 end

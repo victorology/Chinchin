@@ -2,6 +2,7 @@ require "spec_helper"
 
 describe TimeUtil do
   it "should be equal to Time.now" do
+    TimeUtil.freeze(nil)
     TimeUtil.get.should be_within(0.9).of(Time.now)
   end
 

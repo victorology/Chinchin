@@ -70,4 +70,26 @@ describe User do
       user.viewed(chinchin).should be_true
     end
   end
+
+  context 'sorted_chinchin' do
+    it 'should pop the first chinchin in sorted_chinchin when user chose the chinchin' do
+      user = FactoryGirl.create(:user, id: 100, gender: 'male', sorted_chinchin: [101, 102])
+      chinchin_1 = FactoryGirl.create(:user, id: 101, gender: 'female')
+      chinchin_2 = FactoryGirl.create(:user, id: 102, gender: 'female')
+
+      user.sorted_chinchin.should eq [chinchin_1.id, chinchin_2.id]
+      user.chinchin.should eq [chinchin_1]
+      user.sorted_chinchin.should eq [chinchin_2.id]
+    end
+
+    it 'should pop the second chinchin in sorted_chinchin when the first chinchin is same gender' do
+      user = FactoryGirl.create(:user, id: 100, gender: 'male', sorted_chinchin: [101, 102])
+      chinchin_1 = FactoryGirl.create(:user, id: 101, gender: 'male')
+      chinchin_2 = FactoryGirl.create(:user, id: 102, gender: 'female')
+
+      user.sorted_chinchin.should eq [chinchin_1.id, chinchin_2.id]
+      user.chinchin.should eq [chinchin_2]
+      user.sorted_chinchin.should eq []
+    end
+  end
 end
