@@ -58,6 +58,11 @@ en:
       location: "Lives in %{location}"
       employer: "Works at %{employer}"
       school: "Studied at %{school}"
+  tutorials:
+    index:
+      finding_chinchins: "Finding Chinchins..."
+      finding_chinchins_long: "We are currently searching for your Chinchins. Chinchins are people who are connected to you by a mutual friend."
+      finding_chinchins_long_2: "The more friends you have on Chinchin, the more Chinchins you see so get going and invite your friends!"
   chinchins:
     finding:
       finding_chinchins: "Finding Chinchins..."
@@ -97,6 +102,9 @@ en:
       location: "%{location}"
       employer: "%{employer}"
       school: "%{school}"
+    no_more_heart:
+      no_hearts: "No more hearts"
+      no_hearts_long: "To view another Chinchin, you need a heart. You'll get another heart in..."
   leaderboards:
     leaders:
       hot_friends: "Hot Friends?"

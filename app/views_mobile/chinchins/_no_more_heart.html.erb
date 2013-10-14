@@ -1,10 +1,13 @@
 <div class="container-10px">
-  <div class="empty-heart">
-    <div class="empty-heart-icon"></div>
-    <h1><%= t '.no_hearts' %></h1>
-    <p><%= t '.no_hearts_long' %></p>
-    <div id="time-left-big"></div>
-    <script type="text/javascript">
+
+<div class="empty-data">
+  <div class="empty-hearts-icon"></div>
+  <h1><%= t '.no_hearts' %></h1>
+  <p><%= t '.no_hearts_long' %></p>
+  <div id="time-left-big"></div>
+  
+  <!-- start Mixpanel No Hearts -->
+  <script type="text/javascript">
         mixpanel.track("No Hearts");
         $("#time-left-small").hide();
         timer(
@@ -18,6 +21,8 @@
                 $("#time-left-big").html('<a href="/m#browse">Refresh!</a>');
             }
         );
-    </script>
-  </div> <!-- .empty-heart -->
+  </script>
+  <!-- end Mixpanel No Hearts -->
+</div> <!-- .empty-data -->
+
 </div> <!-- .container-10px -->
