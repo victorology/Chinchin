@@ -1,29 +1,3 @@
-# == Schema Information
-#
-# Table name: users
-#
-#  id                  :integer          not null, primary key
-#  provider            :string(255)
-#  uid                 :string(255)
-#  name                :string(255)
-#  email               :string(255)
-#  first_name          :string(255)
-#  last_name           :string(255)
-#  birthday            :string(255)
-#  location            :string(255)
-#  hometown            :string(255)
-#  employer            :string(255)
-#  position            :string(255)
-#  gender              :string(255)
-#  relationship_status :string(255)
-#  school              :string(255)
-#  locale              :string(255)
-#  oauth_token         :string(255)
-#  oauth_expires_at    :datetime
-#  created_at          :datetime         not null
-#  updated_at          :datetime         not null
-#
-
 require 'spec_helper'
 
 describe User do
@@ -42,16 +16,6 @@ describe User do
     chinchin = FactoryGirl.create(:chinchin, gender:'female', relationship_status:'Engaged')
     user.pass_default_chinchin_filter(chinchin).should == false
   end
-
-  #xit 'can register' do
-  #  VCR.use_cassette("fetched_facebook_friends") do
-  #    user = FactoryGirl.create(:user, gender: 'male', oauth_token: "CAAFAjlSNc70BADjEJEn2nmOCeHq9EkOiCX4YMtZCcDIHYA8jZBv663japYreY0rYxNtJIPzkuwZAOb7C7V7GnB4f0IugaTHrdwbWnLhQY8ZAMC3eparTEQZAgydqGbkIL09jCPPH9LYYq7dYo5U3J")
-  #    friends_uids = user.friends.map(&:identifier)
-  #    user.add_friends_to_chinchin
-  #    friends_in_chinchin = user.chinchins
-  #    friends_in_chinchin.map(&:uid).should == friends_uids
-  #  end
-  #end
 
   context 'Like' do
     it 'can like somebody' do
@@ -90,6 +54,56 @@ describe User do
       user.sorted_chinchin.should eq [chinchin_1.id, chinchin_2.id]
       user.chinchin.should eq [chinchin_2]
       user.sorted_chinchin.should eq []
+    end
+
+    it 'should push the poped chinchin in sorted_chinchin to chosen_chinchin' do
+      user = FactoryGirl.create(:user, id: 100, gender: 'male', sorted_chinchin: [101, 102])
+      chinchin_1 = FactoryGirl.create(:user, id: 101, gender: 'female')
+      chinchin_2 = FactoryGirl.create(:user, id: 102, gender: 'female')
+
+      user.sorted_chinchin.should eq [chinchin_1.id, chinchin_2.id]
+      user.chinchin.should eq [chinchin_1]
+      user.sorted_chinchin.should eq [chinchin_2.id]
+      user.chosen_chinchin.should eq [chinchin_1.id]
+    end
+
+    it 'should substract chosen_chinchin from sorted_chinchin after regenerate sorted_chinchin' do
+      user = FactoryGirl.create(:user, id: 100, gender: 'male', sorted_chinchin: [101, 102, 103, 104])
+      chinchin_0 = FactoryGirl.create(:user, id: 99, gender: 'male')
+      chinchin_1 = FactoryGirl.create(:user, id: 101, gender: 'male')
+      chinchin_2 = FactoryGirl.create(:user, id: 102, gender: 'male')
+      chinchin_3 = FactoryGirl.create(:user, id: 103, gender: 'female')
+      chinchin_4 = FactoryGirl.create(:user, id: 104, gender: 'female')
+      user.stub(:friends_in_chinchin) { [chinchin_0] }
+      chinchin_0.stub(:friends_in_chinchin) { [chinchin_1] }
+      chinchin_0.stub(:chinchins) { [chinchin_2, chinchin_3, chinchin_4] }
+
+      user.sorted_chinchin.should eq [chinchin_1.id, chinchin_2.id, chinchin_3.id, chinchin_4.id]
+      user.chinchin.should eq [chinchin_3]
+      user.sorted_chinchin.should eq [chinchin_4.id]
+      user.chosen_chinchin.should eq [chinchin_1.id, chinchin_2.id, chinchin_3.id]
+      user.generate_sorted_chinchin
+      user.sorted_chinchin.first.should eq chinchin_1.id
+      user.sorted_chinchin.sort.should eq [chinchin_1.id, chinchin_2.id, chinchin_3.id, chinchin_4.id]
+    end
+
+    it 'should empty chosen_chinchin when regenerate sorted_chinchin with empty sorted_chinchin' do
+      user = FactoryGirl.create(:user, id: 100, gender: 'male', sorted_chinchin: [], chosen_chinchin: [102, 103, 104])
+      chinchin = FactoryGirl.create(:user, id: 101, gender: 'male')
+      chinchin_1 = FactoryGirl.create(:user, id: 102, gender: 'male')
+      chinchin_2 = FactoryGirl.create(:user, id: 103, gender: 'male')
+      chinchin_3 = FactoryGirl.create(:user, id: 104, gender: 'female')
+      user.stub(:friends_in_chinchin) { [chinchin] }
+
+      chinchin.stub(:friends_in_chinchin) { [chinchin_1] }
+      chinchin.stub(:chinchins) { [chinchin_2, chinchin_3] }
+
+      user.sorted_chinchin.empty?.should be_true
+      user.chosen_chinchin.empty?.should be_false
+      user.generate_sorted_chinchin
+      user.chosen_chinchin.should be_nil
+      user.sorted_chinchin.first.should eq 102
+      user.sorted_chinchin.sort.should eq [102, 103, 104]
     end
   end
 end

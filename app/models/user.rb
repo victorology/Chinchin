@@ -38,6 +38,7 @@ class User < ActiveRecord::Base
   has_many :currencies
 
   serialize :sorted_chinchin
+  serialize :chosen_chinchin
 
   def update_from_omniauth(auth)
     self.provider = auth.provider
@@ -100,35 +101,35 @@ class User < ActiveRecord::Base
     registered_friends
   end
 
-  def friends_in_chinchin2
-    users = User.all
-    friends = self.friends
-    chinchin = []
+  #def friends_in_chinchin2
+  #  users = User.all
+  #  friends = self.friends
+  #  chinchin = []
+  #
+  #  friends.each do |friend|
+  #    users.each do |user|
+  #      if friend.raw_attributes["id"] == user.uid
+  #        chinchin.push(user)
+  #      end
+  #    end
+  #  end
+  #
+  #  return chinchin
+  #end
 
-    friends.each do |friend|
-      users.each do |user|
-        if friend.raw_attributes["id"] == user.uid
-          chinchin.push(user)
-        end
-      end
-    end
-
-    return chinchin
-  end
-
-  def chinchins_in_leaderboard
-    friendships = Friendship.find_all_by_user_id(self.id)
-    leaders = []
-
-    friendships.each do |friendship|
-      c = friendship.chinchin
-      leaders.push({:chinchin => c, :score => c.score})
-    end
-
-    leaders.sort_by { |leader| leader[:score] }
-
-    return leaders.slice 0, 10
-  end
+  #def chinchins_in_leaderboard
+  #  friendships = Friendship.find_all_by_user_id(self.id)
+  #  leaders = []
+  #
+  #  friendships.each do |friendship|
+  #    c = friendship.chinchin
+  #    leaders.push({:chinchin => c, :score => c.score})
+  #  end
+  #
+  #  leaders.sort_by { |leader| leader[:score] }
+  #
+  #  return leaders.slice 0, 10
+  #end
 
   def people_in_leaderboard
     chinchins = self.chinchins
@@ -158,6 +159,12 @@ class User < ActiveRecord::Base
   end
 
   def generate_sorted_chinchin
+    if (self.sorted_chinchin.nil? or self.sorted_chinchin.empty?) and not self.chosen_chinchin.nil?
+      self.chosen_chinchin.clear
+      self.chosen_chinchin = nil
+      self.save
+    end
+
     chinchin_in_chinchin = []
     chinchin_not_in_chinchin = []
     self.friends_in_chinchin.each do |friend|
@@ -189,6 +196,11 @@ class User < ActiveRecord::Base
     while chinchins.count > 0
       chinchin_id = chinchins.shift
       self.sorted_chinchin = chinchins
+      if self.chosen_chinchin.nil?
+        self.chosen_chinchin = [chinchin_id]
+      else
+        self.chosen_chinchin << chinchin_id
+      end
       self.save
 
       chinchin = User.find(chinchin_id)
@@ -281,22 +293,22 @@ class User < ActiveRecord::Base
     end
   end
 
-  def add_friends_to_chinchin2
-    friends = self.friends
-    friends.each do |friend|
-      c = Chinchin.find_by_uid(friend.raw_attributes['id'])
-      if c.nil?
-        c = self.add_friend_to_chinchin(friend)
-      end
-
-      if Friendship.find_by_user_id_and_chinchin_id(self.id, c.id).nil?
-        friendship = Friendship.new
-        friendship.user = self
-        friendship.chinchin = c
-        friendship.save!
-      end
-    end
-  end
+  #def add_friends_to_chinchin2
+  #  friends = self.friends
+  #  friends.each do |friend|
+  #    c = Chinchin.find_by_uid(friend.raw_attributes['id'])
+  #    if c.nil?
+  #      c = self.add_friend_to_chinchin(friend)
+  #    end
+  #
+  #    if Friendship.find_by_user_id_and_chinchin_id(self.id, c.id).nil?
+  #      friendship = Friendship.new
+  #      friendship.user = self
+  #      friendship.chinchin = c
+  #      friendship.save!
+  #    end
+  #  end
+  #end
 
   def like(chinchin)
     like = Like.new
