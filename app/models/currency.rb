@@ -5,6 +5,7 @@ class Currency < ActiveRecord::Base
 
   belongs_to :user
   has_many :currency_logs
+  has_one :currency_alarm
   # attr_accessible :title, :body
 
   def self.init(user, currency_type)
@@ -27,6 +28,7 @@ class Currency < ActiveRecord::Base
     self.save
 
     CurrencyLog.create(currency: self, action: 'use', value: -1)
+    CurrencyAlarm.set(currency: self, type: CurrencyAlarm::HEART_IS_FULL_AGAIN)
   end
 
   def is_available
@@ -53,27 +55,6 @@ class Currency < ActiveRecord::Base
     return cl
   end
 
-  #def last_used_log
-  #  regen_cl = self.currency_logs.where('action = ?', 'regen').order('created_at DESC').first
-  #  regen_full_cl = self.currency_logs.where('action = ?', 'regen_full').order('created_at DESC').first
-  #
-  #  if not regen_cl.nil? and regen_full_cl.nil?
-  #    cl = self.currency_logs.where('action = ?', 'use').order('created_at').first
-  #  end
-  #
-  #  #if not regen_cl.nil? and not regen_full_cl.nil? and regen_cl.created_at > regen_full_cl.created_at
-  #  #  return regen_cl
-  #  #end
-  #
-  #  if regen_full_cl
-  #    cl = self.currency_logs.where('action = ? and created_at >= ?', 'use', regen_full_cl.created_at).order('created_at').first
-  #  else
-  #    cl = self.currency_logs.where('action = ?', 'use').order('created_at').first
-  #  end
-  #
-  #  return cl
-  #end
-
   def recalculate
     if self.current_count == self.max_count
       return
@@ -97,5 +78,9 @@ class Currency < ActiveRecord::Base
 
     self.current_count += regen_count
     self.save
+  end
+
+  def active_alarm
+    return self.currency_alarm if self.currency_alarm and self.currency_alarm.is_active
   end
 end

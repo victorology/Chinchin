@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131014054847) do
+ActiveRecord::Schema.define(:version => 20131017062646) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -74,6 +74,15 @@ ActiveRecord::Schema.define(:version => 20131014054847) do
     t.integer  "current_count"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+  end
+
+  create_table "currency_alarms", :force => true do |t|
+    t.integer  "currency_id"
+    t.integer  "alarm_type"
+    t.integer  "status"
+    t.datetime "set_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "currency_logs", :force => true do |t|

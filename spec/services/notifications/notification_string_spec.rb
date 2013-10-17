@@ -54,5 +54,11 @@ describe NotificationString do
 		it '.' do
 			NotificationString.message(type: "unknown").should == nil
 		end
-	end
+  end
+
+  context '.message with currency' do
+    it '.' do
+      NotificationString.message(type: "heart_full").should == "You have a full set of hearts. See more Chinchins!"
+    end
+  end
 end

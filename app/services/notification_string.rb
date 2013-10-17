@@ -22,6 +22,8 @@ class NotificationString
 					"Two of your friends are a match!"
 				when "alert"
 					"#{@people[0].first_name} likes #{@people[1].first_name}!"
+        when "heart_full"
+          "You have a full set of hearts. See more Chinchins!"
 				else
 					nil
 			end		
