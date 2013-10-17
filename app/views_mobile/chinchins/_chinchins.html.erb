@@ -22,7 +22,7 @@
 </div> <!-- .container-10px -->
 
 <% else %>
-  <% @user.currency(Currency::HEART).use(1) %>
+  <% @user.use_currency(Currency::HEART) %>
   <%= render :partial => "chinchin_card", :locals => {:chinchins => chinchins} %>
   <script>
       mixpanel.track("With Chinchins");
