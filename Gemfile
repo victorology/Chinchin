@@ -28,6 +28,7 @@ group :development, :test do
 	gem 'sqlite3', '1.3.5'
 	gem 'rspec-rails', '~> 2.12.0'
   gem 'spork', '~> 0.9.0.rc'
+  gem 'rcov'
 end
 
 group :development do
