@@ -70,11 +70,10 @@ describe InteractionManager do
 			liked_user = mock_model("User")
 			friends = [mock_model("User"), mock_model("User")]
 
-			#TODO: MessageRoom.create is not received on test environment
-			# MessageRoom.should_receive(:create).with(user1_id: friends[0].id, user2_id: user.id, status: MessageRoom::OPENED_BY_USER2)
-			# MessageRoom.should_receive(:create).with(user1_id: friends[1].id, user2_id: user.id, status: MessageRoom::OPENED_BY_USER2)
-			# UrbanairshipWrapper.should_receive(:send).exactly(2).times
-			Notification.should_receive(:notify).with(type: "alert", media: ['feed'], people: [actor, liked_user], receivers: friends)
+			MessageRoom.should_receive(:create!).with(user1_id: friends[0].id, user2_id: actor.id, status: MessageRoom::OPENED_BY_USER2).and_call_original
+			MessageRoom.should_receive(:create!).with(user1_id: friends[1].id, user2_id: actor.id, status: MessageRoom::OPENED_BY_USER2).and_call_original
+      UrbanairshipWrapper.should_receive(:send).exactly(2).times
+      Notification.should_receive(:notify).with(type: "alert", media: ['feed'], people: [actor, liked_user], receivers: friends).and_call_original
 			InteractionManager.alert(actor: actor, receiver: liked_user, friends: friends)
 		end
 	end
