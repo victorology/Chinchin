@@ -18,14 +18,32 @@ class ReportsController < ApplicationController
 	end
 
 	def csv		
-		csv = "Day,New Male User,New Female User,New Male Chinchin,New Female Chinchin,New Like From Male,New Like From Female,Unique Daily Like From Male,Unique Daily Like From Female,Total Unique Like From Male,Total Unique Like From Female,User has no chinchins,User has one chinchin,User has two chinchins,User has three or more chinchins"
+		csv = "Day, \
+		Members (Daily),Male Members (Daily), Female Members (Daily), \
+		Chinchins (Daily),Male Chinchins (Daily),Female Chinchins (Daily), \
+		Likes (Daily),Likes sent by Male (Daily),Likes sent by Female (Daily), \
+		Likes sent by Unique Member (Daily),Likes sent by Unique Male (Daily),Likes sent by Unique Female (Daily), \
+		Likes sent by Unique Member (Total),Likes sent by Unique Male (Total),Likes sent by Unique Female (Total), \
+		Male Members w/no Chinchin,Female Members w/no Chinchin, \
+		Male Members w/1 Chinchin,Female Members w/1 Chinchin, \
+		Male Members w/2 Chinchins,Female Members w/2 Chinchins, \
+		Male Members w/3+ Chinchins, Female Members w/3+ Chinchins"
 
 		@results = Report.make_reports('2013-01-01'.to_date, Time.now.to_date)
 
 		@results.each do |result|
 			items = []
 			d = result[1]
-			keys = ['male_users', 'female_users', 'male_chinchins', 'female_chinchins', 'likes_from_male', 'likes_from_female', 'uniq_male_liked', 'uniq_female_liked', 'total_uniq_male_liked', 'total_uniq_female_liked', 'no_chinchins', 'one_chinchin', 'two_chinchins', 'three_more_chinchins']
+			keys = ['total_users', 'male_users', 'female_users', 
+				'total_chinchins', 'male_chinchins', 'female_chinchins', 
+				'total_likes', 'likes_from_male', 'likes_from_female', 
+				'total_uniq_liked', 'uniq_male_liked', 'uniq_female_liked', 
+				'total_uniq_member_liked', 'total_uniq_male_liked', 'total_uniq_female_liked', 
+				'male_no_chinchins', 'female_no_chinchins', 
+				'male_one_chinchin', 'female_one_chinchin', 
+				'male_two_chinchins', 'female_two_chinchins', 
+				'male_three_more_chinchins', 'female_three_more_chinchins',
+			]
 			keys.each do |key|
 				items << d[key]
 			end

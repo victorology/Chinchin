@@ -82,6 +82,10 @@ class Report < ActiveRecord::Base
     store_mutual_likes_per_day(started_at, ended_at)
   end
 
+  # Total registered members
+  # Total male registered members
+  # Total female registered members
+
   def self.total_user_per_day_sql(started_at, ended_at)
     sqls = [
       {:title => 'total_users', :result => User.where("created_at BETWEEN ? and ? and status = 1", started_at, ended_at).group("DATE_TRUNC('day', created_at)").count},
@@ -89,6 +93,26 @@ class Report < ActiveRecord::Base
       {:title => 'female_users', :result => User.where("created_at >= ? and created_at <= ? and gender = ? and status = 1", started_at, ended_at, "female").group("DATE_TRUNC('day', created_at)").count}
     ]
   end
+
+  # Daily total Chinchins
+  # Daily total male Chinchins
+  # Daily total female Chinchins
+
+  def self.total_chinchin_per_day_sql(started_at, ended_at)
+    sqls = [
+      {:title => 'total_chinchins', :result => User.where("created_at >= ? and created_at <= ? and status = 0", started_at, ended_at).group("DATE_TRUNC('day', created_at)").count},
+      {:title => 'male_chinchins', :result => User.where("created_at >= ? and created_at <= ? and gender = ? and status = 0", started_at, ended_at, "male").group("DATE_TRUNC('day', created_at)").count},
+      {:title => 'female_chinchins', :result => User.where("created_at >= ? and created_at <= ? and gender = ? and status = 0", started_at, ended_at, "female").group("DATE_TRUNC('day', created_at)").count}
+    ]
+  end
+
+  # Daily total likes
+  # Daily total likes from male
+  # Daily total likes from female
+
+  # Daily total unique members who sent a like
+  # Daily total unique male members who sent a like
+  # Daily total unique female members who sent a like
 
   def self.total_like_per_day_sql(started_at, ended_at)
     sqls = [
@@ -99,20 +123,15 @@ class Report < ActiveRecord::Base
       {:title => 'likes_from_female', :result => Like.joins(:user)
         .where("likes.created_at >= ? and likes.created_at <= ? and users.gender = ?", started_at, ended_at, "female")
         .group("DATE_TRUNC('day', likes.created_at)").count},
+      {:title => 'total_uniq_liked', :result => Like.joins(:user)
+        .where("likes.created_at >= ? and likes.created_at <= ?", started_at, ended_at)
+        .group("DATE_TRUNC('day', likes.created_at)").count("users.id", distinct: true)},
       {:title => 'uniq_male_liked', :result => Like.joins(:user)
         .where("likes.created_at >= ? and likes.created_at <= ? and users.gender = ?", started_at, ended_at, "male")
         .group("DATE_TRUNC('day', likes.created_at)").count("users.id", distinct: true)},
       {:title => 'uniq_female_liked', :result => Like.joins(:user)
         .where("likes.created_at >= ? and likes.created_at <= ? and users.gender = ?", started_at, ended_at, "female")
         .group("DATE_TRUNC('day', likes.created_at)").count("users.id", distinct: true)}
-    ]
-  end
-
-  def self.total_chinchin_per_day_sql(started_at, ended_at)
-    sqls = [
-      {:title => 'total_chinchins', :result => User.where("created_at >= ? and created_at <= ? and status = 0", started_at, ended_at).group("DATE_TRUNC('day', created_at)").count},
-      {:title => 'male_chinchins', :result => User.where("created_at >= ? and created_at <= ? and gender = ? and status = 0", started_at, ended_at, "male").group("DATE_TRUNC('day', created_at)").count},
-      {:title => 'female_chinchins', :result => User.where("created_at >= ? and created_at <= ? and gender = ? and status = 0", started_at, ended_at, "female").group("DATE_TRUNC('day', created_at)").count}
     ]
   end
 
@@ -123,15 +142,6 @@ class Report < ActiveRecord::Base
 
   def self.total_user_per_day(started_at, ended_at)
     count_report(started_at, ended_at, ['total_users', 'male_users', 'female_users'])
-  end 
-
-  def self.store_total_like_per_day(started_at, ended_at)
-    sqls = total_like_per_day_sql(started_at, ended_at)
-    store_report(started_at, ended_at, sqls)
-  end
-
-  def self.total_like_per_day(started_at, ended_at)
-    count_report(started_at, ended_at, ['total_likes', 'likes_from_male', 'likes_from_female', 'uniq_male_liked', 'uniq_female_liked'])
   end
 
   def self.store_total_chinchin_per_day(started_at, ended_at)
@@ -143,28 +153,85 @@ class Report < ActiveRecord::Base
     count_report(started_at, ended_at, ['total_chinchins', 'male_chinchins', 'female_chinchins'])
   end
 
+  def self.store_total_like_per_day(started_at, ended_at)
+    sqls = total_like_per_day_sql(started_at, ended_at)
+    store_report(started_at, ended_at, sqls)
+  end
+
+  def self.total_like_per_day(started_at, ended_at)
+    count_report(started_at, ended_at, ['total_likes', 'likes_from_male', 'likes_from_female', 'total_uniq_liked', 'uniq_male_liked', 'uniq_female_liked'])
+  end
+
   def self.sql_to_hash(sql_results)
     {}.tap { |h| sql_results.each { |r| h[r.created_at.strftime("%Y-%m-%d 00:00:00")] = r.value.to_i} }
   end
 
+  # Total members without Chinchin
+  # Total male members without Chinchin
+  # Total female members without Chinchin
+
+  # Total members with Chinchin
+  # Total male members with Chinchin
+  # Total female members with Chinchin
+
+  # Total members with 1 friend
+  # Total male members with 1 friend
+  # Total female members with 1 friend
+
+  # Total members with 2 friends
+  # Total male members with 2 friends
+  # Total female members with 2 friends
+
+  # Total members with 3 or more friends
+  # Total male members with 3 or more friends
+  # Total female members with 3 or more friends
+
   def self.count_chinchins_per_day(started_at, ended_at)
-    none_reports = Report.where("created_at >=? and created_at <= ? and title = 'count_chinchins_none'", started_at, ended_at).select(['created_at', 'value'])
-    one_reports = Report.where("created_at >=? and created_at <= ? and title = 'count_chinchins_one'", started_at, ended_at).select(['created_at', 'value'])
-    two_reports = Report.where("created_at >=? and created_at <= ? and title = 'count_chinchins_two'", started_at, ended_at).select(['created_at', 'value'])
-    three_reports = Report.where("created_at >=? and created_at <= ? and title = 'count_chinchins_three'", started_at, ended_at).select(['created_at', 'value'])
+    # none_reports = Report.where("created_at >= ? and created_at <= ? and title = 'count_chinchins_none'", started_at, ended_at).select(['created_at', 'value'])
+    none_male_reports = Report.where("created_at >= ? and created_at <= ? and title = 'count_chinchins_none_male'", started_at, ended_at).select(['created_at', 'value'])
+    none_female_reports = Report.where("created_at >= ? and created_at <= ? and title = 'count_chinchins_none_female'", started_at, ended_at).select(['created_at', 'value'])
+    # yes_reports = Report.where("created_at >= ? and created_at <= ? and title = 'count_chinchins_yes'", started_at, ended_at).select(['created_at', 'value'])
+    # yes_male_reports = Report.where("created_at >= ? and created_at <= ? and title = 'count_male_chinchins_yes'", started_at, ended_at).select(['created_at', 'value'])
+    # yes_female_reports = Report.where("created_at >= ? and created_at <= ? and title = 'count_male_chinchins_no'", started_at, ended_at).select(['created_at', 'value'])
+    # one_reports = Report.where("created_at >= ? and created_at <= ? and title = 'count_chinchins_one'", started_at, ended_at).select(['created_at', 'value'])
+    one_male_reports = Report.where("created_at >= ? and created_at <= ? and title = 'count_chinchins_one_male'", started_at, ended_at).select(['created_at', 'value'])
+    one_female_reports = Report.where("created_at >= ? and created_at <= ? and title = 'count_chinchins_one_female'", started_at, ended_at).select(['created_at', 'value'])
+    # two_reports = Report.where("created_at >= ? and created_at <= ? and title = 'count_chinchins_two'", started_at, ended_at).select(['created_at', 'value'])
+    two_male_reports = Report.where("created_at >= ? and created_at <= ? and title = 'count_chinchins_two_male'", started_at, ended_at).select(['created_at', 'value'])
+    two_female_reports = Report.where("created_at >= ? and created_at <= ? and title = 'count_chinchins_two_female'", started_at, ended_at).select(['created_at', 'value'])
+    # three_reports = Report.where("created_at >= ? and created_at <= ? and title = 'count_chinchins_three'", started_at, ended_at).select(['created_at', 'value'])
+    three_male_reports = Report.where("created_at >= ? and created_at <= ? and title = 'count_chinchins_three_male'", started_at, ended_at).select(['created_at', 'value'])
+    three_female_reports = Report.where("created_at >= ? and created_at <= ? and title = 'count_chinchins_three_female'", started_at, ended_at).select(['created_at', 'value'])
     sqls = [
-      {:title => 'no_chinchins', :result => sql_to_hash(none_reports)},
-      {:title => 'one_chinchin', :result => sql_to_hash(one_reports)},
-      {:title => 'two_chinchins', :result => sql_to_hash(two_reports)},
-      {:title => 'three_more_chinchins', :result => sql_to_hash(three_reports)}
+      # {:title => 'no_chinchins', :result => sql_to_hash(none_reports)},
+      {:title => 'male_no_chinchins', :result => sql_to_hash(none_male_reports)},
+      {:title => 'female_no_chinchins', :result => sql_to_hash(none_female_reports)},
+      # {:title => 'yes_chinchins', :result => sql_to_hash(yes_reports)},
+      # {:title => 'male_yes_chinchins', :result => sql_to_hash(yes_male_reports)},
+      # {:title => 'female_yes_chinchins', :result => sql_to_hash(yes_female_reports)},
+      # {:title => 'one_chinchin', :result => sql_to_hash(one_reports)},
+      {:title => 'male_one_chinchin', :result => sql_to_hash(one_male_reports)},
+      {:title => 'female_one_chinchin', :result => sql_to_hash(one_female_reports)},
+      # {:title => 'two_chinchins', :result => sql_to_hash(two_reports)},
+      {:title => 'male_two_chinchins', :result => sql_to_hash(two_male_reports)},
+      {:title => 'female_two_chinchins', :result => sql_to_hash(two_female_reports)},
+      # {:title => 'three_more_chinchins', :result => sql_to_hash(three_reports)},
+      {:title => 'male_three_more_chinchins', :result => sql_to_hash(three_male_reports)},
+      {:title => 'female_three_more_chinchins', :result => sql_to_hash(three_female_reports)}
     ]
     make_report(started_at, ended_at, sqls)
   end
 
+  # Total unique members who sent a like
+  # Total unique male members who sent a like
+  # Total unique female members who sent a like
+
   def self.count_total_uniq_like_per_day(started_at, ended_at)
-    total_uniq_male_reports = Report.where("created_at >=? and created_at <= ? and title = 'total_uniq_male_liked'", started_at, ended_at).select(['created_at', 'value'])
-    total_uniq_female_reports = Report.where("created_at >=? and created_at <= ? and title = 'total_uniq_female_liked'", started_at, ended_at).select(['created_at', 'value'])
+    total_uniq_reports = Report.where("created_at >= ? and created_at <= ? and title = 'total_uniq_member_liked'", started_at, ended_at).select(['created_at', 'value'])
+    total_uniq_male_reports = Report.where("created_at >= ? and created_at <= ? and title = 'total_uniq_male_liked'", started_at, ended_at).select(['created_at', 'value'])
+    total_uniq_female_reports = Report.where("created_at >= ? and created_at <= ? and title = 'total_uniq_female_liked'", started_at, ended_at).select(['created_at', 'value'])
     sqls = [
+      {:title => 'total_uniq_member_liked', :result => sql_to_hash(total_uniq_reports)},
       {:title => 'total_uniq_male_liked', :result => sql_to_hash(total_uniq_male_reports)},
       {:title => 'total_uniq_female_liked', :result => sql_to_hash(total_uniq_female_reports)},
     ]
@@ -243,15 +310,21 @@ class Report < ActiveRecord::Base
   end
 
   def self.store_chinchins_at_certain_day(day)
-    count = {"none"=>0, "one"=>0, "two"=>0, "three"=>0}
-    User.where("created_at <= ? and status = 1", day.end_of_day).each do |user|
-      c = user.registered_friends.where('users.created_at <= ?', day.end_of_day).count
+    count = {"none_male"=>0, "none_female"=>0, 
+      "one_male"=>0, "one_female"=>0, 
+      "two_male"=>0, "two_female"=>0, 
+      "three_male"=>0, "three_female"=>0, }
 
-      case c
-      when 0 then count["none"] += 1
-      when 1 then count["one"] += 1
-      when 2 then count["two"] += 1
-      else count["three"] += 1
+    ['male', 'female'].each do |gender|
+      User.where("created_at <= ? and status = 1 and gender = ?", day.end_of_day, gender).each do |user|
+        c = user.registered_friends.where('users.created_at <= ?', day.end_of_day).count
+
+        case c
+        when 0 then count["none_"+gender] += 1
+        when 1 then count["one_"+gender] += 1
+        when 2 then count["two_"+gender] += 1
+        else count["three_"+gender] += 1
+        end
       end
     end
     
