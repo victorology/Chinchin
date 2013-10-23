@@ -160,7 +160,7 @@ class User < ActiveRecord::Base
 
   def generate_sorted_chinchin
     if (self.sorted_chinchin.nil? or self.sorted_chinchin.empty?) and not self.chosen_chinchin.nil?
-      self.chosen_chinchin.clear
+      # self.chosen_chinchin.clear
       self.chosen_chinchin = nil
       self.save
     end
