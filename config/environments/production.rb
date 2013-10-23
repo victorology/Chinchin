@@ -67,7 +67,7 @@ Chinchin2::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
   # Added for Heroku and Amazon S3 assets
-  # config.action_controller.asset_host = "https://#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com"
+  config.action_controller.asset_host = "https://#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com"
 
   # Added for Amazon CloudFront
   config.action_controller.asset_host = "http://d3qg05jf7nda6s.cloudfront.net"
