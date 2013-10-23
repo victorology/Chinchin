@@ -13,7 +13,6 @@ gem "meta_search", '>= 1.1.0.pre' # Added for ActiveAdmin
 gem 'resque', "~> 1.22.0"
 gem 'thin'
 gem 'delayed_job_active_record'
-gem 'debugger'
 gem 'factory_girl_rails' # Added for rspec test for models
 gem 'asset_sync' # Added for Heroku and Amazon S3 assets
 gem 'memcachier' # Added for Caching
@@ -29,6 +28,7 @@ gem 'rails_12factor' # Added for skipping plugin injection
 group :development, :test do
 	gem 'sqlite3', '1.3.5'
 	gem 'rspec-rails', '~> 2.12.0'
+        gem 'debugger', '~> 1.5.0'
   gem 'spork', '~> 0.9.0.rc'
   gem 'rcov'
 end

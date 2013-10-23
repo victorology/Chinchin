@@ -317,7 +317,7 @@ DEPENDENCIES
   capybara (= 1.1.2)
   coffee-rails (~> 3.2.2)
   dalli
-  debugger
+  debugger (~> 1.5.0)
   delayed_job_active_record
   factory_girl_rails
   fb_graph
