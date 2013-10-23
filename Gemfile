@@ -21,14 +21,14 @@ gem 'unicorn' # new web server
 gem 'urbanairship' # Added for push notification
 gem 'pg', '0.12.2' # Added for postgresql management
 gem 'rails_12factor' # Added for skipping plugin injection
+gem 'rspec-rails', '~> 2.12.0'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 group :development, :test do
 	gem 'sqlite3', '1.3.5'
-	gem 'rspec-rails', '~> 2.12.0'
-        gem 'debugger', '~> 1.5.0'
+  gem 'debugger', '~> 1.5.0'
   gem 'spork', '~> 0.9.0.rc'
   gem 'rcov'
 end
