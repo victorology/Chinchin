@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '1.9.2'
 
 gem 'rails', '3.2.8'
 gem 'bootstrap-sass', '2.0.0'
@@ -20,6 +21,7 @@ gem 'dalli' # Added for Caching
 gem 'unicorn' # new web server
 gem 'urbanairship' # Added for push notification
 gem 'pg', '0.12.2' # Added for postgresql management
+gem 'rails_12factor' # Added for skipping plugin injection
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
