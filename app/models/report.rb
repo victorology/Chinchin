@@ -123,9 +123,6 @@ class Report < ActiveRecord::Base
       {:title => 'likes_from_female', :result => Like.joins(:user)
         .where("likes.created_at >= ? and likes.created_at <= ? and users.gender = ?", started_at, ended_at, "female")
         .group("DATE_TRUNC('day', likes.created_at)").count},
-      {:title => 'total_uniq_liked', :result => Like.joins(:user)
-        .where("likes.created_at >= ? and likes.created_at <= ?", started_at, ended_at)
-        .group("DATE_TRUNC('day', likes.created_at)").count("users.id", distinct: true)},
       {:title => 'uniq_male_liked', :result => Like.joins(:user)
         .where("likes.created_at >= ? and likes.created_at <= ? and users.gender = ?", started_at, ended_at, "male")
         .group("DATE_TRUNC('day', likes.created_at)").count("users.id", distinct: true)},
@@ -159,7 +156,7 @@ class Report < ActiveRecord::Base
   end
 
   def self.total_like_per_day(started_at, ended_at)
-    count_report(started_at, ended_at, ['total_likes', 'likes_from_male', 'likes_from_female', 'total_uniq_liked', 'uniq_male_liked', 'uniq_female_liked'])
+    count_report(started_at, ended_at, ['total_likes', 'likes_from_male', 'likes_from_female', 'uniq_male_liked', 'uniq_female_liked'])
   end
 
   def self.sql_to_hash(sql_results)
@@ -227,11 +224,9 @@ class Report < ActiveRecord::Base
   # Total unique female members who sent a like
 
   def self.count_total_uniq_like_per_day(started_at, ended_at)
-    total_uniq_reports = Report.where("created_at >= ? and created_at <= ? and title = 'total_uniq_member_liked'", started_at, ended_at).select(['created_at', 'value'])
     total_uniq_male_reports = Report.where("created_at >= ? and created_at <= ? and title = 'total_uniq_male_liked'", started_at, ended_at).select(['created_at', 'value'])
     total_uniq_female_reports = Report.where("created_at >= ? and created_at <= ? and title = 'total_uniq_female_liked'", started_at, ended_at).select(['created_at', 'value'])
     sqls = [
-      {:title => 'total_uniq_member_liked', :result => sql_to_hash(total_uniq_reports)},
       {:title => 'total_uniq_male_liked', :result => sql_to_hash(total_uniq_male_reports)},
       {:title => 'total_uniq_female_liked', :result => sql_to_hash(total_uniq_female_reports)},
     ]
