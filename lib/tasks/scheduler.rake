@@ -6,3 +6,7 @@ task :generate_report => :environment do
   Report.store_report_data(today_string, today_string)
   puts "done."
 end
+
+task :check_and_ring_alarm => :environment do
+  CurrencyAlarm.check_and_ring
+end
