@@ -30,7 +30,7 @@ group :development, :test do
 	gem 'sqlite3', '1.3.5'
   gem 'debugger', '~> 1.5.0'
   gem 'spork', '~> 0.9.0.rc'
-  gem 'rcov'
+  gem 'simplecov', :require => false
 end
 
 group :development do

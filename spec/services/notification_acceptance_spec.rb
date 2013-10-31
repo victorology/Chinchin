@@ -5,6 +5,7 @@ describe Notification do
 	target_user = FactoryGirl.create(:user, :first_name => 'Eunmi')
 	friend1 = FactoryGirl.create(:user)
 	friend2 = FactoryGirl.create(:user)
+  Feed.delete_all
 
 	context 'feed' do
 		it 'like' do

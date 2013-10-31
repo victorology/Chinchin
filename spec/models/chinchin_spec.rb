@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe Chinchin do
+  before(:each) do
+    Chinchin.delete_all
+  end
+
   it 'returns empty array when chinchin has no mutual friends with current_user' do
     user = FactoryGirl.create(:user, name: 'kim', gender: 'male')
     user2 = FactoryGirl.create(:user, name: 'lee', gender: 'male')

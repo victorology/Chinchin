@@ -11,7 +11,6 @@ describe Report do
     user.status = 1
     user.save
     Report.delete_all
-    Like.delete_all
   end
 
   after(:each) do

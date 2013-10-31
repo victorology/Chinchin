@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe User do
+  before(:each) do
+    User.delete_all
+  end
+
   it 'return false when a given chinchin has same gender' do
     user = FactoryGirl.create(:user, gender: 'male')
     chinchin = FactoryGirl.create(:chinchin, gender:'male')
