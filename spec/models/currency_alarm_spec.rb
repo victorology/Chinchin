@@ -12,8 +12,12 @@ describe CurrencyAlarm do
 
   context 'type is HEART_IS_FULL_AGAIN' do
     it 'should not be set when heart is already full' do
+      CurrencyAlarm.should_receive(:new).and_call_original
+      CurrencyAlarm.any_instance.should_not_receive(:save)
       CurrencyAlarm.count.should == 0
-
+      c = Currency.init(@user, Currency::HEART)
+      CurrencyAlarm.set(currency: c, type: CurrencyAlarm::HEART_IS_FULL_AGAIN)
+      CurrencyAlarm.count.should == 0
     end
 
     it 'should be created when any heart is used' do
