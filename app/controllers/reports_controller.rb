@@ -22,6 +22,7 @@ class ReportsController < ApplicationController
 		Members (Daily),Male Members (Daily), Female Members (Daily), \
 		Chinchins (Daily),Male Chinchins (Daily),Female Chinchins (Daily), \
 		Likes (Daily),Likes sent by Male (Daily),Likes sent by Female (Daily), \
+		Mutual Likes (Total), \
 		Likes sent by Unique Member (Daily),Likes sent by Unique Male (Daily),Likes sent by Unique Female (Daily), \
 		Likes sent by Unique Member (Total),Likes sent by Unique Male (Total),Likes sent by Unique Female (Total), \
 		Male Members w/no Chinchin,Female Members w/no Chinchin, \
@@ -37,6 +38,7 @@ class ReportsController < ApplicationController
 			keys = ['total_users', 'male_users', 'female_users', 
 				'total_chinchins', 'male_chinchins', 'female_chinchins', 
 				'total_likes', 'likes_from_male', 'likes_from_female', 
+				'total_mutual_likes', 
 				'total_uniq_liked', 'uniq_male_liked', 'uniq_female_liked', 
 				'total_uniq_member_liked', 'total_uniq_male_liked', 'total_uniq_female_liked', 
 				'male_no_chinchins', 'female_no_chinchins', 
