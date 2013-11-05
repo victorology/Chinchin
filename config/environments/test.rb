@@ -34,4 +34,45 @@ Chinchin2::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  OmniAuth.config.test_mode = true
+  OmniAuth.config.mock_auth[:facebook] = {
+      :uid => '1234',
+      :provider => 'facebook',
+      :info => {
+          :name => 'Test Kim',
+          :email => 'testkim@gmail.com',
+          :first_name => 'Test',
+          :last_name => 'Kim',
+      },
+      :extra => {
+          :raw_info => {
+              :birthday => '08/14/1979',
+              :gender => 'male',
+              :locale => 'ko_KR',
+              :work => [
+                  {
+                    :employer => {
+                        :name => 'Chinchin'
+                    },
+                    :position => {
+                        :name => 'CEO'
+                    }
+                  }
+              ],
+              :education => [
+                  {
+                      :school => {
+                          :name => 'Ajou'
+                      }
+                  }
+              ]
+          }
+      },
+      :credentials => {
+          :token => 'token1234',
+          :expires_at => 1434535355,
+      }
+  }
+  OmniAuth.config.add_mock(:facebook, OmniAuth.config.mock_auth[:facebook])
 end

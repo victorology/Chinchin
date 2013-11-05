@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  before_filter :check_for_mobile
+
   def create
   	auth = env["omniauth.auth"]
     user = User.where(auth.slice(:provider, :uid)).first
