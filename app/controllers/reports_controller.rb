@@ -41,7 +41,7 @@ class ReportsController < ApplicationController
 				'total_likes', 'likes_from_male', 'likes_from_female', 
 				'total_mutual_likes', 
 				'uniq_male_liked', 'uniq_female_liked', 
-				'total_uniq_male_liked', 'total_uniq_female_liked', å
+				'total_uniq_male_liked', 'total_uniq_female_liked', 
 				'uniq_male_received_like', 'uniq_female_received_like', 
 				'male_no_chinchins', 'female_no_chinchins', 
 				'male_one_chinchin', 'female_one_chinchin', 
