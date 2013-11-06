@@ -25,8 +25,8 @@ class ReportsController < ApplicationController
 		Mutual Likes (Total), \
 		Likes sent by Unique Male (Daily),Likes sent by Unique Female (Daily), \
 		Likes sent by Unique Male (Total),Likes sent by Unique Female (Total), \
-		Likes sent by Unique Member (Daily),Likes sent by Unique Male (Daily),Likes sent by Unique Female (Daily), \
-		Likes sent by Unique Member (Total),Likes sent by Unique Male (Total),Likes sent by Unique Female (Total), \
+		Likes sent by Unique Male (Daily),Likes sent by Unique Female (Daily), \
+		Likes sent by Unique Male (Total),Likes sent by Unique Female (Total), \
 		Male Members w/no Chinchin,Female Members w/no Chinchin, \
 		Male Members w/1 Chinchin,Female Members w/1 Chinchin, \
 		Male Members w/2 Chinchins,Female Members w/2 Chinchins, \
@@ -43,8 +43,8 @@ class ReportsController < ApplicationController
 				'total_mutual_likes', 
 				'uniq_male_liked', 'uniq_female_liked', 
 				'total_uniq_male_liked', 'total_uniq_female_liked', 
-				'total_uniq_liked', 'uniq_male_liked', 'uniq_female_liked', 
-				'total_uniq_member_liked', 'total_uniq_male_liked', 'total_uniq_female_liked', 
+				'uniq_male_liked', 'uniq_female_liked', 
+				'total_uniq_male_liked', 'total_uniq_female_liked', 
 				'male_no_chinchins', 'female_no_chinchins', 
 				'male_one_chinchin', 'female_one_chinchin', 
 				'male_two_chinchins', 'female_two_chinchins', 
