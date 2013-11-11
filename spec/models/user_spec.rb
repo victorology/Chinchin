@@ -4,18 +4,7 @@ describe User do
   before(:each) do
     User.delete_all
     @user = FactoryGirl.create(:user, name: 'kim', gender: 'male', uid: '0000', status: 1, oauth_token: '1234')
-
-    #request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:facebook]
   end
-
-  #context 'OmniAuth' do
-  #  it 'return valid user when authentication success' do
-  #    get :index
-  #    auth = OmniAuth.config.mock_auth[:facebook]
-  #    auth_obj = OpenStruct.new auth
-  #    user = User.create_from_omniauth(auth_obj)
-  #  end
-  #end
 
   context 'fb_graph' do
     it 'should call FbGraph method when access user facebook' do
@@ -26,10 +15,6 @@ describe User do
     it 'should call FbGraph method when access user friends' do
       FbGraph::User.any_instance.should_receive(:friends)
       @user.friends
-    end
-
-    it 'should add friend to chinchin service' do
-      @user.add_friend_to_chinchin(friend)
     end
   end
 
