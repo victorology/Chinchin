@@ -17,6 +17,8 @@ class CurrencyAlarm < ActiveRecord::Base
       currency_alarm.currency = currency
       currency_alarm.alarm_type = alarm_type
       currency_alarm.status = CurrencyAlarm::PENDING
+    elsif currency_alarm.status == ALARMED
+      currency_alarm.status = CurrencyAlarm::PENDING
     end
 
     heart_gap = currency.max_count - currency.current_count
