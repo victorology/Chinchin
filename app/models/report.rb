@@ -110,7 +110,6 @@ class Report < ActiveRecord::Base
   # Daily total likes from male
   # Daily total likes from female
 
-  # Daily total unique members who sent a like
   # Daily total unique male members who sent a like
   # Daily total unique female members who sent a like
 
@@ -129,6 +128,20 @@ class Report < ActiveRecord::Base
       {:title => 'uniq_female_liked', :result => Like.joins(:user)
         .where("likes.created_at >= ? and likes.created_at <= ? and users.gender = ?", started_at, ended_at, "female")
         .group("DATE_TRUNC('day', likes.created_at)").count("users.id", distinct: true)}
+    ]
+  end
+
+  # Daily total unique male members who received a like
+  # Daily total unique female members who received a like
+
+  def self.total_received_like_per_day_sql(started_at, ended_at)
+    sqls = [
+      {:title => 'uniq_male_received_like', :result => Like.joins(:chinchin)
+        .where("likes.created_at >= ? and likes.created_at <= ? and users.gender = ? and users.status >= 1", started_at, ended_at, "male")
+        .group("DATE_TRUNC('day', likes.created_at)").count("users.id", distinct: true)},
+      {:title => 'uniq_female_received_like', :result => Like.joins(:chinchin)
+        .where("likes.created_at >= ? and likes.created_at <= ? and users.gender = ? and users.status >= 1", started_at, ended_at, "female")
+        .group("DATE_TRUNC('day', likes.created_at)").count("users.id", distinct: true)},
     ]
   end
 
@@ -152,6 +165,11 @@ class Report < ActiveRecord::Base
 
   def self.store_total_like_per_day(started_at, ended_at)
     sqls = total_like_per_day_sql(started_at, ended_at)
+    store_report(started_at, ended_at, sqls)
+  end
+
+  def self.store_total_received_like_per_day(started_at, ended_at)
+    sqls = total_received_like_per_day_sql(started_at, ended_at)
     store_report(started_at, ended_at, sqls)
   end
 
