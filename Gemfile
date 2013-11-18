@@ -22,6 +22,8 @@ gem 'urbanairship' # Added for push notification
 gem 'pg', '0.12.2' # Added for postgresql management
 gem 'rails_12factor' # Added for skipping plugin injection
 gem 'rspec-rails', '~> 2.12.0'
+gem 'rabl'
+gem 'oj'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

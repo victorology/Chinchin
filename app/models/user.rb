@@ -1,32 +1,11 @@
-# == Schema Information
-#
-# Table name: users
-#
-#  id                  :integer          not null, primary key
-#  provider            :string(255)
-#  uid                 :string(255)
-#  name                :string(255)
-#  email               :string(255)
-#  first_name          :string(255)
-#  last_name           :string(255)
-#  birthday            :string(255)
-#  location            :string(255)
-#  hometown            :string(255)
-#  employer            :string(255)
-#  position            :string(255)
-#  gender              :string(255)
-#  relationship_status :string(255)
-#  school              :string(255)
-#  locale              :string(255)
-#  oauth_token         :string(255)
-#  oauth_expires_at    :datetime
-#  created_at          :datetime         not null
-#  updated_at          :datetime         not null
-#
-
 class User < ActiveRecord::Base
   UNREGISTERED = 0
   REGISTERED = 1
+  FRIENDS_FETCHED = 2
+  NO_FOUND_FRIENDS = 3
+  FOUND_FRIENDS = 4
+  NO_FOUND_CHINCHINS = 5
+  FOUND_CHINCHINS = 6
 
   attr_accessible :birthday, :email, :employer, :first_name, :gender, :hometown, :last_name, :locale, :location, :name, :oauth_expires_at, :oauth_token, :position, :provider, :relationship_status, :school, :uid
   has_many :friendships
@@ -81,6 +60,16 @@ class User < ActiveRecord::Base
     return user
 	end
 
+  def renew_credential
+    auth = FbGraph::Auth.new('352455024800701', '035385fe9e7db60eba187ab83fb27cb6')
+    auth.exchange_token! self.oauth_token
+    if auth.access_token.access_token != self.oauth_token
+      self.oauth_token = auth.access_token.access_token
+      self.oauth_expires_at = Time.now + auth.access_token.expires_in
+      self.save
+    end
+  end
+
 	def facebook
 		@fb_user ||= FbGraph::User.me(oauth_token)
 	end
@@ -100,36 +89,6 @@ class User < ActiveRecord::Base
   def friends_in_chinchin
     registered_friends
   end
-
-  #def friends_in_chinchin2
-  #  users = User.all
-  #  friends = self.friends
-  #  chinchin = []
-  #
-  #  friends.each do |friend|
-  #    users.each do |user|
-  #      if friend.raw_attributes["id"] == user.uid
-  #        chinchin.push(user)
-  #      end
-  #    end
-  #  end
-  #
-  #  return chinchin
-  #end
-
-  #def chinchins_in_leaderboard
-  #  friendships = Friendship.find_all_by_user_id(self.id)
-  #  leaders = []
-  #
-  #  friendships.each do |friendship|
-  #    c = friendship.chinchin
-  #    leaders.push({:chinchin => c, :score => c.score})
-  #  end
-  #
-  #  leaders.sort_by { |leader| leader[:score] }
-  #
-  #  return leaders.slice 0, 10
-  #end
 
   def people_in_leaderboard
     chinchins = self.chinchins
@@ -208,28 +167,6 @@ class User < ActiveRecord::Base
         return [chinchin]
       end
     end
-    #friendships = []
-    #self.friends_in_chinchin.each do |friend|
-    #  # friend = chinchin.user
-    #  friendships.push(Friendship.find_all_by_user_id(friend.id))
-    #end
-    #
-    #friendships.flatten!
-    #friendships.shuffle!
-
-    #chinchins = []
-    #friendships.each do |friendship|
-    #  chinchin = friendship.chinchin
-    #  if pass_default_chinchin_filter(chinchin)
-    #    chinchins.push(chinchin)
-    #  end
-    #
-    #  if chinchins.size >= 1
-    #    break
-    #  end
-    #end
-    #
-    #return chinchins
   end
 
   def add_friend_to_chinchin(friend)
@@ -292,23 +229,6 @@ class User < ActiveRecord::Base
       end
     end
   end
-
-  #def add_friends_to_chinchin2
-  #  friends = self.friends
-  #  friends.each do |friend|
-  #    c = Chinchin.find_by_uid(friend.raw_attributes['id'])
-  #    if c.nil?
-  #      c = self.add_friend_to_chinchin(friend)
-  #    end
-  #
-  #    if Friendship.find_by_user_id_and_chinchin_id(self.id, c.id).nil?
-  #      friendship = Friendship.new
-  #      friendship.user = self
-  #      friendship.chinchin = c
-  #      friendship.save!
-  #    end
-  #  end
-  #end
 
   def like(chinchin)
     like = Like.new
@@ -389,13 +309,13 @@ class User < ActiveRecord::Base
     _endpoint_ = ["#{self.endpoint}/picture", options.to_query].delete_if(&:blank?).join('?')
   end
 
-  def connect_with_chinchin
-    c = Chinchin.find_by_uid(self.uid)
-    if not c.nil?
-      c.user = self
-      c.save
-    end
-  end
+  #def connect_with_chinchin
+  #  c = Chinchin.find_by_uid(self.uid)
+  #  if not c.nil?
+  #    c.user = self
+  #    c.save
+  #  end
+  #end
 
   def message_rooms
     MessageRoom.message_rooms(self.id)
@@ -450,5 +370,12 @@ class User < ActiveRecord::Base
     if c.current_count > 0
       c.use(1)
     end
+  end
+
+  def build_token
+    begin
+      token = SecureRandom.urlsafe_base64
+    end while User.exists?(auth_token: token)
+    token
   end
 end

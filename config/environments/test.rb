@@ -75,4 +75,5 @@ Chinchin2::Application.configure do
       }
   }
   OmniAuth.config.add_mock(:facebook, OmniAuth.config.mock_auth[:facebook])
+  OmniAuth.config.add_mock(:facebook_access_token, OmniAuth.config.mock_auth[:facebook])
 end
