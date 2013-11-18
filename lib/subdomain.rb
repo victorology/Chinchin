@@ -3,6 +3,7 @@ class Subdomain
     request.subdomain.present? && \
     request.subdomain != 'www' && \
     request.subdomain != 'skunkwrx' && \
-    request.subdomain != 'test'
-  end  
+    request.subdomain != 'test' && \
+    request.subdomain != 'api'
+  end
 end
