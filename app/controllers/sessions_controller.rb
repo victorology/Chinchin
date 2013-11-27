@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
   	auth = env["omniauth.auth"]
     user = User.where(auth.slice(:provider, :uid)).first
     next_url = root_url
-    status = :created
+    status = :ok
 
     unless user
     	user = User.create_from_omniauth(auth)
