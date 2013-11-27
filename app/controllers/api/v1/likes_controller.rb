@@ -10,8 +10,8 @@ class API::V1::LikesController < API::V1::BaseController
     chinchin = User.find(@chinchinId)
 
     begin
-      if Like.find_by_user_id_and_chinchin_id(current_user.id, @chinchinId).nil?
-        InteractionManager.like(:actor => current_user, :receiver => chinchin)
+      if Like.find_by_user_id_and_chinchin_id(@current_user.id, @chinchinId).nil?
+        InteractionManager.like(:actor => @current_user, :receiver => chinchin)
         render_api_message "created", :created
       else
         render_api_message "already liked", :ok
