@@ -57,6 +57,7 @@ Chinchin2::Application.routes.draw do
     namespace :v1 do
       resources :chinchins
       resources :users, {:only => [:show]}
+      resources :likes
     end
   end
 end
