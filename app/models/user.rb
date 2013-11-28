@@ -378,4 +378,23 @@ class User < ActiveRecord::Base
     end while User.exists?(auth_token: token)
     token
   end
+
+  def age
+    begin
+      birthday = Date.strptime(self.birthday, '%m/%d/%Y')
+      now = Time.now.utc.to_date
+      now.year - birthday.year - ((now.month > birthday.month || (now.month == birthday.month && now.day >= birthday.day)) ? 0 : 1)
+    rescue TypeError, ArgumentError
+      nil
+    end
+  end
+
+  def horoscope
+    begin
+      birthday = Date.strptime(self.birthday, '%m/%d/%Y')
+      birthday.zodiac_sign
+    rescue TypeError, ArgumentError
+      nil
+    end
+  end
 end

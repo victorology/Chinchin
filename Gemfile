@@ -7,7 +7,7 @@ gem 'omniauth-facebook'
 gem 'omniauth-facebook-access-token'
 gem 'fb_graph'
 gem 'newrelic_rpm'
-gem 'activeadmin'
+gem 'activeadmin', '0.6.0'
 gem 'formtastic', '~> 2.1.1' # Added for ActiveAdmin
 gem "meta_search", '>= 1.1.0.pre' # Added for ActiveAdmin
 gem 'resque', "~> 1.22.0"
@@ -24,6 +24,7 @@ gem 'rails_12factor' # Added for skipping plugin injection
 gem 'rspec-rails', '~> 2.12.0'
 gem 'rabl'
 gem 'oj'
+gem 'zodiac'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
