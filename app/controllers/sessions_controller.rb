@@ -14,10 +14,11 @@ class SessionsController < ApplicationController
     end
 
     if user.status == User::UNREGISTERED
-      user.update_from_omniauth(auth)
       next_url = tutorials_url
       status = :created
     end
+    # important fix to update already registered user's auth token
+    user.update_from_omniauth(auth)
 
     user.last_login = Time.now
     session[:user_id] = user.id
