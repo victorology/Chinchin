@@ -49,6 +49,6 @@ class CurrencyAlarm < ActiveRecord::Base
       end
     end
 
-    Notification.notify(type: "heart_full", media: ['push', 'feed'], receivers: alarmed_user)
+    Notification.notify(type: "heart_full", media: ['push'], receivers: alarmed_user)
   end
 end
