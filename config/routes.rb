@@ -59,6 +59,7 @@ Chinchin2::Application.routes.draw do
       resources :users, {:only => [:show]}
       resources :likes
       resources :hot_friends
+      resources :feeds
     end
   end
 end
