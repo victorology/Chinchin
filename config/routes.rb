@@ -60,6 +60,7 @@ Chinchin2::Application.routes.draw do
       resources :likes
       resources :hot_friends
       resources :feeds
+      resources :message_rooms
     end
   end
 end
