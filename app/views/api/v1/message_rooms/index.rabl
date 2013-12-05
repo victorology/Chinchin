@@ -8,6 +8,12 @@ child(@message_rooms => :message_rooms) do
     node(:uid, :if => lambda { |r| r.user2 == @current_user }) do |r|
         r.user1.uid
     end
+    node(:friend_name, :if => lambda { |r| r.user1 == @current_user }) do |r|
+        r.user2.name
+    end
+    node(:friend_name, :if => lambda { |r| r.user2 == @current_user }) do |r|
+        r.user1.name
+    end
     node(:last_message, :if => lambda { |r| r.messages.count > 0}) do |r|
         r.messages.last.content
     end
