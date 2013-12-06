@@ -27,7 +27,7 @@ class API::V1::BaseController < ActionController::Base
     render_api_message "api.v1.unauthorized", :unauthorized
   end
 
-  def render_api_message(message, status)
-    render :json => {:message => message, :status => status}, :status => status
+  def render_api_message(message, status, info={})
+    render :json => {:message => message, :status => status, :info => info}, :status => status
   end
 end

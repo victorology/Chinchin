@@ -5,6 +5,7 @@ class API::V1::MessageRoomsController < API::V1::BaseController
 
   def show
     message_room_id = params[:id]
+    message_id = params[:start]
     if message_room_id.nil?
       render_api_message "api.v1.bad_request", :bad_request
     end
@@ -13,6 +14,15 @@ class API::V1::MessageRoomsController < API::V1::BaseController
     if @message_room.nil?
       render_api_message "api.v1.not_found", :not_found
     end
-    @messages = Message.where('message_room_id = ?', message_room_id)
+    if message_id.present?
+      message = Message.find(message_id)
+      if message
+        @messages = Message.where('message_room_id = ? and created_at > ?', message_room_id, message.created_at)
+      else
+        render_api_message "api.v1.message_room.start_message_not_found", :not_found
+      end
+    else
+      @messages = Message.where('message_room_id = ?', message_room_id)
+    end
   end
 end

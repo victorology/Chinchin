@@ -11,6 +11,6 @@ class Message < ActiveRecord::Base
 	  def send_push
 	  	receiver = self.message_room.user1 
 	  	receiver = self.message_room.user2 if writer == message_room.user1
-	  	UrbanairshipWrapper.send([receiver], self.content)
+	  	UrbanairshipWrapper.send([receiver], writer.first_name + " : " + self.content)
 	  end
 end
