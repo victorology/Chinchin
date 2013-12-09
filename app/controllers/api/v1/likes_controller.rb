@@ -1,7 +1,6 @@
 class API::V1::LikesController < API::V1::BaseController
   def index
-    @user = current_user # Added by Victor don't know if this is right
-    @likes = Like.where(:user_id => @user.id).order("created_at DESC")
+    @likes = Like.where(:user_id => @current_user.id).order("created_at DESC")
   end
 
   def create
