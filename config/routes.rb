@@ -61,6 +61,7 @@ Chinchin2::Application.routes.draw do
       resources :feeds
       resources :message_rooms
       resources :messages
+      resources :invitations
     end
   end
 end

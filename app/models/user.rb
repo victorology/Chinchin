@@ -397,4 +397,12 @@ class User < ActiveRecord::Base
       nil
     end
   end
+
+  def invite(not_yet_user, via="unknown")
+    invitation = Invitation.new
+    invitation.user = self
+    invitation.chinchin = not_yet_user
+    invitation.via = via
+    invitation.save
+  end
 end
