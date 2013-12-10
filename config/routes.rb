@@ -55,7 +55,7 @@ Chinchin2::Application.routes.draw do
   namespace :api, :defaults => {:format => 'json'}, :path => "", :constraints => {:subdomain => 'api'} do
     namespace :v1 do
       resources :chinchins
-      resources :users, {:only => [:show]}
+      resources :users
       resources :likes
       resources :hot_friends
       resources :feeds

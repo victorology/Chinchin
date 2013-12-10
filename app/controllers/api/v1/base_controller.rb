@@ -28,6 +28,9 @@ class API::V1::BaseController < ActionController::Base
   end
 
   def render_api_message(message, status, info={})
+    if status == :too_many_requests
+      status = 429
+    end
     render :json => {:message => message, :status => status, :info => info}, :status => status
   end
 end

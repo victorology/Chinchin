@@ -1,13 +1,27 @@
 object false
 node (:status) { |m| 'ok' }
-child(@current_user) {
-  attributes :uid, :name, :last_name, :first_name, :email, :location, :hometown, :birthday, :employer, :position, :gender, :school, :status
-  attribute :age, :if => lambda {|m| @current_user.age.present?}
-  attribute :horoscope, :if => lambda { |m| @current_user.horoscope.present?}
-  node (:friendship_count) { |m| @current_user.friendships.count }
-  node (:friends_in_chinchin_count) { |m| @current_user.friends_in_chinchin.count }
-  node (:sorted_chinchin_count) { |m| @current_user.sorted_chinchin.count }
-  node (:people_i_liked_count) { |m| @current_user.likes.count }
+child(@user) {
+  attributes :picture, :uid, :name, :last_name, :first_name, :gender, :status, :id
+  attribute :location, :if => lambda {|r| r.location.present?}
+  attribute :employer, :if => lambda {|r| r.employer.present?}
+  attribute :school, :if => lambda {|r| r.school.present?}
+  attribute :age, :if => lambda {|r| r.age.present?}
+  attribute :horoscope, :if => lambda {|r| r.horoscope.present?}
+
+  node(:mutual_friends, :if => lambda { |m| m.id != @current_user.id }) do |m|
+    m.mutual_friends(@current_user)
+  end
+  node(:friendship_count, :if => lambda { |m| m.friendships.present? }) do |m|
+    m.friendships.count
+  end
+  node(:sorted_chinchin_count, :if => lambda { |m| m.sorted_chinchin.present? }) do |m|
+    m.sorted_chinchin.count
+  end
+  node(:people_i_liked_count, :if => lambda { |m| m.likes.present? }) do |m|
+    m.likes.count
+  end
+  node (:friendship_count) { |m| m.friendships.count }
+  node (:friends_in_chinchin_count) { |m| m.friends_in_chinchin.count }
   child :profile_photos do
     attributes :source_url, :picture_url
   end
