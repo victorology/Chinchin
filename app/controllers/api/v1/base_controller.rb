@@ -33,4 +33,12 @@ class API::V1::BaseController < ActionController::Base
     end
     render :json => {:message => message, :status => status, :info => info}, :status => status
   end
+
+  def currency_timeleft(user, currency_type)
+    c = user.currency(currency_type)
+    if c.last_used_log.nil?
+      return 0
+    end
+    return ((30*60) - (TimeUtil.get - c.last_used_log.created_at)) * 1000
+  end
 end
