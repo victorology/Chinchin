@@ -149,7 +149,7 @@ class User < ActiveRecord::Base
   def chinchin
     chinchins = self.sorted_chinchin
     if chinchins.nil? or chinchins.count == 0
-      chinchins = self.generate_sorted_chinchin
+      return []
     end
 
     while chinchins.count > 0
@@ -167,6 +167,8 @@ class User < ActiveRecord::Base
         return [chinchin]
       end
     end
+
+    return []
   end
 
   def add_friend_to_chinchin(friend)
@@ -228,6 +230,7 @@ class User < ActiveRecord::Base
         end
       end
     end
+    self.generate_sorted_chinchin
   end
 
   def like(chinchin)
