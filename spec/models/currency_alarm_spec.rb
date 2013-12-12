@@ -81,7 +81,7 @@ describe CurrencyAlarm do
     end
 
     it 'should send notification when it rings' do
-      Notification.should_receive(:notify).with(type: "heart_full", media: ['push', 'feed'], receivers: [@user])
+      Notification.should_receive(:notify).with(type: "heart_full", media: ['push'], receivers: [@user])
       @user.currency(Currency::HEART).active_alarm.should be_nil
       now = Time.now
       TimeUtil.freeze(now)

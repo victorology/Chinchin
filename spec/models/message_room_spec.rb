@@ -5,9 +5,9 @@ describe MessageRoom do
     MessageRoom.delete_all
   end
 
-  let(:user1) { FactoryGirl.create(:user, gender:'male', name:'Kim', uid:'123', status: User::REGISTERED) }
-  let(:user2) { FactoryGirl.create(:user, gender:'female', name:'Lee', uid:'345', status: User::REGISTERED) }
-  let(:friend) { FactoryGirl.create(:user, gender:'male', name:'Park', uid:'567', status: User::REGISTERED) }
+  let(:user1) { FactoryGirl.create(:user, gender:'male', first_name: 'KK', name:'Kim', uid:'123', status: User::REGISTERED) }
+  let(:user2) { FactoryGirl.create(:user, gender:'female', first_name: 'LL', name:'Lee', uid:'345', status: User::REGISTERED) }
+  let(:friend) { FactoryGirl.create(:user, gender:'male', first_name:'PP', name:'Park', uid:'567', status: User::REGISTERED) }
 
   it 'returns one message room when two user like each other' do
     MessageRoom.all.count.should == 0

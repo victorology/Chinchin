@@ -66,7 +66,7 @@ describe InteractionManager do
 
 	context '.alert to friends' do
 		it 'can send a message for introduce to friends' do
-			actor = mock_model("User")
+			actor = mock_model "User", :first_name => 'kim'
 			liked_user = mock_model("User")
 			friends = [mock_model("User"), mock_model("User")]
 

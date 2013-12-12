@@ -1,6 +1,6 @@
 class CurrencyLog < ActiveRecord::Base
   belongs_to :currency
-  attr_accessible :currency, :action, :value
+  attr_accessible :currency, :action, :value, :via
   before_create {
     @last_used_log = self.currency.last_used_log
   }

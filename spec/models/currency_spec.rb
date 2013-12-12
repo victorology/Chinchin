@@ -266,4 +266,18 @@ describe Currency do
     c.last_used_log.value.should == 1
     c.last_used_log.created_at.should eq first_used_log.created_at + (30*60)
   end
+
+  it 'should be fulled when recharge_full is called' do
+    c = Currency.init(@user, Currency::HEART)
+    c.use(1)
+    c.use(1)
+    c.use(1)
+    c.use(1)
+    c.use(1)
+    c.current_count.should == 0
+    c.recharge_full("invitation")
+    c.current_count.should == 5
+    c.last_used_log.action.should == 'recharge_full'
+    c.last_used_log.via == 'invitation'
+  end
 end

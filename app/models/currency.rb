@@ -36,10 +36,10 @@ class Currency < ActiveRecord::Base
   end
 
   def last_used_log
-    recent_cl = self.currency_logs.where('action in (?)', ['regen', 'regen_full']).order('created_at DESC').first
+    recent_cl = self.currency_logs.where('action in (?)', ['regen', 'regen_full', 'recharge_full']).order('created_at DESC').first
     if recent_cl.nil?
       cl = self.currency_logs.where('action = ?', 'use').order('created_at').first
-    elsif recent_cl.action == 'regen_full'
+    elsif recent_cl.action == 'regen_full' or recent_cl.action == 'recharge_full'
       regen_cl = self.currency_logs.where('action = ? and created_at >= ?', 'regen', recent_cl.created_at).order('created_at DESC').first
       if regen_cl
         cl = regen_cl
@@ -82,5 +82,12 @@ class Currency < ActiveRecord::Base
 
   def active_alarm
     return self.currency_alarm if self.currency_alarm and self.currency_alarm.is_active
+  end
+
+  def recharge_full(via="system")
+    regen_count = self.max_count - self.current_count
+    self.current_count = self.max_count
+    self.save
+    CurrencyLog.create(currency: self, action: 'recharge_full', value: regen_count, via: via)
   end
 end

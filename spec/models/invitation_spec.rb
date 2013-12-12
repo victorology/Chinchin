@@ -26,4 +26,28 @@ describe Invitation do
     TimeUtil.pass_by(23*60*61)
     Invitation.invited_friends(@user).length.should == 0
   end
+
+  it 'should call user.invite 5 times when invite 5 friends' do
+    friends = [mock_model("User"), mock_model("User"), mock_model("User"), mock_model("User"), mock_model("User")]
+    User.stub(:invite) { true }
+
+    User.any_instance.should_receive(:invite).exactly(5).times
+    Invitation.invite_friends(@user, friends, "spec_for_test")
+  end
+
+  it 'should call recharge_full_by_invitation when invite 20 more friends' do
+    friends = []
+    (0..19).each do |n|
+      friends.push(mock_model("User"))
+    end
+    User.stub(:invite) { true }
+
+    User.any_instance.should_receive(:invite).exactly(20).times
+    Currency.any_instance.should_receive(:recharge_full).with("invitation")
+    Invitation.invite_friends(@user, friends, "spec_for_test")
+  end
+
+  xit 'should give a new set of hearts to user who invites 20 more friends' do
+
+  end
 end
