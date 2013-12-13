@@ -36,13 +36,19 @@ describe Notification do
 
 	context 'push' do
 		it 'like' do
-			UrbanairshipWrapper.should_receive(:send).with([target_user], "Someone likes you!")
+			UrbanairshipWrapper.should_receive(:send).with([target_user], "Someone likes you!", "like")
 			Notification.notify(type: "like", media: ['push'], receivers: [target_user])
 		end
 
 		it 'like_friend' do
-			UrbanairshipWrapper.should_receive(:send).with([user], "Someone likes #{target_user.first_name}!")
+			UrbanairshipWrapper.should_receive(:send).with([user], "Someone likes #{target_user.first_name}!", "like_friend")
 			Notification.notify(type: "like_friend", media: ['push'], people: [target_user], receivers: [user])
-		end
+    end
+
+    it 'match' do
+      UrbanairshipWrapper.should_receive(:send).with([user], "Congrats! You've been matched with #{target_user.first_name}! Message now.", "match")
+      UrbanairshipWrapper.should_receive(:send).with([target_user], "Congrats! You've been matched with #{user.first_name}! Message now.", "match")
+      Notification.notify(type: "match", media: ['push'], people: [user, target_user], receivers: [user, target_user])
+    end
 	end
 end

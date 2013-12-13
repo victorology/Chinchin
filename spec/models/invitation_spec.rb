@@ -46,8 +46,4 @@ describe Invitation do
     Currency.any_instance.should_receive(:recharge_full).with("invitation")
     Invitation.invite_friends(@user, friends, "spec_for_test")
   end
-
-  xit 'should give a new set of hearts to user who invites 20 more friends' do
-
-  end
 end

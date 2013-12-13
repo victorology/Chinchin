@@ -1,5 +1,5 @@
 class UrbanairshipWrapper < ActiveRecord::Base
-  def self.send(users, message)
+  def self.send(users, message, type="info")
     begin
       device_tokens = users.map { |user| user.device_token }.compact
     rescue
@@ -9,7 +9,8 @@ class UrbanairshipWrapper < ActiveRecord::Base
     if device_tokens.count > 0
       notification = {
           :device_tokens => device_tokens,
-          :aps => {:alert => message, :badge => 1}
+          :aps => {:alert => message, :badge => 1},
+          :type => type
       }
 
       Urbanairship.push(notification)
