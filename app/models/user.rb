@@ -359,7 +359,7 @@ class User < ActiveRecord::Base
     self.save
   end
 
-  def currency(currency_type)
+  def currency(currency_type=Currency::HEART)
     c = Currency.where('user_id = ? and currency_type = ?', self.id, currency_type).last
     if c.nil?
       c = Currency.init(self, currency_type)
