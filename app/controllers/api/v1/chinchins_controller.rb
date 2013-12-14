@@ -8,7 +8,12 @@ class API::V1::ChinchinsController < API::V1::BaseController
       return
     end
 
-    heart.use(1)
     @chinchin = @current_user.chinchin.first
+    if @chinchin
+      heart.use(1)
+    else
+      render_api_message "api.v1.no_more_matches", :not_found
+      return
+    end
   end
 end
