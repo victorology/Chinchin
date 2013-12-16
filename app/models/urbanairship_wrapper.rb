@@ -1,5 +1,5 @@
 class UrbanairshipWrapper < ActiveRecord::Base
-  def self.send(users, message, type="info")
+  def self.send(users, message, type="info", matched=nil)
     begin
       device_tokens = users.map { |user| user.device_token }.compact
     rescue
@@ -12,6 +12,9 @@ class UrbanairshipWrapper < ActiveRecord::Base
           :aps => {:alert => message, :badge => 1},
           :type => type
       }
+      if matched
+        notification[:matched] = matched
+      end
 
       Urbanairship.push(notification)
     end

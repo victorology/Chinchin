@@ -1,7 +1,7 @@
 object false
 node (:status) { |m| 'ok' }
 child(@user) {
-  attributes :picture, :uid, :name, :last_name, :first_name, :gender, :status, :id
+  attributes :picture, :email, :uid, :name, :last_name, :first_name, :gender, :status, :id
   attribute :location, :if => lambda {|r| r.location.present?}
   attribute :employer, :if => lambda {|r| r.employer.present?}
   attribute :school, :if => lambda {|r| r.school.present?}
