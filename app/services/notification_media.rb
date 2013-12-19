@@ -12,8 +12,10 @@ class NotificationMedia
 	end
 
 	def prepare_for_match()
-		@options.push({type: "match", message: @message[0], user: @receivers[0], target_user: @receivers[1]})
-		@options.push({type: "match", message: @message[1], user: @receivers[1], target_user: @receivers[0]})
+    user = @receivers[0]
+    target_user = @receivers[1]
+		@options.push({type: "match", message: @message[0], user: user, target_user: target_user, matched: {name: target_user.name, uid: target_user.uid}})
+		@options.push({type: "match", message: @message[1], user: target_user, target_user: user, matched: {name: user.name, uid: user.uid}})
 	end
 
 	def prepare()

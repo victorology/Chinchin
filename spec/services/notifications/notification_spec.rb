@@ -8,8 +8,8 @@ require_relative '../../../app/services/notification_string'
 require 'active_support/all'
 
 describe Notification do
-	let(:user) {stub(:user, id: 100, status: 1, first_name: "Charlie")}
-	let(:target_user) {stub(:user, id: 101, status: 1, first_name: "Eunmi")}
+	let(:user) {stub(:user, id: 100, status: 1, first_name: "Charlie", name: "Charlie Kim", uid: "12345")}
+	let(:target_user) {stub(:user, id: 101, status: 1, first_name: "Eunmi", name: "Eunmi Lee", uid: "5678")}
 	let(:friend1) {stub(:user, id: 102, status: 1)}
 	let(:friend2) {stub(:user, id: 103, status: 1)}
 	# let(:user) { stub(:user, id: 100, status: 1) }

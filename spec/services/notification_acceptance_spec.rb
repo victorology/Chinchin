@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe Notification do
-	user = FactoryGirl.create(:user, :first_name => 'Charlie')
-	target_user = FactoryGirl.create(:user, :first_name => 'Eunmi')
+	user = FactoryGirl.create(:user, :first_name => 'Charlie', :name => 'Charlie Kim', :uid => '1234')
+	target_user = FactoryGirl.create(:user, :first_name => 'Eunmi', :name => 'Eunmi Lee', :uid => '5678')
 	friend1 = FactoryGirl.create(:user)
 	friend2 = FactoryGirl.create(:user)
   Feed.delete_all
@@ -36,18 +36,18 @@ describe Notification do
 
 	context 'push' do
 		it 'like' do
-			UrbanairshipWrapper.should_receive(:send).with([target_user], "Someone likes you!", "like")
+			UrbanairshipWrapper.should_receive(:send).with([target_user], "Someone likes you!", "like", nil)
 			Notification.notify(type: "like", media: ['push'], receivers: [target_user])
 		end
 
 		it 'like_friend' do
-			UrbanairshipWrapper.should_receive(:send).with([user], "Someone likes #{target_user.first_name}!", "like_friend")
+			UrbanairshipWrapper.should_receive(:send).with([user], "Someone likes #{target_user.first_name}!", "like_friend", nil)
 			Notification.notify(type: "like_friend", media: ['push'], people: [target_user], receivers: [user])
     end
 
     it 'match' do
-      UrbanairshipWrapper.should_receive(:send).with([user], "Congrats! You've been matched with #{target_user.first_name}! Message now.", "match")
-      UrbanairshipWrapper.should_receive(:send).with([target_user], "Congrats! You've been matched with #{user.first_name}! Message now.", "match")
+      UrbanairshipWrapper.should_receive(:send).with([user], "Congrats! You've been matched with #{target_user.first_name}! Message now.", "match", {:name=>target_user.name, :uid=>target_user.uid})
+      UrbanairshipWrapper.should_receive(:send).with([target_user], "Congrats! You've been matched with #{user.first_name}! Message now.", "match", {:name=>user.name, :uid=>user.uid})
       Notification.notify(type: "match", media: ['push'], people: [user, target_user], receivers: [user, target_user])
     end
 	end
