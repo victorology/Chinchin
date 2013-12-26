@@ -141,6 +141,8 @@ class User < ActiveRecord::Base
     if sorted_chinchin.count > 0
       self.sorted_chinchin = sorted_chinchin
       self.save
+    else
+      self.status = NO_FOUND_CHINCHINS
     end
 
     return sorted_chinchin
