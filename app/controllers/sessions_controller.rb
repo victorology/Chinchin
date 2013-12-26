@@ -31,7 +31,7 @@ class SessionsController < ApplicationController
         user.auth_token = auth_token
         user.auth_secret = SecureRandom.urlsafe_base64
         user.save
-        message[:user_id] = user.id
+        message[:user_id] = user.id.to_s
         message[:auth_token] = user.auth_token
         message[:auth_secret] = user.auth_secret
       rescue => e
