@@ -140,10 +140,10 @@ class User < ActiveRecord::Base
     sorted_chinchin = (chinchin_in_chinchin + chinchin_not_in_chinchin).uniq
     if sorted_chinchin.count > 0
       self.sorted_chinchin = sorted_chinchin
-      self.save
     else
       self.status = NO_FOUND_CHINCHINS
     end
+    self.save
 
     return sorted_chinchin
   end
