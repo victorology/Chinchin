@@ -126,39 +126,3 @@ ko:
     views:
       hang_in: "토닥토닥"
       hang_in_long: "아직 Like가 없네요. 먼저 다가가 보시는 건 어때요?"
-  datetime:
-    distance_in_words:
-      half_a_minute: "30초"
-      less_than_x_seconds:
-        one:   "방금"
-        other: "방금"
-      x_seconds:
-        one:   "1 초"
-        other: "%{count} 초"
-      less_than_x_minutes:
-        one:   "1 분"
-        other: "%{count} 분"
-      x_minutes:
-        one:   "1 분"
-        other: "%{count} 분"
-      about_x_hours:
-        one:   "약 1 시간"
-        other: "약 %{count} 시간"
-      x_days:
-        one:   "하루"
-        other: "%{count} 일"
-      about_x_months:
-        one:   "약 한 달"
-        other: "약 %{count} 달"
-      x_months:
-        one:   "한 달"
-        other: "%{count} 달"
-      about_x_years:
-        one:   "약 1 년"
-        other: "약 %{count} 년"
-      over_x_years:
-        one:   "일 년 이상"
-        other: "%{count} 년 이상"
-      almost_x_years:
-        one:   "거의 일 년"
-        other: "거의 %{count} 년"
