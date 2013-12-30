@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131212091459) do
+ActiveRecord::Schema.define(:version => 20131230092632) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -215,6 +215,10 @@ ActiveRecord::Schema.define(:version => 20131212091459) do
     t.text     "chosen_chinchin"
     t.string   "auth_token"
     t.string   "auth_secret"
+    t.string   "bio"
+    t.string   "quotes"
+    t.datetime "registered_at"
+    t.string   "username"
   end
 
   create_table "views", :force => true do |t|

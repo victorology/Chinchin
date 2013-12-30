@@ -24,6 +24,9 @@ class User < ActiveRecord::Base
     self.uid = auth.uid
     self.name = auth.info.name
     self.email = auth.info.email
+    self.bio = auth.info.bio
+    self.quotes = auth.info.quotes
+    self.username = auth.info.username
     self.first_name = auth.info.first_name
     self.last_name = auth.info.last_name
     self.birthday = auth.extra.raw_info.birthday
@@ -47,8 +50,10 @@ class User < ActiveRecord::Base
     self.locale = auth.extra.raw_info.locale
     self.oauth_token = auth.credentials.token
     self.oauth_expires_at = Time.at(auth.credentials.expires_at) unless auth.credentials.expires_at.nil?
-    self.status = REGISTERED
-    self.created_at = Time.now
+    if self.status != REGISTERED
+      self.status = REGISTERED
+      self.registered_at = Time.now
+    end
     self.save!
     self.delay.add_friends_to_chinchin
     self.delay.fetch_profile_photos
@@ -409,5 +414,23 @@ class User < ActiveRecord::Base
     invitation.chinchin = not_yet_user
     invitation.via = via
     invitation.save
+  end
+
+  def abc
+    users = User.where('status = 1')
+    users = users - self.friends_in_chinchin
+    fs1 = Friendship.where('user_id = ?', self.id)
+    abcs = []
+    users.each do |u|
+      if self.uid == u.uid
+        next
+      end
+
+      fs2 = Friendship.where('user_id = ?', u.id)
+      if (fs1 & fs2).count > 0
+        abc = {user: self, chinchin: u, friendship: fs1&fs2}
+        abcs.push(abc)
+      end
+    end
   end
 end
