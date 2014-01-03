@@ -13,8 +13,12 @@ class API::V1::InvitationsController < API::V1::BaseController
 
   def create
     friendsString = params[:friends]
+    via = params[:via]
     friendUIDs = friendsString.split(',')
     friends = friendUIDs.map { |uid| User.where('uid=?', uid).first }.compact
-    Invitation.invite_friends(@current_user, friends, "facebook_request")
+    if via.nil?
+      via = "unknown"
+    end
+    Invitation.invite_friends(@current_user, friends, via)
   end
 end

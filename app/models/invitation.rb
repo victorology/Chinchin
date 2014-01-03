@@ -12,7 +12,7 @@ class Invitation < ActiveRecord::Base
       user.invite(friend, via)
     end
 
-    if friends.count >= 20
+    if via == 'no_hearts' and friends.count >= 20
       c = user.currency(Currency::HEART)
       c.recharge_full('invitation')
     end
