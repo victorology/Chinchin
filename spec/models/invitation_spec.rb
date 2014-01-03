@@ -44,6 +44,6 @@ describe Invitation do
 
     User.any_instance.should_receive(:invite).exactly(20).times
     Currency.any_instance.should_receive(:recharge_full).with("invitation")
-    Invitation.invite_friends(@user, friends, "spec_for_test")
+    Invitation.invite_friends(@user, friends, "no_hearts")
   end
 end
