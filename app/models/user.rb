@@ -52,7 +52,7 @@ class User < ActiveRecord::Base
     self.oauth_expires_at = Time.at(auth.credentials.expires_at) unless auth.credentials.expires_at.nil?
     if self.status != REGISTERED
       self.status = REGISTERED
-      self.registered_at = Time.now
+      self.registered_at = TimeUtil.get
     end
     self.save!
     self.delay.add_friends_to_chinchin
@@ -61,7 +61,7 @@ class User < ActiveRecord::Base
 
   def self.create_from_omniauth(auth)
 	  user = User.new
-    user.update_from_omniauth(auth)
+    #user.update_from_omniauth(auth)
     return user
 	end
 
@@ -230,14 +230,24 @@ class User < ActiveRecord::Base
         friendship.user = u
         friendship.chinchin = self
         friendship.save!
+      end
 
-        if u.status == User::REGISTERED
-          # TODO: Notification.notify(type: "friend_join", people: [self], receivers: [u])
-          # TODO: u.update_sorted_friends
-        end
+      if u.status == User::NO_FOUND_CHINCHINS
+        u.jump to: User::REGISTERED
+      end
+
+      if u.status == User::REGISTERED
+        # TODO: Notification.notify(type: "friend_join", people: [self], receivers: [u])
+        # TODO: u.update_sorted_friends
       end
     end
     self.generate_sorted_chinchin
+  end
+
+  def jump(options)
+    to = options[:to]
+    self.status = to
+    self.save
   end
 
   def like(chinchin)
