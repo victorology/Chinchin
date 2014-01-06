@@ -245,9 +245,12 @@ class User < ActiveRecord::Base
   end
 
   def jump(options)
+    from = self.status
     to = options[:to]
     self.status = to
-    self.save
+    if self.save
+      Jump.create(user: self, from: from, to: to)
+    end
   end
 
   def like(chinchin)

@@ -125,4 +125,27 @@ describe User do
       user.sorted_chinchin.sort.should eq [102, 103, 104]
     end
   end
+
+  context 'user jumps' do
+    it 'should change status' do
+      user = FactoryGirl.create(:user, id: 100, status: 0)
+      user.jump to: User::REGISTERED
+      expect(user.status).to equal(User::REGISTERED)
+
+      user.jump to: User::NO_FOUND_CHINCHINS
+      expect(user.status).to equal(User::NO_FOUND_CHINCHINS)
+
+      user.jump to: User::REGISTERED
+      expect(user.status).to equal(User::REGISTERED)
+    end
+
+    it 'should log the event to jumps' do
+      user = FactoryGirl.create(:user, id: 100, status: 0)
+      user.jump to: User::REGISTERED
+      expect(Jump.count).to be(1)
+      expect(Jump.first.user_id).to be(user.id)
+      expect(Jump.first.from).to be(User::UNREGISTERED)
+      expect(Jump.first.to).to be(User::REGISTERED)
+    end
+  end
 end
