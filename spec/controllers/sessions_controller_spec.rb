@@ -89,6 +89,7 @@ describe SessionsController do
     it 'should update to found from not found' do
       friend = FactoryGirl.create(:user, name: 'kim', gender: 'male', provider: 'facebook_access_token', uid: '7890', status: User::NO_FOUND_CHINCHINS)
       User.any_instance.should_receive(:renew_credential)
+      User.any_instance.should_receive(:jump).and_call_original
       User.any_instance.stub(:photos) { [] }
       require 'ostruct'
       friend_mock = OpenStruct.new({raw_attributes: {'id' => '7890'}})
