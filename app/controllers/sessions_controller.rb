@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
       next_url = tutorials_url
       status = :created
     end
-    # important fix to update already registered user's auth token
+
     user.update_from_omniauth(auth)
 
     user.last_login = Time.now
