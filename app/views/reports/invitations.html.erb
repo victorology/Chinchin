@@ -1,0 +1,83 @@
+<style>
+  thead td {
+      text-align: center;
+  }
+
+  tr.odd {
+      background-color: #fafae2;
+  }
+
+  tr.even {
+      background: white;
+  }
+
+  td {
+      font-size: 0.8em;
+      height: 1.0em;
+      padding: 5px;
+  }
+
+  td.name {
+      width: 120px;
+  }
+
+  td.date {
+      width: 120px;
+  }
+
+  td.number {
+      width: 50px;
+  }
+
+  .right {
+      text-align: right;
+  }
+</style>
+<table id="invitations" style="float: left;margin-right: 30px">
+  <thead>
+    <tr>
+      <td class="name">
+        User
+      </td>
+      <td class="name">
+        Invited Friend
+      </td>
+      <td class="date">
+        Created
+      </td>
+    </tr>
+  </thead>
+  <% @invitations.each do |invitation| -%>
+      <tr class="<%= cycle('odd', 'even') -%>">
+        <td><%= invitation.user.name %></td>
+        <td><%= invitation.chinchin.name %></td>
+        <td class="right"><%= time_ago_in_words(invitation.created_at) %></td>
+      </tr>
+  <% end %>
+</table>
+<table id="jumps">
+  <thead>
+  <tr>
+    <td class="name">
+      User
+    </td>
+    <td class="number">
+      From
+    </td>
+    <td class="number">
+      To
+    </td>
+    <td class="date">
+      Created
+    </td>
+  </tr>
+  </thead>
+  <% @jumps.each do |jump| %>
+    <tr class="<%= cycle('odd', 'even') -%>">
+      <td><%= jump.user.name %></td>
+      <td><%= jump.from %></td>
+      <td><%= jump.to %></td>
+      <td class="right"><%= time_ago_in_words(jump.created_at) %></td>
+    </tr>
+  <% end %>
+</table>

@@ -1,6 +1,6 @@
 class ReportsController < ApplicationController
 	layout false
-	before_filter :admin_login_required
+	before_filter :admin_login_required, :set_admin_locale
 
 	def index
 		started_at = 90.days.ago.beginning_of_day
@@ -15,7 +15,12 @@ class ReportsController < ApplicationController
 		@results = Report.make_reports(started_at, ended_at)
 
 		render json: @results
-	end
+  end
+
+  def invitations
+    @invitations = Invitation.limit(100).order('created_at DESC').all()
+    @jumps = Jump.limit(100).order('created_at DESC').all()
+  end
 
 	def csv		
 		csv = "Day, \
