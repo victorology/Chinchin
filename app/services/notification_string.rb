@@ -23,7 +23,7 @@ class NotificationString
 				when "alert"
 					"#{@people[0].first_name} likes #{@people[1].first_name}!"
         when "heart_full"
-          "You have a full set of hearts. See more Chinchins!"
+          "You have a full set of hearts. View 5 more matches!"
 				else
 					nil
 			end		

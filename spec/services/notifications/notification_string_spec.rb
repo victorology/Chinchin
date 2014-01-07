@@ -58,7 +58,7 @@ describe NotificationString do
 
   context '.message with currency' do
     it '.' do
-      NotificationString.message(type: "heart_full").should == "You have a full set of hearts. See more Chinchins!"
+      NotificationString.message(type: "heart_full").should == "You have a full set of hearts. View 5 more matches!"
     end
   end
 end
