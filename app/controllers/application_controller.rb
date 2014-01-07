@@ -24,6 +24,12 @@ class ApplicationController < ActionController::Base
   end
   helper_method :mobile_device?
 
+  def set_admin_locale
+    I18n.locale = :en
+    I18n.load_path += Dir[Rails.root.join("config/locales/**/*.yml")]
+    I18n.reload!
+  end
+
   # This is a method to fetch the current user via OmniAuth
   private
 
@@ -53,7 +59,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # Added for i18n
+  #Added for i18n
   def set_locale
     begin
       accept_language = request.env["HTTP_ACCEPT_LANGUAGE"].split(",")[0]
