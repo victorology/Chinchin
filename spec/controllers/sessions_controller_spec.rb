@@ -100,5 +100,20 @@ describe SessionsController do
       visit '/auth/facebook_access_token/callback/'
       expect(User.where('uid = ?', '7890').first.status).to equal(User::REGISTERED)
     end
+
+    it 'should notify about new friends' do
+      friend = FactoryGirl.create(:user, name: 'kim', gender: 'male', provider: 'facebook_access_token', uid: '7890', status: User::NO_FOUND_CHINCHINS)
+      User.any_instance.should_receive(:renew_credential)
+      UrbanairshipWrapper.should_receive(:send).with([friend], "Test Kim joined Chinchin!", "friend_join", nil)
+      User.any_instance.should_receive(:jump).and_call_original
+      User.any_instance.stub(:photos) { [] }
+      require 'ostruct'
+      friend_mock = OpenStruct.new({raw_attributes: {'id' => '7890'}})
+      User.any_instance.stub(:friends) { [friend_mock] }
+      OpenStruct.any_instance.stub(:fetch) { friend_mock }
+
+      friend.status.should == User::NO_FOUND_CHINCHINS
+      visit '/auth/facebook_access_token/callback/'
+    end
   end
 end

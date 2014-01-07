@@ -2,7 +2,7 @@ require_relative '../../../app/services/notification_string'
 require 'active_support/all'
 
 describe NotificationString do
-	let(:person1) { stub(:user, first_name: "Charlie") }
+	let(:person1) { stub(:user, first_name: "Charlie", name: "Charlie Kim") }
 	let(:person2) { stub(:user, first_name: "Eunmi") }
 
 	context '.message with like type' do
@@ -59,6 +59,12 @@ describe NotificationString do
   context '.message with currency' do
     it '.' do
       NotificationString.message(type: "heart_full").should == "You have a full set of hearts. View 5 more matches!"
+    end
+  end
+
+  context 'message with friend_join' do
+    it '.' do
+      NotificationString.message(type: "friend_join", people: [person1]).should == "Charlie Kim joined Chinchin!"
     end
   end
 end

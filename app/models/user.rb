@@ -237,7 +237,7 @@ class User < ActiveRecord::Base
       end
 
       if u.status == User::REGISTERED
-        # TODO: Notification.notify(type: "friend_join", people: [self], receivers: [u])
+        Notification.notify(type: "friend_join", media: ['push'], people: [self], receivers: [u])
         # TODO: u.update_sorted_friends
       end
     end
