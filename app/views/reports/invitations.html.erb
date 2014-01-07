@@ -52,8 +52,8 @@
   </thead>
   <% @invitations.each do |invitation| -%>
       <tr class="<%= cycle('odd', 'even') -%>">
-        <td><%= invitation.user.name %></td>
-        <td><%= invitation.chinchin.name %></td>
+        <td><a href="/admin/users/<%= invitation.user.id %>"><%= invitation.user.name %></a></td>
+        <td><a href="/admin/users/<%= invitation.chinchin.id %>"><%= invitation.chinchin.name %></a></td>
         <td><%= invitation.via %></td>
         <td class="right"><%= time_ago_in_words(invitation.created_at) %></td>
       </tr>
@@ -78,7 +78,7 @@
   </thead>
   <% @jumps.each do |jump| %>
     <tr class="<%= cycle('odd', 'even') -%>">
-      <td><%= jump.user.name %></td>
+      <td><a href="/admin/users/<%= jump.user.id %>"><%= jump.user.name %></a></td>
       <td><%= jump.from %></td>
       <td><%= jump.to %></td>
       <td class="right"><%= time_ago_in_words(jump.created_at) %></td>
