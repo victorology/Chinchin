@@ -75,7 +75,7 @@ describe User do
       user.sorted_chinchin.should eq []
     end
 
-    it 'should push the poped chinchin in sorted_chinchin to chosen_chinchin' do
+    it 'should push the popped chinchin in sorted_chinchin to chosen_chinchin' do
       user = FactoryGirl.create(:user, id: 100, gender: 'male', sorted_chinchin: [101, 102])
       chinchin_1 = FactoryGirl.create(:user, id: 101, gender: 'female')
       chinchin_2 = FactoryGirl.create(:user, id: 102, gender: 'female')
@@ -86,7 +86,7 @@ describe User do
       user.chosen_chinchin.should eq [chinchin_1.id]
     end
 
-    it 'should substract chosen_chinchin from sorted_chinchin after regenerate sorted_chinchin' do
+    it 'should subtract chosen_chinchin from sorted_chinchin after regenerate sorted_chinchin' do
       user = FactoryGirl.create(:user, id: 100, gender: 'male', sorted_chinchin: [101, 102, 103, 104])
       chinchin_0 = FactoryGirl.create(:user, id: 99, gender: 'male')
       chinchin_1 = FactoryGirl.create(:user, id: 101, gender: 'male')
@@ -102,11 +102,11 @@ describe User do
       user.sorted_chinchin.should eq [chinchin_4.id]
       user.chosen_chinchin.should eq [chinchin_1.id, chinchin_2.id, chinchin_3.id]
       user.generate_sorted_chinchin
-      user.sorted_chinchin.first.should eq chinchin_1.id
-      user.sorted_chinchin.sort.should eq [chinchin_1.id, chinchin_2.id, chinchin_3.id, chinchin_4.id]
+      user.sorted_chinchin.first.should eq chinchin_4.id
+      user.chosen_chinchin.should eq [chinchin_1.id, chinchin_2.id, chinchin_3.id]
     end
 
-    it 'should empty chosen_chinchin when regenerate sorted_chinchin with empty sorted_chinchin' do
+    it 'should not empty chosen_chinchin when regenerate sorted_chinchin with empty sorted_chinchin' do
       user = FactoryGirl.create(:user, id: 100, gender: 'male', sorted_chinchin: [], chosen_chinchin: [102, 103, 104])
       chinchin = FactoryGirl.create(:user, id: 101, gender: 'male')
       chinchin_1 = FactoryGirl.create(:user, id: 102, gender: 'male')
@@ -120,9 +120,8 @@ describe User do
       user.sorted_chinchin.empty?.should be_true
       user.chosen_chinchin.empty?.should be_false
       user.generate_sorted_chinchin
-      user.chosen_chinchin.should be_nil
-      user.sorted_chinchin.first.should eq 102
-      user.sorted_chinchin.sort.should eq [102, 103, 104]
+      user.chosen_chinchin.should eq [chinchin_1.id, chinchin_2.id, chinchin_3.id]
+      user.sorted_chinchin.should be_empty
     end
   end
 

@@ -124,9 +124,7 @@ class User < ActiveRecord::Base
 
   def generate_sorted_chinchin
     if (self.sorted_chinchin.nil? or self.sorted_chinchin.empty?) and not self.chosen_chinchin.nil?
-      # self.chosen_chinchin.clear
-      self.chosen_chinchin = nil
-      self.save
+      return
     end
 
     chinchin_in_chinchin = []
@@ -143,6 +141,10 @@ class User < ActiveRecord::Base
     chinchin_not_in_chinchin.shuffle!
 
     sorted_chinchin = (chinchin_in_chinchin + chinchin_not_in_chinchin).uniq
+    if self.chosen_chinchin.present?
+      sorted_chinchin = sorted_chinchin - self.chosen_chinchin
+    end
+
     if sorted_chinchin.count > 0
       self.sorted_chinchin = sorted_chinchin
     else
