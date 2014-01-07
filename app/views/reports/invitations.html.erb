@@ -42,6 +42,9 @@
       <td class="name">
         Invited Friend
       </td>
+      <td class="name">
+        Via
+      </td>
       <td class="date">
         Created
       </td>
@@ -51,6 +54,7 @@
       <tr class="<%= cycle('odd', 'even') -%>">
         <td><%= invitation.user.name %></td>
         <td><%= invitation.chinchin.name %></td>
+        <td><%= invitation.via %></td>
         <td class="right"><%= time_ago_in_words(invitation.created_at) %></td>
       </tr>
   <% end %>
