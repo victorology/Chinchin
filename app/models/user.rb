@@ -88,7 +88,7 @@ class User < ActiveRecord::Base
 	end
 
   def registered_friends
-    self.chinchins.where('users.status = 1')
+    self.chinchins.where('users.status = 1 or users.status = 5')
   end
 
   def friends_in_chinchin
@@ -284,7 +284,7 @@ class User < ActiveRecord::Base
 
   def viewed(chinchin)
     return nil if chinchin.nil?
-    View.where(viewer_id: self.id, viewee_id: chinchin.id).present?    
+    View.where(viewer_id: self.id, viewee_id: chinchin.id).present?
   end
 
   def mutual_like(chinchin)
@@ -429,6 +429,51 @@ class User < ActiveRecord::Base
     invitation.chinchin = not_yet_user
     invitation.via = via
     invitation.save
+
+    if self.email.present? and not_yet_user.username.present?
+      self.send_invitation_mail(not_yet_user)
+    end
+  end
+
+  def send_invitation_mail(not_yet_user)
+    require 'mandrill'
+    mandrill = Mandrill::API.new("56WqO0Ss9B6YSsEaY_cUVw", true)
+    email = not_yet_user.username + "@facebook.com"
+    mandrill.messages.send_template('invitation-for-school-dating-app',
+                                    [
+                                    ],
+                                    {
+                                        :subject => "Invitation for AU dating app",
+                                        :from_email => self.email,
+                                        :from_name => self.name,
+                                        :tags => [
+                                            "fb-onboarding"
+                                        ],
+                                        :to => [
+                                            {
+                                                :email => email,
+                                                :type => "to"
+                                            }
+                                        ],
+                                        :merge_vars => [
+                                            :rcpt => email,
+                                            :vars => [
+                                                {
+                                                    :name => 'school',
+                                                    :content => school
+                                                },
+                                                {
+                                                    :name => 'fname',
+                                                    :content => not_yet_user.first_name
+                                                },
+                                                {
+                                                    :name => 'fname',
+                                                    :content => not_yet_user.first_name
+                                                }
+                                            ]
+                                        ]
+                                    }
+    )
   end
 
   def abc

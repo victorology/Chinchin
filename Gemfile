@@ -25,6 +25,7 @@ gem 'rspec-rails', '~> 2.12.0'
 gem 'rabl'
 gem 'oj'
 gem 'zodiac'
+gem 'mandrill-api'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
