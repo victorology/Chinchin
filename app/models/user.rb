@@ -208,7 +208,7 @@ class User < ActiveRecord::Base
     )
     u.status = UNREGISTERED
     u.save!
-    u.delay.fetch_profile_photos
+    #u.delay.fetch_profile_photos
     u
   end
 
@@ -240,7 +240,7 @@ class User < ActiveRecord::Base
 
       if u.status == User::REGISTERED
         Notification.notify(type: "friend_join", media: ['push'], people: [self], receivers: [u])
-        # TODO: u.update_sorted_friends
+        u.generate_sorted_chinchin
       end
     end
     self.generate_sorted_chinchin
