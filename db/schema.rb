@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140106073937) do
+ActiveRecord::Schema.define(:version => 20140109031030) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -179,6 +179,7 @@ ActiveRecord::Schema.define(:version => 20140106073937) do
   end
 
   add_index "profile_photos", ["chinchin_id"], :name => "index_profile_photos_on_chinchin_id"
+  add_index "profile_photos", ["picture_url"], :name => "index_profile_photos_on_picture_url"
 
   create_table "reports", :force => true do |t|
     t.string   "title"
@@ -228,6 +229,8 @@ ActiveRecord::Schema.define(:version => 20140106073937) do
     t.datetime "registered_at"
     t.string   "username"
   end
+
+  add_index "users", ["status"], :name => "index_users_on_status"
 
   create_table "views", :force => true do |t|
     t.integer  "viewer_id"
