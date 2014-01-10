@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
       status = :created
     end
 
-    if user.status == User::UNREGISTERED
+    if user.status < User::NO_FOUND_CHINCHINS
       next_url = tutorials_url
       status = :created
     end

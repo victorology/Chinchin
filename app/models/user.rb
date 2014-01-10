@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   REGISTERED = 1
   FRIENDS_FETCHED = 2
   NO_FOUND_FRIENDS = 3
-  FOUND_FRIENDS = 4
+  NO_FOUND_CHINCHINS_ONBOARDING = 4
   NO_FOUND_CHINCHINS = 5
   FOUND_CHINCHINS = 6
 
@@ -60,7 +60,8 @@ class User < ActiveRecord::Base
   end
 
   def self.create_from_omniauth(auth)
-	  user = User.new
+    user = User.new
+    user.status = UNREGISTERED
     #user.update_from_omniauth(auth)
     return user
 	end
@@ -145,7 +146,11 @@ class User < ActiveRecord::Base
       self.sorted_chinchin = sorted_chinchin
       self.status = FOUND_CHINCHINS
     else
-      self.status = NO_FOUND_CHINCHINS
+      if self.status == REGISTERED
+        self.status = NO_FOUND_CHINCHINS_ONBOARDING
+      else
+        self.status = NO_FOUND_CHINCHINS
+      end
     end
     self.save
 
