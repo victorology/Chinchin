@@ -123,7 +123,7 @@ class User < ActiveRecord::Base
     return status
   end
 
-  def generate_sorted_chinchin
+  def make_sorted_chinchin
     chinchin_in_chinchin = []
     chinchin_not_in_chinchin = []
     self.friends_in_chinchin.each do |friend|
@@ -142,6 +142,16 @@ class User < ActiveRecord::Base
       sorted_chinchin = sorted_chinchin - self.chosen_chinchin
     end
 
+    return sorted_chinchin
+  end
+
+  def update_status_with_sorted_chinchin_count(sorted_chinchin_count)
+
+  end
+
+  def generate_sorted_chinchin
+    sorted_chinchin = self.make_sorted_chinchin
+    self.update_status_with_sorted_chinchin_count sorted_chinchin.count
     if sorted_chinchin.count > 0
       self.sorted_chinchin = sorted_chinchin
       self.status = FOUND_CHINCHINS

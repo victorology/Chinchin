@@ -9,15 +9,22 @@ describe SessionsController do
   end
 
   it "should return valid user data from facebook" do
+    friend = FactoryGirl.create(:user, name: 'kim', gender: 'male', provider: 'facebook_access_token', uid: '7890', status: 6)
+    chinchin_1 = FactoryGirl.create(:user, id: 101, gender: 'female', status: 6)
+    chinchin_2 = FactoryGirl.create(:user, id: 102, gender: 'female', status: 0)
     User.any_instance.stub(:friends) { [] }
+    User.any_instance.stub(:friends_in_chinchin) { [friend] }
     User.any_instance.stub(:photos) { [] }
-    User.count.should == 0
+    friend.stub(:friends_in_chinchin) { [chinchin_1] }
+    friend.stub(:chinchins) { [chinchin_1, chinchin_2] }
+    User.count.should == 3
     visit '/auth/facebook/callback?mobile=1'
     response.should render_template('tutorials/index')
-    User.count.should == 1
+    User.last.status.should == 6
+    User.count.should == 4
     visit '/auth/facebook?mobile=1'
     response.should render_template('chinchins/index')
-    User.count.should == 1
+    User.count.should == 4
   end
 
   it "authentication for api returns valid json" do
@@ -30,15 +37,32 @@ describe SessionsController do
     User.count.should == 1
   end
 
-  it "second authentication should return ok" do
+  it "second authentication (without chinchin) should return created" do
     FactoryGirl.create(:user, name: 'kim', gender: 'male', provider: 'facebook_access_token', uid: '1234', status: 1)
     User.any_instance.should_receive(:renew_credential)
     User.any_instance.stub(:friends) { [] }
     User.any_instance.stub(:photos) { [] }
     User.count.should == 1
     visit '/auth/facebook_access_token/callback/'
-    JSON.parse(page.source)["status"].should == "ok"
+    JSON.parse(page.source)["status"].should == "created"
     User.count.should == 1
+  end
+
+  it "second authentication (with chinchin) should return ok" do
+    FactoryGirl.create(:user, name: 'kim', gender: 'male', provider: 'facebook_access_token', uid: '1234', status: 6)
+    friend = FactoryGirl.create(:user, name: 'kim', gender: 'male', provider: 'facebook_access_token', uid: '7890', status: 6)
+    chinchin_1 = FactoryGirl.create(:user, id: 101, gender: 'female', status: 6)
+    chinchin_2 = FactoryGirl.create(:user, id: 102, gender: 'female', status: 0)
+    User.any_instance.stub(:friends) { [] }
+    User.any_instance.stub(:friends_in_chinchin) { [friend] }
+    User.any_instance.stub(:photos) { [] }
+    friend.stub(:friends_in_chinchin) { [chinchin_1] }
+    friend.stub(:chinchins) { [chinchin_1, chinchin_2] }
+    User.any_instance.should_receive(:renew_credential)
+    User.count.should == 4
+    visit '/auth/facebook_access_token/callback/'
+    JSON.parse(page.source)["status"].should == "ok"
+    User.count.should == 4
   end
 
   context 'User registered_at' do
@@ -69,13 +93,14 @@ describe SessionsController do
       visit '/auth/facebook_access_token/callback/'
       JSON.parse(page.source)["status"].should == "created"
       User.count.should == 1
-      User.first.status.should == User::NO_FOUND_CHINCHINS
+      User.first.status.should == User::NO_FOUND_CHINCHINS_ONBOARDING
     end
 
     it 'should found chinchin' do
-      friend = FactoryGirl.create(:user, name: 'kim', gender: 'male', provider: 'facebook_access_token', uid: '7890', status: 1)
+      friend = FactoryGirl.create(:user, name: 'kim', gender: 'male', provider: 'facebook_access_token', uid: '7890', status: 6)
       chinchin = FactoryGirl.create(:user, name: 'lee', gender: 'female', provider: 'facebook_access_token', uid: '5678', status: 0)
       User.any_instance.should_receive(:renew_credential)
+      User.any_instance.should_receive(:make_sorted_chinchin).and_call_original
       User.any_instance.should_receive(:generate_sorted_chinchin).and_call_original
       User.any_instance.stub(:friends) { [] }
       User.any_instance.stub(:photos) { [] }
@@ -84,7 +109,7 @@ describe SessionsController do
       visit '/auth/facebook_access_token/callback/'
       JSON.parse(page.source)["status"].should == "created"
       User.count.should == 3
-      User.first.status.should == User::FOUND_CHINCHINS
+      User.last.status.should == User::FOUND_CHINCHINS
     end
 
     it 'should update to found from not found' do
