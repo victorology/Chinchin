@@ -123,6 +123,24 @@ describe User do
       user.chosen_chinchin.should eq [chinchin_1.id, chinchin_2.id, chinchin_3.id]
       user.sorted_chinchin.should be_empty
     end
+
+    it 'should add new chinchin on sorted_chinchin' do
+      user = FactoryGirl.create(:user, id: 100, gender: 'male', sorted_chinchin: [], chosen_chinchin: [201])
+      friend_1 = FactoryGirl.create(:user, id: 101, gender: 'male')
+      friend_2 = FactoryGirl.create(:user, id: 102, gender: 'male')
+      chinchin_1 = FactoryGirl.create(:user, id: 201, gender: 'female')
+      chinchin_2 = FactoryGirl.create(:user, id: 202, gender: 'female')
+      chinchin_3 = FactoryGirl.create(:user, id: 203, gender: 'female')
+      user.stub(:friends_in_chinchin) { [friend_1, friend_2] }
+      friend_1.stub(:friends_in_chinchin) { [chinchin_1] }
+      friend_1.stub(:chinchins) { [chinchin_1, chinchin_2] }
+      friend_2.stub(:friends_in_chinchin) { [chinchin_3] }
+      friend_2.stub(:chinchins) { [chinchin_3] }
+
+      user.generate_sorted_chinchin
+      expect(user.sorted_chinchin).to eq([chinchin_3.id, chinchin_2.id])
+      expect(user.chosen_chinchin).to eq([chinchin_1.id])
+    end
   end
 
   context 'user jumps' do

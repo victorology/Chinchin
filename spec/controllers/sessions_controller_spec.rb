@@ -76,6 +76,7 @@ describe SessionsController do
       friend = FactoryGirl.create(:user, name: 'kim', gender: 'male', provider: 'facebook_access_token', uid: '7890', status: 1)
       chinchin = FactoryGirl.create(:user, name: 'lee', gender: 'female', provider: 'facebook_access_token', uid: '5678', status: 0)
       User.any_instance.should_receive(:renew_credential)
+      User.any_instance.should_receive(:generate_sorted_chinchin).and_call_original
       User.any_instance.stub(:friends) { [] }
       User.any_instance.stub(:photos) { [] }
       User.any_instance.stub(:friends_in_chinchin) { [friend] }
@@ -83,7 +84,7 @@ describe SessionsController do
       visit '/auth/facebook_access_token/callback/'
       JSON.parse(page.source)["status"].should == "created"
       User.count.should == 3
-      User.first.status.should == User::REGISTERED
+      User.first.status.should == User::FOUND_CHINCHINS
     end
 
     it 'should update to found from not found' do
@@ -98,7 +99,7 @@ describe SessionsController do
 
       friend.status.should == User::NO_FOUND_CHINCHINS
       visit '/auth/facebook_access_token/callback/'
-      expect(User.where('uid = ?', '7890').first.status).to equal(User::REGISTERED)
+      expect(User.where('uid = ?', '7890').first.status).to equal(User::FOUND_CHINCHINS)
     end
 
     it 'should notify about new friends' do

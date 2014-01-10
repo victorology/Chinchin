@@ -88,7 +88,7 @@ class User < ActiveRecord::Base
 	end
 
   def registered_friends
-    self.chinchins.where('users.status = 1 or users.status = 5')
+    self.chinchins.where('users.status > 0')
   end
 
   def friends_in_chinchin
@@ -123,10 +123,6 @@ class User < ActiveRecord::Base
   end
 
   def generate_sorted_chinchin
-    if (self.sorted_chinchin.nil? or self.sorted_chinchin.empty?) and not self.chosen_chinchin.nil?
-      return
-    end
-
     chinchin_in_chinchin = []
     chinchin_not_in_chinchin = []
     self.friends_in_chinchin.each do |friend|
@@ -147,6 +143,7 @@ class User < ActiveRecord::Base
 
     if sorted_chinchin.count > 0
       self.sorted_chinchin = sorted_chinchin
+      self.status = FOUND_CHINCHINS
     else
       self.status = NO_FOUND_CHINCHINS
     end
@@ -235,10 +232,10 @@ class User < ActiveRecord::Base
       end
 
       if u.status == User::NO_FOUND_CHINCHINS
-        u.jump to: User::REGISTERED
+        u.jump to: User::FOUND_CHINCHINS
       end
 
-      if u.status == User::REGISTERED
+      if u.status > 0
         Notification.notify(type: "friend_join", media: ['push'], people: [self], receivers: [u])
         u.generate_sorted_chinchin
       end
