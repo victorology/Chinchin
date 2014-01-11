@@ -488,6 +488,20 @@ class User < ActiveRecord::Base
     )
   end
 
+  def add_contact(contact)
+    c = Contact.create(contact)
+    c.user = self
+    c.save
+  end
+
+  def add_contacts(contacts)
+    contacts.each do |c|
+      if Contact.where('phone_number = ?', c[:phone_number]).count == 0
+        self.add_contact(c)
+      end
+    end
+  end
+
   def abc
     users = User.where('status = 1')
     users = users - self.friends_in_chinchin

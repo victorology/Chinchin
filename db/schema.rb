@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140109031030) do
+ActiveRecord::Schema.define(:version => 20140110193058) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -66,6 +66,24 @@ ActiveRecord::Schema.define(:version => 20140109031030) do
     t.integer  "user_id"
     t.integer  "photo_count"
   end
+
+  create_table "contacts", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "phone_number"
+    t.string   "email"
+    t.string   "facebook_uid"
+    t.string   "facebook_username"
+    t.string   "twitter_username"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  add_index "contacts", ["facebook_uid"], :name => "index_contacts_on_facebook_uid"
+  add_index "contacts", ["phone_number"], :name => "index_contacts_on_phone_number"
+  add_index "contacts", ["user_id"], :name => "index_contacts_on_user_id"
 
   create_table "currencies", :force => true do |t|
     t.integer  "user_id"
