@@ -88,9 +88,9 @@ class Report < ActiveRecord::Base
 
   def self.total_user_per_day_sql(started_at, ended_at)
     sqls = [
-      {:title => 'total_users', :result => User.where("created_at BETWEEN ? and ? and status = 1", started_at, ended_at).group("DATE_TRUNC('day', created_at)").count},
-      {:title => 'male_users', :result => User.where("created_at >= ? and created_at <= ? and gender = ? and status = 1", started_at, ended_at, "male").group("DATE_TRUNC('day', created_at)").count},
-      {:title => 'female_users', :result => User.where("created_at >= ? and created_at <= ? and gender = ? and status = 1", started_at, ended_at, "female").group("DATE_TRUNC('day', created_at)").count}
+      {:title => 'total_users', :result => User.where("created_at BETWEEN ? and ? and status > 0", started_at, ended_at).group("DATE_TRUNC('day', created_at)").count},
+      {:title => 'male_users', :result => User.where("created_at >= ? and created_at <= ? and gender = ? and status > 1", started_at, ended_at, "male").group("DATE_TRUNC('day', created_at)").count},
+      {:title => 'female_users', :result => User.where("created_at >= ? and created_at <= ? and gender = ? and status > 1", started_at, ended_at, "female").group("DATE_TRUNC('day', created_at)").count}
     ]
   end
 
@@ -329,7 +329,7 @@ class Report < ActiveRecord::Base
       "three_male"=>0, "three_female"=>0, }
 
     ['male', 'female'].each do |gender|
-      User.where("created_at <= ? and status = 1 and gender = ?", day.end_of_day, gender).each do |user|
+      User.where("created_at <= ? and status > 0 and gender = ?", day.end_of_day, gender).each do |user|
         c = user.registered_friends.where('users.created_at <= ?', day.end_of_day).count
 
         case c
@@ -381,7 +381,7 @@ class Report < ActiveRecord::Base
   end
 
   def self.generate
-    total_user = User.where('status = 1').count
+    total_user = User.where('status > 0').count
     total_male_user = 0
     total_female_user = 0
     total_notspecified_user = 0
