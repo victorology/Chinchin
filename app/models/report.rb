@@ -89,8 +89,8 @@ class Report < ActiveRecord::Base
   def self.total_user_per_day_sql(started_at, ended_at)
     sqls = [
       {:title => 'total_users', :result => User.where("created_at BETWEEN ? and ? and status > 0", started_at, ended_at).group("DATE_TRUNC('day', created_at)").count},
-      {:title => 'male_users', :result => User.where("created_at >= ? and created_at <= ? and gender = ? and status > 1", started_at, ended_at, "male").group("DATE_TRUNC('day', created_at)").count},
-      {:title => 'female_users', :result => User.where("created_at >= ? and created_at <= ? and gender = ? and status > 1", started_at, ended_at, "female").group("DATE_TRUNC('day', created_at)").count}
+      {:title => 'male_users', :result => User.where("created_at >= ? and created_at <= ? and gender = ? and status > 0", started_at, ended_at, "male").group("DATE_TRUNC('day', created_at)").count},
+      {:title => 'female_users', :result => User.where("created_at >= ? and created_at <= ? and gender = ? and status > 0", started_at, ended_at, "female").group("DATE_TRUNC('day', created_at)").count}
     ]
   end
 
