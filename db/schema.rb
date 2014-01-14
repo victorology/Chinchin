@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140110193058) do
+ActiveRecord::Schema.define(:version => 20140114053334) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -249,6 +249,7 @@ ActiveRecord::Schema.define(:version => 20140110193058) do
   end
 
   add_index "users", ["status"], :name => "index_users_on_status"
+  add_index "users", ["uid"], :name => "index_users_on_uid"
 
   create_table "views", :force => true do |t|
     t.integer  "viewer_id"

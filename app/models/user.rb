@@ -50,7 +50,7 @@ class User < ActiveRecord::Base
     self.locale = auth.extra.raw_info.locale
     self.oauth_token = auth.credentials.token
     self.oauth_expires_at = Time.at(auth.credentials.expires_at) unless auth.credentials.expires_at.nil?
-    if self.status != REGISTERED
+    if self.status == UNREGISTERED
       self.status = REGISTERED
       self.registered_at = TimeUtil.get
     end
@@ -503,7 +503,7 @@ class User < ActiveRecord::Base
   end
 
   def abc
-    users = User.where('status = 1')
+    users = User.where('status > 0')
     users = users - self.friends_in_chinchin
     fs1 = Friendship.where('user_id = ?', self.id)
     abcs = []
