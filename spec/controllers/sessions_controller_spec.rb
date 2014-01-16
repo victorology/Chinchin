@@ -12,7 +12,7 @@ describe SessionsController do
     friend = FactoryGirl.create(:user, name: 'kim', gender: 'male', provider: 'facebook_access_token', uid: '7890', status: 6)
     chinchin_1 = FactoryGirl.create(:user, id: 101, gender: 'female', status: 6)
     chinchin_2 = FactoryGirl.create(:user, id: 102, gender: 'female', status: 0)
-    User.any_instance.stub(:friends) { [] }
+    User.any_instance.stub(:friends_at_once) { [] }
     User.any_instance.stub(:friends_in_chinchin) { [friend] }
     User.any_instance.stub(:photos) { [] }
     friend.stub(:friends_in_chinchin) { [chinchin_1] }
@@ -29,7 +29,7 @@ describe SessionsController do
 
   it "authentication for api returns valid json" do
     User.any_instance.should_receive(:renew_credential)
-    User.any_instance.stub(:friends) { [] }
+    User.any_instance.stub(:friends_at_once) { [] }
     User.any_instance.stub(:photos) { [] }
     User.count.should == 0
     visit '/auth/facebook_access_token/callback/'
@@ -40,7 +40,7 @@ describe SessionsController do
   it "second authentication (without chinchin) should return created" do
     FactoryGirl.create(:user, name: 'kim', gender: 'male', provider: 'facebook_access_token', uid: '1234', status: 1)
     User.any_instance.should_receive(:renew_credential)
-    User.any_instance.stub(:friends) { [] }
+    User.any_instance.stub(:friends_at_once) { [] }
     User.any_instance.stub(:photos) { [] }
     User.count.should == 1
     visit '/auth/facebook_access_token/callback/'
@@ -53,7 +53,7 @@ describe SessionsController do
     friend = FactoryGirl.create(:user, name: 'kim', gender: 'male', provider: 'facebook_access_token', uid: '7890', status: 6)
     chinchin_1 = FactoryGirl.create(:user, id: 101, gender: 'female', status: 6)
     chinchin_2 = FactoryGirl.create(:user, id: 102, gender: 'female', status: 0)
-    User.any_instance.stub(:friends) { [] }
+    User.any_instance.stub(:friends_at_once) { [] }
     User.any_instance.stub(:friends_in_chinchin) { [friend] }
     User.any_instance.stub(:photos) { [] }
     friend.stub(:friends_in_chinchin) { [chinchin_1] }
@@ -72,7 +72,7 @@ describe SessionsController do
       TimeUtil.pass_by(60*30)
       FactoryGirl.create(:user, name: 'kim', gender: 'male', provider: 'facebook_access_token', uid: '1234', status: 0)
       User.any_instance.should_receive(:renew_credential)
-      User.any_instance.stub(:friends) { [] }
+      User.any_instance.stub(:friends_at_once) { [] }
       User.any_instance.stub(:photos) { [] }
       User.count.should == 1
       visit '/auth/facebook_access_token/callback/'
@@ -88,7 +88,7 @@ describe SessionsController do
       User.any_instance.should_receive(:update_from_omniauth).and_call_original
       User.any_instance.should_receive(:add_friends_to_chinchin).and_call_original
       User.any_instance.should_receive(:generate_sorted_chinchin).and_call_original
-      User.any_instance.stub(:friends) { [] }
+      User.any_instance.stub(:friends_at_once) { [] }
       User.any_instance.stub(:photos) { [] }
       visit '/auth/facebook_access_token/callback/'
       JSON.parse(page.source)["status"].should == "created"
@@ -102,7 +102,7 @@ describe SessionsController do
       User.any_instance.should_receive(:renew_credential)
       User.any_instance.should_receive(:make_sorted_chinchin).and_call_original
       User.any_instance.should_receive(:generate_sorted_chinchin).and_call_original
-      User.any_instance.stub(:friends) { [] }
+      User.any_instance.stub(:friends_at_once) { [] }
       User.any_instance.stub(:photos) { [] }
       User.any_instance.stub(:friends_in_chinchin) { [friend] }
       friend.stub(:friends_in_chinchin) { [chinchin] }
@@ -117,9 +117,8 @@ describe SessionsController do
       User.any_instance.should_receive(:renew_credential)
       User.any_instance.should_receive(:jump).and_call_original
       User.any_instance.stub(:photos) { [] }
-      require 'ostruct'
-      friend_mock = OpenStruct.new({raw_attributes: {'id' => '7890'}})
-      User.any_instance.stub(:friends) { [friend_mock] }
+      friend_mock = {'uid' => '7890'}
+      User.any_instance.stub(:friends_at_once) { [friend_mock] }
       OpenStruct.any_instance.stub(:fetch) { friend_mock }
 
       friend.status.should == User::NO_FOUND_CHINCHINS
@@ -133,9 +132,8 @@ describe SessionsController do
       UrbanairshipWrapper.should_receive(:send).with([friend], "Test Kim joined Chinchin!", "friend_join", nil)
       User.any_instance.should_receive(:jump).and_call_original
       User.any_instance.stub(:photos) { [] }
-      require 'ostruct'
-      friend_mock = OpenStruct.new({raw_attributes: {'id' => '7890'}})
-      User.any_instance.stub(:friends) { [friend_mock] }
+      friend_mock = {'uid' => '7890'}
+      User.any_instance.stub(:friends_at_once) { [friend_mock] }
       OpenStruct.any_instance.stub(:fetch) { friend_mock }
 
       friend.status.should == User::NO_FOUND_CHINCHINS

@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   NO_FOUND_CHINCHINS = 5
   FOUND_CHINCHINS = 6
 
-  attr_accessible :birthday, :email, :employer, :first_name, :gender, :hometown, :last_name, :locale, :location, :name, :oauth_expires_at, :oauth_token, :position, :provider, :relationship_status, :school, :uid
+  attr_accessible :bio, :quotes, :username, :birthday, :email, :employer, :first_name, :gender, :hometown, :last_name, :locale, :location, :name, :oauth_expires_at, :oauth_token, :position, :provider, :relationship_status, :school, :uid
   has_many :friendships
   has_many :chinchins, :through => :friendships
   has_many :likes
@@ -86,7 +86,53 @@ class User < ActiveRecord::Base
     rescue
       []
     end
-	end
+  end
+
+  def fetch_friends(options)
+    limit = options[:limit]
+    offset = options[:offset]
+
+    return FbGraph::Query.new(%Q{
+      SELECT
+        uid,
+        name,
+        email,
+        first_name,
+        last_name,
+        about_me,
+        quotes,
+        username,
+        birthday,
+        current_location,
+        hometown_location,
+        work,
+        sex,
+        relationship_status,
+        education,
+        locale
+      FROM
+        user
+      WHERE uid in (SELECT uid2 FROM friend WHERE uid1='#{self.uid}' LIMIT #{limit} OFFSET #{offset})
+      }).fetch(access_token: self.oauth_token)
+  end
+
+  def fetch_friends_at_once
+    all_friends = []
+    limit = 1000
+    offset = 0
+    friends = []
+    begin
+      friends = fetch_friends(limit: limit, offset: offset)
+      all_friends += friends
+      offset += 1000
+    end while friends.count != 0
+
+    all_friends
+  end
+
+  def friends_at_once
+    @friends_at_once ||= fetch_friends_at_once
+  end
 
   def registered_friends
     self.chinchins.where('users.status > 0')
@@ -193,30 +239,87 @@ class User < ActiveRecord::Base
   end
 
   def add_friend_to_chinchin(friend)
-    fetched_c = friend.fetch
-    ra = fetched_c.raw_attributes
-    ra['location'] = ra['location']['name'] unless ra['location'].nil?
-    ra['hometown'] = ra['hometown']['name'] unless ra['hometown'].nil?
-    ra['employer'] = ra['employer'].first['name'] unless ra['employer'].nil?
-    ra['position'] = ra['position'].first['name'] unless ra['position'].nil?
-    ra['school'] = ra['school'].last['name'] unless ra['school'].nil?
+    #fetched_c = friend.fetch
+    #ra = fetched_c.raw_attributes
+    #ra['location'] = ra['location']['name'] unless ra['location'].nil?
+    #ra['hometown'] = ra['hometown']['name'] unless ra['hometown'].nil?
+    #ra['employer'] = ra['employer'].first['name'] unless ra['employer'].nil?
+    #ra['position'] = ra['position'].first['name'] unless ra['position'].nil?
+    #ra['school'] = ra['school'].last['name'] unless ra['school'].nil?
 
+    #u = User.new(
+    #    :provider => 'facebook',
+    #    :uid => ra['id'],
+    #    :name => ra['name'],
+    #    :email => ra['email'],
+    #    :first_name => ra['first_name'],
+    #    :last_name => ra['last_name'],
+    #    :birthday => ra['birthday'],
+    #    :location => ra['location'],
+    #    :hometown => ra['hometown'],
+    #    :employer => ra['employer'],
+    #    :position => ra['position'],
+    #    :gender => ra['gender'],
+    #    :relationship_status => ra['relationship_status'],
+    #    :school => ra['school'],
+    #    :locale => ra['locale'],
+    #)
+    work = friend['work'].first
+    employer = work['employer']['name'] unless work.nil?
+    position = work['position']['name'] unless work.nil? or work['position'].nil?
+    education = friend['education'].last
+    school = education['school']['name'] unless education.nil?
     u = User.new(
         :provider => 'facebook',
-        :uid => ra['id'],
-        :name => ra['name'],
-        :email => ra['email'],
-        :first_name => ra['first_name'],
-        :last_name => ra['last_name'],
-        :birthday => ra['birthday'],
-        :location => ra['location'],
-        :hometown => ra['hometown'],
-        :employer => ra['employer'],
-        :position => ra['position'],
-        :gender => ra['gender'],
-        :relationship_status => ra['relationship_status'],
-        :school => ra['school'],
-        :locale => ra['locale'],
+        :uid => friend['uid'],
+        :name => friend['name'],
+        :email => friend['email'],
+        :bio => friend['about_me'],
+        :quotes => friend['quotes'],
+        :first_name => friend['first_name'],
+        :last_name => friend['last_name'],
+        :birthday => friend['birthday'],
+        :location => friend['location'],
+        :hometown => friend['hometown'],
+        :username => friend['username'],
+        :employer => employer,
+        :position => position,
+        :gender => friend['sex'],
+        :relationship_status => friend['relationship_status'],
+        :school => school,
+        :locale => friend['locale'],
+    )
+    u.status = UNREGISTERED
+    u.save!
+    #u.delay.fetch_profile_photos
+    u
+  end
+
+  def update_friend_to_chinchin(friend)
+    work = friend['work'].first
+    employer = work['employer']['name'] unless work.nil?
+    position = work['position']['name'] unless work.nil? or work['position'].nil?
+    education = friend['education'].last
+    school = education['school']['name'] unless education.nil?
+    u = User.update(self.id,
+        :provider => 'facebook',
+        :uid => friend['uid'],
+        :name => friend['name'],
+        :email => friend['email'],
+        :bio => friend['about_me'],
+        :quotes => friend['quotes'],
+        :first_name => friend['first_name'],
+        :last_name => friend['last_name'],
+        :birthday => friend['birthday'],
+        :location => friend['location'],
+        :hometown => friend['hometown'],
+        :username => friend['username'],
+        :employer => employer,
+        :position => position,
+        :gender => friend['sex'],
+        :relationship_status => friend['relationship_status'],
+        :school => school,
+        :locale => friend['locale'],
     )
     u.status = UNREGISTERED
     u.save!
@@ -225,9 +328,12 @@ class User < ActiveRecord::Base
   end
 
   def add_friends_to_chinchin
-    friends = self.friends
+    #friends = self.friends
+    #friends.each do |friend|
+    #  u = User.find_by_uid(friend.raw_attributes['id'])
+    friends = self.friends_at_once
     friends.each do |friend|
-      u = User.find_by_uid(friend.raw_attributes['id'])
+      u = User.where('uid = ?', friend['uid'].to_s).first
       if u.nil?
         u = self.add_friend_to_chinchin(friend)
       end
@@ -252,7 +358,7 @@ class User < ActiveRecord::Base
 
       if u.status > 0
         Notification.notify(type: "friend_join", media: ['push'], people: [self], receivers: [u])
-        u.generate_sorted_chinchin
+        u.delay.generate_sorted_chinchin
       end
     end
     self.generate_sorted_chinchin
