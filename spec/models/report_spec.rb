@@ -2,6 +2,9 @@ require 'spec_helper'
 
 describe Report do
   before(:each) do
+    User.delete_all
+    Report.delete_all
+    Time.zone = nil
     @started_at = '2013-09-01'
     @ended_at = '2013-09-01'
 
@@ -10,11 +13,6 @@ describe Report do
     user.created_at = '2013-09-01'.to_date.beginning_of_day
     user.status = 1
     user.save
-    Report.delete_all
-  end
-
-  after(:each) do
-    User.delete_all
   end
 
   it 'total_user_per_day_sql' do

@@ -14,16 +14,18 @@ describe Invitation do
     invited_friends.first.should == @not_yet_user
   end
 
-  it 'should return invited friends exclude invited 24 hours ago' do
+  it 'should return invited friends exclude the friends invited before today noon' do
     now = Time.now
-    TimeUtil.freeze(now)
+    TimeUtil.freeze(Time.new(now.year, now.month, now.day, 11, 0))
     Invitation.invited_friends(@user).length.should == 0
     @user.invite(@not_yet_user)
-    TimeUtil.pass_by(1*60*60)
+    Invitation.invited_friends(@user).length.should == 1
+    TimeUtil.pass_by(30*60)
     invited_friends = Invitation.invited_friends(@user)
     invited_friends.length.should == 1
     invited_friends.first.should == @not_yet_user
-    TimeUtil.pass_by(23*60*61)
+    puts Invitation.first.created_at
+    TimeUtil.pass_by(31*60)
     Invitation.invited_friends(@user).length.should == 0
   end
 

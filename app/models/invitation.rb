@@ -2,8 +2,25 @@ class Invitation < ActiveRecord::Base
   belongs_to :user
   belongs_to :chinchin, :class_name => "User"
 
-  def self.invited_friends(user)
-    invitations = self.where('user_id = ? and created_at > ?', user.id, TimeUtil.get - 24.hours)
+  def self.friends(user, options)
+    type = options[:type]
+    time_zone = options[:time_zone]
+    if type.present? and type == 'available'
+      fs = Friendship.where('user_id = ?', user.id)
+      friends = fs.map {|x| x.chinchin}.compact
+      friends = friends - user.friends_in_chinchin
+      invited_friends = Invitation.invited_friends(user)
+      friends = friends - invited_friends
+    else
+      friends = Invitation.invited_friends(user, time_zone)
+    end
+
+    friends
+  end
+
+  def self.invited_friends(user, time_zone='US/Pacific')
+    zone_noon = TimeUtil.get_last_noon(time_zone)
+    invitations = self.where('user_id = ? and created_at > ?', user.id, zone_noon)
     invited_friends = invitations.map { |x| x.chinchin }.compact
   end
 
@@ -16,5 +33,14 @@ class Invitation < ActiveRecord::Base
       c = user.currency(Currency::HEART)
       c.recharge_full('invitation')
     end
+
+    if via == 'onboarding' and self.status == NO_FOUND_CHINCHINS_ONBOARDING
+      user.status = NO_FOUND_CHINCHINS
+      user.save
+    end
   end
+  after_create {
+    self.created_at = TimeUtil.get
+    self.save
+  }
 end
