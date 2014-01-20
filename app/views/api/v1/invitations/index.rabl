@@ -1,5 +1,5 @@
 object false
 node (:status) { 'ok' }
 child(@friends => :friends) do
-    attribute :id, :status, :uid, :picture, :name
+    attribute :uid, :name
 end
