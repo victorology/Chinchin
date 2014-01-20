@@ -52,7 +52,7 @@
   </thead>
   <% @invitations.each do |invitation| -%>
       <tr class="<%= cycle('odd', 'even') -%>">
-        <td><a href="/admin/users/<%= invitation.user.id %>"><%= invitation.user.name %></a></td>
+        <td><a href="/contacts/<%= invitation.user.id %>"><%= invitation.user.name %></a></td>
         <td><a href="/admin/users/<%= invitation.chinchin.id %>"><%= invitation.chinchin.name %></a></td>
         <td><%= invitation.via %></td>
         <td class="right"><%= time_ago_in_words(invitation.created_at) %></td>

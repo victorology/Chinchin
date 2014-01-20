@@ -1,0 +1,81 @@
+<style>
+  thead td {
+      text-align: center;
+  }
+
+  tr.odd {
+      background-color: #fafae2;
+  }
+
+  tr.even {
+      background: white;
+  }
+
+  td {
+      font-size: 0.8em;
+      height: 1.0em;
+      padding: 5px;
+  }
+
+  td.name {
+      width: 120px;
+  }
+
+  td.date {
+      width: 120px;
+  }
+
+  td.number {
+      width: 50px;
+  }
+
+  .right {
+      text-align: right;
+  }
+</style>
+<table id="invitations" style="float: left;margin-right: 30px">
+  <thead>
+    <tr>
+      <td class="name">
+        User
+      </td>
+      <td class="name">
+        Mutual Liked User
+      </td>
+      <td class="name">
+        Friend or Friend of Friend
+      </td>
+      <td class="number">
+        Friends in Chinchin
+      </td>
+      <td class="number">
+        FoF in Chinchin
+      </td>
+      <td class="number">
+        Friends in Chinchin
+      </td>
+      <td class="number">
+        FoF in Chinchin
+      </td>
+      <td class="date">
+        Created
+      </td>
+    </tr>
+  </thead>
+  <% @mutual_likes.each do |l| -%>
+      <tr class="<%= cycle('odd', 'even') -%>">
+        <td><a href="/admin/users/<%= l.user.id %>"><%= l.user.name %></a></td>
+        <td><a href="/admin/users/<%= l.chinchin.id %>"><%= l.chinchin.name %></a></td>
+        <% if l.user.friends_in_chinchin.include? l.chinchin %>
+        <td>Friend</td>
+        <% else %>
+        <td>Friend of Friend</td>
+        <% end %>
+        <td><%= l.user.friends_in_chinchin.count %></td>
+        <td><%= l.user.friends_of_friends_in_chinchin.count %></td>
+        <td><%= l.chinchin.friends_in_chinchin.count %></td>
+        <td><%= l.chinchin.friends_of_friends_in_chinchin.count %></td>
+        <td class="right"><%= time_ago_in_words(l.created_at) %></td>
+      </tr>
+  <% end %>
+</table>

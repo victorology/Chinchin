@@ -1,0 +1,54 @@
+<style>
+    thead td {
+        text-align: center;
+    }
+
+    tr.odd {
+        background-color: #fafae2;
+    }
+
+    tr.even {
+        background: white;
+    }
+
+    td {
+        font-size: 0.8em;
+        height: 1.0em;
+        padding: 5px;
+    }
+
+    td.name {
+        width: 120px;
+    }
+
+    td.date {
+        width: 120px;
+    }
+
+    td.number {
+        width: 50px;
+    }
+
+    .right {
+        text-align: right;
+    }
+</style>
+<h1><%= @user.name %></h1>
+<table id="invitations" style="float: left;margin-right: 30px">
+  <thead>
+  <tr>
+    <td class="name">
+      Name
+    </td>
+    <td class="name">
+      Phone number
+    </td>
+  </tr>
+  </thead>
+  <% @contacts.each do |c| -%>
+      <tr class="<%= cycle('odd', 'even') -%>">
+        <td><%= c.name %></a></td>
+        <td><%= c.phone_number %></td>
+      </tr>
+  <% end %>
+</table>

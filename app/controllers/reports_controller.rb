@@ -22,6 +22,10 @@ class ReportsController < ApplicationController
     @jumps = Jump.limit(100).order('created_at DESC').all()
   end
 
+  def mutual_likes
+    @mutual_likes = Like.mutual_likes
+  end
+
 	def csv		
 		csv = "Day, \
 		Members (Daily),Male Members (Daily), Female Members (Daily), \

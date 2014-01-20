@@ -169,6 +169,15 @@ class User < ActiveRecord::Base
     return status
   end
 
+  def friends_of_friends_in_chinchin
+    fof = []
+    self.friends_in_chinchin.each do |friend|
+      fof.push(friend.friends_in_chinchin)
+    end
+    fof.flatten!
+    return fof.uniq
+  end
+
   def make_sorted_chinchin
     chinchin_in_chinchin = []
     chinchin_not_in_chinchin = []
@@ -548,9 +557,9 @@ class User < ActiveRecord::Base
     invitation.via = via
     invitation.save
 
-    if self.email.present? and not_yet_user.username.present?
-      self.send_invitation_mail(not_yet_user)
-    end
+    #if self.email.present? and not_yet_user.username.present?
+    #  self.send_invitation_mail(not_yet_user)
+    #end
   end
 
   def send_invitation_mail(not_yet_user)
