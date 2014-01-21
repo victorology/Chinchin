@@ -34,7 +34,7 @@ class Invitation < ActiveRecord::Base
       c.recharge_full('invitation')
     end
 
-    if via == 'onboarding' and self.status == NO_FOUND_CHINCHINS_ONBOARDING
+    if via == 'onboarding' and user.status == NO_FOUND_CHINCHINS_ONBOARDING
       user.status = NO_FOUND_CHINCHINS
       user.save
     end
