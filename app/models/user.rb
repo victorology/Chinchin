@@ -336,6 +336,23 @@ class User < ActiveRecord::Base
     u
   end
 
+  def update_friends_to_chinchin
+    friends = self.friends_at_once
+    friends.each do |friend|
+      u = User.where('uid = ?', friend['uid'].to_s).first
+      if u.nil?
+        next
+      end
+      u.update_facebook_info(friend)
+    end
+  end
+
+  def update_facebook_info(info)
+    self.bio = info['about_me']
+    self.quotes = info['quotes']
+    self.save!
+  end
+
   def add_friends_to_chinchin
     #friends = self.friends
     #friends.each do |friend|
