@@ -2,6 +2,8 @@ object false
 node (:status) { |m| 'ok' }
 child(@user) {
   attributes :picture, :uid, :name, :last_name, :first_name, :gender, :status, :id
+  attribute :bio, :if => lambda {|r| r.bio.present?}
+  attribute :quotes, :if => lambda {|r| r.quotes.present?}
   attribute :email, :if => lambda {|r| r.email.present?}
   attribute :location, :if => lambda {|r| r.location.present?}
   attribute :employer, :if => lambda {|r| r.employer.present?}
