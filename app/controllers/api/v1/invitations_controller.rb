@@ -1,7 +1,7 @@
 class API::V1::InvitationsController < API::V1::BaseController
   def index
     type = params[:type]
-    time_zone = params[:timeZoneName]
+    time_zone = params[:timeZone]
 
     @friends = Invitation.friends(@current_user, type: type, time_zone: time_zone)
   end
