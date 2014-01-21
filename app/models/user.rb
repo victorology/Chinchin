@@ -118,13 +118,13 @@ class User < ActiveRecord::Base
 
   def fetch_friends_at_once
     all_friends = []
-    limit = 1000
+    limit = 500
     offset = 0
     friends = []
     begin
       friends = fetch_friends(limit: limit, offset: offset)
       all_friends += friends
-      offset += 1000
+      offset += 500
     end while friends.count != 0
 
     all_friends
