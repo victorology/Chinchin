@@ -39,6 +39,14 @@ class Invitation < ActiveRecord::Base
       user.save
     end
   end
+
+  def phone_number
+    contact = Contact.where('name=?', self.chinchin.name).first
+    if contact
+      return contact.phone_number
+    end
+  end
+
   after_create {
     self.created_at = TimeUtil.get
     self.save

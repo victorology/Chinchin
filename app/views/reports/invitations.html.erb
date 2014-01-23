@@ -45,6 +45,9 @@
       <td class="name">
         Via
       </td>
+      <td class="name">
+        Contact
+      </td>
       <td class="date">
         Created
       </td>
@@ -55,6 +58,7 @@
         <td><a href="/contacts/<%= invitation.user.id %>"><%= invitation.user.name %></a></td>
         <td><a href="/admin/users/<%= invitation.chinchin.id %>"><%= invitation.chinchin.name %></a></td>
         <td><%= invitation.via %></td>
+        <td><%= invitation.phone_number %></td>
         <td class="right"><%= time_ago_in_words(invitation.created_at) %></td>
       </tr>
   <% end %>
