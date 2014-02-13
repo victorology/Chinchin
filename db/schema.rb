@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140116032717) do
+ActiveRecord::Schema.define(:version => 20140213072910) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -67,6 +67,8 @@ ActiveRecord::Schema.define(:version => 20140116032717) do
     t.integer  "photo_count"
   end
 
+  add_index "chinchins", ["user_id"], :name => "index_chinchins_on_user_id"
+
   create_table "contacts", :force => true do |t|
     t.integer  "user_id"
     t.string   "name"
@@ -94,6 +96,8 @@ ActiveRecord::Schema.define(:version => 20140116032717) do
     t.datetime "updated_at",    :null => false
   end
 
+  add_index "currencies", ["user_id"], :name => "index_currencies_on_user_id"
+
   create_table "currency_alarms", :force => true do |t|
     t.integer  "currency_id"
     t.integer  "alarm_type"
@@ -103,6 +107,8 @@ ActiveRecord::Schema.define(:version => 20140116032717) do
     t.datetime "updated_at",  :null => false
   end
 
+  add_index "currency_alarms", ["currency_id"], :name => "index_currency_alarms_on_currency_id"
+
   create_table "currency_logs", :force => true do |t|
     t.integer  "currency_id"
     t.string   "action"
@@ -111,6 +117,8 @@ ActiveRecord::Schema.define(:version => 20140116032717) do
     t.datetime "updated_at",  :null => false
     t.string   "via"
   end
+
+  add_index "currency_logs", ["currency_id"], :name => "index_currency_logs_on_currency_id"
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -137,6 +145,9 @@ ActiveRecord::Schema.define(:version => 20140116032717) do
     t.datetime "updated_at",     :null => false
   end
 
+  add_index "feeds", ["target_user_id"], :name => "index_feeds_on_target_user_id"
+  add_index "feeds", ["user_id"], :name => "index_feeds_on_user_id"
+
   create_table "friendships", :force => true do |t|
     t.integer  "chinchin_id"
     t.integer  "user_id"
@@ -154,6 +165,9 @@ ActiveRecord::Schema.define(:version => 20140116032717) do
     t.datetime "updated_at",  :null => false
   end
 
+  add_index "invitations", ["chinchin_id"], :name => "index_invitations_on_chinchin_id"
+  add_index "invitations", ["user_id"], :name => "index_invitations_on_user_id"
+
   create_table "jumps", :force => true do |t|
     t.integer  "user_id"
     t.integer  "from"
@@ -162,12 +176,17 @@ ActiveRecord::Schema.define(:version => 20140116032717) do
     t.datetime "updated_at", :null => false
   end
 
+  add_index "jumps", ["user_id"], :name => "index_jumps_on_user_id"
+
   create_table "likes", :force => true do |t|
     t.integer  "chinchin_id"
     t.integer  "user_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
+
+  add_index "likes", ["chinchin_id"], :name => "index_likes_on_chinchin_id"
+  add_index "likes", ["user_id"], :name => "index_likes_on_user_id"
 
   create_table "message_rooms", :force => true do |t|
     t.integer  "user1_id"
@@ -178,6 +197,9 @@ ActiveRecord::Schema.define(:version => 20140116032717) do
     t.datetime "updated_at", :null => false
   end
 
+  add_index "message_rooms", ["user1_id"], :name => "index_message_rooms_on_user1_id"
+  add_index "message_rooms", ["user2_id"], :name => "index_message_rooms_on_user2_id"
+
   create_table "messages", :force => true do |t|
     t.integer  "message_room_id"
     t.integer  "writer_id"
@@ -186,6 +208,9 @@ ActiveRecord::Schema.define(:version => 20140116032717) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end
+
+  add_index "messages", ["message_room_id"], :name => "index_messages_on_message_room_id"
+  add_index "messages", ["writer_id"], :name => "index_messages_on_writer_id"
 
   create_table "profile_photos", :force => true do |t|
     t.integer  "chinchin_id"
@@ -257,5 +282,8 @@ ActiveRecord::Schema.define(:version => 20140116032717) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "views", ["viewee_id"], :name => "index_views_on_viewee_id"
+  add_index "views", ["viewer_id"], :name => "index_views_on_viewer_id"
 
 end

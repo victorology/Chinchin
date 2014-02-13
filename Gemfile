@@ -26,6 +26,7 @@ gem 'rabl'
 gem 'oj'
 gem 'zodiac'
 gem 'mandrill-api'
+gem 'kaminari'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -35,6 +36,7 @@ group :development, :test do
   gem 'debugger', '~> 1.5.0'
   gem 'spork', '~> 0.9.0.rc'
   gem 'simplecov', :require => false
+  gem 'lol_dba'
 end
 
 group :development do

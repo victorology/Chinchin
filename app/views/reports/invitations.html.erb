@@ -32,9 +32,16 @@
   .right {
       text-align: right;
   }
+
+  .box {
+      float: left;
+      padding: 20px;
+  }
 </style>
-<table id="invitations" style="float: left;margin-right: 30px">
-  <thead>
+<div class="box">
+  <%= paginate @invitations %>
+  <table id="invitations" style="float: left;margin-right: 30px">
+    <thead>
     <tr>
       <td class="name">
         User
@@ -52,40 +59,44 @@
         Created
       </td>
     </tr>
-  </thead>
-  <% @invitations.each do |invitation| -%>
-      <tr class="<%= cycle('odd', 'even') -%>">
-        <td><a href="/contacts/<%= invitation.user.id %>"><%= invitation.user.name %></a></td>
-        <td><a href="/admin/users/<%= invitation.chinchin.id %>"><%= invitation.chinchin.name %></a></td>
-        <td><%= invitation.via %></td>
-        <td><%= invitation.phone_number %></td>
-        <td class="right"><%= time_ago_in_words(invitation.created_at) %></td>
-      </tr>
-  <% end %>
-</table>
-<table id="jumps">
-  <thead>
-  <tr>
-    <td class="name">
-      User
-    </td>
-    <td class="number">
-      From
-    </td>
-    <td class="number">
-      To
-    </td>
-    <td class="date">
-      Created
-    </td>
-  </tr>
-  </thead>
-  <% @jumps.each do |jump| %>
-    <tr class="<%= cycle('odd', 'even') -%>">
-      <td><a href="/admin/users/<%= jump.user.id %>"><%= jump.user.name %></a></td>
-      <td><%= jump.from %></td>
-      <td><%= jump.to %></td>
-      <td class="right"><%= time_ago_in_words(jump.created_at) %></td>
+    </thead>
+    <% @invitations.each do |invitation| -%>
+        <tr class="<%= cycle('odd', 'even') -%>">
+          <td><a href="/contacts/<%= invitation.user.id %>"><%= invitation.user.name %></a></td>
+          <td><a href="/admin/users/<%= invitation.chinchin.id %>"><%= invitation.chinchin.name %></a></td>
+          <td><%= invitation.via %></td>
+          <td><%= invitation.phone_number %></td>
+          <td class="right"><%= time_ago_in_words(invitation.created_at) %></td>
+        </tr>
+    <% end %>
+  </table>
+  <%= paginate @invitations %>
+</div>
+<div class="box">
+  <table id="jumps">
+    <thead>
+    <tr>
+      <td class="name">
+        User
+      </td>
+      <td class="number">
+        From
+      </td>
+      <td class="number">
+        To
+      </td>
+      <td class="date">
+        Created
+      </td>
     </tr>
-  <% end %>
-</table>
+    </thead>
+    <% @jumps.each do |jump| %>
+        <tr class="<%= cycle('odd', 'even') -%>">
+          <td><a href="/admin/users/<%= jump.user.id %>"><%= jump.user.name %></a></td>
+          <td><%= jump.from %></td>
+          <td><%= jump.to %></td>
+          <td class="right"><%= time_ago_in_words(jump.created_at) %></td>
+        </tr>
+    <% end %>
+  </table>
+</div>

@@ -1,4 +1,5 @@
 class Invitation < ActiveRecord::Base
+  paginates_per 100
   belongs_to :user
   belongs_to :chinchin, :class_name => "User"
 

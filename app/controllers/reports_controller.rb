@@ -18,8 +18,8 @@ class ReportsController < ApplicationController
   end
 
   def invitations
-    @invitations = Invitation.limit(100).order('created_at DESC').all()
-    @jumps = Jump.limit(100).order('created_at DESC').all()
+    @invitations = Invitation.order('created_at DESC').page params[:page]
+    @jumps = Jump.order('created_at DESC').page params[:page]
   end
 
   def mutual_likes
