@@ -222,10 +222,36 @@ class User < ActiveRecord::Base
     return sorted_chinchin
   end
 
+  def registered_and_same_location_user(location)
+    users = User.where('status > 0')
+
+    if location != nil
+      users = users.where(location: location)
+    end
+
+    users.shuffle!
+    users.each do |chinchin|
+      if not self.chosen_chinchin.nil? and self.chosen_chinchin.include? chinchin.id
+        next
+      end
+
+      if self.chosen_chinchin.nil?
+        self.chosen_chinchin = [chinchin.id]
+      else
+        self.chosen_chinchin << chinchin.id
+      end
+      self.save
+
+      return [chinchin] if pass_default_chinchin_filter(chinchin)
+    end
+
+    return  []
+  end
+
   def chinchin
     chinchins = self.sorted_chinchin
     if chinchins.nil? or chinchins.count == 0
-      return []
+      return registered_and_same_location_user(self.location)
     end
 
     while chinchins.count > 0
@@ -627,6 +653,10 @@ class User < ActiveRecord::Base
   end
 
   def add_contacts(contacts)
+    if contacts.nil? or contacts.empty?
+      return
+    end
+
     contacts.each do |c|
       if Contact.where('phone_number = ?', c[:phone_number]).count == 0
         self.add_contact(c)
